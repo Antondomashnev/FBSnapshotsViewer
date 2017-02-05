@@ -1,5 +1,5 @@
 //
-//  ResultsInteractorIO.swift
+//  MenuUserInterface.swift
 //  FBSnapshotsViewer
 //
 //  Created by Anton Domashnev on 05/02/2017.
@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol TestResultsInteractorInput {
-    
-}
-
-protocol TestResultsInteractorOutput {
+protocol MenuUserInterface {
     
 }

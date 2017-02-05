@@ -8,7 +8,7 @@
 
 import Cocoa
 
-final class Menu {
+final class MenuController {
     private let statusItem: NSStatusItem
     
     init(statusBar: NSStatusBar) {
@@ -22,7 +22,7 @@ final class Menu {
 }
 
 // MARK: - Actions
-extension Menu {
+extension MenuController {
     @objc func showSnapshots(sender: AnyObject) {
     }
 }
