@@ -8,7 +8,7 @@
 
 import Cocoa
 
-enum FolderEventObject {
+enum FolderEventObject: Equatable {
     case folder
     case file
 }
@@ -39,3 +39,18 @@ enum FolderEvent {
     }
 }
 
+/// Equatable
+extension FolderEvent: Equatable {
+    public static func == (lhs: FolderEvent, rhs: FolderEvent) -> Bool {
+        switch (lhs, rhs) {
+        case (let .modified(path1, object1), let .modified(path2, object2)):
+            return path1 == path2 && object1 == object2
+        case (let .created(path1, object1), let .created(path2, object2)):
+            return path1 == path2 && object1 == object2
+        case (let .deleted(path1, object1), let .deleted(path2, object2)):
+            return path1 == path2 && object1 == object2
+        default: break
+        }
+        return false
+    }
+}
