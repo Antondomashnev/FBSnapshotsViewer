@@ -11,7 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var menuUserInterface: MenuUserInterface!
-    
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let wireframe = MenuWireframe()
         menuUserInterface = wireframe.instantinateMenu(in: NSStatusBar.system())
@@ -23,4 +23,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 }
-
