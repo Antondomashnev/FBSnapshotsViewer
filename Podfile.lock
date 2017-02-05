@@ -1,0 +1,22 @@
+PODS:
+  - SwiftFSWatcher (1.02-4)
+
+DEPENDENCIES:
+  - SwiftFSWatcher (from `https://github.com/Antondomashnev/SwiftFSWatcher.git`, branch `master`)
+
+EXTERNAL SOURCES:
+  SwiftFSWatcher:
+    :branch: master
+    :git: https://github.com/Antondomashnev/SwiftFSWatcher.git
+
+CHECKOUT OPTIONS:
+  SwiftFSWatcher:
+    :commit: 321a20df5961244f628c8a3c5f07e48e5bda45ea
+    :git: https://github.com/Antondomashnev/SwiftFSWatcher.git
+
+SPEC CHECKSUMS:
+  SwiftFSWatcher: 1a9a4c5366b6bbf762f1927b3ced7d0f2ac64c4e
+
+PODFILE CHECKSUM: 55118323641bfa32527ee96bc9c3dd5576b4c11f
+
+COCOAPODS: 1.2.0
