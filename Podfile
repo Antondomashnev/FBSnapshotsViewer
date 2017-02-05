@@ -9,7 +9,7 @@ target 'FBSnapshotsViewer' do
 
   target 'FBSnapshotsViewerTests' do
     inherit! :search_paths
-    # Pods for testing
+    pod 'Quick', '~> 1.0'
+    pod 'Nimble', '~> 5.0'
   end
-
 end

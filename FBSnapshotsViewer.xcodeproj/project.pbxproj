@@ -493,6 +493,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B17C48E1D2FE2D15D9563E9C /* Pods-FBSnapshotsViewer.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = XZ2J8VAMV6;
@@ -508,6 +509,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E5BEA4ED9D938AA805237841 /* Pods-FBSnapshotsViewer.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = XZ2J8VAMV6;
@@ -523,7 +525,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4F49A2211365156DDBDC7331 /* Pods-FBSnapshotsViewerTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = XZ2J8VAMV6;
@@ -540,7 +542,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9EACAED9B9A9448DDC8DDF8F /* Pods-FBSnapshotsViewerTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = XZ2J8VAMV6;
