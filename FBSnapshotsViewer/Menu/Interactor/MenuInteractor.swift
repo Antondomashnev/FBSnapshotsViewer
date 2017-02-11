@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class MenuInteractor {
+    private let snaphotsDiffFolderNotificationListener: SnapshotsDiffFolderNotificationListener
+    
+    init(snaphotsDiffFolderNotificationListener: SnapshotsDiffFolderNotificationListener) {
+        self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
+    }
+}

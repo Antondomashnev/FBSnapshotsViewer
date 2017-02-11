@@ -10,10 +10,9 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    private var menu: Menu!
+    private let listener = SnapshotsDiffFolderNotificationListener()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        menu = Menu(statusBar: NSStatusBar.system())
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

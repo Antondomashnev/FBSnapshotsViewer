@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftFSWatcher:
-    :commit: 321a20df5961244f628c8a3c5f07e48e5bda45ea
+    :commit: 290899cfa9e05f9b07b43e667833bac981fdad09
     :git: https://github.com/Antondomashnev/SwiftFSWatcher.git
 
 SPEC CHECKSUMS:
