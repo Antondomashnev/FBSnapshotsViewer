@@ -21,4 +21,10 @@ protocol FolderEventsListener {
     ///
     /// - Parameter folderPath: absolute folder path to watch
     init(folderPath: String)
+    
+    /// Starts listening for events
+    func startListening()
+    
+    /// Stops listening for events
+    func stopListening()
 }

@@ -10,9 +10,11 @@ import Cocoa
 
 /// `MenuWireframe` is responsible to build a menu module - app's status bar UI representation
 final class MenuWireframe {
-    private weak var userInterface: MenuController?
     
-    func instantinateMenu(in statusBar: NSStatusBar) {
-        userInterface = MenuController(statusBar: statusBar)
+    func instantinateMenu(in statusBar: NSStatusBar) -> MenuUserInterface {
+        let interactor = MenuInteractor(snaphotsDiffFolderNotificationListener: SnapshotsDiffFolderNotificationListener(), folderEventsListenerFactory: FolderEventsListenerFactory())
+        let userInterface = MenuController(statusBar: statusBar)
+        userInterface.interactor = interactor
+        return userInterface
     }
 }

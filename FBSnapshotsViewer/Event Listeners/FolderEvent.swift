@@ -13,6 +13,30 @@ enum FolderEventObject: Equatable {
     case file
 }
 
+extension FolderEventObject: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .folder:
+            return "folder"
+        case .file:
+            return "file"
+        }
+    }
+}
+
+extension FolderEventObject: CustomDebugStringConvertible {
+    var debugDescription: String {
+        switch self {
+        case .folder:
+            return "folder"
+        case .file:
+            return "file"
+        }
+    }
+}
+
+//*********************************************************//
+
 enum FolderEvent {
     case modified(path: String, object: FolderEventObject)
     case created(path: String, object: FolderEventObject)
@@ -52,5 +76,35 @@ extension FolderEvent: Equatable {
         default: break
         }
         return false
+    }
+}
+
+extension FolderEvent: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .created(let path, let object):
+            return "FolderEvent: \(object) created at \(path)"
+        case .deleted(let path, let object):
+            return "FolderEvent: \(object) deleted at \(path)"
+        case .modified(let path, let object):
+            return "FolderEvent: \(object) modified at \(path)"
+        case .unknown:
+            return "FolderEvent: unknown"
+        }
+    }
+}
+
+extension FolderEvent: CustomDebugStringConvertible {
+    var debugDescription: String {
+        switch self {
+        case .created(let path, let object):
+            return "FolderEvent: \(object) created at \(path)"
+        case .deleted(let path, let object):
+            return "FolderEvent: \(object) deleted at \(path)"
+        case .modified(let path, let object):
+            return "FolderEvent: \(object) modified at \(path)"
+        case .unknown:
+            return "FolderEvent: unknown"
+        }
     }
 }

@@ -8,8 +8,10 @@
 
 import Cocoa
 
-final class MenuController {
+final class MenuController: MenuUserInterface {
     private let statusItem: NSStatusItem
+    
+    var interactor: MenuInteractorInput!
     
     init(statusBar: NSStatusBar) {
         statusItem = statusBar.statusItem(withLength: NSSquareStatusItemLength)
@@ -18,6 +20,10 @@ final class MenuController {
             button.alternateImage = NSImage(named: "menu_icon_highlighted")
             button.action = #selector(showSnapshots)
         }
+    }
+    
+    deinit {
+        print("Lala")
     }
 }
 

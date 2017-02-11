@@ -10,9 +10,11 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    private let listener = SnapshotsDiffFolderNotificationListener()
+    private var menuUserInterface: MenuUserInterface!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let wireframe = MenuWireframe()
+        menuUserInterface = wireframe.instantinateMenu(in: NSStatusBar.system())
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

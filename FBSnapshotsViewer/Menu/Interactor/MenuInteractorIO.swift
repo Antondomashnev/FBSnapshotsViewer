@@ -9,7 +9,6 @@
 import Cocoa
 
 protocol MenuInteractorInput: class {
-    func startListeningForTestResults()
 }
 
 protocol MenuInteractorOutput: class {

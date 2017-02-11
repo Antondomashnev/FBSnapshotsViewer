@@ -23,10 +23,7 @@ final class NonRecursiveFolderEventsListener: FolderEventsListener {
     init(folderPath: String) {
         watcher = SwiftFSWatcher([folderPath])
     }
-}
-
-// MARK: - Interface
-extension NonRecursiveFolderEventsListener {
+    
     func startListening() {
         watcher.watch { [weak self] events in
             guard let strongSelf = self else {
