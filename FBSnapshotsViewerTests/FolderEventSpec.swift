@@ -11,7 +11,7 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
-class FBSnapshotsViewerSpec: QuickSpec {
+class FolderEventSpec: QuickSpec {
     override func spec() {
         context("when file event") {
             var eventFlag: Int!
