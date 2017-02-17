@@ -10,7 +10,7 @@ import Foundation
 
 class MenuInteractor {
     /// Instance of listener for snapshots diff folder notification
-    private let snaphotsDiffFolderNotificationListener: SnapshotsDiffFolderNotificationListener
+    private let snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener
     
     /// Instance of folder events listener factory to get listeners from
     fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
@@ -19,17 +19,17 @@ class MenuInteractor {
     /// Basically it means that the `snaphotsDiffFolderNotificationListener` has not received notification yet
     fileprivate var currentSnapshotsDiffFolderListener: FolderEventsListener?
     
-    init(snaphotsDiffFolderNotificationListener: SnapshotsDiffFolderNotificationListener, folderEventsListenerFactory: FolderEventsListenerFactory) {
+    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, folderEventsListenerFactory: FolderEventsListenerFactory) {
         self.folderEventsListenerFactory = folderEventsListenerFactory
         self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
         self.snaphotsDiffFolderNotificationListener.delegate = self
     }
 }
 
-// MARK: - SnapshotsDiffFolderNotificationListenerDelegate
-extension MenuInteractor: SnapshotsDiffFolderNotificationListenerDelegate {
-    func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsDiffFolderNotificationListener, didReceive folderPath: String) {
-        currentSnapshotsDiffFolderListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: folderPath)
+// MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
+extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
+    func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
+        currentSnapshotsDiffFolderListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: simulatorPath)
         currentSnapshotsDiffFolderListener?.output = self
         currentSnapshotsDiffFolderListener?.startListening()
     }
@@ -38,7 +38,16 @@ extension MenuInteractor: SnapshotsDiffFolderNotificationListenerDelegate {
 // MARK: - FolderEventsListenerOutput
 extension MenuInteractor: FolderEventsListenerOutput {
     func folderEventsListener(_ listener: FolderEventsListener, didReceive events: [FolderEvent]) {
-        print("Received new events: \(events)")
+        let knownEvents = events.filter { event in
+            switch event {
+            case .unknown: return false
+            default: return true
+            }
+        }
+        if knownEvents.isEmpty {
+            return
+        }
+        print("Received new events: \(knownEvents)")
     }
 }
 
