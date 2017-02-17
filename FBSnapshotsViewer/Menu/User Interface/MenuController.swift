@@ -8,8 +8,10 @@
 
 import Cocoa
 
-final class Menu {
+final class MenuController: MenuUserInterface {
     private let statusItem: NSStatusItem
+    
+    var interactor: MenuInteractorInput!
     
     init(statusBar: NSStatusBar) {
         statusItem = statusBar.statusItem(withLength: NSSquareStatusItemLength)
@@ -19,10 +21,14 @@ final class Menu {
             button.action = #selector(showSnapshots)
         }
     }
+    
+    deinit {
+        print("Lala")
+    }
 }
 
 // MARK: - Actions
-extension Menu {
+extension MenuController {
     @objc func showSnapshots(sender: AnyObject) {
     }
 }

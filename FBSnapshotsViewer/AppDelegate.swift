@@ -10,10 +10,11 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    private var menu: Menu!
+    private var menuUserInterface: MenuUserInterface!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        menu = Menu(statusBar: NSStatusBar.system())
+        let wireframe = MenuWireframe()
+        menuUserInterface = wireframe.instantinateMenu(in: NSStatusBar.system())
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
