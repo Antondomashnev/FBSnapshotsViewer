@@ -17,10 +17,14 @@ final class NonRecursiveFolderEventsListener: FolderEventsListener {
     /// Internal 3rd party watcher
     fileprivate let watcher: SwiftFSWatcher
     
+    /// Applied filter for watched events
+    fileprivate let filter: FolderEventFilter?
+    
     /// Handler for `FolderEventsListener` output
     weak var output: FolderEventsListenerOutput?
     
-    init(folderPath: String) {
+    init(folderPath: String, filter: FolderEventFilter? = nil) {
+        self.filter = filter
         watcher = SwiftFSWatcher([folderPath])
     }
     

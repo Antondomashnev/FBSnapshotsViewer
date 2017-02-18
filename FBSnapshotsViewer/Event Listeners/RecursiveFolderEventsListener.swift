@@ -22,10 +22,14 @@ final class RecursiveFolderEventsListener: FolderEventsListener {
     /// Currently watching folder path
     let folderPath: String
     
+    /// Applied filters for watched events
+    fileprivate let filter: FolderEventFilter?
+    
     /// Handler for `FolderEventsListener` output
     weak var output: FolderEventsListenerOutput?
     
-    init(folderPath: String) {
+    init(folderPath: String, filter: FolderEventFilter? = nil) {
+        self.filter = filter
         self.folderPath = folderPath
         watcher = SwiftFSWatcher([folderPath])
     }

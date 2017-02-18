@@ -20,7 +20,8 @@ protocol FolderEventsListener {
     /// Designated initializer to create new instance of FolderEventsListener
     ///
     /// - Parameter folderPath: absolute folder path to watch
-    init(folderPath: String)
+    /// - Parameter filter: filter for received events
+    init(folderPath: String, filter: FolderEventFilter?)
     
     /// Starts listening for events
     func startListening()

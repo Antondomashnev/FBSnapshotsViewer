@@ -8,12 +8,12 @@
 
 import Foundation
 
-class ApplicationTemporaryFolderEventFilter: FolderEventFilter {
+class ApplicationTemporaryFolderEventFilter: FolderEventFilterer {
     static let applicationTemporaryFolderRegex = "\\/data\\/Containers\\/Data\\/Application\\/.{8}-.{4}-.{4}-.{4}-.{12}\\/tmp"
     
-    static func filter(_ isIncluded: FolderEvent) throws -> Bool {
+    static var filter: FolderEventFilter = { isIncluded in
         switch isIncluded {
-        case let .created(path, type) where path.range(of: applicationTemporaryFolderRegex, options: NSString.CompareOptions.regularExpression) != nil:
+        case let .created(path, type) where type == .folder && path.range(of: applicationTemporaryFolderRegex, options: NSString.CompareOptions.regularExpression) != nil:
             return true
         default: return false
         }
