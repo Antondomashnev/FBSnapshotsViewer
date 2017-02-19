@@ -41,26 +41,33 @@ enum FolderEvent {
     case modified(path: String, object: FolderEventObject)
     case created(path: String, object: FolderEventObject)
     case deleted(path: String, object: FolderEventObject)
+    case renamed(path: String, object: FolderEventObject)
     case unknown
     
+    init(type: FolderEventObject, at path: String, eventFlag: FileWatch.EventFlag) {
+        if eventFlag.contains(FileWatch.EventFlag.ItemCreated) {
+            self = .created(path: path, object: type)
+        }
+        else if eventFlag.contains(FileWatch.EventFlag.ItemModified) {
+            self = .modified(path: path, object: type)
+        }
+        else if eventFlag.contains(FileWatch.EventFlag.ItemRemoved) {
+            self = .deleted(path: path, object: type)
+        }
+        else if eventFlag.contains(FileWatch.EventFlag.ItemRenamed) {
+            self = .renamed(path: path, object: type)
+        }
+        else {
+            self = .unknown
+        }
+    }
+    
     init(eventFlag: FileWatch.EventFlag, at path: String) {
-        if eventFlag == FileWatch.EventFlag.ItemIsDir.union(FileWatch.EventFlag.ItemCreated) {
-            self = .created(path: path, object: .folder)
+        if eventFlag.contains(FileWatch.EventFlag.ItemIsDir) {
+            self = FolderEvent(type: .folder, at: path, eventFlag: eventFlag)
         }
-        else if eventFlag == FileWatch.EventFlag.ItemIsDir.union(FileWatch.EventFlag.ItemModified) {
-            self = .modified(path: path, object: .folder)
-        }
-        else if eventFlag == FileWatch.EventFlag.ItemIsDir.union(FileWatch.EventFlag.ItemRemoved) {
-            self = .deleted(path: path, object: .folder)
-        }
-        else if eventFlag == FileWatch.EventFlag.ItemIsFile.union(FileWatch.EventFlag.ItemCreated) {
-            self = .created(path: path, object: .file)
-        }
-        else if eventFlag == FileWatch.EventFlag.ItemIsFile.union(FileWatch.EventFlag.ItemModified) {
-            self = .modified(path: path, object: .file)
-        }
-        else if eventFlag == FileWatch.EventFlag.ItemIsFile.union(FileWatch.EventFlag.ItemRemoved) {
-            self = .deleted(path: path, object: .file)
+        else if eventFlag.contains(FileWatch.EventFlag.ItemIsFile) {
+            self = FolderEvent(type: .file, at: path, eventFlag: eventFlag)
         }
         else {
             self = .unknown
@@ -93,6 +100,8 @@ extension FolderEvent: CustomStringConvertible {
             return "FolderEvent: \(object) deleted at \(path)"
         case .modified(let path, let object):
             return "FolderEvent: \(object) modified at \(path)"
+        case .renamed(let path, let object):
+            return "FolderEvent: \(object) renamed at \(path)"
         case .unknown:
             return "FolderEvent: unknown"
         }
@@ -108,6 +117,8 @@ extension FolderEvent: CustomDebugStringConvertible {
             return "FolderEvent: \(object) deleted at \(path)"
         case .modified(let path, let object):
             return "FolderEvent: \(object) modified at \(path)"
+        case .renamed(let path, let object):
+            return "FolderEvent: \(object) renamed at \(path)"
         case .unknown:
             return "FolderEvent: unknown"
         }

@@ -16,6 +16,6 @@ class FolderEventsListenerFactory {
     }
     
     func iOSSimulatorFolderEventsListener(at simulatorPath: String) -> FolderEventsListener {
-        return RecursiveFolderEventsListener(folderPath: simulatorPath, filter: FolderEventFilter.known)
+        return NonRecursiveFolderEventsListener(folderPath: simulatorPath, filter: FolderEventFilter.known)
     }
 }
