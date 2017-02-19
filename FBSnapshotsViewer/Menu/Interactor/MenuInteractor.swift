@@ -29,7 +29,7 @@ class MenuInteractor {
 // MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
-        currentSnapshotsDiffFolderListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: simulatorPath)
+        currentSnapshotsDiffFolderListener = folderEventsListenerFactory.iOSSimulatorFolderEventsListener(at: simulatorPath)
         currentSnapshotsDiffFolderListener?.output = self
         currentSnapshotsDiffFolderListener?.startListening()
     }
@@ -37,17 +37,8 @@ extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDeleg
 
 // MARK: - FolderEventsListenerOutput
 extension MenuInteractor: FolderEventsListenerOutput {
-    func folderEventsListener(_ listener: FolderEventsListener, didReceive events: [FolderEvent]) {
-        let knownEvents = events.filter { event in
-            switch event {
-            case .unknown: return false
-            default: return true
-            }
-        }
-        if knownEvents.isEmpty {
-            return
-        }
-        print("Received new events: \(knownEvents)")
+    func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
+        print("Received new event: \(event)")
     }
 }
 

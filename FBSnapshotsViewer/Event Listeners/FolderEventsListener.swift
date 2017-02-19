@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol FolderEventsListenerOutput: class {
-    func folderEventsListener(_ listener: FolderEventsListener, didReceive events: [FolderEvent])
+    func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent)
 }
 
 protocol FolderEventsListener {
@@ -20,7 +20,7 @@ protocol FolderEventsListener {
     /// Designated initializer to create new instance of FolderEventsListener
     ///
     /// - Parameter folderPath: absolute folder path to watch
-    /// - Parameter filter: filter for received events
+    /// - Parameter filter: filter for received event
     init(folderPath: String, filter: FolderEventFilter?)
     
     /// Starts listening for events

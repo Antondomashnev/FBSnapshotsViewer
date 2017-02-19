@@ -8,12 +8,35 @@
 
 import Foundation
 
-typealias FolderEventFilter = (_ isIncluded: FolderEvent) throws -> Bool
-
-protocol FolderEventFilterer {
-    static var filter: FolderEventFilter { get }
+indirect enum FolderEventFilter {
+    case known
+    case pathRegex(String)
+    case compound(FolderEventFilter, FolderEventFilter)
+    
+    func apply(to event: FolderEvent) -> Bool {
+        switch self {
+        case let .pathRegex(regex):
+            switch event {
+            case let .created(path, _) where path.range(of: regex, options: NSString.CompareOptions.regularExpression) != nil:
+                return true
+            case let .modified(path, _) where path.range(of: regex, options: NSString.CompareOptions.regularExpression) != nil:
+                return true
+            case let .deleted(path, _) where path.range(of: regex, options: NSString.CompareOptions.regularExpression) != nil:
+                return true
+            default: return false
+            }
+        case .known:
+            switch event {
+            case .unknown:
+                return false
+            default: return true
+            }
+        case let .compound(filter1, filter2):
+            return filter1.apply(to: event) && filter2.apply(to: event)
+        }
+    }
 }
 
-func + (left: @escaping FolderEventFilter, right: @escaping FolderEventFilter) -> FolderEventFilter {
-    return { isIncluded in try left(isIncluded) && right(isIncluded) }
+func + (lhs: FolderEventFilter, rhs: FolderEventFilter) -> FolderEventFilter {
+    return FolderEventFilter.compound(lhs, rhs)
 }

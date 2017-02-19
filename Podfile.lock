@@ -1,28 +1,15 @@
 PODS:
   - Nimble (5.1.1)
   - Quick (1.0.0)
-  - SwiftFSWatcher (1.02-4)
 
 DEPENDENCIES:
   - Nimble (~> 5.0)
   - Quick (~> 1.0)
-  - SwiftFSWatcher (from `https://github.com/Antondomashnev/SwiftFSWatcher.git`, branch `master`)
-
-EXTERNAL SOURCES:
-  SwiftFSWatcher:
-    :branch: master
-    :git: https://github.com/Antondomashnev/SwiftFSWatcher.git
-
-CHECKOUT OPTIONS:
-  SwiftFSWatcher:
-    :commit: 290899cfa9e05f9b07b43e667833bac981fdad09
-    :git: https://github.com/Antondomashnev/SwiftFSWatcher.git
 
 SPEC CHECKSUMS:
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
-  SwiftFSWatcher: 1a9a4c5366b6bbf762f1927b3ced7d0f2ac64c4e
 
-PODFILE CHECKSUM: f033885bc995bf47772e228cffc644d22832a3bf
+PODFILE CHECKSUM: 893634ce6ddcb5a7fba0b1872ba4d45e915aac27
 
 COCOAPODS: 1.2.0

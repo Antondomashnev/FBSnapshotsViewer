@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftFSWatcher
 
 /// `NonRecursiveFolderEventsListener` is responsible to watch folder
 ///  changes (new file, updated file, deleted file), watches only the given folder non-recursively.
@@ -15,30 +14,36 @@ import SwiftFSWatcher
 final class NonRecursiveFolderEventsListener: FolderEventsListener {
     
     /// Internal 3rd party watcher
-    fileprivate let watcher: SwiftFSWatcher
+    fileprivate var watcher: FileWatch?
     
     /// Applied filter for watched events
     fileprivate let filter: FolderEventFilter?
+    
+    /// Currently watching folder path
+    let folderPath: String
     
     /// Handler for `FolderEventsListener` output
     weak var output: FolderEventsListenerOutput?
     
     init(folderPath: String, filter: FolderEventFilter? = nil) {
         self.filter = filter
-        watcher = SwiftFSWatcher([folderPath])
+        self.folderPath = folderPath
     }
     
     func startListening() {
-        watcher.watch { [weak self] events in
+        watcher = try? FileWatch(paths: [folderPath], createFlag: [.UseCFTypes, .FileEvents], runLoop: RunLoop.current, latency: 1) { [weak self] event in
             guard let strongSelf = self else {
                 return
             }
-            let receivedEvents: [FolderEvent] = events.map { FolderEvent(systemEvents: $0.eventFlag.intValue, at: $0.eventPath) }
-            strongSelf.output?.folderEventsListener(strongSelf, didReceive: receivedEvents)
+            let folderEvent = FolderEvent(eventFlag: event.flag, at: event.path)
+            if let existedFilter = strongSelf.filter, !existedFilter.apply(to: folderEvent) {
+                return
+            }
+            strongSelf.output?.folderEventsListener(strongSelf, didReceive: folderEvent)
         }
     }
     
     func stopListening() {
-        watcher.pause()
+        watcher = nil
     }
 }

@@ -43,21 +43,26 @@ enum FolderEvent {
     case deleted(path: String, object: FolderEventObject)
     case unknown
     
-    init(systemEvents: Int, at path: String) {
-        switch systemEvents {
-        case kFSEventStreamEventFlagItemIsFile + kFSEventStreamEventFlagItemCreated:
-            self = .created(path: path, object: .file)
-        case kFSEventStreamEventFlagItemIsFile + kFSEventStreamEventFlagItemModified:
-            self = .modified(path: path, object: .file)
-        case kFSEventStreamEventFlagItemIsFile + kFSEventStreamEventFlagItemRemoved:
-            self = .deleted(path: path, object: .file)
-        case kFSEventStreamEventFlagItemIsDir + kFSEventStreamEventFlagItemCreated:
+    init(eventFlag: FileWatch.EventFlag, at path: String) {
+        if eventFlag == FileWatch.EventFlag.ItemIsDir.union(FileWatch.EventFlag.ItemCreated) {
             self = .created(path: path, object: .folder)
-        case kFSEventStreamEventFlagItemIsDir + kFSEventStreamEventFlagItemModified:
+        }
+        else if eventFlag == FileWatch.EventFlag.ItemIsDir.union(FileWatch.EventFlag.ItemModified) {
             self = .modified(path: path, object: .folder)
-        case kFSEventStreamEventFlagItemIsDir + kFSEventStreamEventFlagItemRemoved:
+        }
+        else if eventFlag == FileWatch.EventFlag.ItemIsDir.union(FileWatch.EventFlag.ItemRemoved) {
             self = .deleted(path: path, object: .folder)
-        default:
+        }
+        else if eventFlag == FileWatch.EventFlag.ItemIsFile.union(FileWatch.EventFlag.ItemCreated) {
+            self = .created(path: path, object: .file)
+        }
+        else if eventFlag == FileWatch.EventFlag.ItemIsFile.union(FileWatch.EventFlag.ItemModified) {
+            self = .modified(path: path, object: .file)
+        }
+        else if eventFlag == FileWatch.EventFlag.ItemIsFile.union(FileWatch.EventFlag.ItemRemoved) {
+            self = .deleted(path: path, object: .file)
+        }
+        else {
             self = .unknown
         }
     }

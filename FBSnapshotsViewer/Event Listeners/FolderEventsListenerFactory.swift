@@ -12,6 +12,10 @@ class FolderEventsListenerFactory {
     // MARK: - Interface
     
     func snapshotsDiffFolderEventsListener(at folderPath: String) -> FolderEventsListener {
-        return RecursiveFolderEventsListener(folderPath: folderPath)
+        return RecursiveFolderEventsListener(folderPath: folderPath, filter: FolderEventFilter.known)
+    }
+    
+    func iOSSimulatorFolderEventsListener(at simulatorPath: String) -> FolderEventsListener {
+        return RecursiveFolderEventsListener(folderPath: simulatorPath, filter: FolderEventFilter.known)
     }
 }
