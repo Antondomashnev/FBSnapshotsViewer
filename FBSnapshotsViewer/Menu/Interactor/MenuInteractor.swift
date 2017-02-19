@@ -29,7 +29,7 @@ class MenuInteractor {
 // MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
-        currentSnapshotsDiffFolderListener = folderEventsListenerFactory.iOSSimulatorFolderEventsListener(at: simulatorPath)
+        currentSnapshotsDiffFolderListener = folderEventsListenerFactory.iOSSimulatorApplicationsFolderEventsListener(at: simulatorPath)
         currentSnapshotsDiffFolderListener?.output = self
         currentSnapshotsDiffFolderListener?.startListening()
     }

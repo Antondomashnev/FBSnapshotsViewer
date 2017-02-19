@@ -73,6 +73,36 @@ enum FolderEvent {
             self = .unknown
         }
     }
+    
+    var object: FolderEventObject? {
+        switch self {
+        case let .modified(_, object):
+            return object
+        case let .deleted(_, object):
+            return object
+        case let .renamed(_, object):
+            return object
+        case let .created(_, object):
+            return object
+        default:
+            return nil
+        }
+    }
+    
+    var path: String? {
+        switch self {
+        case let .modified(path, _):
+            return path
+        case let .deleted(path, _):
+            return path
+        case let .renamed(path, _):
+            return path
+        case let .created(path, _):
+            return path
+        default:
+            return nil
+        }
+    }
 }
 
 /// Equatable

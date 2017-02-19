@@ -11,20 +11,21 @@ import Foundation
 indirect enum FolderEventFilter {
     case known
     case pathRegex(String)
+    case type(FolderEventObject)
     case compound(FolderEventFilter, FolderEventFilter)
     
     func apply(to event: FolderEvent) -> Bool {
         switch self {
-        case let .pathRegex(regex):
-            switch event {
-            case let .created(path, _) where path.range(of: regex, options: NSString.CompareOptions.regularExpression) != nil:
-                return true
-            case let .modified(path, _) where path.range(of: regex, options: NSString.CompareOptions.regularExpression) != nil:
-                return true
-            case let .deleted(path, _) where path.range(of: regex, options: NSString.CompareOptions.regularExpression) != nil:
-                return true
-            default: return false
+        case let .type(type):
+            guard let object = event.object else {
+                return false
             }
+            return object == type
+        case let .pathRegex(regex):
+            guard let path = event.path else {
+                return false
+            }
+            return path.range(of: regex, options: NSString.CompareOptions.regularExpression) != nil
         case .known:
             switch event {
             case .unknown:
@@ -37,6 +38,6 @@ indirect enum FolderEventFilter {
     }
 }
 
-func + (lhs: FolderEventFilter, rhs: FolderEventFilter) -> FolderEventFilter {
+func & (lhs: FolderEventFilter, rhs: FolderEventFilter) -> FolderEventFilter {
     return FolderEventFilter.compound(lhs, rhs)
 }
