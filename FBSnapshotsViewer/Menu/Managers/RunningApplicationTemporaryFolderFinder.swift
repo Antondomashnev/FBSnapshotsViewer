@@ -1,5 +1,5 @@
 //
-//  FindRunningApplicationTemporaryFolderTask.swift
+//  RunningApplicationTemporaryFolderFinder.swift
 //  FBSnapshotsViewer
 //
 //  Created by Anton Domashnev on 19/02/2017.
@@ -7,34 +7,27 @@
 //
 
 import Foundation
-import BoltsSwift
 
-class FindRunningApplicationTemporaryFolderTask {
+class RunningApplicationTemporaryFolderFinder {
     fileprivate let fileManager: FileManager
     fileprivate let applicationTemporaryFolderName = "tmp"
-    fileprivate let runningFolderEventsListener: FolderEventsListener
-    fileprivate let runningTaskCompletionSource = TaskCompletionSource<String>()
+    fileprivate let runningFolderEventsListener: FolderEventsListener?
     
-    init(simulatorApplicationsPath: String, folderEventsListenerFactory: FolderEventsListenerFactory = FolderEventsListenerFactory(), fileManager: FileManager = FileManager.default) {
-        self.runningFolderEventsListener = folderEventsListenerFactory.iOSSimulatorApplicationsFolderEventsListener(at: simulatorApplicationsPath)
+    init(runningFolderEventsListener: FolderEventsListener, fileManager: FileManager = FileManager.default) {
         self.fileManager = fileManager
-        self.runningFolderEventsListener.output = self
     }
     
     deinit {
         runningFolderEventsListener.stopListening()
     }
     
-    // MARK: - Interface
-    
-    func run() -> Task<String> {
-        runningFolderEventsListener.startListening()
-        return runningTaskCompletionSource.task
+    func find() {
+        
     }
 }
 
 // MARK: - FolderEventsListenerOutput
-extension FindRunningApplicationTemporaryFolderTask: FolderEventsListenerOutput {
+extension RunningApplicationTemporaryFolderFinder: FolderEventsListenerOutput {
     func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
         guard let path = event.path else {
             assertionFailure("FindRunningApplicationTemporaryFolderTask expects to not receive unknown events")

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BoltsSwift
 
 class MenuInteractor {
     /// Instance of listener for snapshots diff folder notification
@@ -15,12 +16,12 @@ class MenuInteractor {
     /// Instance of folder events listener factory to get listeners from
     fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
     
-    /// Snapshots diff folder listener. Nil when snapshots diff folder is unknown.
-    /// Basically it means that the `snaphotsDiffFolderNotificationListener` has not received notification yet
-    fileprivate var currentSnapshotsDiffFolderListener: FolderEventsListener?
+    /// Instance of file manager to be used for internal listeners
+    fileprivate let fileManager: FileManager
     
-    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, folderEventsListenerFactory: FolderEventsListenerFactory) {
+    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, folderEventsListenerFactory: FolderEventsListenerFactory, fileManager: FileManager = FileManager.default) {
         self.folderEventsListenerFactory = folderEventsListenerFactory
+        self.fileManager = fileManager
         self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
         self.snaphotsDiffFolderNotificationListener.delegate = self
     }
@@ -29,16 +30,10 @@ class MenuInteractor {
 // MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
-        currentSnapshotsDiffFolderListener = folderEventsListenerFactory.iOSSimulatorApplicationsFolderEventsListener(at: simulatorPath)
-        currentSnapshotsDiffFolderListener?.output = self
-        currentSnapshotsDiffFolderListener?.startListening()
-    }
-}
-
-// MARK: - FolderEventsListenerOutput
-extension MenuInteractor: FolderEventsListenerOutput {
-    func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
-        print("Received new event: \(event)")
+        let findRunningApplicationTemporaryFolderTask = FindRunningApplicationTemporaryFolderTask(simulatorApplicationsPath: simulatorPath, folderEventsListenerFactory: folderEventsListenerFactory, fileManager: fileManager)
+        findRunningApplicationTemporaryFolderTask.run().continueWith { result in
+            print("Found folder at \(result)")
+        }
     }
 }
 
