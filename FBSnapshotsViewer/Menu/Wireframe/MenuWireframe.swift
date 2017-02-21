@@ -12,7 +12,7 @@ import Cocoa
 final class MenuWireframe {
     
     func instantinateMenu(in statusBar: NSStatusBar) -> MenuUserInterface {
-        let interactor = MenuInteractor(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener(), folderEventsListenerFactory: FolderEventsListenerFactory())
+        let interactor = MenuInteractor(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener(), applicationTemporaryFolderFinder: RunningApplicationTemporaryFolderFinder())
         let userInterface = MenuController(statusBar: statusBar)
         userInterface.interactor = interactor
         return userInterface

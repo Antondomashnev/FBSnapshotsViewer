@@ -13,14 +13,14 @@ class MenuInteractor {
     /// Instance of listener for snapshots diff folder notification
     private let snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener
     
-    /// Instance of folder events listener factory to get listeners from
-    fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
+    /// Instance of aplication temporary folder finder
+    fileprivate let applicationTemporaryFolderFinder: RunningApplicationTemporaryFolderFinder
     
     /// Instance of file manager to be used for internal listeners
     fileprivate let fileManager: FileManager
     
-    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, folderEventsListenerFactory: FolderEventsListenerFactory, fileManager: FileManager = FileManager.default) {
-        self.folderEventsListenerFactory = folderEventsListenerFactory
+    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, applicationTemporaryFolderFinder: RunningApplicationTemporaryFolderFinder, fileManager: FileManager = FileManager.default) {
+        self.applicationTemporaryFolderFinder = applicationTemporaryFolderFinder
         self.fileManager = fileManager
         self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
         self.snaphotsDiffFolderNotificationListener.delegate = self
@@ -30,9 +30,8 @@ class MenuInteractor {
 // MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
-        let findRunningApplicationTemporaryFolderTask = FindRunningApplicationTemporaryFolderTask(simulatorApplicationsPath: simulatorPath, folderEventsListenerFactory: folderEventsListenerFactory, fileManager: fileManager)
-        findRunningApplicationTemporaryFolderTask.run().continueWith { result in
-            print("Found folder at \(result)")
+        applicationTemporaryFolderFinder.find(in: simulatorPath) { temporaryFolderPath in
+            print("Found temporary folder path \(temporaryFolderPath). Hoooray!!!")
         }
     }
 }
