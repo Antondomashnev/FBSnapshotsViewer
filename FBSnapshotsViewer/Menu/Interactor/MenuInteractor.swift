@@ -7,20 +7,21 @@
 //
 
 import Foundation
+import BoltsSwift
 
 class MenuInteractor {
     /// Instance of listener for snapshots diff folder notification
     private let snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener
     
-    /// Instance of folder events listener factory to get listeners from
-    fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
+    /// Instance of aplication temporary folder finder
+    fileprivate let applicationTemporaryFolderFinder: RunningApplicationTemporaryFolderFinder
     
-    /// Snapshots diff folder listener. Nil when snapshots diff folder is unknown.
-    /// Basically it means that the `snaphotsDiffFolderNotificationListener` has not received notification yet
-    fileprivate var currentSnapshotsDiffFolderListener: FolderEventsListener?
+    /// Instance of file manager to be used for internal listeners
+    fileprivate let fileManager: FileManager
     
-    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, folderEventsListenerFactory: FolderEventsListenerFactory) {
-        self.folderEventsListenerFactory = folderEventsListenerFactory
+    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, applicationTemporaryFolderFinder: RunningApplicationTemporaryFolderFinder, fileManager: FileManager = FileManager.default) {
+        self.applicationTemporaryFolderFinder = applicationTemporaryFolderFinder
+        self.fileManager = fileManager
         self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
         self.snaphotsDiffFolderNotificationListener.delegate = self
     }
@@ -29,25 +30,9 @@ class MenuInteractor {
 // MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
-        currentSnapshotsDiffFolderListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: simulatorPath)
-        currentSnapshotsDiffFolderListener?.output = self
-        currentSnapshotsDiffFolderListener?.startListening()
-    }
-}
-
-// MARK: - FolderEventsListenerOutput
-extension MenuInteractor: FolderEventsListenerOutput {
-    func folderEventsListener(_ listener: FolderEventsListener, didReceive events: [FolderEvent]) {
-        let knownEvents = events.filter { event in
-            switch event {
-            case .unknown: return false
-            default: return true
-            }
+        applicationTemporaryFolderFinder.find(in: simulatorPath) { temporaryFolderPath in
+            print("Found temporary folder path \(temporaryFolderPath). Hoooray!!!")
         }
-        if knownEvents.isEmpty {
-            return
-        }
-        print("Received new events: \(knownEvents)")
     }
 }
 

@@ -26,12 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-<<<<<<< HEAD
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
-=======
-      shouldUseLaunchSchemeArgsEnv = "YES">
->>>>>>> Add menu element;
       <Testables>
          <TestableReference
             skipped = "NO">

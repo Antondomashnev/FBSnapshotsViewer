@@ -1,12 +1,9 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :osx, '10.12'
 
 target 'FBSnapshotsViewer' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
-  pod 'SwiftFSWatcher', :git=>'https://github.com/Antondomashnev/SwiftFSWatcher.git', :branch=>'master'
-
+  pod 'Bolts-Swift', '~> 1.3'
   target 'FBSnapshotsViewerTests' do
     inherit! :search_paths
     pod 'Quick', '~> 1.0'
