@@ -16,17 +16,26 @@ class MenuInteractor {
     /// Instance of aplication temporary folder finder
     fileprivate let applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder
     
+    /// Instance of aplication snapshot test listener
+    fileprivate let applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener
+    
     /// Instance of file manager to be used for internal listeners
     fileprivate let fileManager: FileManager
     
-    /// Currently testing iOS application in iOS simulator
-    fileprivate var currentlyApplication: Application? = nil
-    
-    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder, fileManager: FileManager = FileManager.default) {
+    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder, applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener, fileManager: FileManager = FileManager.default) {
         self.applicationTemporaryFolderFinder = applicationTemporaryFolderFinder
+        self.applicationSnapshotTestResultListener = applicationSnapshotTestResultListener
         self.fileManager = fileManager
         self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
         self.snaphotsDiffFolderNotificationListener.delegate = self
+    }
+    
+    // MARK: - Helpers
+    
+    func startSnapshotTestResultListening(of application: Application) {
+        applicationSnapshotTestResultListener.listen(application: application) { [weak self] testResult in
+            
+        }
     }
 }
 
@@ -34,14 +43,11 @@ class MenuInteractor {
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
         if let imageDiffPath = imageDiffPath {
-            currentlyApplication = Application(snapshotsDiffFolder: imageDiffPath)
+            startSnapshotTestResultListening(of: Application(snapshotsDiffFolder: imageDiffPath))
+            return
         }
-        else {
-            
-        }
-        
         applicationTemporaryFolderFinder.find(in: simulatorPath) { [weak self] temporaryFolderPath in
-            self?.currentlyApplication = Application(snapshotsDiffFolder: temporaryFolderPath)
+            self?.startSnapshotTestResultListening(of: Application(snapshotsDiffFolder: temporaryFolderPath))
         }
     }
 }

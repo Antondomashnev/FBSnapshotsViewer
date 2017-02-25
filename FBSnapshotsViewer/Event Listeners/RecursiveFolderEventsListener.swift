@@ -40,11 +40,11 @@ final class RecursiveFolderEventsListener: FolderEventsListener {
                 return
             }
             let folderEvent = FolderEvent(eventFlag: event.flag, at: event.path)
+            strongSelf.process(received: folderEvent)
             if let existedFilter = strongSelf.filter, !existedFilter.apply(to: folderEvent) {
                 return
             }
             strongSelf.output?.folderEventsListener(strongSelf, didReceive: folderEvent)
-            strongSelf.process(received: folderEvent)
         }
     }
     

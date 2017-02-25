@@ -8,10 +8,10 @@
 
 import Foundation
 
-typealias ApplicationTemporaryFolderFinderCompletion = (String) -> Void
+typealias ApplicationTemporaryFolderFinderOutput = (String) -> Void
 
 struct ApplicationTemporaryFolderFinderAction {
-    let completionHandler: ApplicationTemporaryFolderFinderCompletion
+    let output: ApplicationTemporaryFolderFinderOutput
     let folderEventsListener: FolderEventsListener
     let simulatorPath: String
     
@@ -39,11 +39,11 @@ class ApplicationTemporaryFolderFinder {
         resetRunningAction()
     }
     
-    func find(in simulatorPath: String, with completion: @escaping ApplicationTemporaryFolderFinderCompletion) {
+    func find(in simulatorPath: String, outputTo completion: @escaping ApplicationTemporaryFolderFinderOutput) {
         resetRunningAction()
         var folderEventsListener = folderEventsListenerFactory.iOSSimulatorApplicationsFolderEventsListener(at: simulatorPath)
         folderEventsListener.output = self
-        runningAction = ApplicationTemporaryFolderFinderAction(completionHandler: completion, folderEventsListener: folderEventsListener, simulatorPath: simulatorPath)
+        runningAction = ApplicationTemporaryFolderFinderAction(output: completion, folderEventsListener: folderEventsListener, simulatorPath: simulatorPath)
         runningAction?.run()
     }
     
@@ -71,6 +71,6 @@ extension ApplicationTemporaryFolderFinder: FolderEventsListenerOutput {
         guard fileManager.fileExists(atPath: possibleApplicationTemporaryFolderPath) else {
             return
         }
-        runningAction.completionHandler(possibleApplicationTemporaryFolderPath)
+        runningAction.output(possibleApplicationTemporaryFolderPath)
     }
 }
