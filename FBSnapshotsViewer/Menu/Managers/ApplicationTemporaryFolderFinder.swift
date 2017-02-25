@@ -1,5 +1,5 @@
 //
-//  RunningApplicationTemporaryFolderFinder.swift
+//  ApplicationTemporaryFolderFinder.swift
 //  FBSnapshotsViewer
 //
 //  Created by Anton Domashnev on 19/02/2017.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-typealias RunningApplicationTemporaryFolderFinderCompletion = (String) -> Void
+typealias ApplicationTemporaryFolderFinderCompletion = (String) -> Void
 
-struct RunningApplicationTemporaryFolderFinderAction {
-    let completionHandler: RunningApplicationTemporaryFolderFinderCompletion
+struct ApplicationTemporaryFolderFinderAction {
+    let completionHandler: ApplicationTemporaryFolderFinderCompletion
     let folderEventsListener: FolderEventsListener
     let simulatorPath: String
     
@@ -24,11 +24,11 @@ struct RunningApplicationTemporaryFolderFinderAction {
     }
 }
 
-class RunningApplicationTemporaryFolderFinder {
+class ApplicationTemporaryFolderFinder {
     fileprivate let fileManager: FileManager
     fileprivate let applicationTemporaryFolderName = "tmp"
     fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
-    fileprivate var runningAction: RunningApplicationTemporaryFolderFinderAction?
+    fileprivate var runningAction: ApplicationTemporaryFolderFinderAction?
     
     init(folderEventsListenerFactory: FolderEventsListenerFactory = FolderEventsListenerFactory(), fileManager: FileManager = FileManager.default) {
         self.fileManager = fileManager
@@ -39,11 +39,11 @@ class RunningApplicationTemporaryFolderFinder {
         resetRunningAction()
     }
     
-    func find(in simulatorPath: String, with completion: @escaping RunningApplicationTemporaryFolderFinderCompletion) {
+    func find(in simulatorPath: String, with completion: @escaping ApplicationTemporaryFolderFinderCompletion) {
         resetRunningAction()
         var folderEventsListener = folderEventsListenerFactory.iOSSimulatorApplicationsFolderEventsListener(at: simulatorPath)
         folderEventsListener.output = self
-        runningAction = RunningApplicationTemporaryFolderFinderAction(completionHandler: completion, folderEventsListener: folderEventsListener, simulatorPath: simulatorPath)
+        runningAction = ApplicationTemporaryFolderFinderAction(completionHandler: completion, folderEventsListener: folderEventsListener, simulatorPath: simulatorPath)
         runningAction?.run()
     }
     
@@ -57,14 +57,14 @@ class RunningApplicationTemporaryFolderFinder {
 }
 
 // MARK: - FolderEventsListenerOutput
-extension RunningApplicationTemporaryFolderFinder: FolderEventsListenerOutput {
+extension ApplicationTemporaryFolderFinder: FolderEventsListenerOutput {
     func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
         guard let path = event.path else {
-            assertionFailure("RunningApplicationTemporaryFolderFinder expects to not receive unknown events")
+            assertionFailure("ApplicationTemporaryFolderFinder expects to not receive unknown events")
             return
         }
         guard let runningAction = runningAction else {
-            assertionFailure("RunningApplicationTemporaryFolderFinder expects to have a running action")
+            assertionFailure("ApplicationTemporaryFolderFinder expects to have a running action")
             return
         }
         let possibleApplicationTemporaryFolderPath = path + "/" + applicationTemporaryFolderName

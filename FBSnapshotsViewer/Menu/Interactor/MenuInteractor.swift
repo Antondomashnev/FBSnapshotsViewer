@@ -14,12 +14,15 @@ class MenuInteractor {
     private let snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener
     
     /// Instance of aplication temporary folder finder
-    fileprivate let applicationTemporaryFolderFinder: RunningApplicationTemporaryFolderFinder
+    fileprivate let applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder
     
     /// Instance of file manager to be used for internal listeners
     fileprivate let fileManager: FileManager
     
-    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, applicationTemporaryFolderFinder: RunningApplicationTemporaryFolderFinder, fileManager: FileManager = FileManager.default) {
+    /// Currently testing iOS application in iOS simulator
+    fileprivate var currentlyApplication: Application? = nil
+    
+    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder, fileManager: FileManager = FileManager.default) {
         self.applicationTemporaryFolderFinder = applicationTemporaryFolderFinder
         self.fileManager = fileManager
         self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
@@ -30,8 +33,15 @@ class MenuInteractor {
 // MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
-        applicationTemporaryFolderFinder.find(in: simulatorPath) { temporaryFolderPath in
-            print("Found temporary folder path \(temporaryFolderPath). Hoooray!!!")
+        if let imageDiffPath = imageDiffPath {
+            currentlyApplication = Application(snapshotsDiffFolder: imageDiffPath)
+        }
+        else {
+            
+        }
+        
+        applicationTemporaryFolderFinder.find(in: simulatorPath) { [weak self] temporaryFolderPath in
+            self?.currentlyApplication = Application(snapshotsDiffFolder: temporaryFolderPath)
         }
     }
 }
