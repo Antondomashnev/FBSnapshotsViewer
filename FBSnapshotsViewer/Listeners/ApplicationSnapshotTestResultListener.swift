@@ -13,6 +13,7 @@ typealias ApplicationSnapshotTestResultListenerOutput = (TestResult) -> Void
 struct ApplicationSnapshotTestResultListenerAction {
     let output: ApplicationSnapshotTestResultListenerOutput
     let folderEventsListener: FolderEventsListener
+    let snapshotTestImagesCollector: ApplicationSnapshotTestImageCollector
     let application: Application
     
     func run() {
@@ -26,10 +27,12 @@ struct ApplicationSnapshotTestResultListenerAction {
 
 class ApplicationSnapshotTestResultListener {
     fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
+    fileprivate let snapshotTestImagesCollectorFactory: ApplicationSnapshotTestImageCollectorFactory
     fileprivate var runningAction: ApplicationSnapshotTestResultListenerAction?
     
-    init(folderEventsListenerFactory: FolderEventsListenerFactory = FolderEventsListenerFactory()) {
+    init(folderEventsListenerFactory: FolderEventsListenerFactory = FolderEventsListenerFactory(), snapshotTestImagesCollectorFactory: ApplicationSnapshotTestImageCollectorFactory = ApplicationSnapshotTestImageCollectorFactory()) {
         self.folderEventsListenerFactory = folderEventsListenerFactory
+        self.snapshotTestImagesCollectorFactory = snapshotTestImagesCollectorFactory
     }
     
     deinit {
@@ -40,7 +43,9 @@ class ApplicationSnapshotTestResultListener {
         resetRunningAction()
         var folderEventsListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: application.snapshotsDiffFolder)
         folderEventsListener.output = self
-        runningAction = ApplicationSnapshotTestResultListenerAction(output: completion, folderEventsListener: folderEventsListener, application: application)
+        let snapshotTestImagesCollector = snapshotTestImagesCollectorFactory.applicationSnapshotTestImageCollector()
+        snapshotTestImagesCollector.output = self
+        runningAction = ApplicationSnapshotTestResultListenerAction(output: completion, folderEventsListener: folderEventsListener, snapshotTestImagesCollector: snapshotTestImagesCollector, application: application)
         runningAction?.run()
     }
     
@@ -52,9 +57,21 @@ class ApplicationSnapshotTestResultListener {
     }
 }
 
+// MARK: - ApplicationSnapshotTestImageCollectorOutput
+
+extension ApplicationSnapshotTestResultListener: ApplicationSnapshotTestImageCollectorOutput {
+    func applicationSnapshotTestResultCollector(_ collector: ApplicationSnapshotTestImageCollector, didCollect testResult: TestResult) {
+        runningAction?.output(testResult)
+    }
+}
+
 // MARK: - FolderEventsListenerOutput
 extension ApplicationSnapshotTestResultListener: FolderEventsListenerOutput {
     func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
-        print("did receive event: \(event)")
+        guard let eventPath = event.path, let snapshotTestImage = SnapshotTestImage(imagePath: eventPath) else {
+            print("Unexpected event in ApplicationSnapshotTestResultListener: \(event)")
+            return
+        }
+        runningAction?.snapshotTestImagesCollector.collect(snapshotTestImage)
     }
 }

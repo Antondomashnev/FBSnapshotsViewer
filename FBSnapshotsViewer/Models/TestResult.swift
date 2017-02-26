@@ -8,12 +8,26 @@
 
 import Cocoa
 
-protocol TestResult {
+protocol TestResult: CustomStringConvertible, CustomDebugStringConvertible {
     var referenceImagePath: String { get }
     var diffImagePath: String { get }
     var failedImagePath: String { get }
     var testName: String { get }
 }
+
+extension TestResult {
+    var description: String {
+        return "testName: \(testName)\nreferenceImagePath: \(referenceImagePath),\ndiffImagePath \(diffImagePath),\nfailedImagePath: \(failedImagePath)"
+    }
+}
+
+extension TestResult {
+    var debugDescription: String {
+        return "testName: \(testName):\nreferenceImagePath: \(referenceImagePath),\ndiffImagePath \(diffImagePath),\nfailedImagePath: \(failedImagePath)"
+    }
+}
+
+//*******************************************//
 
 struct CompletedTestResult: TestResult {
     let referenceImagePath: String
@@ -21,6 +35,8 @@ struct CompletedTestResult: TestResult {
     let failedImagePath: String
     let testName: String
 }
+
+//*******************************************//
 
 struct PendingTestResult: TestResult {
     var referenceImagePath: String = ""

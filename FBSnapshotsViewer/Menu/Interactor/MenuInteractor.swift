@@ -34,7 +34,7 @@ class MenuInteractor {
     
     func startSnapshotTestResultListening(of application: Application) {
         applicationSnapshotTestResultListener.listen(application: application) { [weak self] testResult in
-            
+            print("Found test result: \(testResult)")
         }
     }
 }
