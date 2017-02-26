@@ -8,11 +8,9 @@
 
 import Cocoa
 
-/// `TestResult` enum represents the FBSnapshotTestCase result
-///
-/// - record: represents the `recordMode == YES` result of new reference image
-/// - failed: represents the real test case result in case of failure
-enum TestResult {
-    case record(referenceImageAt: URL)
-    case failed(referenceImageAt: URL, failedImageAt: URL)
+struct TestResult {
+    let referenceImageURL: URL
+    let diffImageURL: URL
+    let failedImageURL: URL
+    let testName: String
 }
