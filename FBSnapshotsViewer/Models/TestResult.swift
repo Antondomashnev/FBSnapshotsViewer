@@ -31,4 +31,17 @@ struct PendingTestResult: TestResult {
     init(testName: String) {
         self.testName = testName
     }
+    
+    var isCompleted: Bool {
+        return referenceImagePath.characters.count > 0 &&
+               diffImagePath.characters.count > 0 &&
+               failedImagePath.characters.count > 0
+    }
+    
+    var completedTestResult: CompletedTestResult? {
+        if !self.isCompleted {
+            return nil
+        }
+        return CompletedTestResult(referenceImagePath: referenceImagePath, diffImagePath: diffImagePath, failedImagePath: failedImagePath, testName: testName)
+    }
 }
