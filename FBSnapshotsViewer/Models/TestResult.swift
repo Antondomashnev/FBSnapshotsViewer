@@ -8,11 +8,56 @@
 
 import Cocoa
 
-/// `TestResult` enum represents the FBSnapshotTestCase result
-///
-/// - record: represents the `recordMode == YES` result of new reference image
-/// - failed: represents the real test case result in case of failure
-enum TestResult {
-    case record(referenceImageAt: URL)
-    case failed(referenceImageAt: URL, failedImageAt: URL)
+protocol TestResult: CustomStringConvertible, CustomDebugStringConvertible {
+    var referenceImagePath: String { get }
+    var diffImagePath: String { get }
+    var failedImagePath: String { get }
+    var testName: String { get }
+}
+
+extension TestResult {
+    var description: String {
+        return "testName: \(testName)\nreferenceImagePath: \(referenceImagePath),\ndiffImagePath \(diffImagePath),\nfailedImagePath: \(failedImagePath)"
+    }
+}
+
+extension TestResult {
+    var debugDescription: String {
+        return "testName: \(testName):\nreferenceImagePath: \(referenceImagePath),\ndiffImagePath \(diffImagePath),\nfailedImagePath: \(failedImagePath)"
+    }
+}
+
+//*******************************************//
+
+struct CompletedTestResult: TestResult {
+    let referenceImagePath: String
+    let diffImagePath: String
+    let failedImagePath: String
+    let testName: String
+}
+
+//*******************************************//
+
+struct PendingTestResult: TestResult {
+    var referenceImagePath: String = ""
+    var diffImagePath: String = ""
+    var failedImagePath: String = ""
+    let testName: String
+    
+    init(testName: String) {
+        self.testName = testName
+    }
+    
+    var isCompleted: Bool {
+        return referenceImagePath.characters.count > 0 &&
+               diffImagePath.characters.count > 0 &&
+               failedImagePath.characters.count > 0
+    }
+    
+    var completedTestResult: CompletedTestResult? {
+        if !self.isCompleted {
+            return nil
+        }
+        return CompletedTestResult(referenceImagePath: referenceImagePath, diffImagePath: diffImagePath, failedImagePath: failedImagePath, testName: testName)
+    }
 }
