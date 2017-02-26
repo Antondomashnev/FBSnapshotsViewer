@@ -10,6 +10,12 @@ import Foundation
 import BoltsSwift
 
 class MenuInteractor {
+    weak var output: MenuInteractorOutput?
+    
+    /// Currently found test results
+    /// Note: in resets every notification about new application test run
+    fileprivate var testResults: [TestResult] = []
+    
     /// Instance of listener for snapshots diff folder notification
     private let snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener
     
@@ -32,9 +38,13 @@ class MenuInteractor {
     
     // MARK: - Helpers
     
-    func startSnapshotTestResultListening(of application: Application) {
+    private func startSnapshotTestResultListening(of application: Application) {
         applicationSnapshotTestResultListener.listen(application: application) { [weak self] testResult in
-            print("Found test result: \(testResult)")
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.testResults.append(testResult)
+            strongSelf.output?.didFind(new: strongSelf.testResults)
         }
     }
 }
@@ -42,6 +52,9 @@ class MenuInteractor {
 // MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
+        testResults = []
+        applicationSnapshotTestResultListener.stopListening()
+        applicationTemporaryFolderFinder.stopFinding()
         if let imageDiffPath = imageDiffPath {
             startSnapshotTestResultListening(of: Application(snapshotsDiffFolder: imageDiffPath))
             return

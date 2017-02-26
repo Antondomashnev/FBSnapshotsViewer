@@ -12,6 +12,6 @@ protocol MenuInteractorInput: class {
 }
 
 protocol MenuInteractorOutput: class {
-    func didFind(new testResults: [AnyObject])
+    func didFind(new testResults: [TestResult])
 }
 

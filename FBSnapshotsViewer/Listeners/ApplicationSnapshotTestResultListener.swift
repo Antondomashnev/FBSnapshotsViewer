@@ -49,9 +49,13 @@ class ApplicationSnapshotTestResultListener {
         runningAction?.run()
     }
     
+    func stopListening() {
+        resetRunningAction()
+    }
+    
     // MARK: - Helpers
     
-    func resetRunningAction() {
+    private func resetRunningAction() {
         runningAction?.stop()
         runningAction = nil
     }
