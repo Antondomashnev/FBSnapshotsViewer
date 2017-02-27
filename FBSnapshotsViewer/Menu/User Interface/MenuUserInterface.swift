@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol MenuUserInterface {
-    
+protocol MenuUserInterface: class {
+    func setNewTestResults(available: Bool)
 }

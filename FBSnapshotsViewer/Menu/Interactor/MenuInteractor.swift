@@ -13,8 +13,8 @@ class MenuInteractor {
     weak var output: MenuInteractorOutput?
     
     /// Currently found test results
-    /// Note: in resets every notification about new application test run
-    fileprivate var testResults: [TestResult] = []
+    /// Note: it resets every notification about new application test run
+    fileprivate var currentlyFoundTestResults: [TestResult] = []
     
     /// Instance of listener for snapshots diff folder notification
     private let snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener
@@ -38,13 +38,13 @@ class MenuInteractor {
     
     // MARK: - Helpers
     
-    private func startSnapshotTestResultListening(of application: Application) {
+    fileprivate func startSnapshotTestResultListening(of application: Application) {
         applicationSnapshotTestResultListener.listen(application: application) { [weak self] testResult in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.testResults.append(testResult)
-            strongSelf.output?.didFind(new: strongSelf.testResults)
+            strongSelf.currentlyFoundTestResults.append(testResult)
+            strongSelf.output?.didFind(new: testResult)
         }
     }
 }
@@ -52,9 +52,9 @@ class MenuInteractor {
 // MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
-        testResults = []
         applicationSnapshotTestResultListener.stopListening()
         applicationTemporaryFolderFinder.stopFinding()
+        currentlyFoundTestResults.removeAll()
         if let imageDiffPath = imageDiffPath {
             startSnapshotTestResultListening(of: Application(snapshotsDiffFolder: imageDiffPath))
             return
@@ -67,5 +67,7 @@ extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDeleg
 
 // MARK: - MenuInteractorInput
 extension MenuInteractor: MenuInteractorInput {
-    
+    var foundTestResults: [TestResult] {
+        return currentlyFoundTestResults
+    }
 }
