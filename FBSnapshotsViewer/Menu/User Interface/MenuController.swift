@@ -20,6 +20,7 @@ final class MenuController {
             button.alternateImage = NSImage(named: "menu_icon_highlighted")
             button.action = #selector(showSnapshots(sender:))
             button.target = self
+            button.sendAction(on: NSEventMask.leftMouseUp.union(NSEventMask.rightMouseUp))
             
         }
     }
@@ -37,7 +38,17 @@ extension MenuController:  MenuUserInterface {
 
 // MARK: - Actions
 extension MenuController {
-    @objc func showSnapshots(sender: AnyObject) {
-        eventHandler?.showTestResults()
+    @objc func showSnapshots(sender: NSStatusBarButton) {
+        guard let event = NSApp.currentEvent else {
+            return
+        }
+
+        switch event.associatedEventsMask {
+        case NSEventMask.rightMouseUp:
+            eventHandler?.showApplicationMenu()
+        case NSEventMask.leftMouseUp:
+            eventHandler?.showTestResults()
+        default: break
+        }
     }
 }

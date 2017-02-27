@@ -19,6 +19,10 @@ extension MenuPresenter: MenuModuleInterface {
     func showTestResults() {
         userInterface?.setNewTestResults(available: false)
     }
+    
+    func showApplicationMenu() {
+        //TODO
+    }
 }
 
 // MARK: - MenuInteractorOutput
