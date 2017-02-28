@@ -10,6 +10,12 @@ import Foundation
 import BoltsSwift
 
 class MenuInteractor {
+    weak var output: MenuInteractorOutput?
+    
+    /// Currently found test results
+    /// Note: it resets every notification about new application test run
+    fileprivate var currentlyFoundTestResults: [TestResult] = []
+    
     /// Instance of listener for snapshots diff folder notification
     private let snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener
     
@@ -32,9 +38,13 @@ class MenuInteractor {
     
     // MARK: - Helpers
     
-    func startSnapshotTestResultListening(of application: Application) {
+    fileprivate func startSnapshotTestResultListening(of application: Application) {
         applicationSnapshotTestResultListener.listen(application: application) { [weak self] testResult in
-            print("Found test result: \(testResult)")
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.currentlyFoundTestResults.append(testResult)
+            strongSelf.output?.didFind(new: testResult)
         }
     }
 }
@@ -42,6 +52,9 @@ class MenuInteractor {
 // MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
 extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
+        applicationSnapshotTestResultListener.stopListening()
+        applicationTemporaryFolderFinder.stopFinding()
+        currentlyFoundTestResults.removeAll()
         if let imageDiffPath = imageDiffPath {
             startSnapshotTestResultListening(of: Application(snapshotsDiffFolder: imageDiffPath))
             return
@@ -54,5 +67,7 @@ extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDeleg
 
 // MARK: - MenuInteractorInput
 extension MenuInteractor: MenuInteractorInput {
-    
+    var foundTestResults: [TestResult] {
+        return currentlyFoundTestResults
+    }
 }

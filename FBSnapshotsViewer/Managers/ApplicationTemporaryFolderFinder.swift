@@ -47,9 +47,13 @@ class ApplicationTemporaryFolderFinder {
         runningAction?.run()
     }
     
+    func stopFinding() {
+        resetRunningAction()
+    }
+    
     // MARK: - Helpers
     
-    func resetRunningAction() {
+    private func resetRunningAction() {
         runningAction?.stop()
         runningAction = nil
     }
