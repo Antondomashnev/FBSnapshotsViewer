@@ -11,4 +11,5 @@ import Foundation
 protocol MenuModuleInterface: class {
     func showTestResults()
     func showApplicationMenu()
+    func quit()
 }

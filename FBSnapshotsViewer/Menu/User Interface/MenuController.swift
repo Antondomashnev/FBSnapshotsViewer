@@ -34,6 +34,11 @@ extension MenuController:  MenuUserInterface {
         }
         button.image = NSImage(named: available ? "menu_icon_red" : "menu_icon")
     }
+    
+    func popUpOptionsMenu() {
+        let menu = MenuStatusItemMenu(target: self)
+        statusItem.popUpMenu(menu)
+    }
 }
 
 // MARK: - Actions
@@ -42,13 +47,18 @@ extension MenuController {
         guard let event = NSApp.currentEvent else {
             return
         }
-
-        switch event.associatedEventsMask {
-        case NSEventMask.rightMouseUp:
+        let associatedEventsMask = event.associatedEventsMask
+        if associatedEventsMask.contains(NSEventMask.rightMouseUp) {
             eventHandler?.showApplicationMenu()
-        case NSEventMask.leftMouseUp:
-            eventHandler?.showTestResults()
-        default: break
         }
+        else if associatedEventsMask.contains(NSEventMask.leftMouseUp) {
+            eventHandler?.showTestResults()
+        }
+    }
+}
+
+extension MenuController: MenuStatusItemMenuTarget {
+    func menuStatusItemMenu(_ menu: NSMenu, quitItemClicked: NSMenuItem) {
+        eventHandler?.quit()
     }
 }

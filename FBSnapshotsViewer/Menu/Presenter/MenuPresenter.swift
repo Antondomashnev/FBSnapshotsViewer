@@ -6,7 +6,7 @@
 //  Copyright © 2017 Anton Domashnev. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 class MenuPresenter {
     var wireframe: MenuWireframe?
@@ -21,7 +21,11 @@ extension MenuPresenter: MenuModuleInterface {
     }
     
     func showApplicationMenu() {
-        //TODO
+        userInterface?.popUpOptionsMenu()
+    }
+    
+    func quit() {
+        NSApp.terminate(self)
     }
 }
 

@@ -6,8 +6,9 @@
 //  Copyright © 2017 Anton Domashnev. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 protocol MenuUserInterface: class {
     func setNewTestResults(available: Bool)
+    func popUpOptionsMenu()
 }
