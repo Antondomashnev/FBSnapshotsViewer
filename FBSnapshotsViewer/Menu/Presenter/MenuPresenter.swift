@@ -17,7 +17,12 @@ class MenuPresenter {
 // MARK: - MenuModuleInterface
 extension MenuPresenter: MenuModuleInterface {
     func showTestResults() {
+        guard let testResults = interactor?.foundTestResults, !testResults.isEmpty else {
+            return
+        }
+        
         userInterface?.setNewTestResults(available: false)
+        wireframe?.showTestResultsModule(with: testResults)
     }
     
     func showApplicationMenu() {
