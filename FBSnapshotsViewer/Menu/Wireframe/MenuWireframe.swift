@@ -35,6 +35,6 @@ final class MenuWireframe {
             return
         }
         let wireframe = TestResultsWireframe()
-        wireframe.show(relativeTo: presentationView.bounds, of: presentationView)
+        wireframe.show(relativeTo: presentationView.bounds, of: presentationView, with: testResults)
     }
 }

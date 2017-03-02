@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TestResultsUserInterface: class {
-    
+    func show(testResults: [TestResultDisplayInfo])
 }

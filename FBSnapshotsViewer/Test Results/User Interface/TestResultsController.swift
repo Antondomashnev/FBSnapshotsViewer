@@ -9,5 +9,17 @@
 import Cocoa
 
 class TestResultsController: NSViewController {
+    @IBOutlet private var collectionView: NSCollectionView!
     
+    var eventHandler: TestResultsModuleInterface?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
+extension TestResultsController: TestResultsUserInterface {
+    func show(testResults: [TestResultDisplayInfo]) {
+        //TODO
+    }
 }

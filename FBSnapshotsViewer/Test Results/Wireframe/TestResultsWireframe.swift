@@ -9,12 +9,16 @@
 import Cocoa
 
 final class TestResultsWireframe {
-    fileprivate var popover: NSPopover!
-    fileprivate var userInterface: TestResultsController!
     
-    func show(relativeTo rect: NSRect, of view: NSView) {
-        userInterface = StoryboardScene.Main.instantiateTestResultsController()
-        popover = NSPopover()
+    func show(relativeTo rect: NSRect, of view: NSView, with testResults: [TestResult]) {
+        let userInterface = StoryboardScene.Main.instantiateTestResultsController()
+        let interactor = TestResultsInteractor(testResults: testResults)
+        let presenter = TestResultsPresenter()
+        let popover = NSPopover()
+        presenter.interactor = interactor
+        presenter.userInterface = userInterface
+        presenter.wireframe = self
+        userInterface.eventHandler = presenter
         popover.contentViewController = userInterface
         popover.show(relativeTo: rect, of: view, preferredEdge: NSRectEdge.minY)
     }
