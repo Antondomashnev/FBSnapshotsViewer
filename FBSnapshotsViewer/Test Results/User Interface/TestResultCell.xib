@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="TestResultsCell" customModule="FBSnapshotsViewer" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="TestResultCell" customModule="FBSnapshotsViewer" customModuleProvider="target">
             <connections>
                 <outlet property="diffImageView" destination="966-H2-cnl" id="9uN-aF-08U"/>
                 <outlet property="diffImageViewHeightConstraint" destination="ZRs-SI-Wbx" id="Dbb-cw-Nf3"/>

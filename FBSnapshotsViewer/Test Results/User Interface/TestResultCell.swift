@@ -1,5 +1,5 @@
 //
-//  TestResultsCell.swift
+//  TestResultCell.swift
 //  FBSnapshotsViewer
 //
 //  Created by Anton Domashnev on 02/03/2017.
@@ -8,7 +8,9 @@
 
 import Cocoa
 
-class TestResultsCell: NSCollectionViewItem {
+class TestResultCell: NSCollectionViewItem {
+    static let itemIdentifier = "TestResultCell"
+    
     @IBOutlet private weak var referenceImageView: NSImageView!
     @IBOutlet private weak var diffImageView: NSImageView!
     @IBOutlet private weak var failedImageView: NSImageView!
