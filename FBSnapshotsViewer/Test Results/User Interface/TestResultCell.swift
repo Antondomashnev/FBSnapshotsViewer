@@ -24,18 +24,28 @@ class TestResultCell: NSCollectionViewItem {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.view.layer?.backgroundColor = NSColor(named: .primaryLight).cgColor
-        self.testNameLabel.textColor = NSColor(named: .primaryText)
-        self.testNameLabel.layer?.backgroundColor = NSColor.clear.cgColor
-        self.referenceImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
-        self.diffImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
-        self.failedImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
-        self.referenceImageTitleLabel.textColor = NSColor(named: .secondaryText)
-        self.diffImageTitleLabel.textColor = NSColor(named: .secondaryText)
-        self.failedImageTitleLabel.textColor = NSColor(named: .secondaryText)
-        self.referenceSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
-        self.diffSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
-        self.failedSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
+        view.layer?.backgroundColor = NSColor(named: .primaryLight).cgColor
+        configureTitleLabelsColorScheme()
+        configureSeparatorsColorScheme()
+    }
+
+    // MARK: - Helpers
+
+    private func configureSeparatorsColorScheme() {
+        referenceSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
+        diffSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
+        failedSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
+    }
+
+    private func configureTitleLabelsColorScheme() {
+        testNameLabel.textColor = NSColor(named: .primaryText)
+        testNameLabel.layer?.backgroundColor = NSColor.clear.cgColor
+        referenceImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
+        diffImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
+        failedImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
+        referenceImageTitleLabel.textColor = NSColor(named: .secondaryText)
+        diffImageTitleLabel.textColor = NSColor(named: .secondaryText)
+        failedImageTitleLabel.textColor = NSColor(named: .secondaryText)
     }
 
     // MARK: - Interface

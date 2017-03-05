@@ -26,12 +26,7 @@ extension FolderEventObject: CustomStringConvertible {
 
 extension FolderEventObject: CustomDebugStringConvertible {
     var debugDescription: String {
-        switch self {
-        case .folder:
-            return "folder"
-        case .file:
-            return "file"
-        }
+        return self.description
     }
 }
 
@@ -142,17 +137,6 @@ extension FolderEvent: CustomStringConvertible {
 
 extension FolderEvent: CustomDebugStringConvertible {
     var debugDescription: String {
-        switch self {
-        case .created(let path, let object):
-            return "FolderEvent: \(object) created at \(path)"
-        case .deleted(let path, let object):
-            return "FolderEvent: \(object) deleted at \(path)"
-        case .modified(let path, let object):
-            return "FolderEvent: \(object) modified at \(path)"
-        case .renamed(let path, let object):
-            return "FolderEvent: \(object) renamed at \(path)"
-        case .unknown:
-            return "FolderEvent: unknown"
-        }
+        return self.description
     }
 }

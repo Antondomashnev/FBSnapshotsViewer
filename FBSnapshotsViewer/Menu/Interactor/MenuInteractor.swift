@@ -25,13 +25,11 @@ class MenuInteractor {
     /// Instance of aplication snapshot test listener
     fileprivate let applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener
 
-    /// Instance of file manager to be used for internal listeners
-    fileprivate let fileManager: FileManager
-
-    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder, applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener, fileManager: FileManager = FileManager.default) {
+    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener,
+         applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder,
+         applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener) {
         self.applicationTemporaryFolderFinder = applicationTemporaryFolderFinder
         self.applicationSnapshotTestResultListener = applicationSnapshotTestResultListener
-        self.fileManager = fileManager
         self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
         self.snaphotsDiffFolderNotificationListener.delegate = self
     }
