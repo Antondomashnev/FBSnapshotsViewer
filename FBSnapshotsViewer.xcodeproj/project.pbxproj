@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6D21F7451E6C1A9300BFCE4C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21F7441E6C1A9300BFCE4C /* Colors.swift */; };
+		6D21F7481E6CBAFA00BFCE4C /* MenuControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21F7471E6CBAFA00BFCE4C /* MenuControllerSpec.swift */; };
+		6D21F74A1E6CC17000BFCE4C /* MenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21F7491E6CC17000BFCE4C /* MenuActions.swift */; };
 		6D4724BD1E3E9F2400F38161 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4724BC1E3E9F2400F38161 /* AppDelegate.swift */; };
 		6D4724C11E3E9F2400F38161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D4724C01E3E9F2400F38161 /* Assets.xcassets */; };
 		6D4724C41E3E9F2400F38161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D4724C21E3E9F2400F38161 /* Main.storyboard */; };
@@ -69,6 +71,8 @@
 		4F49A2211365156DDBDC7331 /* Pods-FBSnapshotsViewerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotsViewerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotsViewerTests/Pods-FBSnapshotsViewerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6AB66AD06A529A00E998FD8B /* Pods_FBSnapshotsViewerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FBSnapshotsViewerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D21F7441E6C1A9300BFCE4C /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		6D21F7471E6CBAFA00BFCE4C /* MenuControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuControllerSpec.swift; sourceTree = "<group>"; };
+		6D21F7491E6CC17000BFCE4C /* MenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuActions.swift; sourceTree = "<group>"; };
 		6D4724B91E3E9F2400F38161 /* FBSnapshotsViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBSnapshotsViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D4724BC1E3E9F2400F38161 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D4724C01E3E9F2400F38161 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				6D4724D01E3E9F2400F38161 /* Info.plist */,
 				6DE3475D1E476F8A004147DF /* FolderEventSpec.swift */,
 				6DDFBD8A1E63252B00DFC0A4 /* SnapshotTestImageSpec.swift */,
+				6D21F7471E6CBAFA00BFCE4C /* MenuControllerSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				6DE347741E47D8CE004147DF /* MenuController.swift */,
 				6DE347791E47D917004147DF /* MenuUserInterface.swift */,
 				6DDFBDA51E64E53D00DFC0A4 /* MenuStatusItemMenu.swift */,
+				6D21F7491E6CC17000BFCE4C /* MenuActions.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -601,6 +607,7 @@
 				6DE3477A1E47D917004147DF /* MenuUserInterface.swift in Sources */,
 				6D5F913A1E4F6D3500C6E5BF /* RecursiveFolderEventsListener.swift in Sources */,
 				6D5BB4C61E5915A10006BAE1 /* FolderEventFilter.swift in Sources */,
+				6D21F74A1E6CC17000BFCE4C /* MenuActions.swift in Sources */,
 				6D63FC2C1E6781970094749A /* Storyboards.swift in Sources */,
 				6D65C6291E60F04C00733118 /* Application.swift in Sources */,
 				6DDFBD8D1E63268300DFC0A4 /* FolderEvent.swift in Sources */,
@@ -640,6 +647,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DDFBD8B1E63252B00DFC0A4 /* SnapshotTestImageSpec.swift in Sources */,
+				6D21F7481E6CBAFA00BFCE4C /* MenuControllerSpec.swift in Sources */,
 				6DE3475E1E476F8A004147DF /* FolderEventSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

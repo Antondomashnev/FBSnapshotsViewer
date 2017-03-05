@@ -13,6 +13,58 @@ import Nimble
 
 class FolderEventSpec: QuickSpec {
     override func spec() {
+        describe(".object") {
+            context("when modified") {
+                it("returns correct object") {
+                    expect(FolderEvent.modified(path: "lala", object: .folder).object).to(equal(FolderEventObject.folder))
+                }
+            }
+
+            context("when created") {
+                it("returns correct object") {
+                    expect(FolderEvent.created(path: "lala", object: .file).object).to(equal(FolderEventObject.file))
+                }
+            }
+
+            context("when deleted") {
+                it("returns correct object") {
+                    expect(FolderEvent.deleted(path: "lala", object: .folder).object).to(equal(FolderEventObject.folder))
+                }
+            }
+
+            context("when renamed") {
+                it("returns correct object") {
+                    expect(FolderEvent.renamed(path: "lala", object: .file).object).to(equal(FolderEventObject.file))
+                }
+            }
+        }
+
+        describe(".path") {
+            context("when modified") {
+                it("returns correct path") {
+                    expect(FolderEvent.modified(path: "foo", object: .folder).path).to(equal("foo"))
+                }
+            }
+
+            context("when created") {
+                it("returns correct path") {
+                    expect(FolderEvent.created(path: "buka", object: .file).path).to(equal("buka"))
+                }
+            }
+
+            context("when deleted") {
+                it("returns correct path") {
+                    expect(FolderEvent.deleted(path: "lala", object: .folder).path).to(equal("lala"))
+                }
+            }
+
+            context("when renamed") {
+                it("returns correct path") {
+                    expect(FolderEvent.renamed(path: "bar", object: .file).path).to(equal("bar"))
+                }
+            }
+        }
+
         context("when file event") {
             var eventFlag: FileWatch.EventFlag!
 
