@@ -680,12 +680,12 @@
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="5hR-Ye-zue">
                                                 <size key="itemSize" width="50" height="50"/>
                                             </collectionViewFlowLayout>
-                                            <color key="primaryBackgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="primaryBackgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="0.0" colorSpace="calibratedRGB"/>
                                         </collectionView>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </clipView>
-                                <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="10"/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="bDZ-uv-ivK">
                                     <rect key="frame" x="-100" y="-100" width="233" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>

@@ -18,7 +18,6 @@ class TestResultsController: NSViewController {
         collectionViewOutlets = TestResultsCollectionViewOutlets(collectionView: collectionView)
         collectionView.delegate = collectionViewOutlets
         collectionView.dataSource = collectionViewOutlets
-        collectionView.enclosingScrollView?.backgroundColor = NSColor.red
     }
     
     override func viewWillAppear() {
