@@ -1,0 +1,16 @@
+codecov:
+  notify:
+    require_ci_to_pass: yes
+
+coverage:
+  ignore:
+    - Scripts/*
+    - Vendoe/*
+    - Pods/*
+    - FBSnapshotsViewerTests/*
+  status:
+    patch: false
+    changes: false
+    project:
+      default:
+        target: 70
