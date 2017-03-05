@@ -9,8 +9,7 @@
 import Cocoa
 
 final class MenuController {
-    fileprivate let statusItem: NSStatusItem
-    
+    let statusItem: NSStatusItem
     var eventHandler: MenuModuleInterface?
     
     init(statusBar: NSStatusBar) {
