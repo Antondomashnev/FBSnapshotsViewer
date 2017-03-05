@@ -18,7 +18,7 @@ let sendTemporaryFolderPathNotificationIdentiier = "com.antondomashnev.FBSnapsho
 let sendTemporaryFolderPathNotificationFolderKey = "com.antondomashnev.FBSnapshotsViewerTempFolderProxy.temporaryFolderPathNotification.userInfo.temporaryFolderKey" as NSString
 
 func sendDarwinNotification(with temporaryFolderPath: String) {
-    let userInfo = NSDictionary(dictionaryLiteral: (sendTemporaryFolderPathNotificationFolderKey, temporaryFolderPath))
+    let userInfo = [sendTemporaryFolderPathNotificationFolderKey: temporaryFolderPath]
     let center = CFNotificationCenterGetDistributedCenter()
     let deliverImmediately: Bool = true
     CFNotificationCenterPostNotification(center, CFNotificationName(rawValue: sendTemporaryFolderPathNotificationIdentiier as CFString), nil, userInfo as CFDictionary, deliverImmediately)
@@ -40,5 +40,3 @@ catch let error {
     print(error)
     exit(0)
 }
-
-

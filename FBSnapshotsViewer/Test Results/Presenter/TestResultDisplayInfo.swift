@@ -13,7 +13,7 @@ struct TestResultDisplayInfo {
     let diffImageURL: URL
     let failedImageURL: URL
     let testName: String
-    
+
     init(testResult: TestResult) {
         testName = testResult.testName
         referenceImageURL = URL(fileURLWithPath: testResult.referenceImagePath)

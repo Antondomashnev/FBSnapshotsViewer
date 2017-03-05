@@ -12,24 +12,24 @@ import Foundation
 ///  changes (new file, updated file, deleted file), watches only the given folder non-recursively.
 ///  It uses the 3rd party dependency under the hood.
 final class NonRecursiveFolderEventsListener: FolderEventsListener {
-    
+
     /// Internal 3rd party watcher
     fileprivate var watcher: FileWatch?
-    
+
     /// Applied filter for watched events
     fileprivate let filter: FolderEventFilter?
-    
+
     /// Currently watching folder path
     let folderPath: String
-    
+
     /// Handler for `FolderEventsListener` output
     weak var output: FolderEventsListenerOutput?
-    
+
     init(folderPath: String, filter: FolderEventFilter? = nil) {
         self.filter = filter
         self.folderPath = folderPath
     }
-    
+
     func startListening() {
         watcher = try? FileWatch(paths: [folderPath], createFlag: [.UseCFTypes, .FileEvents], runLoop: RunLoop.current, latency: 1) { [weak self] event in
             guard let strongSelf = self else {
@@ -42,7 +42,7 @@ final class NonRecursiveFolderEventsListener: FolderEventsListener {
             strongSelf.output?.folderEventsListener(strongSelf, didReceive: folderEvent)
         }
     }
-    
+
     func stopListening() {
         watcher = nil
     }

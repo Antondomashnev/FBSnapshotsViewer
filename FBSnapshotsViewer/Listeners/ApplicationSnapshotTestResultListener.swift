@@ -15,11 +15,11 @@ struct ApplicationSnapshotTestResultListenerAction {
     let folderEventsListener: FolderEventsListener
     let snapshotTestImagesCollector: ApplicationSnapshotTestImageCollector
     let application: Application
-    
+
     func run() {
         folderEventsListener.startListening()
     }
-    
+
     func stop() {
         folderEventsListener.stopListening()
     }
@@ -29,16 +29,16 @@ class ApplicationSnapshotTestResultListener {
     fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
     fileprivate let snapshotTestImagesCollectorFactory: ApplicationSnapshotTestImageCollectorFactory
     fileprivate var runningAction: ApplicationSnapshotTestResultListenerAction?
-    
+
     init(folderEventsListenerFactory: FolderEventsListenerFactory = FolderEventsListenerFactory(), snapshotTestImagesCollectorFactory: ApplicationSnapshotTestImageCollectorFactory = ApplicationSnapshotTestImageCollectorFactory()) {
         self.folderEventsListenerFactory = folderEventsListenerFactory
         self.snapshotTestImagesCollectorFactory = snapshotTestImagesCollectorFactory
     }
-    
+
     deinit {
         resetRunningAction()
     }
-    
+
     func listen(application: Application, outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
         resetRunningAction()
         var folderEventsListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: application.snapshotsDiffFolder)
@@ -48,13 +48,13 @@ class ApplicationSnapshotTestResultListener {
         runningAction = ApplicationSnapshotTestResultListenerAction(output: completion, folderEventsListener: folderEventsListener, snapshotTestImagesCollector: snapshotTestImagesCollector, application: application)
         runningAction?.run()
     }
-    
+
     func stopListening() {
         resetRunningAction()
     }
-    
+
     // MARK: - Helpers
-    
+
     private func resetRunningAction() {
         runningAction?.stop()
         runningAction = nil

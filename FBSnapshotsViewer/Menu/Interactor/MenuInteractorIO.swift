@@ -19,4 +19,3 @@ protocol MenuInteractorOutput: class {
     /// - Parameter testResult: found test result
     func didFind(new testResult: TestResult)
 }
-

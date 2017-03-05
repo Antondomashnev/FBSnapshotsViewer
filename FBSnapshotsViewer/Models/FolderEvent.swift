@@ -43,7 +43,7 @@ enum FolderEvent {
     case deleted(path: String, object: FolderEventObject)
     case renamed(path: String, object: FolderEventObject)
     case unknown
-    
+
     init(type: FolderEventObject, at path: String, eventFlag: FileWatch.EventFlag) {
         if eventFlag.contains(FileWatch.EventFlag.ItemCreated) {
             self = .created(path: path, object: type)
@@ -61,7 +61,7 @@ enum FolderEvent {
             self = .unknown
         }
     }
-    
+
     init(eventFlag: FileWatch.EventFlag, at path: String) {
         if eventFlag.contains(FileWatch.EventFlag.ItemIsDir) {
             self = FolderEvent(type: .folder, at: path, eventFlag: eventFlag)
@@ -73,7 +73,7 @@ enum FolderEvent {
             self = .unknown
         }
     }
-    
+
     var object: FolderEventObject? {
         switch self {
         case let .modified(_, object):
@@ -88,7 +88,7 @@ enum FolderEvent {
             return nil
         }
     }
-    
+
     var path: String? {
         switch self {
         case let .modified(path, _):

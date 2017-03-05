@@ -13,7 +13,7 @@ indirect enum FolderEventFilter {
     case pathRegex(String)
     case type(FolderEventObject)
     case compound(FolderEventFilter, FolderEventFilter)
-    
+
     func apply(to event: FolderEvent) -> Bool {
         switch self {
         case let .type(type):

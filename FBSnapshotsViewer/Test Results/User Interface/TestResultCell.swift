@@ -10,7 +10,7 @@ import Cocoa
 
 class TestResultCell: NSCollectionViewItem {
     static let itemIdentifier = "TestResultCell"
-    
+
     @IBOutlet private weak var referenceImageView: NSImageView!
     @IBOutlet private weak var diffImageView: NSImageView!
     @IBOutlet private weak var failedImageView: NSImageView!
@@ -21,7 +21,7 @@ class TestResultCell: NSCollectionViewItem {
     @IBOutlet private weak var referenceSeparatorView: NSView!
     @IBOutlet private weak var diffSeparatorView: NSView!
     @IBOutlet private weak var failedSeparatorView: NSView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.view.layer?.backgroundColor = NSColor(named: .primaryLight).cgColor
@@ -37,9 +37,9 @@ class TestResultCell: NSCollectionViewItem {
         self.diffSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
         self.failedSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
     }
-    
+
     // MARK: - Interface
-    
+
     func configure(with testResult: TestResultDisplayInfo) {
         if let referenceImage = NSImage(contentsOf: testResult.referenceImageURL) {
             referenceImageView.image = referenceImage

@@ -15,7 +15,7 @@ extension StoryboardSceneType {
     static func storyboard() -> NSStoryboard {
         return NSStoryboard(name: self.storyboardName, bundle: Bundle(for: BundleToken.self))
     }
-    
+
     static func initialController() -> Any {
         guard let controller = storyboard().instantiateInitialController()
             else {
@@ -51,7 +51,7 @@ extension NSViewController {
 enum StoryboardScene {
     enum Main: String, StoryboardSceneType {
         static let storyboardName = "Main"
-        
+
         case testResultsControllerScene = "TestResultsController"
         static func instantiateTestResultsController() -> FBSnapshotsViewer.TestResultsController {
             guard let vc = StoryboardScene.Main.testResultsControllerScene.controller() as? FBSnapshotsViewer.TestResultsController

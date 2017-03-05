@@ -1,0 +1,27 @@
+warning_threshold: 1
+
+disabled_rules:
+  - line_length
+  - type_name
+  - function_parameter_count
+  - function_body_length
+  - statement_position
+
+opt_in_rules:
+  - empty_count
+  - force_unwrapping
+
+excluded:
+  - Pods
+  - FBSnapshotsViewer/SwiftGen
+
+force_cast: error
+file_length:
+  warning: 400
+  error: 600
+
+variable_name:
+  max_length: 100
+  excluded:
+  - a
+  - b

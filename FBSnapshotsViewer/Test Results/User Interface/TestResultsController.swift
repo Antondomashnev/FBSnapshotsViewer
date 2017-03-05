@@ -12,14 +12,14 @@ class TestResultsController: NSViewController {
     @IBOutlet fileprivate var collectionView: NSCollectionView!
     fileprivate var collectionViewOutlets: TestResultsCollectionViewOutlets!
     var eventHandler: TestResultsModuleInterface!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionViewOutlets = TestResultsCollectionViewOutlets(collectionView: collectionView)
         collectionView.delegate = collectionViewOutlets
         collectionView.dataSource = collectionViewOutlets
     }
-    
+
     override func viewWillAppear() {
         super.viewWillAppear()
         eventHandler.updateUserInterface()

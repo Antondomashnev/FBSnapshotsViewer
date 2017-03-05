@@ -15,11 +15,11 @@ class FolderEventSpec: QuickSpec {
     override func spec() {
         context("when file event") {
             var eventFlag: FileWatch.EventFlag!
-            
+
             beforeEach {
                 eventFlag = FileWatch.EventFlag.ItemIsFile
             }
-            
+
             context("when renamed") {
                 it ("returns correct folder event") {
                     let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemRenamed.union(eventFlag), at: "/temp")
@@ -27,7 +27,7 @@ class FolderEventSpec: QuickSpec {
                     expect(event).to(equal(expectedEvent))
                 }
             }
-            
+
             context("when modified") {
                 it("returns correct folder event") {
                     let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemModified.union(eventFlag), at: "/temp")
@@ -35,7 +35,7 @@ class FolderEventSpec: QuickSpec {
                     expect(event).to(equal(expectedEvent))
                 }
             }
-            
+
             context("when created") {
                 it("returns correct folder event") {
                     let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemCreated.union(eventFlag), at: "/temp")
@@ -43,7 +43,7 @@ class FolderEventSpec: QuickSpec {
                     expect(event).to(equal(expectedEvent))
                 }
             }
-            
+
             context("when deleted") {
                 it("returns correct folder event") {
                     let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemRemoved.union(eventFlag), at: "/temp")
@@ -52,14 +52,14 @@ class FolderEventSpec: QuickSpec {
                 }
             }
         }
-        
+
         context("when folder event") {
             var eventFlag: FileWatch.EventFlag!
-            
+
             beforeEach {
                 eventFlag = FileWatch.EventFlag.ItemIsDir
             }
-            
+
             context("when renamed") {
                 it("returns correct folder event") {
                     let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemRenamed.union(eventFlag), at: "/temp")
@@ -67,7 +67,7 @@ class FolderEventSpec: QuickSpec {
                     expect(event).to(equal(expectedEvent))
                 }
             }
-            
+
             context("when modified") {
                 it("returns correct folder event") {
                     let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemModified.union(eventFlag), at: "/temp")
@@ -75,7 +75,7 @@ class FolderEventSpec: QuickSpec {
                     expect(event).to(equal(expectedEvent))
                 }
             }
-            
+
             context("when created") {
                 it("returns correct folder event") {
                     let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemCreated.union(eventFlag), at: "/temp")
@@ -83,7 +83,7 @@ class FolderEventSpec: QuickSpec {
                     expect(event).to(equal(expectedEvent))
                 }
             }
-            
+
             context("when deleted") {
                 it("returns correct folder event") {
                     let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemRemoved.union(eventFlag), at: "/temp")

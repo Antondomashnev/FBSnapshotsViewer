@@ -383,6 +383,7 @@
 			buildConfigurationList = 6D4724D31E3E9F2400F38161 /* Build configuration list for PBXNativeTarget "FBSnapshotsViewer" */;
 			buildPhases = (
 				BBCA672821526DC17B8B6AFA /* [CP] Check Pods Manifest.lock */,
+				6D21F7461E6C204700BFCE4C /* Swiftlint */,
 				6D4724B51E3E9F2300F38161 /* Sources */,
 				6D4724B61E3E9F2300F38161 /* Frameworks */,
 				6D4724B71E3E9F2300F38161 /* Resources */,
@@ -496,6 +497,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotsViewer/Pods-FBSnapshotsViewer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6D21F7461E6C204700BFCE4C /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint lint --config ${SRCROOT}/FBSnapshotsViewer/.swiftlint.yml";
 		};
 		85A248FF384E76EC0BA66DC2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -16,18 +16,18 @@ class SnapshotsViewerApplicationRunNotificationListener {
     private let notificationCenter: CFNotificationCenter
     private let willRunApplicationTestsNotificationIdentifier: NSString = "com.antondomashnev.FBSnapshotsViewerRunPhaseScript.willRunApplicationTestsNotificationIdentifier"
     weak var delegate: SnapshotsViewerApplicationRunNotificationListenerDelegate?
-    
+
     init(notificationCenter: CFNotificationCenter = CFNotificationCenterGetDistributedCenter()) {
         self.notificationCenter = notificationCenter
         registerForDarwinNotifications(with: willRunApplicationTestsNotificationIdentifier, from: notificationCenter)
     }
-    
+
     deinit {
         CFNotificationCenterRemoveObserver(notificationCenter, nil, CFNotificationName(rawValue: willRunApplicationTestsNotificationIdentifier as CFString), nil)
     }
-    
+
     // MARK: - Helpers
-    
+
     private func registerForDarwinNotifications(with identifier: NSString, from center: CFNotificationCenter) {
         let callback: CFNotificationCallback = { center, observer, name, object, info in
             let imageDiffFolderPathKey = "com.antondomashnev.FBSnapshotsViewerRunPhaseScript.imageDiffFolderPath"
@@ -41,7 +41,7 @@ class SnapshotsViewerApplicationRunNotificationListener {
             let unwrappedSelf = Unmanaged<SnapshotsViewerApplicationRunNotificationListener>.fromOpaque(observer).takeUnretainedValue()
             unwrappedSelf.delegate?.snapshotsDiffFolderNotificationListener(unwrappedSelf, didReceiveRunningiOSSimulatorFolder: iOSSimulatorPath, andImageDiffFolder: imageDiffFolderPath)
         }
-        
+
         let suspensionBehavior = CFNotificationSuspensionBehavior.deliverImmediately
         let center = CFNotificationCenterGetDistributedCenter()
         let observer = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())

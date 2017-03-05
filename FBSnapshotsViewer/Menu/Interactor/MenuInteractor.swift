@@ -11,23 +11,23 @@ import BoltsSwift
 
 class MenuInteractor {
     weak var output: MenuInteractorOutput?
-    
+
     /// Currently found test results
     /// Note: it resets every notification about new application test run
     fileprivate var currentlyFoundTestResults: [TestResult] = []
-    
+
     /// Instance of listener for snapshots diff folder notification
     private let snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener
-    
+
     /// Instance of aplication temporary folder finder
     fileprivate let applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder
-    
+
     /// Instance of aplication snapshot test listener
     fileprivate let applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener
-    
+
     /// Instance of file manager to be used for internal listeners
     fileprivate let fileManager: FileManager
-    
+
     init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener, applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder, applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener, fileManager: FileManager = FileManager.default) {
         self.applicationTemporaryFolderFinder = applicationTemporaryFolderFinder
         self.applicationSnapshotTestResultListener = applicationSnapshotTestResultListener
@@ -35,9 +35,9 @@ class MenuInteractor {
         self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
         self.snaphotsDiffFolderNotificationListener.delegate = self
     }
-    
+
     // MARK: - Helpers
-    
+
     fileprivate func startSnapshotTestResultListening(of application: Application) {
         applicationSnapshotTestResultListener.listen(application: application) { [weak self] testResult in
             guard let strongSelf = self else {

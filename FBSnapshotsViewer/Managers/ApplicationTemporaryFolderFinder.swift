@@ -14,11 +14,11 @@ struct ApplicationTemporaryFolderFinderAction {
     let output: ApplicationTemporaryFolderFinderOutput
     let folderEventsListener: FolderEventsListener
     let simulatorPath: String
-    
+
     func run() {
         folderEventsListener.startListening()
     }
-    
+
     func stop() {
         folderEventsListener.stopListening()
     }
@@ -29,16 +29,16 @@ class ApplicationTemporaryFolderFinder {
     fileprivate let applicationTemporaryFolderName = "tmp"
     fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
     fileprivate var runningAction: ApplicationTemporaryFolderFinderAction?
-    
+
     init(folderEventsListenerFactory: FolderEventsListenerFactory = FolderEventsListenerFactory(), fileManager: FileManager = FileManager.default) {
         self.fileManager = fileManager
         self.folderEventsListenerFactory = folderEventsListenerFactory
     }
-    
+
     deinit {
         resetRunningAction()
     }
-    
+
     func find(in simulatorPath: String, outputTo completion: @escaping ApplicationTemporaryFolderFinderOutput) {
         resetRunningAction()
         var folderEventsListener = folderEventsListenerFactory.iOSSimulatorApplicationsFolderEventsListener(at: simulatorPath)
@@ -46,18 +46,18 @@ class ApplicationTemporaryFolderFinder {
         runningAction = ApplicationTemporaryFolderFinderAction(output: completion, folderEventsListener: folderEventsListener, simulatorPath: simulatorPath)
         runningAction?.run()
     }
-    
+
     func stopFinding() {
         resetRunningAction()
     }
-    
+
     // MARK: - Helpers
-    
+
     private func resetRunningAction() {
         runningAction?.stop()
         runningAction = nil
     }
-    
+
 }
 
 // MARK: - FolderEventsListenerOutput
