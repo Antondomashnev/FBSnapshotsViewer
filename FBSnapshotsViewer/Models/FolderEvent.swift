@@ -115,6 +115,8 @@ extension FolderEvent: Equatable {
             return path1 == path2 && object1 == object2
         case (let .deleted(path1, object1), let .deleted(path2, object2)):
             return path1 == path2 && object1 == object2
+        case (let .renamed(path1, object1), let .renamed(path2, object2)):
+            return path1 == path2 && object1 == object2
         default: break
         }
         return false
