@@ -9,17 +9,27 @@
 import Cocoa
 
 class TestResultsController: NSViewController {
-    @IBOutlet private var collectionView: NSCollectionView!
-    
-    var eventHandler: TestResultsModuleInterface?
+    @IBOutlet fileprivate var collectionView: NSCollectionView!
+    fileprivate var collectionViewOutlets: TestResultsCollectionViewOutlets!
+    var eventHandler: TestResultsModuleInterface!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionViewOutlets = TestResultsCollectionViewOutlets(collectionView: collectionView)
+        collectionView.delegate = collectionViewOutlets
+        collectionView.dataSource = collectionViewOutlets
+        collectionView.enclosingScrollView?.backgroundColor = NSColor.red
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        eventHandler.updateUserInterface()
     }
 }
 
 extension TestResultsController: TestResultsUserInterface {
     func show(testResults: [TestResultDisplayInfo]) {
-        //TODO
+        collectionViewOutlets.testResults = testResults
+        collectionView.reloadData()
     }
 }

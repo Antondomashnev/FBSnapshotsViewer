@@ -6,106 +6,131 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="TestResultCell" customModule="FBSnapshotsViewer" customModuleProvider="target">
-            <connections>
-                <outlet property="diffImageView" destination="966-H2-cnl" id="9uN-aF-08U"/>
-                <outlet property="diffImageViewHeightConstraint" destination="ZRs-SI-Wbx" id="Dbb-cw-Nf3"/>
-                <outlet property="diffImageViewWidthConstraint" destination="35g-SB-Bom" id="5ni-qP-K5E"/>
-                <outlet property="failedImageView" destination="edf-47-yY5" id="aj6-Ex-CdO"/>
-                <outlet property="failedImageViewHeightConstraint" destination="N4C-XG-XLH" id="WGW-X7-O0x"/>
-                <outlet property="failedImageViewWidthConstraint" destination="dPw-FJ-3Gs" id="rAs-sX-dlw"/>
-                <outlet property="referenceImageView" destination="F4W-wc-Rop" id="dre-LQ-7Up"/>
-                <outlet property="referenceImageViewHeightConstraint" destination="rV5-JN-v1V" id="epz-W3-nQG"/>
-                <outlet property="referenceImageViewWidthConstraint" destination="i2s-lj-m3A" id="Fnj-pz-Vzf"/>
-                <outlet property="testNameLabel" destination="dHE-r1-1UN" id="CIn-aV-UWu"/>
-                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
-            </connections>
-        </customObject>
+        <customObject id="-2" userLabel="File's Owner" customClass="TestResultCell" customModule="FBSnapshotsViewer" customModuleProvider="target"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+        <customView identifier="TestResultCell" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="727" height="376"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="uGL-DU-ooJ">
-                    <rect key="frame" x="0.0" y="0.0" width="150" height="270"/>
+                    <rect key="frame" x="10" y="0.0" width="229" height="346"/>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F4W-wc-Rop">
-                            <rect key="frame" x="75" y="135" width="0.0" height="0.0"/>
-                            <constraints>
-                                <constraint firstAttribute="width" id="i2s-lj-m3A"/>
-                                <constraint firstAttribute="height" id="rV5-JN-v1V"/>
-                            </constraints>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="UpX-mf-qE6"/>
+                            <rect key="frame" x="-3" y="-3" width="235" height="322"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="photo" id="UpX-mf-qE6"/>
                         </imageView>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mR-P3-PFf">
+                            <rect key="frame" x="14" y="316" width="201" height="30"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Reference Image" id="mWL-cY-Tbf">
+                                <font key="font" size="12" name="HelveticaNeue-Light"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                            </textFieldCell>
+                        </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="F4W-wc-Rop" firstAttribute="centerY" secondItem="uGL-DU-ooJ" secondAttribute="centerY" id="d3Z-FX-IkP"/>
-                        <constraint firstItem="F4W-wc-Rop" firstAttribute="centerX" secondItem="uGL-DU-ooJ" secondAttribute="centerX" id="s1w-wz-v0C"/>
+                        <constraint firstItem="6mR-P3-PFf" firstAttribute="leading" secondItem="uGL-DU-ooJ" secondAttribute="leading" constant="16" id="46Y-FE-w2C"/>
+                        <constraint firstItem="F4W-wc-Rop" firstAttribute="top" secondItem="uGL-DU-ooJ" secondAttribute="top" constant="30" id="6fe-1X-zSM"/>
+                        <constraint firstItem="6mR-P3-PFf" firstAttribute="top" secondItem="uGL-DU-ooJ" secondAttribute="top" id="Aw2-Gw-3M6"/>
+                        <constraint firstItem="F4W-wc-Rop" firstAttribute="leading" secondItem="uGL-DU-ooJ" secondAttribute="leading" id="GbI-oa-i7N"/>
+                        <constraint firstItem="F4W-wc-Rop" firstAttribute="top" secondItem="6mR-P3-PFf" secondAttribute="bottom" id="gnf-aj-XhQ"/>
+                        <constraint firstAttribute="bottom" secondItem="F4W-wc-Rop" secondAttribute="bottom" id="hal-Gc-ccV"/>
+                        <constraint firstAttribute="trailing" secondItem="6mR-P3-PFf" secondAttribute="trailing" constant="16" id="rra-uL-7Ia"/>
+                        <constraint firstAttribute="trailing" secondItem="F4W-wc-Rop" secondAttribute="trailing" id="zGc-xo-k2d"/>
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Q1A-0b-4ON">
-                    <rect key="frame" x="150" y="0.0" width="150" height="270"/>
+                    <rect key="frame" x="249" y="0.0" width="229" height="346"/>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="966-H2-cnl">
-                            <rect key="frame" x="75" y="135" width="0.0" height="0.0"/>
-                            <constraints>
-                                <constraint firstAttribute="width" id="35g-SB-Bom"/>
-                                <constraint firstAttribute="height" id="ZRs-SI-Wbx"/>
-                            </constraints>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Epx-nm-VOC"/>
+                            <rect key="frame" x="-3" y="-3" width="235" height="322"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="photo" id="Epx-nm-VOC"/>
                         </imageView>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OuK-bS-O1M">
+                            <rect key="frame" x="14" y="325" width="201" height="21"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Diff Image" id="6IK-i8-zOw">
+                                <font key="font" size="12" name="HelveticaNeue-Light"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                            </textFieldCell>
+                        </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="966-H2-cnl" firstAttribute="centerX" secondItem="Q1A-0b-4ON" secondAttribute="centerX" id="GJC-KB-HZk"/>
-                        <constraint firstItem="966-H2-cnl" firstAttribute="centerY" secondItem="Q1A-0b-4ON" secondAttribute="centerY" id="pRk-MZ-c6H"/>
+                        <constraint firstItem="966-H2-cnl" firstAttribute="leading" secondItem="Q1A-0b-4ON" secondAttribute="leading" id="KBh-9c-g58"/>
+                        <constraint firstAttribute="trailing" secondItem="OuK-bS-O1M" secondAttribute="trailing" constant="16" id="UIh-oZ-zQT"/>
+                        <constraint firstItem="OuK-bS-O1M" firstAttribute="leading" secondItem="Q1A-0b-4ON" secondAttribute="leading" constant="16" id="W9E-0d-Zv5"/>
+                        <constraint firstItem="966-H2-cnl" firstAttribute="top" secondItem="OuK-bS-O1M" secondAttribute="bottom" constant="9" id="cUP-Gw-LOY"/>
+                        <constraint firstAttribute="bottom" secondItem="966-H2-cnl" secondAttribute="bottom" id="fKr-sN-a8O"/>
+                        <constraint firstItem="966-H2-cnl" firstAttribute="top" secondItem="Q1A-0b-4ON" secondAttribute="top" constant="30" id="gbN-qO-CZK"/>
+                        <constraint firstItem="OuK-bS-O1M" firstAttribute="top" secondItem="Q1A-0b-4ON" secondAttribute="top" id="olL-b2-i3p"/>
+                        <constraint firstAttribute="trailing" secondItem="966-H2-cnl" secondAttribute="trailing" id="wLb-oa-Hde"/>
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="kFU-q4-Ob1">
-                    <rect key="frame" x="300" y="0.0" width="150" height="270"/>
+                    <rect key="frame" x="488" y="0.0" width="229" height="346"/>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="edf-47-yY5">
-                            <rect key="frame" x="75" y="135" width="0.0" height="0.0"/>
-                            <constraints>
-                                <constraint firstAttribute="height" id="N4C-XG-XLH"/>
-                                <constraint firstAttribute="width" id="dPw-FJ-3Gs"/>
-                            </constraints>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="5GF-nx-LXL"/>
+                            <rect key="frame" x="-3" y="-3" width="235" height="322"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="photo" id="5GF-nx-LXL"/>
                         </imageView>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1w-Lb-3UC">
+                            <rect key="frame" x="14" y="316" width="201" height="30"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Failed Image" id="kcG-ti-wAx">
+                                <font key="font" size="12" name="HelveticaNeue-Light"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                            </textFieldCell>
+                        </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="edf-47-yY5" firstAttribute="centerY" secondItem="kFU-q4-Ob1" secondAttribute="centerY" id="Jv4-jr-myC"/>
-                        <constraint firstItem="edf-47-yY5" firstAttribute="centerX" secondItem="kFU-q4-Ob1" secondAttribute="centerX" id="QVj-p4-Lqz"/>
+                        <constraint firstItem="edf-47-yY5" firstAttribute="top" secondItem="e1w-Lb-3UC" secondAttribute="bottom" id="MIy-cy-MXq"/>
+                        <constraint firstItem="e1w-Lb-3UC" firstAttribute="top" secondItem="kFU-q4-Ob1" secondAttribute="top" id="Mfe-GV-LaR"/>
+                        <constraint firstItem="edf-47-yY5" firstAttribute="top" secondItem="kFU-q4-Ob1" secondAttribute="top" constant="30" id="Sc9-VT-UN1"/>
+                        <constraint firstAttribute="trailing" secondItem="edf-47-yY5" secondAttribute="trailing" id="Xab-nk-SUg"/>
+                        <constraint firstItem="e1w-Lb-3UC" firstAttribute="leading" secondItem="kFU-q4-Ob1" secondAttribute="leading" constant="16" id="cLY-Vf-hzU"/>
+                        <constraint firstAttribute="trailing" secondItem="e1w-Lb-3UC" secondAttribute="trailing" constant="16" id="iW1-Oc-Nat"/>
+                        <constraint firstAttribute="bottom" secondItem="edf-47-yY5" secondAttribute="bottom" id="kyM-jY-ukN"/>
+                        <constraint firstItem="edf-47-yY5" firstAttribute="leading" secondItem="kFU-q4-Ob1" secondAttribute="leading" id="oSU-Ez-GYp"/>
                     </constraints>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHE-r1-1UN">
-                    <rect key="frame" x="207" y="278" width="37" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="sF7-Wt-RKs">
-                        <font key="font" metaFont="system"/>
+                    <rect key="frame" x="340" y="353" width="48" height="23"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="sF7-Wt-RKs">
+                        <font key="font" size="16" name="HelveticaNeue"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                     </textFieldCell>
                 </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="Q1A-0b-4ON" firstAttribute="width" secondItem="uGL-DU-ooJ" secondAttribute="width" id="1fZ-cR-qqw"/>
-                <constraint firstItem="kFU-q4-Ob1" firstAttribute="leading" secondItem="Q1A-0b-4ON" secondAttribute="trailing" id="ECh-d5-FaV"/>
+                <constraint firstItem="kFU-q4-Ob1" firstAttribute="leading" secondItem="Q1A-0b-4ON" secondAttribute="trailing" constant="10" id="ECh-d5-FaV"/>
                 <constraint firstItem="uGL-DU-ooJ" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="30" id="JB7-GE-GXj"/>
                 <constraint firstItem="dHE-r1-1UN" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="PgM-Aq-jB4"/>
                 <constraint firstItem="kFU-q4-Ob1" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="30" id="Ueo-ah-xAs"/>
                 <constraint firstAttribute="bottom" secondItem="uGL-DU-ooJ" secondAttribute="bottom" id="Upl-V8-Wwt"/>
                 <constraint firstItem="kFU-q4-Ob1" firstAttribute="width" secondItem="Q1A-0b-4ON" secondAttribute="width" id="fQF-YL-4hW"/>
-                <constraint firstItem="Q1A-0b-4ON" firstAttribute="leading" secondItem="uGL-DU-ooJ" secondAttribute="trailing" id="h31-7b-PkX"/>
-                <constraint firstAttribute="trailing" secondItem="kFU-q4-Ob1" secondAttribute="trailing" id="iaK-jz-THf"/>
-                <constraint firstItem="dHE-r1-1UN" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="j0i-zh-Y6B"/>
+                <constraint firstItem="Q1A-0b-4ON" firstAttribute="leading" secondItem="uGL-DU-ooJ" secondAttribute="trailing" constant="10" id="h31-7b-PkX"/>
+                <constraint firstAttribute="trailing" secondItem="kFU-q4-Ob1" secondAttribute="trailing" constant="10" id="iaK-jz-THf"/>
+                <constraint firstItem="dHE-r1-1UN" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="j0i-zh-Y6B"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dHE-r1-1UN" secondAttribute="trailing" constant="20" id="kW8-tH-30T"/>
                 <constraint firstAttribute="bottom" secondItem="kFU-q4-Ob1" secondAttribute="bottom" id="oYj-7s-pRv"/>
                 <constraint firstItem="dHE-r1-1UN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="pTP-mT-j1t"/>
                 <constraint firstItem="Q1A-0b-4ON" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="30" id="pl8-KF-c7U"/>
-                <constraint firstItem="uGL-DU-ooJ" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="qde-Sq-ldZ"/>
+                <constraint firstItem="uGL-DU-ooJ" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="qde-Sq-ldZ"/>
                 <constraint firstAttribute="bottom" secondItem="Q1A-0b-4ON" secondAttribute="bottom" id="y4r-Lt-YYs"/>
             </constraints>
-            <point key="canvasLocation" x="149" y="95"/>
+            <point key="canvasLocation" x="27" y="94"/>
         </customView>
+        <collectionViewItem nibName="TestResultCell" id="i7H-GG-lM3" customClass="TestResultCell" customModule="FBSnapshotsViewer" customModuleProvider="target">
+            <connections>
+                <outlet property="diffImageView" destination="966-H2-cnl" id="fzX-p6-hev"/>
+                <outlet property="failedImageView" destination="edf-47-yY5" id="91l-8e-PCN"/>
+                <outlet property="referenceImageView" destination="F4W-wc-Rop" id="zm4-ZS-M3f"/>
+                <outlet property="testNameLabel" destination="dHE-r1-1UN" id="T5Y-qB-2vB"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="t7t-hF-Vsm"/>
+            </connections>
+        </collectionViewItem>
     </objects>
 </document>

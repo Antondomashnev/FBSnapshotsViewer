@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class TestResultsCollectionViewOutlets {
+class TestResultsCollectionViewOutlets: NSObject {
     var testResults: [TestResultDisplayInfo] = []
     
     init(collectionView: NSCollectionView) {
@@ -16,11 +16,18 @@ class TestResultsCollectionViewOutlets {
             fatalError("TestResultCell is missing in bundle")
         }
         collectionView.register(nib, forItemWithIdentifier: TestResultCell.itemIdentifier)
+        super.init()
     }
 }
 
 extension TestResultsCollectionViewOutlets: NSCollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
+        return NSSize(width: 530, height: 346)
+    }
     
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, insetForSectionAt section: Int) -> EdgeInsets {
+        return EdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
 }
 
 extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
@@ -33,7 +40,10 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        let item = collectionView.makeItem(withIdentifier: TestResultCell.itemIdentifier, for: indexPath) as? TestResultCell
+        guard let item = collectionView.makeItem(withIdentifier: TestResultCell.itemIdentifier, for: indexPath) as? TestResultCell else {
+            fatalError("TestResultCell is not registered in collection view")
+        }
+        item.configure(with: testResults[indexPath.item])
         return item
     }
 }
