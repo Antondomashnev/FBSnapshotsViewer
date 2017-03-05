@@ -15,6 +15,7 @@ final class TestResultsWireframe {
         let interactor = TestResultsInteractor(testResults: testResults)
         let presenter = TestResultsPresenter()
         let popover = NSPopover()
+        popover.behavior = .transient
         presenter.interactor = interactor
         presenter.userInterface = userInterface
         presenter.wireframe = self
