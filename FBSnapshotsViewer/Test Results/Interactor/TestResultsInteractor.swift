@@ -10,7 +10,7 @@ import Cocoa
 
 class TestResultsInteractor: TestResultsInteractorInput {
     let testResults: [TestResult]
-    
+
     init(testResults: [TestResult]) {
         self.testResults = testResults
     }

@@ -20,15 +20,15 @@ extension MenuPresenter: MenuModuleInterface {
         guard let testResults = interactor?.foundTestResults, !testResults.isEmpty else {
             return
         }
-        
+
         userInterface?.setNewTestResults(available: false)
         wireframe?.showTestResultsModule(with: testResults)
     }
-    
+
     func showApplicationMenu() {
         userInterface?.popUpOptionsMenu()
     }
-    
+
     func quit() {
         NSApp.terminate(self)
     }

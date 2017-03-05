@@ -12,16 +12,16 @@ enum SnapshotTestImage {
     private static let diffImagePrefix = "diff_"
     private static let referenceImagePrefix = "reference_"
     private static let failedImagePrefix = "failed_"
-    
+
     /// Since the image name is expected to be something like
     /// .../E78B5865-234B-4779-BCED-784C91146583/tmp/FBSnapshotsViewerExampleTests/failed_testExample@2x.png"
     /// To extract test name it requires to remove @2x.png suffix
     private static let testImageSuffix = "@2x.png"
-    
+
     case diff(imagePath: String)
     case reference(imagePath: String)
     case failed(imagePath: String)
-    
+
     init?(imagePath: String) {
         guard let lastComponentPath = imagePath.components(separatedBy: "/").last else {
             return nil
@@ -39,9 +39,9 @@ enum SnapshotTestImage {
             return nil
         }
     }
-    
+
     // MARK: - Interface
-    
+
     var testName: String {
         func extractTestName(from path: String, pathPrefix: String, pathSuffix: String) -> String {
             guard let lastComponentPath = path.components(separatedBy: "/").last else {
@@ -53,7 +53,7 @@ enum SnapshotTestImage {
             let testName = lastComponentPath.substring(with: start..<end)
             return testName
         }
-        switch(self) {
+        switch self {
         case let .diff(imagePath: imagePath):
             return extractTestName(from: imagePath, pathPrefix: SnapshotTestImage.diffImagePrefix, pathSuffix: SnapshotTestImage.testImageSuffix)
         case let .reference(imagePath: imagePath):

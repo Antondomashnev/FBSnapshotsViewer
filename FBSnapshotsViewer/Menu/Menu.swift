@@ -10,7 +10,7 @@ import Cocoa
 
 final class Menu {
     private let statusItem: NSStatusItem
-    
+
     init(statusBar: NSStatusBar) {
         statusItem = statusBar.statusItem(withLength: NSSquareStatusItemLength)
         if let button = statusItem.button {

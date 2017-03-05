@@ -12,9 +12,9 @@ import Cocoa
 final class MenuWireframe {
 
     weak private var userInterface: MenuController?
-    
+
     // MARK: - Interface
-    
+
     func instantinateMenu(in statusBar: NSStatusBar) -> MenuUserInterface {
         let menuController = MenuController(statusBar: statusBar)
         let interactor = MenuInteractor(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener(),
@@ -29,7 +29,7 @@ final class MenuWireframe {
         userInterface = menuController
         return menuController
     }
-    
+
     func showTestResultsModule(with testResults: [TestResult]) {
         guard let presentationView = userInterface?.statusItem.button else {
             return

@@ -19,6 +19,6 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         guard let testResults = interactor?.testResults else {
             return
         }
-        userInterface?.show(testResults: testResults.map { TestResultDisplayInfo(testResult: $0) } )
+        userInterface?.show(testResults: testResults.map { TestResultDisplayInfo(testResult: $0) })
     }
 }

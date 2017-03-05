@@ -11,7 +11,7 @@ import Cocoa
 final class MenuController {
     let statusItem: NSStatusItem
     var eventHandler: MenuModuleInterface?
-    
+
     init(statusBar: NSStatusBar) {
         statusItem = statusBar.statusItem(withLength: NSSquareStatusItemLength)
         if let button = statusItem.button {
@@ -20,7 +20,6 @@ final class MenuController {
             button.action = #selector(showSnapshots(sender:))
             button.target = self
             button.sendAction(on: NSEventMask.leftMouseUp.union(NSEventMask.rightMouseUp))
-            
         }
     }
 }
@@ -33,7 +32,7 @@ extension MenuController:  MenuUserInterface {
         }
         button.image = NSImage(named: available ? "menu_icon_red" : "menu_icon")
     }
-    
+
     func popUpOptionsMenu() {
         let menu = MenuStatusItemMenu(target: self)
         statusItem.popUpMenu(menu)

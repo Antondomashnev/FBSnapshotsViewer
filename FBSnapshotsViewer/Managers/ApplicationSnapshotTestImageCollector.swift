@@ -16,13 +16,13 @@ class ApplicationSnapshotTestImageCollector {
     weak var output: ApplicationSnapshotTestImageCollectorOutput?
 
     private var pendingTestResults: [String: PendingTestResult] = [:]
-    
+
     // MARK: - Interface
-    
+
     func collect(_ testImage: SnapshotTestImage) {
         let testName = testImage.testName
         var pendingTestResult: PendingTestResult = pendingTestResults[testName] ?? PendingTestResult(testName: testName)
-        
+
         switch testImage {
         case let .diff(imagePath):
             pendingTestResult.diffImagePath = imagePath
@@ -31,7 +31,7 @@ class ApplicationSnapshotTestImageCollector {
         case let .failed(imagePath):
             pendingTestResult.failedImagePath = imagePath
         }
-        
+
         if let completedTestResult = pendingTestResult.completedTestResult {
             pendingTestResults.removeValue(forKey: testName)
             output?.applicationSnapshotTestResultCollector(self, didCollect: completedTestResult)

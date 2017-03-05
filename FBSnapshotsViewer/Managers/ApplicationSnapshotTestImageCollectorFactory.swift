@@ -10,7 +10,7 @@ import Foundation
 
 class ApplicationSnapshotTestImageCollectorFactory {
     // MARK: - Interface
-    
+
     func applicationSnapshotTestImageCollector() -> ApplicationSnapshotTestImageCollector {
         return ApplicationSnapshotTestImageCollector()
     }
