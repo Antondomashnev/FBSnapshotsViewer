@@ -1,0 +1,18 @@
+language: objective-c
+osx_image: xcode8.2
+xcode_workspace: FBSnapshotsViewer.xcworkspace
+xcode_scheme: FBSnapshotsViewer
+env:
+  global:
+  - LC_CTYPE=en_US.UTF-8
+  - LANG=en_US.UTF-8
+cache:
+- bundler
+- cocoapods
+- xcpretty
+install:
+- bundle install
+- bundle exec pod repo update
+- bundle exec pod install
+script:
+- xcodebuild -workspace FBSnapshotsViewer.xcworkspace -scheme FBSnapshotsViewer -configuration Debug test -sdk macosx10.12 -destination 'platform=OS X,arch=x86_64' | xcpretty -c --test
