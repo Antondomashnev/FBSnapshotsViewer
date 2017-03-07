@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import BoltsSwift
 
 class MenuInteractor {
     weak var output: MenuInteractorOutput?

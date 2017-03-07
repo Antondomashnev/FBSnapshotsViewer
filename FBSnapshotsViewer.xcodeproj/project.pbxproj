@@ -11,6 +11,10 @@
 		6D21F7481E6CBAFA00BFCE4C /* MenuControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21F7471E6CBAFA00BFCE4C /* MenuControllerSpec.swift */; };
 		6D21F74A1E6CC17000BFCE4C /* MenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21F7491E6CC17000BFCE4C /* MenuActions.swift */; };
 		6D3BA5631E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BA5621E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift */; };
+		6D3BA5651E6E07AA00CAD4EE /* MenuPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BA5641E6E07AA00CAD4EE /* MenuPresenterSpec.swift */; };
+		6D3BA56C1E6E0D2200CAD4EE /* AutoMockable.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BA56B1E6E0D2200CAD4EE /* AutoMockable.stencil */; };
+		6D3BA56E1E6E0F5D00CAD4EE /* AutoMockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BA56D1E6E0F5D00CAD4EE /* AutoMockable.swift */; };
+		6D3BA5741E6E158100CAD4EE /* AutoMockable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BA5731E6E158100CAD4EE /* AutoMockable.generated.swift */; };
 		6D4724BD1E3E9F2400F38161 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4724BC1E3E9F2400F38161 /* AppDelegate.swift */; };
 		6D4724C11E3E9F2400F38161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D4724C01E3E9F2400F38161 /* Assets.xcassets */; };
 		6D4724C41E3E9F2400F38161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D4724C21E3E9F2400F38161 /* Main.storyboard */; };
@@ -75,6 +79,10 @@
 		6D21F7471E6CBAFA00BFCE4C /* MenuControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuControllerSpec.swift; sourceTree = "<group>"; };
 		6D21F7491E6CC17000BFCE4C /* MenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuActions.swift; sourceTree = "<group>"; };
 		6D3BA5621E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuStatusItemMenuSpec.swift; sourceTree = "<group>"; };
+		6D3BA5641E6E07AA00CAD4EE /* MenuPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuPresenterSpec.swift; sourceTree = "<group>"; };
+		6D3BA56B1E6E0D2200CAD4EE /* AutoMockable.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AutoMockable.stencil; sourceTree = "<group>"; };
+		6D3BA56D1E6E0F5D00CAD4EE /* AutoMockable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoMockable.swift; sourceTree = "<group>"; };
+		6D3BA5731E6E158100CAD4EE /* AutoMockable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoMockable.generated.swift; sourceTree = "<group>"; };
 		6D4724B91E3E9F2400F38161 /* FBSnapshotsViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBSnapshotsViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D4724BC1E3E9F2400F38161 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D4724C01E3E9F2400F38161 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -155,6 +163,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D3BA5661E6E0B5B00CAD4EE /* Sourcery */ = {
+			isa = PBXGroup;
+			children = (
+				6D3BA56A1E6E0BFD00CAD4EE /* CodeGenerated */,
+				6D3BA5671E6E0B6300CAD4EE /* Templates */,
+			);
+			path = Sourcery;
+			sourceTree = "<group>";
+		};
+		6D3BA5671E6E0B6300CAD4EE /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				6D3BA56B1E6E0D2200CAD4EE /* AutoMockable.stencil */,
+				6D3BA56D1E6E0F5D00CAD4EE /* AutoMockable.swift */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		6D3BA56A1E6E0BFD00CAD4EE /* CodeGenerated */ = {
+			isa = PBXGroup;
+			children = (
+				6D3BA5731E6E158100CAD4EE /* AutoMockable.generated.swift */,
+			);
+			path = CodeGenerated;
+			sourceTree = "<group>";
+		};
 		6D4724B01E3E9F2300F38161 = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +237,7 @@
 				6DDFBD8A1E63252B00DFC0A4 /* SnapshotTestImageSpec.swift */,
 				6D21F7471E6CBAFA00BFCE4C /* MenuControllerSpec.swift */,
 				6D3BA5621E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift */,
+				6D3BA5641E6E07AA00CAD4EE /* MenuPresenterSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -219,6 +254,7 @@
 		6D5BB4C91E59A20E0006BAE1 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				6D3BA5661E6E0B5B00CAD4EE /* Sourcery */,
 				6D5BB4CA1E59A20E0006BAE1 /* FileWatch.swift */,
 			);
 			path = Vendor;
@@ -297,8 +333,8 @@
 			isa = PBXGroup;
 			children = (
 				6DE347741E47D8CE004147DF /* MenuController.swift */,
-				6DE347791E47D917004147DF /* MenuUserInterface.swift */,
 				6DDFBDA51E64E53D00DFC0A4 /* MenuStatusItemMenu.swift */,
+				6DE347791E47D917004147DF /* MenuUserInterface.swift */,
 				6D21F7491E6CC17000BFCE4C /* MenuActions.swift */,
 			);
 			path = "User Interface";
@@ -413,6 +449,7 @@
 			buildConfigurationList = 6D4724D61E3E9F2400F38161 /* Build configuration list for PBXNativeTarget "FBSnapshotsViewerTests" */;
 			buildPhases = (
 				9F4AE397767705C1E9D22C1D /* [CP] Check Pods Manifest.lock */,
+				6D3BA5691E6E0BC200CAD4EE /* Sourcery */,
 				6D4724C61E3E9F2400F38161 /* Sources */,
 				6D4724C71E3E9F2400F38161 /* Frameworks */,
 				6D4724C81E3E9F2400F38161 /* Resources */,
@@ -479,6 +516,7 @@
 				6D4724C11E3E9F2400F38161 /* Assets.xcassets in Resources */,
 				6D848C571E68D0C90000FC1E /* TestResultCell.xib in Resources */,
 				6D4724C41E3E9F2400F38161 /* Main.storyboard in Resources */,
+				6D3BA56C1E6E0D2200CAD4EE /* AutoMockable.stencil in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +558,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint lint --config ${SRCROOT}/FBSnapshotsViewer/.swiftlint.yml";
+		};
+		6D3BA5691E6E0BC200CAD4EE /* Sourcery */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Sourcery;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Sourcery/bin/sourcery\" \"${SRCROOT}/FBSnapshotsViewer\" \"${SRCROOT}/Vendor/Sourcery/Templates\" \"${SRCROOT}/Vendor/Sourcery/CodeGenerated\"";
 		};
 		85A248FF384E76EC0BA66DC2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -626,11 +678,13 @@
 				6D848C5F1E68D7940000FC1E /* TestResultsModuleInterface.swift in Sources */,
 				6D848C611E68D7B80000FC1E /* TestResultsPresenter.swift in Sources */,
 				6DE347781E47D8E5004147DF /* MenuWireframe.swift in Sources */,
+				6D3BA5741E6E158100CAD4EE /* AutoMockable.generated.swift in Sources */,
 				6D5F912D1E4F4D9E00C6E5BF /* SnapshotsViewerApplicationRunNotificationListener.swift in Sources */,
 				6D848C5B1E68D5720000FC1E /* TestResultsInteractorIO.swift in Sources */,
 				6D5F913C1E4F6D4700C6E5BF /* FolderEventsListenerFactory.swift in Sources */,
 				6DE3477E1E47D9DF004147DF /* MenuInteractorIO.swift in Sources */,
 				6D5BB4C81E598F460006BAE1 /* FolderEventsListenerError.swift in Sources */,
+				6D3BA56E1E6E0F5D00CAD4EE /* AutoMockable.swift in Sources */,
 				6DF15B751E662CBD00DFA181 /* TestResultsController.swift in Sources */,
 				6D65C62E1E62F39B00733118 /* ApplicationTemporaryFolderFinder.swift in Sources */,
 				6DDFBD891E6320C000DFC0A4 /* SnapshotTestImage.swift in Sources */,
@@ -652,6 +706,7 @@
 				6DDFBD8B1E63252B00DFC0A4 /* SnapshotTestImageSpec.swift in Sources */,
 				6D21F7481E6CBAFA00BFCE4C /* MenuControllerSpec.swift in Sources */,
 				6DE3475E1E476F8A004147DF /* FolderEventSpec.swift in Sources */,
+				6D3BA5651E6E07AA00CAD4EE /* MenuPresenterSpec.swift in Sources */,
 				6D3BA5631E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

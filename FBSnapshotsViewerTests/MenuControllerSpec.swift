@@ -58,34 +58,16 @@ class MenuController_MockStatusBar: NSStatusBar {
     }
 }
 
-class MenuController_MockMenuModuleInterface: MenuModuleInterface {
-    var quitCalled: Bool = false
-    var showTestResultsCalled: Bool = false
-    var showApplicationMenuCalled: Bool = false
-
-    func quit() {
-        quitCalled = true
-    }
-
-    func showTestResults() {
-        showTestResultsCalled = true
-    }
-
-    func showApplicationMenu() {
-        showApplicationMenuCalled = true
-    }
-}
-
 class MenuControllerSpec: QuickSpec {
     override func spec() {
-        var eventHandler: MenuController_MockMenuModuleInterface!
+        var eventHandler: MenuModuleInterfaceMock!
         var menuController: MenuController!
         var statusItem: MenuController_MockNSStatusItem!
         var statusBar: MenuController_MockStatusBar!
         var button: MenuController_MockNSStatusBarButton!
 
         beforeEach {
-            eventHandler = MenuController_MockMenuModuleInterface()
+            eventHandler = MenuModuleInterfaceMock()
             button = MenuController_MockNSStatusBarButton()
             statusItem = MenuController_MockNSStatusItem()
             statusBar = MenuController_MockStatusBar.system()

@@ -6,9 +6,9 @@
 //  Copyright © 2017 Anton Domashnev. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
-protocol MenuModuleInterface: class {
+protocol MenuModuleInterface: class, AutoMockable {
     func showTestResults()
     func showApplicationMenu()
     func quit()

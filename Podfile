@@ -3,7 +3,7 @@ platform :osx, '10.12'
 
 target 'FBSnapshotsViewer' do
   use_frameworks!
-  pod 'Bolts-Swift', '~> 1.3'
+  pod 'Sourcery', '~> 0.5'
   pod 'SwiftGen', '~> 4.2'
   pod 'SwiftLint', '~> 0.16'
   target 'FBSnapshotsViewerTests' do
