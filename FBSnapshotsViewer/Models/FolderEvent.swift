@@ -112,6 +112,8 @@ extension FolderEvent: Equatable {
             return path1 == path2 && object1 == object2
         case (let .renamed(path1, object1), let .renamed(path2, object2)):
             return path1 == path2 && object1 == object2
+        case ( .unknown, .unknown):
+            return true
         default: break
         }
         return false

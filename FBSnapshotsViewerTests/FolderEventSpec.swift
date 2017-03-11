@@ -37,6 +37,12 @@ class FolderEventSpec: QuickSpec {
                     expect(FolderEvent.renamed(path: "lala", object: .file).object).to(equal(FolderEventObject.file))
                 }
             }
+
+            context("when unknown") {
+                it("returns nil") {
+                    expect(FolderEvent.unknown.object).to(beNil())
+                }
+            }
         }
 
         describe(".path") {
@@ -61,6 +67,12 @@ class FolderEventSpec: QuickSpec {
             context("when renamed") {
                 it("returns correct path") {
                     expect(FolderEvent.renamed(path: "bar", object: .file).path).to(equal("bar"))
+                }
+            }
+
+            context("when unknown") {
+                it("returns nil") {
+                    expect(FolderEvent.unknown.path).to(beNil())
                 }
             }
         }
@@ -110,6 +122,14 @@ class FolderEventSpec: QuickSpec {
 
             beforeEach {
                 eventFlag = FileWatch.EventFlag.ItemIsDir
+            }
+
+            context("when unknown") {
+                it("returns correct folder event") {
+                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.None.union(eventFlag), at: "/temp")
+                    let expectedEvent = FolderEvent.unknown
+                    expect(event).to(equal(expectedEvent))
+                }
             }
 
             context("when renamed") {
