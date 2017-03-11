@@ -13,7 +13,7 @@ protocol MenuInteractorInput: class {
     var foundTestResults: [TestResult] { get }
 }
 
-protocol MenuInteractorOutput: class {
+protocol MenuInteractorOutput: class, AutoMockable {
     /// Callback that notifies that new test results are found
     ///
     /// - Parameter testResult: found test result

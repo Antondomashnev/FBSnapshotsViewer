@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol TestResult: CustomStringConvertible, CustomDebugStringConvertible {
+protocol TestResult: CustomStringConvertible, CustomDebugStringConvertible, AutoEquatable {
     var referenceImagePath: String { get }
     var diffImagePath: String { get }
     var failedImagePath: String { get }

@@ -18,6 +18,21 @@ class MenuActionsMock: MenuActions {
     }
 
 }
+class MenuInteractorOutputMock: MenuInteractorOutput {
+
+
+    //MARK: - didFind
+
+    var didFindCalled = false
+    var didFindReceivedTestResult: TestResult?
+
+    func didFind(new testResult: TestResult) {
+
+        didFindCalled = true
+        didFindReceivedTestResult = testResult
+    }
+
+}
 class MenuModuleInterfaceMock: MenuModuleInterface {
 
 
