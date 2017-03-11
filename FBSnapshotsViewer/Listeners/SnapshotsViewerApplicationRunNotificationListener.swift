@@ -8,16 +8,18 @@
 
 import Foundation
 
-protocol SnapshotsViewerApplicationRunNotificationListenerDelegate: class {
+protocol SnapshotsViewerApplicationRunNotificationListenerDelegate: class, AutoMockable {
     func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?)
 }
 
 class SnapshotsViewerApplicationRunNotificationListener {
     private let notificationCenter: CFNotificationCenter
-    private let willRunApplicationTestsNotificationIdentifier: NSString = "com.antondomashnev.FBSnapshotsViewerRunPhaseScript.willRunApplicationTestsNotificationIdentifier"
+    private let willRunApplicationTestsNotificationIdentifier: NSString
     weak var delegate: SnapshotsViewerApplicationRunNotificationListenerDelegate?
 
-    init(notificationCenter: CFNotificationCenter = CFNotificationCenterGetDistributedCenter()) {
+    init(notificationCenter: CFNotificationCenter = CFNotificationCenterGetDistributedCenter(),
+         willRunApplicationTestsNotificationIdentifier: NSString = "com.antondomashnev.FBSnapshotsViewerRunPhaseScript.willRunApplicationTestsNotificationIdentifier") {
+        self.willRunApplicationTestsNotificationIdentifier = willRunApplicationTestsNotificationIdentifier
         self.notificationCenter = notificationCenter
         registerForDarwinNotifications(with: willRunApplicationTestsNotificationIdentifier, from: notificationCenter)
     }

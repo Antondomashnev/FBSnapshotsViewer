@@ -88,3 +88,18 @@ class MenuUserInterfaceMock: MenuUserInterface {
     }
 
 }
+class SnapshotsViewerApplicationRunNotificationListenerDelegateMock: SnapshotsViewerApplicationRunNotificationListenerDelegate {
+
+
+    //MARK: - snapshotsDiffFolderNotificationListener
+
+    var snapshotsDiffFolderNotificationListenerCalled = false
+    var snapshotsDiffFolderNotificationListenerReceivedArguments: (listener: SnapshotsViewerApplicationRunNotificationListener, simulatorPath: String, imageDiffPath: String?)?
+
+    func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
+
+        snapshotsDiffFolderNotificationListenerCalled = true
+        snapshotsDiffFolderNotificationListenerReceivedArguments = (listener: listener, simulatorPath: simulatorPath, imageDiffPath: imageDiffPath)
+    }
+
+}
