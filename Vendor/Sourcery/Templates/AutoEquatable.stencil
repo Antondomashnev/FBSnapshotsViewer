@@ -44,8 +44,8 @@ extension {{ type.name }}: Equatable {}
         {% if case.associatedValues.count == 1 %}
         return lhs == rhs
         {% else %}
-            {% for associated in case.associatedValues %} if lhs.{{ associated.externalName }} != rhs.{{ associated.externalName }} { return false }
-            {% endfor %} return true
+        {% for associated in case.associatedValues %}if lhs.{{ associated.externalName }} != rhs.{{ associated.externalName }} { return false }
+        {% endfor %}return true
         {% endif %}
         {% endif %}
     {% endfor %}

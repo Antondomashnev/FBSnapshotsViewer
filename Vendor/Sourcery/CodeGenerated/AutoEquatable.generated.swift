@@ -57,6 +57,23 @@ internal func == (lhs: TestResult, rhs: TestResult) -> Bool {
 }
 
 // MARK: - AutoEquatable for Enums
+// MARK: - FolderEventFilter AutoEquatable
+extension FolderEventFilter: Equatable {}
+internal func == (lhs: FolderEventFilter, rhs: FolderEventFilter) -> Bool {
+    switch (lhs, rhs) {
+     case (.known, .known): 
+         return true 
+    case (.pathRegex(let lhs), .pathRegex(let rhs)): 
+        return lhs == rhs
+    case (.type(let lhs), .type(let rhs)): 
+        return lhs == rhs
+    case (.compound(let lhs), .compound(let rhs)): 
+        if lhs.0 != rhs.0 { return false }
+        if lhs.1 != rhs.1 { return false }
+        return true
+    default: return false
+    }
+}
 // MARK: - SnapshotTestImage AutoEquatable
 extension SnapshotTestImage: Equatable {}
 internal func == (lhs: SnapshotTestImage, rhs: SnapshotTestImage) -> Bool {
