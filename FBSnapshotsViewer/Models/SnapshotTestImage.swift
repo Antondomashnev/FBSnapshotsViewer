@@ -65,17 +65,4 @@ enum SnapshotTestImage {
 }
 
 /// Equatable
-extension SnapshotTestImage: Equatable {
-    public static func == (lhs: SnapshotTestImage, rhs: SnapshotTestImage) -> Bool {
-        switch (lhs, rhs) {
-        case (let .diff(path1), let .diff(path2)):
-            return path1 == path2
-        case (let .reference(path1), let .reference(path2)):
-            return path1 == path2
-        case (let .failed(path1), let .failed(path2)):
-            return path1 == path2
-        default: break
-        }
-        return false
-    }
-}
+extension SnapshotTestImage: AutoEquatable {}

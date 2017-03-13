@@ -57,5 +57,18 @@ internal func == (lhs: TestResult, rhs: TestResult) -> Bool {
 }
 
 // MARK: - AutoEquatable for Enums
+// MARK: - SnapshotTestImage AutoEquatable
+extension SnapshotTestImage: Equatable {}
+internal func == (lhs: SnapshotTestImage, rhs: SnapshotTestImage) -> Bool {
+    switch (lhs, rhs) {
+    case (.diff(let lhs), .diff(let rhs)): 
+        return lhs == rhs
+    case (.reference(let lhs), .reference(let rhs)): 
+        return lhs == rhs
+    case (.failed(let lhs), .failed(let rhs)): 
+        return lhs == rhs
+    default: return false
+    }
+}
 
 // MARK: -

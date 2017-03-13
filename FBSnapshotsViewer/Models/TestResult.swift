@@ -8,23 +8,11 @@
 
 import Cocoa
 
-protocol TestResult: CustomStringConvertible, CustomDebugStringConvertible, AutoEquatable {
+protocol TestResult: AutoEquatable {
     var referenceImagePath: String { get }
     var diffImagePath: String { get }
     var failedImagePath: String { get }
     var testName: String { get }
-}
-
-extension TestResult {
-    var description: String {
-        return "testName: \(testName)\nreferenceImagePath: \(referenceImagePath),\ndiffImagePath \(diffImagePath),\nfailedImagePath: \(failedImagePath)"
-    }
-}
-
-extension TestResult {
-    var debugDescription: String {
-        return "testName: \(testName):\nreferenceImagePath: \(referenceImagePath),\ndiffImagePath \(diffImagePath),\nfailedImagePath: \(failedImagePath)"
-    }
 }
 
 //*******************************************//
