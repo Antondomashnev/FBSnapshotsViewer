@@ -14,7 +14,7 @@ import Nimble
 class ApplicationSnapshotTestResultListener_MockFolderEventsListener: FolderEventsListener {
     weak var output: FolderEventsListenerOutput?
 
-    required init(folderPath: String, filter: FolderEventFilter?) {}
+    required init(folderPath: String, filter: FolderEventFilter? = nil, fileWatcherFactory: FileWatcherFactory = FileWatcherFactory()) {}
 
     func startListening() {}
 
@@ -66,7 +66,7 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
 
         describe(".listen") {
             beforeEach {
-                folderEventsListenerFactory.mockSnapshotsDiffFolderEventsListener = ApplicationSnapshotTestResultListener_MockFolderEventsListener(folderPath: "", filter: nil)
+                folderEventsListenerFactory.mockSnapshotsDiffFolderEventsListener = ApplicationSnapshotTestResultListener_MockFolderEventsListener(folderPath: "")
                 snapshotTestImagesCollectorFactory.mockApplicationSnapshotTestImageCollector = ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestImageCollector()
                 snapshotTestResultListener.listen(application: Application(snapshotsDiffFolder: "myDiffFolder"), outputTo: output)
             }

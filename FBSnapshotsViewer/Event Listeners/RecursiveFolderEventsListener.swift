@@ -16,7 +16,7 @@ final class RecursiveFolderEventsListener: FolderEventsListener {
     fileprivate var listeners: [String: FolderEventsListener] = [:]
 
     /// Internal 3rd party watcher
-    fileprivate var watcher: FileWatch?
+    fileprivate var watcher: FileWatcher?
 
     /// Currently watching folder path
     fileprivate let folderPath: String
@@ -27,15 +27,16 @@ final class RecursiveFolderEventsListener: FolderEventsListener {
     /// Handler for `FolderEventsListener` output
     weak var output: FolderEventsListenerOutput?
 
-    init(folderPath: String, filter: FolderEventFilter? = nil) {
+    init(folderPath: String, filter: FolderEventFilter? = nil, fileWatcherFactory: FileWatcherFactory = FileWatcherFactory()) {
         self.filter = filter
         self.folderPath = folderPath
+        self.watcher = fileWatcherFactory.fileWatcher(for: [folderPath])
     }
 
     // MARK: - Interface
 
     func startListening() {
-        watcher = try? FileWatch(paths: [folderPath], createFlag: [.UseCFTypes, .FileEvents], runLoop: RunLoop.current, latency: 1) { [weak self] event in
+        try? watcher?.start { [weak self] event in
             guard let strongSelf = self else {
                 return
             }

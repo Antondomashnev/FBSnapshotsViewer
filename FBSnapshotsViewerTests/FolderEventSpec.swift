@@ -78,15 +78,15 @@ class FolderEventSpec: QuickSpec {
         }
 
         context("when file event") {
-            var eventFlag: FileWatch.EventFlag!
+            var eventFlag: FileWatcher.EventFlag!
 
             beforeEach {
-                eventFlag = FileWatch.EventFlag.ItemIsFile
+                eventFlag = FileWatcher.EventFlag.ItemIsFile
             }
 
             context("when renamed") {
                 it ("returns correct folder event") {
-                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemRenamed.union(eventFlag), at: "/temp")
+                    let event = FolderEvent(eventFlag: FileWatcher.EventFlag.ItemRenamed.union(eventFlag), at: "/temp")
                     let expectedEvent = FolderEvent.renamed(path: "/temp", object: .file)
                     expect(event).to(equal(expectedEvent))
                 }
@@ -94,7 +94,7 @@ class FolderEventSpec: QuickSpec {
 
             context("when modified") {
                 it("returns correct folder event") {
-                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemModified.union(eventFlag), at: "/temp")
+                    let event = FolderEvent(eventFlag: FileWatcher.EventFlag.ItemModified.union(eventFlag), at: "/temp")
                     let expectedEvent = FolderEvent.modified(path: "/temp", object: .file)
                     expect(event).to(equal(expectedEvent))
                 }
@@ -102,7 +102,7 @@ class FolderEventSpec: QuickSpec {
 
             context("when created") {
                 it("returns correct folder event") {
-                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemCreated.union(eventFlag), at: "/temp")
+                    let event = FolderEvent(eventFlag: FileWatcher.EventFlag.ItemCreated.union(eventFlag), at: "/temp")
                     let expectedEvent = FolderEvent.created(path: "/temp", object: .file)
                     expect(event).to(equal(expectedEvent))
                 }
@@ -110,7 +110,7 @@ class FolderEventSpec: QuickSpec {
 
             context("when deleted") {
                 it("returns correct folder event") {
-                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemRemoved.union(eventFlag), at: "/temp")
+                    let event = FolderEvent(eventFlag: FileWatcher.EventFlag.ItemRemoved.union(eventFlag), at: "/temp")
                     let expectedEvent = FolderEvent.deleted(path: "/temp", object: .file)
                     expect(event).to(equal(expectedEvent))
                 }
@@ -118,15 +118,15 @@ class FolderEventSpec: QuickSpec {
         }
 
         context("when folder event") {
-            var eventFlag: FileWatch.EventFlag!
+            var eventFlag: FileWatcher.EventFlag!
 
             beforeEach {
-                eventFlag = FileWatch.EventFlag.ItemIsDir
+                eventFlag = FileWatcher.EventFlag.ItemIsDir
             }
 
             context("when unknown") {
                 it("returns correct folder event") {
-                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.None.union(eventFlag), at: "/temp")
+                    let event = FolderEvent(eventFlag: FileWatcher.EventFlag.None.union(eventFlag), at: "/temp")
                     let expectedEvent = FolderEvent.unknown
                     expect(event).to(equal(expectedEvent))
                 }
@@ -134,7 +134,7 @@ class FolderEventSpec: QuickSpec {
 
             context("when renamed") {
                 it("returns correct folder event") {
-                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemRenamed.union(eventFlag), at: "/temp")
+                    let event = FolderEvent(eventFlag: FileWatcher.EventFlag.ItemRenamed.union(eventFlag), at: "/temp")
                     let expectedEvent = FolderEvent.renamed(path: "/temp", object: .folder)
                     expect(event).to(equal(expectedEvent))
                 }
@@ -142,7 +142,7 @@ class FolderEventSpec: QuickSpec {
 
             context("when modified") {
                 it("returns correct folder event") {
-                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemModified.union(eventFlag), at: "/temp")
+                    let event = FolderEvent(eventFlag: FileWatcher.EventFlag.ItemModified.union(eventFlag), at: "/temp")
                     let expectedEvent = FolderEvent.modified(path: "/temp", object: .folder)
                     expect(event).to(equal(expectedEvent))
                 }
@@ -150,7 +150,7 @@ class FolderEventSpec: QuickSpec {
 
             context("when created") {
                 it("returns correct folder event") {
-                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemCreated.union(eventFlag), at: "/temp")
+                    let event = FolderEvent(eventFlag: FileWatcher.EventFlag.ItemCreated.union(eventFlag), at: "/temp")
                     let expectedEvent = FolderEvent.created(path: "/temp", object: .folder)
                     expect(event).to(equal(expectedEvent))
                 }
@@ -158,7 +158,7 @@ class FolderEventSpec: QuickSpec {
 
             context("when deleted") {
                 it("returns correct folder event") {
-                    let event = FolderEvent(eventFlag: FileWatch.EventFlag.ItemRemoved.union(eventFlag), at: "/temp")
+                    let event = FolderEvent(eventFlag: FileWatcher.EventFlag.ItemRemoved.union(eventFlag), at: "/temp")
                     let expectedEvent = FolderEvent.deleted(path: "/temp", object: .folder)
                     expect(event).to(equal(expectedEvent))
                 }

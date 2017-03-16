@@ -1,8 +1,8 @@
 import Foundation
 
-public class FileWatch {
+public class FileWatcher {
 
-    // wrap FSEventStreamEventFlags as  OptionSetType
+    // wrap FSEventStreamEventFlags as OptionSetType
     public struct EventFlag: OptionSet {
         public let rawValue: FSEventStreamEventFlags
         public init(rawValue: FSEventStreamEventFlags) {
@@ -98,29 +98,19 @@ public class FileWatch {
     }
 
     public typealias EventHandler = (Event) -> Void
-
-    open let eventHandler: EventHandler
+    
+    private let paths: [String]
+    private let eventStreamFlags: CreateFlag
+    private let runLoop: RunLoop
+    private let latency: CFTimeInterval
     private var eventStream: FSEventStreamRef?
-
-    public init(paths: [String], createFlag: CreateFlag, runLoop: RunLoop, latency: CFTimeInterval, eventHandler: @escaping EventHandler) throws {
-        self.eventHandler = eventHandler
-
-        var ctx = FSEventStreamContext(version: 0, info: UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque()), retain: nil, release: nil, copyDescription: nil)
-
-        if !createFlag.contains(.UseCFTypes) {
-            throw Error.notContainUseCFTypes
-        }
-
-        guard let eventStream = FSEventStreamCreate(kCFAllocatorDefault, FileWatch.StreamCallback, &ctx, paths as CFArray, FSEventStreamEventId(kFSEventStreamEventIdSinceNow), latency, createFlag.rawValue) else {
-            throw Error.streamCreateFailed
-        }
-
-        FSEventStreamScheduleWithRunLoop(eventStream, runLoop.getCFRunLoop(), CFRunLoopMode.defaultMode.rawValue)
-        if !FSEventStreamStart(eventStream) {
-            throw Error.startFailed
-        }
-
-        self.eventStream = eventStream
+    private(set) public var eventHandler: EventHandler?
+    
+    public init(paths: [String], createFlag: CreateFlag, runLoop: RunLoop, latency: CFTimeInterval) {
+        self.paths = paths
+        self.eventStreamFlags = createFlag
+        self.runLoop = runLoop
+        self.latency = latency
     }
 
     deinit {
@@ -133,11 +123,35 @@ public class FileWatch {
         self.eventStream = nil
 
     }
+    
+    // MARK: - Interface
+    
+    public func start(with eventHandler: @escaping EventHandler) throws {
+        self.eventHandler = eventHandler
+        var ctx = FSEventStreamContext(version: 0, info: UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque()), retain: nil, release: nil, copyDescription: nil)
+    
+        guard eventStreamFlags.contains(.UseCFTypes) else {
+            throw Error.notContainUseCFTypes
+        }
+        
+        guard let eventStream = FSEventStreamCreate(kCFAllocatorDefault, FileWatcher.StreamCallback, &ctx, paths as CFArray, FSEventStreamEventId(kFSEventStreamEventIdSinceNow), latency, eventStreamFlags.rawValue) else {
+            throw Error.streamCreateFailed
+        }
+        
+        FSEventStreamScheduleWithRunLoop(eventStream, runLoop.getCFRunLoop(), CFRunLoopMode.defaultMode.rawValue)
+        if !FSEventStreamStart(eventStream) {
+            throw Error.startFailed
+        }
+        
+        self.eventStream = eventStream
+    }
+    
+    // MARK: - Helpers
 
     // http://stackoverflow.com/questions/33260808/swift-proper-use-of-cfnotificationcenteraddobserver-w-callback
     private static let StreamCallback: FSEventStreamCallback = {(streamRef: ConstFSEventStreamRef, clientCallBackInfo: UnsafeMutableRawPointer?, numEvents: Int, eventPaths: UnsafeMutableRawPointer, eventFlags: UnsafePointer<FSEventStreamEventFlags>?, eventIds: UnsafePointer<FSEventStreamEventId>?) -> Void in
 
-        let `self` = unsafeBitCast(clientCallBackInfo, to: FileWatch.self)
+        let `self` = unsafeBitCast(clientCallBackInfo, to: FileWatcher.self)
         guard let eventPathArray = unsafeBitCast(eventPaths, to: NSArray.self) as? [String] else {
             return
         }
@@ -149,7 +163,7 @@ public class FileWatch {
             let flag = eventFlagArray[i]
             let eventID = eventIdArray[i]
             let event = Event(path: path, flag: EventFlag(rawValue: flag), eventID: eventID)
-            self.eventHandler(event)
+            self.eventHandler?(event)
         }
     }
 }

@@ -61,7 +61,7 @@ internal func == (lhs: TestResult, rhs: TestResult) -> Bool {
 extension FolderEventFilter: Equatable {}
 internal func == (lhs: FolderEventFilter, rhs: FolderEventFilter) -> Bool {
     switch (lhs, rhs) {
-     case (.known, .known): 
+    case (.known, .known): 
          return true 
     case (.pathRegex(let lhs), .pathRegex(let rhs)): 
         return lhs == rhs
