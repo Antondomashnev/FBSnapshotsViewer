@@ -3,6 +3,21 @@
 
 import Cocoa
 
+class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
+
+
+    //MARK: - folderEventsListener
+
+    var folderEventsListenerCalled = false
+    var folderEventsListenerReceivedArguments: (listener: FolderEventsListener, event: FolderEvent)?
+
+    func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
+
+        folderEventsListenerCalled = true
+        folderEventsListenerReceivedArguments = (listener: listener, event: event)
+    }
+
+}
 class MenuActionsMock: MenuActions {
 
 

@@ -114,13 +114,7 @@ public class FileWatcher {
     }
 
     deinit {
-        guard let eventStream = self.eventStream else {
-            return
-        }
-        FSEventStreamStop(eventStream)
-        FSEventStreamInvalidate(eventStream)
-        FSEventStreamRelease(eventStream)
-        self.eventStream = nil
+        stop()
 
     }
     
@@ -144,6 +138,16 @@ public class FileWatcher {
         }
         
         self.eventStream = eventStream
+    }
+    
+    public func stop() {
+        guard let eventStream = self.eventStream else {
+            return
+        }
+        FSEventStreamStop(eventStream)
+        FSEventStreamInvalidate(eventStream)
+        FSEventStreamRelease(eventStream)
+        self.eventStream = nil
     }
     
     // MARK: - Helpers

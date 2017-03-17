@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol FolderEventsListenerOutput: class {
+protocol FolderEventsListenerOutput: class, AutoMockable {
     func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent)
 }
 
