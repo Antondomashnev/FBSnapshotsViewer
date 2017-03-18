@@ -8,6 +8,6 @@
 
 import Cocoa
 
-protocol MenuActions: AutoMockable {
+protocol MenuActions {
     func handleIconMouseEvent(_ event: NSEvent)
 }

@@ -3,6 +3,21 @@
 
 import Cocoa
 
+class ApplicationSnapshotTestImageCollectorOutputMock: ApplicationSnapshotTestImageCollectorOutput {
+
+
+    //MARK: - applicationSnapshotTestResultCollector
+
+    var applicationSnapshotTestResultCollectorCalled = false
+    var applicationSnapshotTestResultCollectorReceivedArguments: (collector: ApplicationSnapshotTestImageCollector, testResult: TestResult)?
+
+    func applicationSnapshotTestResultCollector(_ collector: ApplicationSnapshotTestImageCollector, didCollect testResult: TestResult) {
+
+        applicationSnapshotTestResultCollectorCalled = true
+        applicationSnapshotTestResultCollectorReceivedArguments = (collector: collector, testResult: testResult)
+    }
+
+}
 class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
 
 
@@ -15,21 +30,6 @@ class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
 
         folderEventsListenerCalled = true
         folderEventsListenerReceivedArguments = (listener: listener, event: event)
-    }
-
-}
-class MenuActionsMock: MenuActions {
-
-
-    //MARK: - handleIconMouseEvent
-
-    var handleIconMouseEventCalled = false
-    var handleIconMouseEventReceivedEvent: NSEvent?
-
-    func handleIconMouseEvent(_ event: NSEvent) {
-
-        handleIconMouseEventCalled = true
-        handleIconMouseEventReceivedEvent = event
     }
 
 }
