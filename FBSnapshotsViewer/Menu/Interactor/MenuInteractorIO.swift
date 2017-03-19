@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol MenuInteractorInput: class {
+protocol MenuInteractorInput: class, AutoMockable {
     /// Cached test results per one application run
     var foundTestResults: [TestResult] { get }
 }

@@ -1,7 +1,7 @@
 PODS:
   - Nimble (6.0.1)
   - Quick (1.1.0)
-  - Sourcery (0.5.8)
+  - Sourcery (0.5.9)
   - SwiftGen (4.2.0)
   - SwiftLint (0.16.1)
 
@@ -15,7 +15,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Sourcery: 78f07fb299a839356ed3e17f8510b13e097934da
+  Sourcery: 45e4b8ab587861e67de267957b16d91902f3a26f
   SwiftGen: b6bfed151243348e4603b91bf5bc4eb2486c9d5b
   SwiftLint: b8b683208cc09640898f16318a7a452274e91f61
 

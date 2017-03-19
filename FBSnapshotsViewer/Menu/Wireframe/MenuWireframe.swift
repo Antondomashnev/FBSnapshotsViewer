@@ -9,7 +9,7 @@
 import Cocoa
 
 /// `MenuWireframe` is responsible to build a menu module - app's status bar UI representation
-final class MenuWireframe {
+class MenuWireframe {
 
     weak private var userInterface: MenuController?
 

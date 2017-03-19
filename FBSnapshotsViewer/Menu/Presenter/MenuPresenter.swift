@@ -10,7 +10,7 @@ import Cocoa
 
 class MenuPresenter {
     var wireframe: MenuWireframe?
-    var interactor: MenuInteractor?
+    var interactor: MenuInteractorInput?
     weak var userInterface: MenuUserInterface?
 }
 

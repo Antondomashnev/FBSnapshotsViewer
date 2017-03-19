@@ -16,7 +16,7 @@ class TestResultsPresenter {
 
 extension TestResultsPresenter: TestResultsModuleInterface {
     func updateUserInterface() {
-        guard let testResults = interactor?.testResults else {
+        guard let testResults = interactor?.testResults, !testResults.isEmpty  else {
             return
         }
         userInterface?.show(testResults: testResults.map { TestResultDisplayInfo(testResult: $0) })

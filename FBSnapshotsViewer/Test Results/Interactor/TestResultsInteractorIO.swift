@@ -8,6 +8,6 @@
 
 import Cocoa
 
-protocol TestResultsInteractorInput: class {
+protocol TestResultsInteractorInput: class, AutoMockable {
     var testResults: [TestResult] { get }
 }

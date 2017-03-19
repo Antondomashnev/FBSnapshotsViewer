@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol TestResultsUserInterface: class {
+protocol TestResultsUserInterface: class, AutoMockable {
     func show(testResults: [TestResultDisplayInfo])
 }

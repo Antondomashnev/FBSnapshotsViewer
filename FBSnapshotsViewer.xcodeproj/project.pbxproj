@@ -13,6 +13,8 @@
 		6D076B731E7EAF81001FDA14 /* ApplicationTemporaryFolderFinderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D076B721E7EAF81001FDA14 /* ApplicationTemporaryFolderFinderSpec.swift */; };
 		6D076B751E7EBC80001FDA14 /* ApplicationSnapshotTestImageCollectorFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D076B741E7EBC80001FDA14 /* ApplicationSnapshotTestImageCollectorFactorySpec.swift */; };
 		6D076B771E7EBD15001FDA14 /* TestResultDisplayInfoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D076B761E7EBD15001FDA14 /* TestResultDisplayInfoSpec.swift */; };
+		6D076B791E7F2FB5001FDA14 /* TestResultsInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D076B781E7F2FB5001FDA14 /* TestResultsInteractorSpec.swift */; };
+		6D076B7B1E7F3177001FDA14 /* TestResultsPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D076B7A1E7F3177001FDA14 /* TestResultsPresenterSpec.swift */; };
 		6D21F7481E6CBAFA00BFCE4C /* MenuControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21F7471E6CBAFA00BFCE4C /* MenuControllerSpec.swift */; };
 		6D21F74A1E6CC17000BFCE4C /* MenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21F7491E6CC17000BFCE4C /* MenuActions.swift */; };
 		6D3BA5631E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BA5621E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift */; };
@@ -97,6 +99,8 @@
 		6D076B721E7EAF81001FDA14 /* ApplicationTemporaryFolderFinderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationTemporaryFolderFinderSpec.swift; sourceTree = "<group>"; };
 		6D076B741E7EBC80001FDA14 /* ApplicationSnapshotTestImageCollectorFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationSnapshotTestImageCollectorFactorySpec.swift; sourceTree = "<group>"; };
 		6D076B761E7EBD15001FDA14 /* TestResultDisplayInfoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultDisplayInfoSpec.swift; sourceTree = "<group>"; };
+		6D076B781E7F2FB5001FDA14 /* TestResultsInteractorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultsInteractorSpec.swift; sourceTree = "<group>"; };
+		6D076B7A1E7F3177001FDA14 /* TestResultsPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultsPresenterSpec.swift; sourceTree = "<group>"; };
 		6D21F7471E6CBAFA00BFCE4C /* MenuControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuControllerSpec.swift; sourceTree = "<group>"; };
 		6D21F7491E6CC17000BFCE4C /* MenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuActions.swift; sourceTree = "<group>"; };
 		6D3BA5621E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuStatusItemMenuSpec.swift; sourceTree = "<group>"; };
@@ -283,6 +287,8 @@
 				6D076B721E7EAF81001FDA14 /* ApplicationTemporaryFolderFinderSpec.swift */,
 				6D076B741E7EBC80001FDA14 /* ApplicationSnapshotTestImageCollectorFactorySpec.swift */,
 				6D076B761E7EBD15001FDA14 /* TestResultDisplayInfoSpec.swift */,
+				6D076B781E7F2FB5001FDA14 /* TestResultsInteractorSpec.swift */,
+				6D076B7A1E7F3177001FDA14 /* TestResultsPresenterSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -628,7 +634,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Sourcery/bin/sourcery\" \"${SRCROOT}/FBSnapshotsViewer\" \"${SRCROOT}/Vendor/Sourcery/Templates\" \"${SRCROOT}/Vendor/Sourcery/CodeGenerated\"";
+			shellScript = "\"${PODS_ROOT}/Sourcery/bin/sourcery\" --sources \"${SRCROOT}/FBSnapshotsViewer\" --templates \"${SRCROOT}/Vendor/Sourcery/Templates\" --output \"${SRCROOT}/Vendor/Sourcery/CodeGenerated\"";
 		};
 		85A248FF384E76EC0BA66DC2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -766,11 +772,13 @@
 				6DDFBD8B1E63252B00DFC0A4 /* SnapshotTestImageSpec.swift in Sources */,
 				6D21F7481E6CBAFA00BFCE4C /* MenuControllerSpec.swift in Sources */,
 				6D076B751E7EBC80001FDA14 /* ApplicationSnapshotTestImageCollectorFactorySpec.swift in Sources */,
+				6D076B7B1E7F3177001FDA14 /* TestResultsPresenterSpec.swift in Sources */,
 				6D92E1CB1E730A5C00DB73C7 /* MenuInteractorSpec.swift in Sources */,
 				6D076B771E7EBD15001FDA14 /* TestResultDisplayInfoSpec.swift in Sources */,
 				6D076B731E7EAF81001FDA14 /* ApplicationTemporaryFolderFinderSpec.swift in Sources */,
 				6DE3475E1E476F8A004147DF /* FolderEventSpec.swift in Sources */,
 				6D3BA5651E6E07AA00CAD4EE /* MenuPresenterSpec.swift in Sources */,
+				6D076B791E7F2FB5001FDA14 /* TestResultsInteractorSpec.swift in Sources */,
 				6D076B6F1E7DA738001FDA14 /* ApplicationSnapshotTestImageCollectorSpec.swift in Sources */,
 				6DBD99D91E7AB31B00E1714E /* NonRecursiveFolderEventsListenerSpec.swift in Sources */,
 				6D92E1D31E7444F700DB73C7 /* SnapshotsViewerApplicationRunNotificationListenerSpec.swift in Sources */,

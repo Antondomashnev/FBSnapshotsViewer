@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.5.8 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.5.9 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 import Cocoa
@@ -31,6 +31,11 @@ class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
         folderEventsListenerCalled = true
         folderEventsListenerReceivedArguments = (listener: listener, event: event)
     }
+
+}
+class MenuInteractorInputMock: MenuInteractorInput {
+
+    var foundTestResults: [TestResult] = []
 
 }
 class MenuInteractorOutputMock: MenuInteractorOutput {
@@ -115,6 +120,26 @@ class SnapshotsViewerApplicationRunNotificationListenerDelegateMock: SnapshotsVi
 
         snapshotsDiffFolderNotificationListenerCalled = true
         snapshotsDiffFolderNotificationListenerReceivedArguments = (listener: listener, simulatorPath: simulatorPath, imageDiffPath: imageDiffPath)
+    }
+
+}
+class TestResultsInteractorInputMock: TestResultsInteractorInput {
+
+    var testResults: [TestResult] = []
+
+}
+class TestResultsUserInterfaceMock: TestResultsUserInterface {
+
+
+    //MARK: - show
+
+    var showCalled = false
+    var showReceivedTestResults: [TestResultDisplayInfo]?
+
+    func show(testResults: [TestResultDisplayInfo]) {
+
+        showCalled = true
+        showReceivedTestResults = testResults
     }
 
 }
