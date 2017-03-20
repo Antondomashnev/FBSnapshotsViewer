@@ -40,6 +40,12 @@ class SnapshotTestImageSpec: QuickSpec {
         }
 
         describe(".init(imagePath)") {
+            context("when image path is empty") {
+                it("returns nil") {
+                    expect(SnapshotTestImage(imagePath: "")).to(beNil())
+                }
+            }
+
             context("when image is diff") {
                 it("returns diff image") {
                     let imagePath = "/Users/myuser/Library/Developer/CoreSimulator/Devices/30D06E4C-C6F4-4F8D-93EC-63381DC42F12/data/Containers/Data/Application/E78B5865-234B-4779-BCED-784C91146583/tmp/FBSnapshotsViewerExampleTests/diff_testExample@2x.png"
