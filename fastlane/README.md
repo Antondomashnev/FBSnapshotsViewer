@@ -29,6 +29,11 @@ xcode-select --install
 </table>
 # Available Actions
 ## osx
+### osx sanity_check
+```
+fastlane osx sanity_check
+```
+Sanity check for the fastfile issues
 ### osx build_run_phase_script
 ```
 fastlane osx build_run_phase_script

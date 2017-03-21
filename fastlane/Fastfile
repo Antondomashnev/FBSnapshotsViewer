@@ -6,6 +6,11 @@ platform :osx do
     bundle_install
   end
 
+  desc "Sanity check for the fastfile issues"
+  lane :sanity_check do
+    puts "Compiling Fastfile to check if the syntax if valid or not"
+  end
+
   desc "Create a new build of FBSnapshotsViewerRunPhaseScript"
   lane :build_run_phase_script do
     puts "Building run phase script into FBSnapshotsViewerRunPhaseScript/bin folder..."
