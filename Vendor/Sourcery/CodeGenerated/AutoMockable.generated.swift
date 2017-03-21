@@ -128,6 +128,19 @@ class TestResultsInteractorInputMock: TestResultsInteractorInput {
     var testResults: [TestResult] = []
 
 }
+class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
+
+
+    //MARK: - updateUserInterface
+
+    var updateUserInterfaceCalled = false
+
+    func updateUserInterface() {
+
+        updateUserInterfaceCalled = true
+    }
+
+}
 class TestResultsUserInterfaceMock: TestResultsUserInterface {
 
 
