@@ -13,10 +13,23 @@ platform :osx do
 
   desc "Create a new build of FBSnapshotsViewerRunPhaseScript"
   lane :build_run_phase_script do
-    puts "Building run phase script into FBSnapshotsViewerRunPhaseScript/bin folder..."
+    puts "Building run phase script into /bin folder..."
     gym(
       workspace: "FBSnapshotsViewer.xcworkspace",
       scheme: "FBSnapshotsViewerRunPhaseScript",
+      configuration: "Release",
+      derived_data_path: "#{ENV["BUILD_DIR"]}/tmp/",
+      output_directory: "bin/",
+      clean: true
+    )
+  end
+
+  desc "Create a new build of FBSnapshotsViewerRunPhaseScript"
+  lane :build_app do
+    puts "Building an app into /bin folder..."
+    gym(
+      workspace: "FBSnapshotsViewer.xcworkspace",
+      scheme: "FBSnapshotsViewer",
       configuration: "Release",
       derived_data_path: "#{ENV["BUILD_DIR"]}/tmp/",
       output_directory: "bin/",

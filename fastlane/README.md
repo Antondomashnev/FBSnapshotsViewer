@@ -39,6 +39,11 @@ Sanity check for the fastfile issues
 fastlane osx build_run_phase_script
 ```
 Create a new build of FBSnapshotsViewerRunPhaseScript
+### osx build_app
+```
+fastlane osx build_app
+```
+Create a new build of FBSnapshotsViewerRunPhaseScript
 ### osx test
 ```
 fastlane osx test
