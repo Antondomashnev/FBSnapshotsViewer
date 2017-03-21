@@ -15,21 +15,19 @@ enum FBSnapshotsViewerTempFolderProxyError: Error {
     case xcrunSimctlListNoBootedSimulators(String)
 }
 
-
 let coreSimulatorsPath = "\(NSHomeDirectory())/Library/Developer/CoreSimulator/Devices"
 let coreSimulatorsDataApplicationsRelativePath = "/data/Containers/Data/Application"
 let willRunApplicationTestsNotificationIdentifier = "com.antondomashnev.FBSnapshotsViewerRunPhaseScript.willRunApplicationTestsNotificationIdentifier" as NSString
 let imageDiffFolderPath = "com.antondomashnev.FBSnapshotsViewerRunPhaseScript.imageDiffFolderPath" as NSString
 let iOSSimulatorPath = "com.antondomashnev.FBSnapshotsViewerRunPhaseScript.iOSSimulatorPath" as NSString
 
-
 func sendDarwinNotification(with snapshotsDiffFolderPath: String?, and runningiOSSimulatorPath: String) {
     let userInfo: NSDictionary
     if let snapshotsDiffFolderPath = snapshotsDiffFolderPath {
-        userInfo = NSDictionary(dictionaryLiteral: (imageDiffFolderPath, snapshotsDiffFolderPath), (iOSSimulatorPath, runningiOSSimulatorPath))
+        userInfo = [imageDiffFolderPath: snapshotsDiffFolderPath, iOSSimulatorPath: runningiOSSimulatorPath]
     }
     else {
-        userInfo = NSDictionary(dictionaryLiteral: (iOSSimulatorPath, runningiOSSimulatorPath))
+        userInfo = [iOSSimulatorPath: runningiOSSimulatorPath]
     }
     let deliverImmediately: Bool = true
     CFNotificationCenterPostNotification(CFNotificationCenterGetDistributedCenter(), CFNotificationName(rawValue: willRunApplicationTestsNotificationIdentifier as CFString), nil, userInfo as CFDictionary, deliverImmediately)
@@ -42,12 +40,12 @@ func extractSnapshotsDiffFolderPath(from arguments: [String]) -> String? {
 func currentlyRunningiOSSimulatorPath() throws -> String {
     let task = Process()
     task.launchPath = "/usr/bin/xcrun"
-    task.arguments = ["simctl", "list" ,"-j"]
-    
+    task.arguments = ["simctl", "list", "-j"]
+
     let pipe = Pipe()
     task.standardOutput = pipe
     task.launch()
-    
+
     let outputJSONData = pipe.fileHandleForReading.readDataToEndOfFile()
     let jsonReadingOptions = JSONSerialization.ReadingOptions(rawValue: UInt(0))
     guard let outputJSON = try JSONSerialization.jsonObject(with: outputJSONData, options: jsonReadingOptions) as? [String: Any],
@@ -71,4 +69,3 @@ catch let error {
     print(error.localizedDescription)
     exit(EXIT_FAILURE)
 }
-

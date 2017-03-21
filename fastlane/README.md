@@ -33,7 +33,12 @@ xcode-select --install
 ```
 fastlane osx build_run_phase_script
 ```
-
+Create a new build of FBSnapshotsViewerRunPhaseScript
+### osx test
+```
+fastlane osx test
+```
+Run test of FBSnapshotsViewer
 
 ----
 
