@@ -8,6 +8,6 @@
 
 import Cocoa
 
-protocol TestResultsModuleInterface: class {
+protocol TestResultsModuleInterface: class, AutoMockable {
     func updateUserInterface()
 }

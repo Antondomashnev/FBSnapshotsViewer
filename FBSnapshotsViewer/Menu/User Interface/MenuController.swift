@@ -27,10 +27,7 @@ final class MenuController {
 // MARK: - MenuUserInterface
 extension MenuController:  MenuUserInterface {
     func setNewTestResults(available: Bool) {
-        guard let button = statusItem.button else {
-            return
-        }
-        button.image = NSImage(named: available ? "menu_icon_red" : "menu_icon")
+        statusItem.button?.image = NSImage(named: available ? "menu_icon_red" : "menu_icon")
     }
 
     func popUpOptionsMenu() {
@@ -40,11 +37,8 @@ extension MenuController:  MenuUserInterface {
 }
 
 // MARK: - Actions
-extension MenuController {
-    @objc func showSnapshots(sender: NSStatusBarButton) {
-        guard let event = NSApp.currentEvent else {
-            return
-        }
+extension MenuController: MenuActions {
+    func handleIconMouseEvent(_ event: NSEvent) {
         let associatedEventsMask = event.associatedEventsMask
         if associatedEventsMask.contains(NSEventMask.rightMouseUp) {
             eventHandler?.showApplicationMenu()
@@ -52,6 +46,13 @@ extension MenuController {
         else if associatedEventsMask.contains(NSEventMask.leftMouseUp) {
             eventHandler?.showTestResults()
         }
+    }
+
+    @objc func showSnapshots(sender: NSStatusBarButton) {
+        guard let event = NSApp.currentEvent else {
+            return
+        }
+        handleIconMouseEvent(event)
     }
 }
 

@@ -14,6 +14,13 @@ struct TestResultDisplayInfo {
     let failedImageURL: URL
     let testName: String
 
+    init(referenceImageURL: URL, diffImageURL: URL, failedImageURL: URL, testName: String) {
+        self.referenceImageURL = referenceImageURL
+        self.diffImageURL = diffImageURL
+        self.failedImageURL = failedImageURL
+        self.testName = testName
+    }
+
     init(testResult: TestResult) {
         testName = testResult.testName
         referenceImageURL = URL(fileURLWithPath: testResult.referenceImagePath)

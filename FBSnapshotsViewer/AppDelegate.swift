@@ -16,8 +16,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let wireframe = MenuWireframe()
         menuUserInterface = wireframe.instantinateMenu(in: NSStatusBar.system())
     }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
 }

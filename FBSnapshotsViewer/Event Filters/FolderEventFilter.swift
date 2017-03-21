@@ -38,6 +38,8 @@ indirect enum FolderEventFilter {
     }
 }
 
+extension FolderEventFilter: AutoEquatable {}
+
 func & (lhs: FolderEventFilter, rhs: FolderEventFilter) -> FolderEventFilter {
     return FolderEventFilter.compound(lhs, rhs)
 }

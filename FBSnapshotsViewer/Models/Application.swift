@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct Application {
+struct Application: AutoEquatable {
     let snapshotsDiffFolder: String
 }

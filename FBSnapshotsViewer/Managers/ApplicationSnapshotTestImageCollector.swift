@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ApplicationSnapshotTestImageCollectorOutput: class {
+protocol ApplicationSnapshotTestImageCollectorOutput: class, AutoMockable {
     func applicationSnapshotTestResultCollector(_ collector: ApplicationSnapshotTestImageCollector, didCollect testResult: TestResult)
 }
 

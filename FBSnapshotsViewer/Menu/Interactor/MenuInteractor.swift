@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import BoltsSwift
 
 class MenuInteractor {
     weak var output: MenuInteractorOutput?
@@ -38,11 +37,8 @@ class MenuInteractor {
 
     fileprivate func startSnapshotTestResultListening(of application: Application) {
         applicationSnapshotTestResultListener.listen(application: application) { [weak self] testResult in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.currentlyFoundTestResults.append(testResult)
-            strongSelf.output?.didFind(new: testResult)
+            self?.currentlyFoundTestResults.append(testResult)
+            self?.output?.didFind(new: testResult)
         }
     }
 }

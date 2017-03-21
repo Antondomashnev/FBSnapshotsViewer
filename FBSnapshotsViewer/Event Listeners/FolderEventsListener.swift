@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol FolderEventsListenerOutput: class {
+protocol FolderEventsListenerOutput: class, AutoMockable {
     func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent)
 }
 
@@ -21,7 +21,8 @@ protocol FolderEventsListener {
     ///
     /// - Parameter folderPath: absolute folder path to watch
     /// - Parameter filter: filter for received event
-    init(folderPath: String, filter: FolderEventFilter?)
+    /// - Parameter fileWatcherFactory: factory to create underlying watcher
+    init(folderPath: String, filter: FolderEventFilter?, fileWatcherFactory: FileWatcherFactory)
 
     /// Starts listening for events
     func startListening()

@@ -5,7 +5,7 @@ codecov:
 coverage:
   ignore:
     - Scripts/*
-    - Vendoe/*
+    - Vendor/*
     - Pods/*
     - FBSnapshotsViewerTests/*
   status:

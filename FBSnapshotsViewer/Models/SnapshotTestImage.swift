@@ -23,9 +23,8 @@ enum SnapshotTestImage {
     case failed(imagePath: String)
 
     init?(imagePath: String) {
-        guard let lastComponentPath = imagePath.components(separatedBy: "/").last else {
-            return nil
-        }
+        let components = imagePath.components(separatedBy: "/")
+        let lastComponentPath = components[components.count - 1]
         if lastComponentPath.hasPrefix(SnapshotTestImage.diffImagePrefix) {
             self = .diff(imagePath: imagePath)
         }
@@ -44,10 +43,8 @@ enum SnapshotTestImage {
 
     var testName: String {
         func extractTestName(from path: String, pathPrefix: String, pathSuffix: String) -> String {
-            guard let lastComponentPath = path.components(separatedBy: "/").last else {
-                assertionFailure("All of possbile SnapshotTestImage must have lastComponentPath")
-                return ""
-            }
+            let components = path.components(separatedBy: "/")
+            let lastComponentPath = components[components.count - 1]
             let start = lastComponentPath.index(lastComponentPath.startIndex, offsetBy: pathPrefix.characters.count)
             let end = lastComponentPath.index(lastComponentPath.endIndex, offsetBy: -pathSuffix.characters.count)
             let testName = lastComponentPath.substring(with: start..<end)
@@ -65,17 +62,4 @@ enum SnapshotTestImage {
 }
 
 /// Equatable
-extension SnapshotTestImage: Equatable {
-    public static func == (lhs: SnapshotTestImage, rhs: SnapshotTestImage) -> Bool {
-        switch (lhs, rhs) {
-        case (let .diff(path1), let .diff(path2)):
-            return path1 == path2
-        case (let .reference(path1), let .reference(path2)):
-            return path1 == path2
-        case (let .failed(path1), let .failed(path2)):
-            return path1 == path2
-        default: break
-        }
-        return false
-    }
-}
+extension SnapshotTestImage: AutoEquatable {}

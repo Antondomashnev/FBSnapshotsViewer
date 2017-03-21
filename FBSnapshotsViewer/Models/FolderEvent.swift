@@ -39,17 +39,17 @@ enum FolderEvent {
     case renamed(path: String, object: FolderEventObject)
     case unknown
 
-    init(type: FolderEventObject, at path: String, eventFlag: FileWatch.EventFlag) {
-        if eventFlag.contains(FileWatch.EventFlag.ItemCreated) {
+    init(type: FolderEventObject, at path: String, eventFlag: FileWatcher.EventFlag) {
+        if eventFlag.contains(FileWatcher.EventFlag.ItemCreated) {
             self = .created(path: path, object: type)
         }
-        else if eventFlag.contains(FileWatch.EventFlag.ItemModified) {
+        else if eventFlag.contains(FileWatcher.EventFlag.ItemModified) {
             self = .modified(path: path, object: type)
         }
-        else if eventFlag.contains(FileWatch.EventFlag.ItemRemoved) {
+        else if eventFlag.contains(FileWatcher.EventFlag.ItemRemoved) {
             self = .deleted(path: path, object: type)
         }
-        else if eventFlag.contains(FileWatch.EventFlag.ItemRenamed) {
+        else if eventFlag.contains(FileWatcher.EventFlag.ItemRenamed) {
             self = .renamed(path: path, object: type)
         }
         else {
@@ -57,11 +57,11 @@ enum FolderEvent {
         }
     }
 
-    init(eventFlag: FileWatch.EventFlag, at path: String) {
-        if eventFlag.contains(FileWatch.EventFlag.ItemIsDir) {
+    init(eventFlag: FileWatcher.EventFlag, at path: String) {
+        if eventFlag.contains(FileWatcher.EventFlag.ItemIsDir) {
             self = FolderEvent(type: .folder, at: path, eventFlag: eventFlag)
         }
-        else if eventFlag.contains(FileWatch.EventFlag.ItemIsFile) {
+        else if eventFlag.contains(FileWatcher.EventFlag.ItemIsFile) {
             self = FolderEvent(type: .file, at: path, eventFlag: eventFlag)
         }
         else {
@@ -112,6 +112,8 @@ extension FolderEvent: Equatable {
             return path1 == path2 && object1 == object2
         case (let .renamed(path1, object1), let .renamed(path2, object2)):
             return path1 == path2 && object1 == object2
+        case ( .unknown, .unknown):
+            return true
         default: break
         }
         return false

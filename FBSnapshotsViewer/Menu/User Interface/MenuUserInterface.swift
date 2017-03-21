@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol MenuUserInterface: class {
+protocol MenuUserInterface: class, AutoMockable {
     func setNewTestResults(available: Bool)
     func popUpOptionsMenu()
 }

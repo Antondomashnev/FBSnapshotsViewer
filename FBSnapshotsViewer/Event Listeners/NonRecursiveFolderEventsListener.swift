@@ -14,7 +14,7 @@ import Foundation
 final class NonRecursiveFolderEventsListener: FolderEventsListener {
 
     /// Internal 3rd party watcher
-    fileprivate var watcher: FileWatch?
+    fileprivate let watcher: FileWatcher
 
     /// Applied filter for watched events
     fileprivate let filter: FolderEventFilter?
@@ -25,25 +25,26 @@ final class NonRecursiveFolderEventsListener: FolderEventsListener {
     /// Handler for `FolderEventsListener` output
     weak var output: FolderEventsListenerOutput?
 
-    init(folderPath: String, filter: FolderEventFilter? = nil) {
+    init(folderPath: String, filter: FolderEventFilter? = nil, fileWatcherFactory: FileWatcherFactory = FileWatcherFactory()) {
         self.filter = filter
         self.folderPath = folderPath
+        self.watcher = fileWatcherFactory.fileWatcher(for: [folderPath])
     }
 
     func startListening() {
-        watcher = try? FileWatch(paths: [folderPath], createFlag: [.UseCFTypes, .FileEvents], runLoop: RunLoop.current, latency: 1) { [weak self] event in
-            guard let strongSelf = self else {
-                return
-            }
+        try? watcher.start { [weak self] event in
             let folderEvent = FolderEvent(eventFlag: event.flag, at: event.path)
-            if let existedFilter = strongSelf.filter, !existedFilter.apply(to: folderEvent) {
+            if let existedFilter = self?.filter, !existedFilter.apply(to: folderEvent) {
                 return
             }
-            strongSelf.output?.folderEventsListener(strongSelf, didReceive: folderEvent)
+            if let strongSelf = self {
+                strongSelf.output?.folderEventsListener(strongSelf, didReceive: folderEvent)
+            }
         }
+
     }
 
     func stopListening() {
-        watcher = nil
+        watcher.stop()
     }
 }
