@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:FBSnapshotsViewerRunPhaseScript/FBSnapshotsViewerRunPhaseScript.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:FBSnapshotsViewer.xcodeproj">
    </FileRef>
    <FileRef

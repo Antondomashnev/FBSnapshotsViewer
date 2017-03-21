@@ -1,0 +1,37 @@
+fastlane_version "2.21.0"
+default_platform :osx
+
+platform :osx do
+  before_all do
+    bundle_install
+  end
+
+  desc "Sanity check for the fastfile issues"
+  lane :sanity_check do
+    puts "Compiling Fastfile to check if the syntax if valid or not"
+  end
+
+  desc "Create a new build of FBSnapshotsViewerRunPhaseScript"
+  lane :build_run_phase_script do
+    puts "Building run phase script into FBSnapshotsViewerRunPhaseScript/bin folder..."
+    gym(
+      workspace: "FBSnapshotsViewer.xcworkspace",
+      scheme: "FBSnapshotsViewerRunPhaseScript",
+      configuration: "Release",
+      derived_data_path: "#{ENV["BUILD_DIR"]}/tmp/",
+      output_directory: "bin/",
+      clean: true
+    )
+  end
+
+  desc "Run test of FBSnapshotsViewer"
+  lane :test do
+    scan(
+      workspace: "FBSnapshotsViewer.xcworkspace",
+      scheme: "FBSnapshotsViewer",
+      clean: true,
+      code_coverage: true,
+      output_types: "junit"
+    )
+  end
+end

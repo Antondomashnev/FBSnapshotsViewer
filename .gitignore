@@ -23,3 +23,5 @@ DerivedData
 
 Carthage
 /Pods
+/bin
+/fastlane/report.xml
