@@ -1,0 +1,21 @@
+fastlane_version "2.21.0"
+
+default_platform :osx
+
+platform :osx do
+  before_all do
+    bundle_install
+  end
+
+  lane :build_run_phase_script do
+    puts "Building run phase script into FBSnapshotsViewerRunPhaseScript/bin folder..."
+    gym(
+      workspace: "FBSnapshotsViewer.xcworkspace",
+      scheme: "FBSnapshotsViewerRunPhaseScript",
+      configuration: "Release",
+      derived_data_path: "#{ENV["BUILD_DIR"]}/tmp/",
+      output_directory: "bin/",
+      clean: true
+    )
+  end
+end
