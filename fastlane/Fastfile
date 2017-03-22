@@ -174,4 +174,15 @@ platform :osx do
     )
     [app_path, run_phase_script_zip_path]
   end
+
+  desc "Checks if the given 'branch' exists on the 'remote'."
+  desc "####Options"
+  desc "* **`remote`** - git remote in format git@github.com:conichiGMBH/ios-fastlane.git"
+  desc "* **`branch`** - branch name"
+  desc ""
+  lane :git_branch_exists_on_remote do |options|
+    remote = options[:remote]
+    branch = options[:branch]
+    sh("git ls-remote --heads #{remote} #{branch} | wc -l")
+  end
 end
