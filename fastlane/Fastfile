@@ -72,7 +72,7 @@ platform :osx do
       tag_name: release_version
     )
 
-    set_or_update_github_release(
+    github_set_or_update_release(
       release_name: release_version,
       repository_name: GITHUB_REPOSITORY,
       description: "",
