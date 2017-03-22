@@ -49,6 +49,13 @@ Create a new build of FBSnapshotsViewerRunPhaseScript
 fastlane osx test
 ```
 Run test of FBSnapshotsViewer
+### osx release
+```
+fastlane osx release
+```
+Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk
+
+Before doing so don't forget to move the next version of Changelog to released as well as update FBSnapshotsViewerRunPhaseScript.podspec
 
 ----
 

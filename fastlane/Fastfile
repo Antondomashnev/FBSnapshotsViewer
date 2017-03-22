@@ -2,6 +2,12 @@ fastlane_version "2.21.0"
 default_platform :osx
 
 platform :osx do
+  GITHUB_REMOTE = "origin"
+  RELEASE_BRANCH = "release_script"
+  GITHUB_REPOSITORY = "Antondomashnev/FBSnapshotsViewer"
+  SPECS_REPOSITORY_SOURCE = "git@github.com:Antondomashnev/CocoaPodsSpecsSandbox.git"
+  SPECS_REPOSITORY = "CocoaPodsSpecsSandbox"
+
   before_all do
     bundle_install
   end
@@ -46,5 +52,126 @@ platform :osx do
       code_coverage: true,
       output_types: "junit"
     )
+  end
+
+  desc "Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk"
+  desc "Before doing so don't forget to move the next version of Changelog to released as well as update FBSnapshotsViewerRunPhaseScript.podspec"
+  lane :release do
+    ensure_git_status_clean
+    test
+
+    release_version = read_podspec_version
+
+    build_run_phase_script
+    build_app
+
+    git_add_or_update_tag(
+      tag_name: release_version
+    )
+
+    set_or_update_github_release(
+      release_name: release_version,
+      repository_name: GITHUB_REPOSITORY,
+      description: "",
+      tag_name: release_version,
+      upload_assets: github_create_release_assets,
+      api_token: ENV["FB_SNAPSHOTS_VIEWER_GITHUB_API_TOKEN"]
+    )
+
+    pod_push(
+      path: "./FBSnapshotsViewerRunPhaseScript.podspec",
+      repo: SPECS_REPOSITORY,
+      sources: SPECS_REPOSITORY_SOURCE,
+      allow_warnings: true
+    )
+  end
+
+  ##### PRIVATE #####
+
+  desc "Creates or updates github release."
+  desc "####Options"
+  desc "* **`release_name`** - release name"
+  desc "* **`description`** - release description"
+  desc "* **`repository_name`** - repositiry name in format 'Antondomashnev/FBSnapshotsViewer'"
+  desc "* **`tag_name`** - tag name"
+  desc "* **`api_token`** - github api token"
+  desc "* **`upload_assets`** - array of paths to files to be uploaded and attached to the release"
+  private_lane :github_set_or_update_release do |options|
+    release_name = options[:release_name]
+    description = options[:description]
+    repository_name = options[:repository_name]
+    tag_name = options[:tag_name]
+    api_token = options[:api_token]
+    upload_assets = options[:upload_assets]
+
+    release = get_github_release(
+      url: repository_name,
+      version: release_name,
+      api_token: api_token
+    )
+
+    if release != nil
+      edit_github_release(
+        repository_name: repository_name,
+        id: release['id'].to_s,
+        description: description,
+        tag_name: tag_name,
+        name: release_name,
+        api_token: api_token,
+        upload_assets: upload_assets
+      )
+    else
+      set_github_release(
+        repository_name: repository_name,
+        api_token: api_token,
+        name: release_name,
+        tag_name: tag_name,
+        description: description,
+        upload_assets: upload_assets
+      )
+    end
+  end
+
+  desc "Create or update tag with the given name."
+  desc "####Options"
+  desc "* **`tag_name`** - tag name to be used"
+  private_lane :git_add_or_update_tag do |options|
+    remote = GITHUB_REMOTE
+    branch = RELEASE_BRANCH
+
+    branch_exist = git_branch_exists_on_remote(
+      remote: remote,
+      branch: branch
+    )
+
+    sh("git pull #{remote} #{branch} --tags") if branch_exist.to_i
+
+    tag_name = options[:tag_name]
+    if git_tag_exists(tag: tag_name)
+      sh("git tag #{tag_name} -d")
+      sh("git push #{remote} :refs/tags/#{tag_name}")
+    end
+
+    sh("git tag #{tag_name}")
+    sh("git push #{remote} --tags")
+  end
+
+  desc "Read the FBSnapshotsViewerRunPhaseScript.podspec version and return it"
+  private_lane :read_podspec_version do
+    read_podspec(path: "./FBSnapshotsViewerRunPhaseScript.podspec")["version"]
+  end
+
+  desc "Create assets to be uploaded as a github release"
+  desc "####Options"
+  desc "* **`release_version`** - releave version to be used as a part of name of asset"
+  private_lane :github_create_release_assets do |options|
+    app_path = "./bin/FBSnapshotsViewer.app"
+    run_phase_script_path = "./bin/FBSnapshotsViewerRunPhaseScript"
+    run_phase_script_zip_path = "./bin/FBSnapshotsViewerRunPhaseScript.zip"
+    zip(
+      path: path,
+      output_path: run_phase_script_zip_path
+    )
+    [app_path, run_phase_script_zip_path]
   end
 end
