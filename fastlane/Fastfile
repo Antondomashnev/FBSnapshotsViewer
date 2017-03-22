@@ -166,8 +166,8 @@ platform :osx do
   desc "* **`release_version`** - releave version to be used as a part of name of asset"
   private_lane :github_create_release_assets do |options|
     app_path = "./bin/FBSnapshotsViewer.app"
-    run_phase_script_path = "./bin/FBSnapshotsViewerRunPhaseScript"
-    run_phase_script_zip_path = "./bin/FBSnapshotsViewerRunPhaseScript.zip"
+    run_phase_script_path = "../bin/FBSnapshotsViewerRunPhaseScript"
+    run_phase_script_zip_path = "../bin/FBSnapshotsViewerRunPhaseScript.zip"
     zip(
       path: run_phase_script_path,
       output_path: run_phase_script_zip_path
