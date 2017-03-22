@@ -25,3 +25,4 @@ Carthage
 /Pods
 /bin
 /fastlane/report.xml
+/fastlane/test_output/report.junit
