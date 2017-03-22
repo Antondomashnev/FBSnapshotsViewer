@@ -57,6 +57,9 @@ platform :osx do
   desc "Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk"
   desc "Before doing so don't forget to move the next version of Changelog to released as well as update FBSnapshotsViewerRunPhaseScript.podspec"
   lane :release do
+    github_create_release_assets(
+      release_version: "0.1.0"
+    )
     ensure_git_status_clean
     test
 
@@ -74,7 +77,7 @@ platform :osx do
       repository_name: GITHUB_REPOSITORY,
       description: "",
       tag_name: release_version,
-      upload_assets: github_create_release_assets,
+      upload_assets: github_create_release_assets(release_version: release_version),
       api_token: ENV["FB_SNAPSHOTS_VIEWER_GITHUB_API_TOKEN"]
     )
 
@@ -165,9 +168,10 @@ platform :osx do
   desc "####Options"
   desc "* **`release_version`** - releave version to be used as a part of name of asset"
   private_lane :github_create_release_assets do |options|
+    release_version = options[:release_version]
     app_path = "./bin/FBSnapshotsViewer.app"
-    run_phase_script_path = "../bin/FBSnapshotsViewerRunPhaseScript"
-    run_phase_script_zip_path = "../bin/FBSnapshotsViewerRunPhaseScript.zip"
+    run_phase_script_path = "./bin/FBSnapshotsViewerRunPhaseScript"
+    run_phase_script_zip_path = "FBSnapshotsViewerRunPhaseScript-#{release_version}.zip"
     zip(
       path: run_phase_script_path,
       output_path: run_phase_script_zip_path
