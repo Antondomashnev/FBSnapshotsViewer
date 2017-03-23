@@ -178,12 +178,13 @@ platform :osx do
   desc "####Return"
   desc "Path to the asset"
   private_lane :github_create_app_release_assets do |options|
+    require 'fileutils'
     release_version = options[:release_version]
     app_path = "./bin/FBSnapshotsViewer-#{release_version}.app"
     Dir.chdir(File.expand_path("./bin", "..")) do
       old_name = "FBSnapshotsViewer.app"
       new_name = "FBSnapshotsViewer-#{release_version}.app"
-      File.delete(new_name) if File.exist?(new_name)
+      FileUtils.rm_rf(new_name)
       File.rename(old_name, new_name)
     end
     app_path
