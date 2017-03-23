@@ -84,7 +84,7 @@ platform :osx do
     pod_push(
       path: "./FBSnapshotsViewerRunPhaseScript.podspec",
       repo: SPECS_REPOSITORY,
-      sources: SPECS_REPOSITORY_SOURCE,
+      sources: [SPECS_REPOSITORY_SOURCE],
       allow_warnings: true
     )
   end
