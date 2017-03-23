@@ -197,7 +197,7 @@ platform :osx do
   private_lane :github_create_run_phase_script_release_assets do |options|
     release_version = options[:release_version]
     run_phase_script_path = "./bin/FBSnapshotsViewerRunPhaseScript"
-    run_phase_script_zip_name = "./bin/FBSnapshotsViewerRunPhaseScript-#{release_version}.zip"
+    run_phase_script_zip_name = "FBSnapshotsViewerRunPhaseScript-#{release_version}.zip"
     run_phase_script_zip_path = "./bin/#{run_phase_script_zip_name}"
     zip(
       path: run_phase_script_path,
