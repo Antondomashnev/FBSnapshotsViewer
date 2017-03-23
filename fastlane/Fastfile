@@ -130,7 +130,9 @@ platform :osx do
         name: release_name,
         tag_name: tag_name,
         description: description,
-        upload_assets: upload_assets
+        upload_assets: upload_assets,
+        is_draft: false,
+        is_prerelease: false
       )
     end
   end
