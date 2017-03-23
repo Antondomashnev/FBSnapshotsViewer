@@ -169,9 +169,8 @@ platform :osx do
   desc "* **`release_version`** - releave version to be used as a part of name of asset"
   private_lane :github_create_release_assets do |options|
     release_version = options[:release_version]
-    app_path = "./bin/FBSnapshotsViewer.app"
-    new_app_path = "./bin/FBSnapshotsViewer-#{release_version}.app"
-    Dir.chdir(File.expand_path(app_path, "..")) { File.rename("FBSnapshotsViewer.app", "FBSnapshotsViewer-#{release_version}.app") }
+    app_path = "./bin/FBSnapshotsViewer-#{release_version}.app"
+    Dir.chdir(File.expand_path("./bin", "..")) { File.rename("FBSnapshotsViewer.app", "FBSnapshotsViewer-#{release_version}.app") }
     run_phase_script_path = "./bin/FBSnapshotsViewerRunPhaseScript"
     run_phase_script_zip_name = "FBSnapshotsViewerRunPhaseScript-#{release_version}.zip"
     run_phase_script_zip_path = "./bin/#{run_phase_script_zip_name}"
@@ -179,7 +178,7 @@ platform :osx do
       path: run_phase_script_path,
       output_path: run_phase_script_zip_name
     )
-    [new_app_path, run_phase_script_zip_path]
+    [app_path, run_phase_script_zip_path]
   end
 
   desc "Checks if the given 'branch' exists on the 'remote'."
