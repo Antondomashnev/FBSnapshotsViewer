@@ -171,10 +171,11 @@ platform :osx do
     release_version = options[:release_version]
     app_path = "./bin/FBSnapshotsViewer.app"
     run_phase_script_path = "./bin/FBSnapshotsViewerRunPhaseScript"
-    run_phase_script_zip_path = "FBSnapshotsViewerRunPhaseScript-#{release_version}.zip"
+    run_phase_script_zip_name = "FBSnapshotsViewerRunPhaseScript-#{release_version}.zip"
+    run_phase_script_zip_path = "./bin/#{run_phase_script_zip_name}"
     zip(
       path: run_phase_script_path,
-      output_path: run_phase_script_zip_path
+      output_path: run_phase_script_zip_name
     )
     [app_path, run_phase_script_zip_path]
   end
