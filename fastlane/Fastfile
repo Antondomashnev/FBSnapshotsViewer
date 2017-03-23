@@ -183,7 +183,7 @@ platform :osx do
     Dir.chdir(File.expand_path("./bin", "..")) do
       old_name = "FBSnapshotsViewer.app"
       new_name = "FBSnapshotsViewer-#{release_version}.app"
-      FileUtils.rm_f(new_name)
+      File.delete(new_name) if File.exist?(new_name)
       File.rename(old_name, new_name)
     end
     app_path
