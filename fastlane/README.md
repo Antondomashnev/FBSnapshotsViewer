@@ -56,19 +56,6 @@ fastlane osx release
 Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk
 
 Before doing so don't forget to move the next version of Changelog to released as well as update FBSnapshotsViewerRunPhaseScript.podspec
-### osx git_branch_exists_on_remote
-```
-fastlane osx git_branch_exists_on_remote
-```
-Checks if the given 'branch' exists on the 'remote'.
-
-####Options
-
-* **`remote`** - git remote in format git@github.com:conichiGMBH/ios-fastlane.git
-
-* **`branch`** - branch name
-
-
 
 ----
 

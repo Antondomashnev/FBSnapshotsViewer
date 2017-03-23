@@ -25,8 +25,8 @@ module Fastlane
           server_url = "https://api.github.com"
 
           dict = Hash.new
-          dict["draft"] = params[:draft] if params[:draft] != nil
-          dict["prerelease"] = params[:prerelease] if params[:prerelease] != nil
+          dict["draft"] = params[:draft] != nil ? params[:draft] : false
+          dict["prerelease"] = params[:prerelease] != nil ? params[:prerelease] : false
           dict["body"] = params[:description] if params[:description]
           dict["tag_name"] = params[:tag_name] if params[:tag_name]
           dict["name"] = params[:name] if params[:name]
