@@ -57,33 +57,34 @@ platform :osx do
   desc "Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk"
   desc "Before doing so don't forget to move the next version of Changelog to released as well as update FBSnapshotsViewerRunPhaseScript.podspec"
   lane :release do
-    ensure_git_status_clean
-    test
-
-    release_version = read_podspec_version
-
-    build_run_phase_script
-    build_app
-
-    git_add_or_update_tag(
-      tag_name: release_version
-    )
-
-    github_set_or_update_release(
-      release_name: release_version,
-      repository_name: GITHUB_REPOSITORY,
-      description: "",
-      tag_name: release_version,
-      upload_assets: github_create_release_assets(release_version: release_version),
-      api_token: ENV["FB_SNAPSHOTS_VIEWER_GITHUB_API_TOKEN"]
-    )
-
-    pod_push(
-      path: "./FBSnapshotsViewerRunPhaseScript.podspec",
-      repo: SPECS_REPOSITORY,
-      sources: [SPECS_REPOSITORY_SOURCE],
-      allow_warnings: true
-    )
+    github_create_app_release_assets(release_version: "0.1.0")
+    # ensure_git_status_clean
+    # test
+    #
+    # release_version = read_podspec_version
+    #
+    # build_run_phase_script
+    # build_app
+    #
+    # git_add_or_update_tag(
+    #   tag_name: release_version
+    # )
+    #
+    # github_set_or_update_release(
+    #   release_name: release_version,
+    #   repository_name: GITHUB_REPOSITORY,
+    #   description: "",
+    #   tag_name: release_version,
+    #   upload_assets: github_create_release_assets(release_version: release_version),
+    #   api_token: ENV["FB_SNAPSHOTS_VIEWER_GITHUB_API_TOKEN"]
+    # )
+    #
+    # pod_push(
+    #   path: "./FBSnapshotsViewerRunPhaseScript.podspec",
+    #   repo: SPECS_REPOSITORY,
+    #   sources: [SPECS_REPOSITORY_SOURCE],
+    #   allow_warnings: true
+    # )
   end
 
   ##### PRIVATE #####
