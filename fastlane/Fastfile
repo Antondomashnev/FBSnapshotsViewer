@@ -6,7 +6,6 @@ platform :osx do
   RELEASE_BRANCH = "master"
   GITHUB_REPOSITORY = "Antondomashnev/FBSnapshotsViewer"
   SPECS_REPOSITORY_SOURCE = "git@github.com:CocoaPods/Specs.git"
-  SPECS_REPOSITORY = "CocoaPodsSpecsSandbox"
 
   before_all do
     bundle_install
