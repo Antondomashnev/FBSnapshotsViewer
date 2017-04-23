@@ -37,6 +37,17 @@ class MenuInteractorInputMock: MenuInteractorInput {
 
     var foundTestResults: [TestResult] = []
 
+    //MARK: - startXcodeBuildsListening
+
+    var startXcodeBuildsListeningCalled = false
+    var startXcodeBuildsListeningReceivedXcodeDerivedDataFolder: XcodeDerivedDataFolder?
+
+    func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {
+
+        startXcodeBuildsListeningCalled = true
+        startXcodeBuildsListeningReceivedXcodeDerivedDataFolder = xcodeDerivedDataFolder
+    }
+
 }
 class MenuInteractorOutputMock: MenuInteractorOutput {
 
@@ -55,6 +66,15 @@ class MenuInteractorOutputMock: MenuInteractorOutput {
 }
 class MenuModuleInterfaceMock: MenuModuleInterface {
 
+
+    //MARK: - start
+
+    var startCalled = false
+
+    func start() {
+
+        startCalled = true
+    }
 
     //MARK: - showTestResults
 

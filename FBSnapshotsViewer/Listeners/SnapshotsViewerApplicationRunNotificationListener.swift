@@ -34,7 +34,7 @@ class SnapshotsViewerApplicationRunNotificationListener {
         let callback: CFNotificationCallback = { center, observer, name, object, info in
             let imageDiffFolderPathKey = "com.antondomashnev.FBSnapshotsViewerRunPhaseScript.imageDiffFolderPath"
             let iOSSimulatorPathKey = "com.antondomashnev.FBSnapshotsViewerRunPhaseScript.iOSSimulatorPath"
-            guard let userInfo = info as? NSDictionary,
+            guard let userInfo = info as? [AnyHashable: AnyObject],
                   let observer = observer,
                   let iOSSimulatorPath = userInfo[iOSSimulatorPathKey] as? String else {
                 return

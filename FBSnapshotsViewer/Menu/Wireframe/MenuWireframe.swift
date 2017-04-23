@@ -19,7 +19,8 @@ class MenuWireframe {
         let menuController = MenuController(statusBar: statusBar)
         let interactor = MenuInteractor(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener(),
                                         applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder(),
-                                        applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener())
+                                        applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener(),
+                                        applicationTestLogFilesListener: ApplicationTestLogFilesListener())
         let presenter = MenuPresenter()
         menuController.eventHandler = presenter
         presenter.interactor = interactor
@@ -27,6 +28,7 @@ class MenuWireframe {
         presenter.userInterface = menuController
         presenter.wireframe = self
         userInterface = menuController
+        presenter.start()
         return menuController
     }
 

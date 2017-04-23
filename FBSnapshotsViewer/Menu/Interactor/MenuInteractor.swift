@@ -24,9 +24,14 @@ class MenuInteractor {
     /// Instance of aplication snapshot test listener
     fileprivate let applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener
 
+    /// Instance of applications test log files listener
+    fileprivate let applicationTestLogFilesListener: ApplicationTestLogFilesListener
+
     init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener,
          applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder,
-         applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener) {
+         applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener,
+         applicationTestLogFilesListener: ApplicationTestLogFilesListener) {
+        self.applicationTestLogFilesListener = applicationTestLogFilesListener
         self.applicationTemporaryFolderFinder = applicationTemporaryFolderFinder
         self.applicationSnapshotTestResultListener = applicationSnapshotTestResultListener
         self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
@@ -63,5 +68,12 @@ extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDeleg
 extension MenuInteractor: MenuInteractorInput {
     var foundTestResults: [TestResult] {
         return currentlyFoundTestResults
+    }
+
+    func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {
+        applicationTestLogFilesListener.stopListening()
+        applicationTestLogFilesListener.listen(xcodeDerivedDataFolder: xcodeDerivedDataFolder.path) { file in
+            print("Found log file: \(file)")
+        }
     }
 }

@@ -11,6 +11,11 @@ import Cocoa
 protocol MenuInteractorInput: class, AutoMockable {
     /// Cached test results per one application run
     var foundTestResults: [TestResult] { get }
+
+    /// Start listening for xcode builds real-time
+    ///
+    /// - Parameter xcodeDerivedDataFolder: xcode derived data folder
+    func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder)
 }
 
 protocol MenuInteractorOutput: class, AutoMockable {
