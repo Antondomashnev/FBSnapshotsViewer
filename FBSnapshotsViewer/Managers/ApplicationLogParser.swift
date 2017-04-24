@@ -9,4 +9,7 @@
 import Foundation
 
 class ApplicationLogParser {
+    static func parse(log logText: String) -> [SnapshotTestImage] {
+        return []
+    }
 }
