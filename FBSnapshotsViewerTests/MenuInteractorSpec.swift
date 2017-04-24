@@ -21,107 +21,92 @@ class MenuInteractor_MockApplicationSnapshotTestResultListener: ApplicationSnaps
     }
 }
 
+class MenuInteractor_MockApplicationTestLogFilesListener: ApplicationTestLogFilesListener {
+    var output: ApplicationTestLogFilesListenerOutput!
+    var listeningDerivedDataFolder: String!
+    var stopListeningCalled: Bool = false
+
+    override func listen(xcodeDerivedDataFolder: String, outputTo completion: @escaping ApplicationTestLogFilesListenerOutput) {
+        listeningDerivedDataFolder = xcodeDerivedDataFolder
+        output = completion
+    }
+
+    override func stopListening() {
+        stopListeningCalled = true
+    }
+}
+
 class MenuInteractorSpec: QuickSpec {
     override func spec() {
+        let testResult1 = CompletedTestResult(referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", testName: "testName1")
+        let testResult2 = CompletedTestResult(referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", testName: "testName2")
+
         var output: MenuInteractorOutputMock!
         var interactor: MenuInteractor!
         var applicationSnapshotTestResultListener: MenuInteractor_MockApplicationSnapshotTestResultListener!
+        var applicationTestLogFilesListener: MenuInteractor_MockApplicationTestLogFilesListener!
 
         beforeEach {
             output = MenuInteractorOutputMock()
-            snaphotsDiffFolderNotificationListener = MenuInteractor_MockSnapshotsViewerApplicationRunNotificationListener()
-            applicationTemporaryFolderFinder = MenuInteractor_MockApplicationTemporaryFolderFinder()
             applicationSnapshotTestResultListener = MenuInteractor_MockApplicationSnapshotTestResultListener()
-            interactor = MenuInteractor(snaphotsDiffFolderNotificationListener: snaphotsDiffFolderNotificationListener,
-                                        applicationTemporaryFolderFinder: applicationTemporaryFolderFinder,
-                                        applicationSnapshotTestResultListener: applicationSnapshotTestResultListener)
+            applicationTestLogFilesListener = MenuInteractor_MockApplicationTestLogFilesListener()
+            interactor = MenuInteractor(applicationSnapshotTestResultListener: applicationSnapshotTestResultListener,
+                                        applicationTestLogFilesListener: applicationTestLogFilesListener)
             interactor.output = output
         }
 
-        describe(".foundTestResults") {
-            let testResult1 = CompletedTestResult(referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", testName: "testName1")
-            let testResult2 = CompletedTestResult(referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", testName: "testName2")
-
+        describe(".startXcodeBuildsListening") {
             beforeEach {
-                snaphotsDiffFolderNotificationListener.delegate?.snapshotsDiffFolderNotificationListener(snaphotsDiffFolderNotificationListener, didReceiveRunningiOSSimulatorFolder: "simulator/blabla", andImageDiffFolder: "my_image_diff_folder/")
-                applicationSnapshotTestResultListener.output(testResult1)
-                applicationSnapshotTestResultListener.output(testResult2)
+                interactor.startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder(path: "/Users/antondomashnev/Library/Bla"))
             }
 
-            it("is the collection of all found test result") {
-                expect(interactor.foundTestResults.contains(where: { $0 == testResult1 })).to(beTrue())
-                expect(interactor.foundTestResults.contains(where: { $0 == testResult2 })).to(beTrue())
+            it("stops the current xcode builds listening") {
+                expect(applicationTestLogFilesListener.stopListeningCalled).to(beTrue())
             }
 
-            context("when received running tests notification") {
+            it("starts a new listening of the given derived data folder") {
+                expect(applicationTestLogFilesListener.listeningDerivedDataFolder).to(equal("/Users/antondomashnev/Library/Bla"))
+            }
+
+            context("when find a new test log file") {
                 beforeEach {
-                    snaphotsDiffFolderNotificationListener.delegate?.snapshotsDiffFolderNotificationListener(snaphotsDiffFolderNotificationListener, didReceiveRunningiOSSimulatorFolder: "simulator/foobar", andImageDiffFolder: "my_image_diff_folder/")
+                    applicationTestLogFilesListener.output("/Users/antondomashnev/Library/Bla/Bla.log")
                 }
 
-                it("cleans the collection") {
-                    expect(interactor.foundTestResults.isEmpty).to(beTrue())
+                it("outputs it") {
+                    expect(output.didFindNewTestLogFileCalled).to(beTrue())
+                    expect(output.didFindNewTestLogFileReceivedPath).to(equal("/Users/antondomashnev/Library/Bla/Bla.log"))
                 }
             }
         }
 
-        context("when receives notification from running tests in specific folder") {
+        describe(".startSnapshotTestResultListening") {
             beforeEach {
-                snaphotsDiffFolderNotificationListener.delegate?.snapshotsDiffFolderNotificationListener(snaphotsDiffFolderNotificationListener, didReceiveRunningiOSSimulatorFolder: "simulator/blabla", andImageDiffFolder: "my_image_diff_folder/")
+                interactor.startSnapshotTestResultListening(fromLogFileAt: "/Users/antondomashnev/Library/Bla/Bla.log")
             }
 
-            it("starts looking for test results for correct application") {
-                expect(applicationSnapshotTestResultListener.listeningApplication.snapshotsDiffFolder).to(equal("my_image_diff_folder/"))
-            }
-
-            context("when test results listener finds new test result") {
-                var testResult: TestResult!
-
+            context("when find new test result") {
                 beforeEach {
-                    testResult = CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName")
-                    applicationSnapshotTestResultListener.output(testResult)
+                    applicationSnapshotTestResultListener.output(testResult1)
                 }
 
-                it("outputs found test result") {
-                    expect(output.didFindReceivedTestResult?.referenceImagePath).to(equal(testResult.referenceImagePath))
-                    expect(output.didFindReceivedTestResult?.failedImagePath).to(equal(testResult.failedImagePath))
-                    expect(output.didFindReceivedTestResult?.diffImagePath).to(equal(testResult.diffImagePath))
-                    expect(output.didFindReceivedTestResult?.testName).to(equal(testResult.testName))
+                it("outputs it") {
+                    expect(output.didFindNewTestResultReceivedTestResult?.diffImagePath).to(equal("diffImagePath1"))
+                    expect(output.didFindNewTestResultReceivedTestResult?.referenceImagePath).to(equal("referenceImagePath1"))
+                    expect(output.didFindNewTestResultReceivedTestResult?.failedImagePath).to(equal("failedImagePath1"))
+                    expect(output.didFindNewTestResultReceivedTestResult?.testName).to(equal("testName1"))
                 }
             }
-        }
 
-        context("when receives notification from running tests without specific folder") {
-            beforeEach {
-                snaphotsDiffFolderNotificationListener.delegate?.snapshotsDiffFolderNotificationListener(snaphotsDiffFolderNotificationListener, didReceiveRunningiOSSimulatorFolder: "simulator/apps/", andImageDiffFolder: nil)
-            }
-
-            it("starts finding running application temporary folder for correct simulator") {
-                expect(applicationTemporaryFolderFinder.checkingSimulatorPath).to(equal("simulator/apps/"))
-            }
-
-            context("when temporary folder finder finds diff folder") {
+            context("when find two test results consequently") {
                 beforeEach {
-                    applicationTemporaryFolderFinder.output(applicationTemporaryFolderFinder.mockApplicationTemporaryFolder)
+                    applicationSnapshotTestResultListener.output(testResult1)
+                    applicationSnapshotTestResultListener.output(testResult2)
                 }
 
-                it("starts looking for test results for correct application") {
-                    expect(applicationSnapshotTestResultListener.listeningApplication.snapshotsDiffFolder).to(equal(applicationTemporaryFolderFinder.mockApplicationTemporaryFolder))
-                }
-
-                context("when test results listener finds new test result") {
-                    var testResult: TestResult!
-
-                    beforeEach {
-                        testResult = CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName")
-                        applicationSnapshotTestResultListener.output(testResult)
-                    }
-
-                    it("outputs found test result") {
-                        expect(output.didFindReceivedTestResult?.referenceImagePath).to(equal(testResult.referenceImagePath))
-                        expect(output.didFindReceivedTestResult?.failedImagePath).to(equal(testResult.failedImagePath))
-                        expect(output.didFindReceivedTestResult?.diffImagePath).to(equal(testResult.diffImagePath))
-                        expect(output.didFindReceivedTestResult?.testName).to(equal(testResult.testName))
-                    }
+                it("is the collection of all found test result") {
+                    expect(interactor.foundTestResults.contains(where: { $0 == testResult1 })).to(beTrue())
+                    expect(interactor.foundTestResults.contains(where: { $0 == testResult2 })).to(beTrue())
                 }
             }
         }

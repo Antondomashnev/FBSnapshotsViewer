@@ -48,9 +48,20 @@ class MenuPresenterSpec: QuickSpec {
             }
         }
 
-        describe(".didFind") {
+        describe(".didFindNewTestLogFile") {
             beforeEach {
-                presenter.didFind(new: CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName"))
+                presenter.didFindNewTestLogFile(at: "/Users/antondomashnev/Library/Xcode/Logs/MyLog.log")
+            }
+
+            it("starts listening for snapshot tests results from the given test log") {
+                expect(interactor.startSnapshotTestResultListeningCalled).to(beTrue())
+                expect(interactor.startSnapshotTestResultListeningReceivedPath).to(equal("/Users/antondomashnev/Library/Xcode/Logs/MyLog.log"))
+            }
+        }
+
+        describe(".didFindNewTestResult") {
+            beforeEach {
+                presenter.didFindNewTestResult(CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName"))
             }
 
             it("sets that new test results are available in user interface") {
