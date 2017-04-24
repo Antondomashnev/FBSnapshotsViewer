@@ -28,10 +28,10 @@ protocol MenuInteractorOutput: class, AutoMockable {
     /// Callback that notifies that new test results are found
     ///
     /// - Parameter testResult: found test result
-    func didFind(newTestResult testResult: TestResult)
+    func didFindNewTestResult(_ testResult: TestResult)
 
     /// Callback that notifies that new Xcode test's log file is found
     ///
     /// - Parameter path: absolute log file path
-    func didFind(newTestLogFileAt path: String)
+    func didFindNewTestLogFile(at path: String)
 }

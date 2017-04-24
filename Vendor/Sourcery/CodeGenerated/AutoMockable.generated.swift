@@ -63,26 +63,26 @@ class MenuInteractorInputMock: MenuInteractorInput {
 class MenuInteractorOutputMock: MenuInteractorOutput {
 
 
-    //MARK: - didFind
+    //MARK: - didFindNewTestResult
 
-    var didFindCalled = false
-    var didFindReceivedTestResult: TestResult?
+    var didFindNewTestResultCalled = false
+    var didFindNewTestResultReceivedTestResult: TestResult?
 
-    func didFind(newTestResult testResult: TestResult) {
+    func didFindNewTestResult(_ testResult: TestResult) {
 
-        didFindCalled = true
-        didFindReceivedTestResult = testResult
+        didFindNewTestResultCalled = true
+        didFindNewTestResultReceivedTestResult = testResult
     }
 
-    //MARK: - didFind
+    //MARK: - didFindNewTestLogFile
 
-    var didFindCalled = false
-    var didFindReceivedPath: String?
+    var didFindNewTestLogFileCalled = false
+    var didFindNewTestLogFileReceivedPath: String?
 
-    func didFind(newTestLogFileAt path: String) {
+    func didFindNewTestLogFile(at path: String) {
 
-        didFindCalled = true
-        didFindReceivedPath = path
+        didFindNewTestLogFileCalled = true
+        didFindNewTestLogFileReceivedPath = path
     }
 
 }
@@ -147,21 +147,6 @@ class MenuUserInterfaceMock: MenuUserInterface {
     func popUpOptionsMenu() {
 
         popUpOptionsMenuCalled = true
-    }
-
-}
-class SnapshotsViewerApplicationRunNotificationListenerDelegateMock: SnapshotsViewerApplicationRunNotificationListenerDelegate {
-
-
-    //MARK: - snapshotsDiffFolderNotificationListener
-
-    var snapshotsDiffFolderNotificationListenerCalled = false
-    var snapshotsDiffFolderNotificationListenerReceivedArguments: (listener: SnapshotsViewerApplicationRunNotificationListener, simulatorPath: String, imageDiffPath: String?)?
-
-    func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
-
-        snapshotsDiffFolderNotificationListenerCalled = true
-        snapshotsDiffFolderNotificationListenerReceivedArguments = (listener: listener, simulatorPath: simulatorPath, imageDiffPath: imageDiffPath)
     }
 
 }

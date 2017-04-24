@@ -45,7 +45,11 @@ extension MenuPresenter: MenuModuleInterface {
 
 // MARK: - MenuInteractorOutput
 extension MenuPresenter: MenuInteractorOutput {
-    func didFind(new testResult: TestResult) {
+    func didFindNewTestResult(_ testResult: TestResult) {
         userInterface?.setNewTestResults(available: true)
+    }
+
+    func didFindNewTestLogFile(at path: String) {
+        interactor?.startSnapshotTestResultListening(fromLogFileAt: path)
     }
 }

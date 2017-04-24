@@ -37,14 +37,14 @@ extension MenuInteractor: MenuInteractorInput {
     func startSnapshotTestResultListening(fromLogFileAt path: String) {
         applicationSnapshotTestResultListener.listen(logFileAt: path) { [weak self] testResult in
             self?.currentlyFoundTestResults.append(testResult)
-            self?.output?.didFind(new: testResult)
+            self?.output?.didFindNewTestResult(testResult)
         }
     }
 
     func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {
         applicationTestLogFilesListener.stopListening()
-        applicationTestLogFilesListener.listen(xcodeDerivedDataFolder: xcodeDerivedDataFolder.path) { file in
-            print("Found log file: \(file)")
+        applicationTestLogFilesListener.listen(xcodeDerivedDataFolder: xcodeDerivedDataFolder.path) { [weak self] path in
+            self?.output?.didFindNewTestLogFile(at: path)
         }
     }
 }
