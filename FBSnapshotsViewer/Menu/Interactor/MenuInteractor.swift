@@ -15,52 +15,16 @@ class MenuInteractor {
     /// Note: it resets every notification about new application test run
     fileprivate var currentlyFoundTestResults: [TestResult] = []
 
-    /// Instance of listener for snapshots diff folder notification
-    private let snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener
-
-    /// Instance of aplication temporary folder finder
-    fileprivate let applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder
-
     /// Instance of aplication snapshot test listener
     fileprivate let applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener
 
     /// Instance of applications test log files listener
     fileprivate let applicationTestLogFilesListener: ApplicationTestLogFilesListener
 
-    init(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener,
-         applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder,
-         applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener,
+    init(applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener,
          applicationTestLogFilesListener: ApplicationTestLogFilesListener) {
         self.applicationTestLogFilesListener = applicationTestLogFilesListener
-        self.applicationTemporaryFolderFinder = applicationTemporaryFolderFinder
         self.applicationSnapshotTestResultListener = applicationSnapshotTestResultListener
-        self.snaphotsDiffFolderNotificationListener = snaphotsDiffFolderNotificationListener
-        self.snaphotsDiffFolderNotificationListener.delegate = self
-    }
-
-    // MARK: - Helpers
-
-    fileprivate func startSnapshotTestResultListening(of application: Application) {
-        applicationSnapshotTestResultListener.listen(application: application) { [weak self] testResult in
-            self?.currentlyFoundTestResults.append(testResult)
-            self?.output?.didFind(new: testResult)
-        }
-    }
-}
-
-// MARK: - SnapshotsViewerApplicationRunNotificationListenerDelegate
-extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDelegate {
-    func snapshotsDiffFolderNotificationListener(_ listener: SnapshotsViewerApplicationRunNotificationListener, didReceiveRunningiOSSimulatorFolder simulatorPath: String, andImageDiffFolder imageDiffPath: String?) {
-        applicationSnapshotTestResultListener.stopListening()
-        applicationTemporaryFolderFinder.stopFinding()
-        currentlyFoundTestResults.removeAll()
-        if let imageDiffPath = imageDiffPath {
-            startSnapshotTestResultListening(of: Application(snapshotsDiffFolder: imageDiffPath))
-            return
-        }
-        applicationTemporaryFolderFinder.find(in: simulatorPath) { [weak self] temporaryFolderPath in
-            self?.startSnapshotTestResultListening(of: Application(snapshotsDiffFolder: temporaryFolderPath))
-        }
     }
 }
 
@@ -68,6 +32,13 @@ extension MenuInteractor: SnapshotsViewerApplicationRunNotificationListenerDeleg
 extension MenuInteractor: MenuInteractorInput {
     var foundTestResults: [TestResult] {
         return currentlyFoundTestResults
+    }
+
+    func startSnapshotTestResultListening(fromLogFileAt path: String) {
+        applicationSnapshotTestResultListener.listen(logFileAt: path) { [weak self] testResult in
+            self?.currentlyFoundTestResults.append(testResult)
+            self?.output?.didFind(new: testResult)
+        }
     }
 
     func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {

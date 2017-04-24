@@ -39,14 +39,14 @@ class ApplicationSnapshotTestResultListener {
         resetRunningAction()
     }
 
-    func listen(application: Application, outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
+    func listen(logFileAt logFilePath: String, outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
         resetRunningAction()
-        var folderEventsListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: application.snapshotsDiffFolder)
-        folderEventsListener.output = self
-        let snapshotTestImagesCollector = snapshotTestImagesCollectorFactory.applicationSnapshotTestImageCollector()
-        snapshotTestImagesCollector.output = self
-        runningAction = ApplicationSnapshotTestResultListenerAction(output: completion, folderEventsListener: folderEventsListener, snapshotTestImagesCollector: snapshotTestImagesCollector, application: application)
-        runningAction?.run()
+//        var folderEventsListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: application.snapshotsDiffFolder)
+//        folderEventsListener.output = self
+//        let snapshotTestImagesCollector = snapshotTestImagesCollectorFactory.applicationSnapshotTestImageCollector()
+//        snapshotTestImagesCollector.output = self
+//        runningAction = ApplicationSnapshotTestResultListenerAction(output: completion, folderEventsListener: folderEventsListener, snapshotTestImagesCollector: snapshotTestImagesCollector, application: application)
+//        runningAction?.run()
     }
 
     func stopListening() {

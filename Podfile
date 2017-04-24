@@ -3,6 +3,7 @@ platform :osx, '10.12'
 
 target 'FBSnapshotsViewer' do
   use_frameworks!
+  pod 'KZFileWatchers', '~> 1.0'
   pod 'Sourcery', '~> 0.5'
   pod 'SwiftGen', '~> 4.2'
   pod 'SwiftLint', '~> 0.16'

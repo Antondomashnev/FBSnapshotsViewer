@@ -11,27 +11,12 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
-class MenuInteractor_MockSnapshotsViewerApplicationRunNotificationListener: SnapshotsViewerApplicationRunNotificationListener {
-
-}
-
-class MenuInteractor_MockApplicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder {
-    let mockApplicationTemporaryFolder = "simulator/apps/1234-1234-1234-1234/tmp/"
-    var checkingSimulatorPath: String!
-    var output: ApplicationTemporaryFolderFinderOutput!
-
-    override func find(in simulatorPath: String, outputTo completion: @escaping ApplicationTemporaryFolderFinderOutput) {
-        output = completion
-        checkingSimulatorPath = simulatorPath
-    }
-}
-
 class MenuInteractor_MockApplicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener {
     var output: ApplicationSnapshotTestResultListenerOutput!
-    var listeningApplication: Application!
+    var listeningLogFilePath: String!
 
-    override func listen(application: Application, outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
-        listeningApplication = application
+    override func listen(logFileAt path: String, outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
+        listeningLogFilePath = path
         output = completion
     }
 }
@@ -40,8 +25,6 @@ class MenuInteractorSpec: QuickSpec {
     override func spec() {
         var output: MenuInteractorOutputMock!
         var interactor: MenuInteractor!
-        var snaphotsDiffFolderNotificationListener: MenuInteractor_MockSnapshotsViewerApplicationRunNotificationListener!
-        var applicationTemporaryFolderFinder: MenuInteractor_MockApplicationTemporaryFolderFinder!
         var applicationSnapshotTestResultListener: MenuInteractor_MockApplicationSnapshotTestResultListener!
 
         beforeEach {

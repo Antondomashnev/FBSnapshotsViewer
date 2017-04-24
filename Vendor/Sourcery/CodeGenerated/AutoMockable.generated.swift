@@ -48,6 +48,17 @@ class MenuInteractorInputMock: MenuInteractorInput {
         startXcodeBuildsListeningReceivedXcodeDerivedDataFolder = xcodeDerivedDataFolder
     }
 
+    //MARK: - startSnapshotTestResultListening
+
+    var startSnapshotTestResultListeningCalled = false
+    var startSnapshotTestResultListeningReceivedPath: String?
+
+    func startSnapshotTestResultListening(fromLogFileAt path: String) {
+
+        startSnapshotTestResultListeningCalled = true
+        startSnapshotTestResultListeningReceivedPath = path
+    }
+
 }
 class MenuInteractorOutputMock: MenuInteractorOutput {
 
@@ -57,10 +68,21 @@ class MenuInteractorOutputMock: MenuInteractorOutput {
     var didFindCalled = false
     var didFindReceivedTestResult: TestResult?
 
-    func didFind(new testResult: TestResult) {
+    func didFind(newTestResult testResult: TestResult) {
 
         didFindCalled = true
         didFindReceivedTestResult = testResult
+    }
+
+    //MARK: - didFind
+
+    var didFindCalled = false
+    var didFindReceivedPath: String?
+
+    func didFind(newTestLogFileAt path: String) {
+
+        didFindCalled = true
+        didFindReceivedPath = path
     }
 
 }
