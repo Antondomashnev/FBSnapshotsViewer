@@ -47,13 +47,13 @@
 //
 //class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
 //    override func spec() {
-//        var outputtedTestResult: TestResult?
+//        var outputtedTestResult: SnapshotTestResult?
 //        var output: ApplicationSnapshotTestResultListenerOutput!
 //        var snapshotTestResultListener: ApplicationSnapshotTestResultListener!
 //        var folderEventsListenerFactory: ApplicationSnapshotTestResultListener_MockFolderEventsListenerFactory!
 //        var snapshotTestImagesCollectorFactory: ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestImageCollectorFactory!
 //
-//        func mockOutput(testResult: TestResult) {
+//        func mockOutput(testResult: SnapshotTestResult) {
 //            outputtedTestResult = testResult
 //        }
 //

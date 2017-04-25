@@ -13,9 +13,9 @@ import Nimble
 
 class MenuPresenter_MockMenuWireframe: MenuWireframe {
     var showTestResultsModuleCalled: Bool = false
-    var showTestResultsModuleReceivedParameters: [TestResult] = []
+    var showTestResultsModuleReceivedParameters: [SnapshotTestResult] = []
 
-    override func showTestResultsModule(with testResults: [TestResult]) {
+    override func showTestResultsModule(with testResults: [SnapshotTestResult]) {
         showTestResultsModuleCalled = true
         showTestResultsModuleReceivedParameters = testResults
     }
@@ -72,7 +72,7 @@ class MenuPresenterSpec: QuickSpec {
 
         describe(".showTestResults") {
             context("when interactor has test results") {
-                var foundTestResults: [TestResult] = []
+                var foundTestResults: [SnapshotTestResult] = []
 
                 beforeEach {
                     foundTestResults = [CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName")]

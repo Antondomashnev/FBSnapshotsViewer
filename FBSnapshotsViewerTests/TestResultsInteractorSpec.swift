@@ -14,7 +14,7 @@ import Nimble
 class TestResultsInteractorSpec: QuickSpec {
     override func spec() {
         var interactor: TestResultsInteractor!
-        var testResults: [TestResult] = []
+        var testResults: [SnapshotTestResult] = []
 
         beforeEach {
             let testResult1 = CompletedTestResult(referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", testName: "testName1")

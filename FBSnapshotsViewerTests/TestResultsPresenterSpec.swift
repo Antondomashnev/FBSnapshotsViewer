@@ -37,7 +37,7 @@ class TestResultsPresenterSpec: QuickSpec {
             }
 
             context("when interactor has test results") {
-                var testResults: [TestResult] = []
+                var testResults: [SnapshotTestResult] = []
 
                 beforeEach {
                     testResults = [CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName")]

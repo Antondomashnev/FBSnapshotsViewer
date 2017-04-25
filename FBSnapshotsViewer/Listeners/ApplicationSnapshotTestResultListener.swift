@@ -8,12 +8,11 @@
 
 import Foundation
 
-typealias ApplicationSnapshotTestResultListenerOutput = (TestResult) -> Void
+typealias ApplicationSnapshotTestResultListenerOutput = (SnapshotTestResult) -> Void
 
 struct ApplicationSnapshotTestResultListenerAction {
     let output: ApplicationSnapshotTestResultListenerOutput
     let folderEventsListener: FolderEventsListener
-    let snapshotTestImagesCollector: ApplicationSnapshotTestImageCollector
     let application: Application
 
     func run() {
@@ -26,13 +25,9 @@ struct ApplicationSnapshotTestResultListenerAction {
 }
 
 class ApplicationSnapshotTestResultListener {
-    fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
-    fileprivate let snapshotTestImagesCollectorFactory: ApplicationSnapshotTestImageCollectorFactory
     fileprivate var runningAction: ApplicationSnapshotTestResultListenerAction?
 
-    init(folderEventsListenerFactory: FolderEventsListenerFactory = FolderEventsListenerFactory(), snapshotTestImagesCollectorFactory: ApplicationSnapshotTestImageCollectorFactory = ApplicationSnapshotTestImageCollectorFactory()) {
-        self.folderEventsListenerFactory = folderEventsListenerFactory
-        self.snapshotTestImagesCollectorFactory = snapshotTestImagesCollectorFactory
+    init() {
     }
 
     deinit {
@@ -61,21 +56,8 @@ class ApplicationSnapshotTestResultListener {
     }
 }
 
-// MARK: - ApplicationSnapshotTestImageCollectorOutput
-
-extension ApplicationSnapshotTestResultListener: ApplicationSnapshotTestImageCollectorOutput {
-    func applicationSnapshotTestResultCollector(_ collector: ApplicationSnapshotTestImageCollector, didCollect testResult: TestResult) {
-        runningAction?.output(testResult)
-    }
-}
-
 // MARK: - FolderEventsListenerOutput
 extension ApplicationSnapshotTestResultListener: FolderEventsListenerOutput {
     func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
-        guard let eventPath = event.path, let snapshotTestImage = SnapshotTestImage(imagePath: eventPath) else {
-            print("Unexpected event in ApplicationSnapshotTestResultListener: \(event)")
-            return
-        }
-        runningAction?.snapshotTestImagesCollector.collect(snapshotTestImage)
     }
 }

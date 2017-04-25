@@ -54,10 +54,10 @@ class TestResultCell: NSCollectionViewItem {
         if let referenceImage = NSImage(contentsOf: testResult.referenceImageURL) {
             referenceImageView.image = referenceImage
         }
-        if let diffImage = NSImage(contentsOf: testResult.diffImageURL) {
+        if let diffImageURL = testResult.diffImageURL, let diffImage = NSImage(contentsOf: diffImageURL) {
             diffImageView.image = diffImage
         }
-        if let failedImage = NSImage(contentsOf: testResult.failedImageURL) {
+        if let failedImageURL = testResult.failedImageURL, let failedImage = NSImage(contentsOf: failedImageURL) {
             failedImageView.image = failedImage
         }
         testNameLabel.stringValue = testResult.testName

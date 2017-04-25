@@ -30,7 +30,7 @@ class MenuWireframe {
         return menuController
     }
 
-    func showTestResultsModule(with testResults: [TestResult]) {
+    func showTestResultsModule(with testResults: [SnapshotTestResult]) {
         guard let presentationView = userInterface?.statusItem.button else {
             return
         }

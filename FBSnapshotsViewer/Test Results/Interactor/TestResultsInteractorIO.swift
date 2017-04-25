@@ -9,5 +9,5 @@
 import Cocoa
 
 protocol TestResultsInteractorInput: class, AutoMockable {
-    var testResults: [TestResult] { get }
+    var testResults: [SnapshotTestResult] { get }
 }

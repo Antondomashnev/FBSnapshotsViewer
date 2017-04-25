@@ -13,7 +13,7 @@ class MenuInteractor {
 
     /// Currently found test results
     /// Note: it resets every notification about new application test run
-    fileprivate var currentlyFoundTestResults: [TestResult] = []
+    fileprivate var currentlyFoundTestResults: [SnapshotTestResult] = []
 
     /// Instance of aplication snapshot test listener
     fileprivate let applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener
@@ -30,7 +30,7 @@ class MenuInteractor {
 
 // MARK: - MenuInteractorInput
 extension MenuInteractor: MenuInteractorInput {
-    var foundTestResults: [TestResult] {
+    var foundTestResults: [SnapshotTestResult] {
         return currentlyFoundTestResults
     }
 

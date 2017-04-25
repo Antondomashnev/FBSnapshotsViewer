@@ -14,7 +14,7 @@ import Nimble
 class TestResultDisplayInfoSpec: QuickSpec {
     override func spec() {
         describe(".initWithTestInfo") {
-            var testResult: TestResult!
+            var testResult: SnapshotTestResult!
 
             beforeEach {
                 testResult = CompletedTestResult(referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", testName: "testName")

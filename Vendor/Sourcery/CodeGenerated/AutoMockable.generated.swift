@@ -3,21 +3,6 @@
 
 import Cocoa
 
-class ApplicationSnapshotTestImageCollectorOutputMock: ApplicationSnapshotTestImageCollectorOutput {
-
-
-    //MARK: - applicationSnapshotTestResultCollector
-
-    var applicationSnapshotTestResultCollectorCalled = false
-    var applicationSnapshotTestResultCollectorReceivedArguments: (collector: ApplicationSnapshotTestImageCollector, testResult: TestResult)?
-
-    func applicationSnapshotTestResultCollector(_ collector: ApplicationSnapshotTestImageCollector, didCollect testResult: TestResult) {
-
-        applicationSnapshotTestResultCollectorCalled = true
-        applicationSnapshotTestResultCollectorReceivedArguments = (collector: collector, testResult: testResult)
-    }
-
-}
 class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
 
 
@@ -35,7 +20,7 @@ class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
 }
 class MenuInteractorInputMock: MenuInteractorInput {
 
-    var foundTestResults: [TestResult] = []
+    var foundTestResults: [SnapshotTestResult] = []
 
     //MARK: - startXcodeBuildsListening
 
@@ -66,9 +51,9 @@ class MenuInteractorOutputMock: MenuInteractorOutput {
     //MARK: - didFindNewTestResult
 
     var didFindNewTestResultCalled = false
-    var didFindNewTestResultReceivedTestResult: TestResult?
+    var didFindNewTestResultReceivedTestResult: SnapshotTestResult?
 
-    func didFindNewTestResult(_ testResult: TestResult) {
+    func didFindNewTestResult(_ testResult: SnapshotTestResult) {
 
         didFindNewTestResultCalled = true
         didFindNewTestResultReceivedTestResult = testResult
@@ -152,7 +137,7 @@ class MenuUserInterfaceMock: MenuUserInterface {
 }
 class TestResultsInteractorInputMock: TestResultsInteractorInput {
 
-    var testResults: [TestResult] = []
+    var testResults: [SnapshotTestResult] = []
 
 }
 class TestResultsModuleInterfaceMock: TestResultsModuleInterface {

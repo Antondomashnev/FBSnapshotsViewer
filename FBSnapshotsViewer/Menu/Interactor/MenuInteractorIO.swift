@@ -10,7 +10,7 @@ import Cocoa
 
 protocol MenuInteractorInput: class, AutoMockable {
     /// Cached test results per one application run
-    var foundTestResults: [TestResult] { get }
+    var foundTestResults: [SnapshotTestResult] { get }
 
     /// Start listening for xcode builds real-time
     ///
@@ -28,7 +28,7 @@ protocol MenuInteractorOutput: class, AutoMockable {
     /// Callback that notifies that new test results are found
     ///
     /// - Parameter testResult: found test result
-    func didFindNewTestResult(_ testResult: TestResult)
+    func didFindNewTestResult(_ testResult: SnapshotTestResult)
 
     /// Callback that notifies that new Xcode test's log file is found
     ///

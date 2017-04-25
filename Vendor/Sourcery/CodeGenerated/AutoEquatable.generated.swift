@@ -29,32 +29,6 @@ internal func == (lhs: Application, rhs: Application) -> Bool {
     guard lhs.snapshotsDiffFolder == rhs.snapshotsDiffFolder else { return false }
     return true
 }
-// MARK: - CompletedTestResult AutoEquatable
-extension CompletedTestResult: Equatable {} 
-internal func == (lhs: CompletedTestResult, rhs: CompletedTestResult) -> Bool {
-    guard lhs.referenceImagePath == rhs.referenceImagePath else { return false }
-    guard lhs.diffImagePath == rhs.diffImagePath else { return false }
-    guard lhs.failedImagePath == rhs.failedImagePath else { return false }
-    guard lhs.testName == rhs.testName else { return false }
-    return true
-}
-// MARK: - PendingTestResult AutoEquatable
-extension PendingTestResult: Equatable {} 
-internal func == (lhs: PendingTestResult, rhs: PendingTestResult) -> Bool {
-    guard lhs.referenceImagePath == rhs.referenceImagePath else { return false }
-    guard lhs.diffImagePath == rhs.diffImagePath else { return false }
-    guard lhs.failedImagePath == rhs.failedImagePath else { return false }
-    guard lhs.testName == rhs.testName else { return false }
-    return true
-}
-// MARK: - TestResult AutoEquatable
-internal func == (lhs: TestResult, rhs: TestResult) -> Bool {
-    guard lhs.referenceImagePath == rhs.referenceImagePath else { return false }
-    guard lhs.diffImagePath == rhs.diffImagePath else { return false }
-    guard lhs.failedImagePath == rhs.failedImagePath else { return false }
-    guard lhs.testName == rhs.testName else { return false }
-    return true
-}
 
 // MARK: - AutoEquatable for Enums
 // MARK: - FolderEventFilter AutoEquatable
@@ -74,16 +48,20 @@ internal func == (lhs: FolderEventFilter, rhs: FolderEventFilter) -> Bool {
     default: return false
     }
 }
-// MARK: - SnapshotTestImage AutoEquatable
-extension SnapshotTestImage: Equatable {}
-internal func == (lhs: SnapshotTestImage, rhs: SnapshotTestImage) -> Bool {
+// MARK: - SnapshotTestResult AutoEquatable
+extension SnapshotTestResult: Equatable {}
+internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
     switch (lhs, rhs) {
-    case (.diff(let lhs), .diff(let rhs)): 
-        return lhs == rhs
-    case (.reference(let lhs), .reference(let rhs)): 
-        return lhs == rhs
+    case (.recorded(let lhs), .recorded(let rhs)): 
+        if lhs.testName != rhs.testName { return false }
+        if lhs.referenceImagePath != rhs.referenceImagePath { return false }
+        return true
     case (.failed(let lhs), .failed(let rhs)): 
-        return lhs == rhs
+        if lhs.testName != rhs.testName { return false }
+        if lhs.referenceImagePath != rhs.referenceImagePath { return false }
+        if lhs.diffImagePath != rhs.diffImagePath { return false }
+        if lhs.failedImagePath != rhs.failedImagePath { return false }
+        return true
     default: return false
     }
 }

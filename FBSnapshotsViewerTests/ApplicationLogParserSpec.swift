@@ -8,16 +8,19 @@
 
 import Quick
 import Nimble
+import Foundation
 
 @testable import FBSnapshotsViewer
 
 class ApplicationLogParserSpec: QuickSpec {
     override func spec() {
         describe(".parse") {
-            let logText: String! = try? String(
+            let path: String! = Bundle.init(for: type(of: self)).path(forResource: "TestLog", ofType: "log")
+            let log: String! = try? String(contentsOfFile: path)
 
             it("founds snapshot test images") {
-                expect(logText).toNot(beNil())
+                let snapshotImages = ApplicationLogParser.parse(log: log)
+                expect()
             }
         }
     }
