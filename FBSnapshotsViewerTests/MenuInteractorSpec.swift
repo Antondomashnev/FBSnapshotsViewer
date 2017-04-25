@@ -38,8 +38,8 @@ class MenuInteractor_MockApplicationTestLogFilesListener: ApplicationTestLogFile
 
 class MenuInteractorSpec: QuickSpec {
     override func spec() {
-        let testResult1 = CompletedTestResult(referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", testName: "testName1")
-        let testResult2 = CompletedTestResult(referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", testName: "testName2")
+        let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1")
+        let testResult2 = SnapshotTestResult.failed(testName: "testName2", referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2")
 
         var output: MenuInteractorOutputMock!
         var interactor: MenuInteractor!
@@ -91,10 +91,8 @@ class MenuInteractorSpec: QuickSpec {
                 }
 
                 it("outputs it") {
-                    expect(output.didFindNewTestResultReceivedTestResult?.diffImagePath).to(equal("diffImagePath1"))
-                    expect(output.didFindNewTestResultReceivedTestResult?.referenceImagePath).to(equal("referenceImagePath1"))
-                    expect(output.didFindNewTestResultReceivedTestResult?.failedImagePath).to(equal("failedImagePath1"))
-                    expect(output.didFindNewTestResultReceivedTestResult?.testName).to(equal("testName1"))
+                    let expectedTestResult = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1")
+                    expect(output.didFindNewTestResultReceivedTestResult).to(equal(expectedTestResult))
                 }
             }
 

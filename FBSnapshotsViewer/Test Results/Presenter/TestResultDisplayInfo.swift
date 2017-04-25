@@ -14,7 +14,7 @@ struct TestResultDisplayInfo {
     let failedImageURL: URL?
     let testName: String
 
-    init( testName: String, referenceImageURL: URL, diffImageURL: URL?, failedImageURL: URL?) {
+    init(testName: String, referenceImageURL: URL, diffImageURL: URL?, failedImageURL: URL?) {
         self.referenceImageURL = referenceImageURL
         self.diffImageURL = diffImageURL
         self.failedImageURL = failedImageURL

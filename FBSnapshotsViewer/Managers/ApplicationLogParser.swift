@@ -9,7 +9,17 @@
 import Foundation
 
 class ApplicationLogParser {
-    static func parse(log logText: String) -> [SnapshotTestResult] {
-        return []
+    private let kaleidoscopeDiffCommandMessage = "ksdiff"
+    private let referenceImageSavedMessage = "Reference image save at:"
+
+    // MAKR: - Interface
+
+    func parse(log logText: String) -> [SnapshotTestResult] {
+        var results: [SnapshotTestResult] = []
+        let lines = logText.components(separatedBy: .newlines)
+        for line in lines {
+
+        }
+        return results
     }
 }

@@ -61,7 +61,7 @@ class MenuPresenterSpec: QuickSpec {
 
         describe(".didFindNewTestResult") {
             beforeEach {
-                presenter.didFindNewTestResult(CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName"))
+                presenter.didFindNewTestResult(SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath"))
             }
 
             it("sets that new test results are available in user interface") {
@@ -75,7 +75,7 @@ class MenuPresenterSpec: QuickSpec {
                 var foundTestResults: [SnapshotTestResult] = []
 
                 beforeEach {
-                    foundTestResults = [CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName")]
+                    foundTestResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath")]
                     interactor.foundTestResults = foundTestResults
                     presenter.showTestResults()
                 }
@@ -86,11 +86,9 @@ class MenuPresenterSpec: QuickSpec {
                 }
 
                 it("shows test results") {
+                    let expectedPaameter = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath")
                     expect(wireframe.showTestResultsModuleCalled).to(beTrue())
-                    expect(wireframe.showTestResultsModuleReceivedParameters[0].diffImagePath).to(equal("diffImagePath"))
-                    expect(wireframe.showTestResultsModuleReceivedParameters[0].referenceImagePath).to(equal("referenceImagePath"))
-                    expect(wireframe.showTestResultsModuleReceivedParameters[0].failedImagePath).to(equal("failedImagePath"))
-                    expect(wireframe.showTestResultsModuleReceivedParameters[0].testName).to(equal("testName"))
+                    expect(wireframe.showTestResultsModuleReceivedParameters[0]).to(equal(expectedPaameter))
                 }
             }
 
