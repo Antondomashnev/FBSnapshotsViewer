@@ -44,7 +44,7 @@ extension MenuInteractor: MenuInteractorInput {
         }
         let applicationSnapshotTestResultListener = applicationSnapshotTestResultListenerFactory.applicationSnapshotTestResultListener(forLogFileAt: path)
         applicationSnapshotTestResultListener.startListening { [weak self] testResult in
-            self?.currentlyFoundTestResults.append(testResult)
+            self?.currentlyFoundTestResults.insert(testResult, at: 0)
             self?.output?.didFindNewTestResult(testResult)
         }
         applicationSnapshotTestResultListeners[path] = applicationSnapshotTestResultListener

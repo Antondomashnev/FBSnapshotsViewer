@@ -76,7 +76,7 @@ class ApplicationSnapshotTestResultListener {
                 }
             }
             snapshotTestResults.forEach { listeningOutput($0) }
-            readLinesNumber = logLines.count
+            readLinesNumber += logLines.count
         }
     }
 
