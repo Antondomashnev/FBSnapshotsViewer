@@ -35,10 +35,10 @@ extension MenuInteractor: MenuInteractorInput {
     }
 
     func startSnapshotTestResultListening(fromLogFileAt path: String) {
-        applicationSnapshotTestResultListener.listen(logFileAt: path) { [weak self] testResult in
-            self?.currentlyFoundTestResults.append(testResult)
-            self?.output?.didFindNewTestResult(testResult)
-        }
+//        applicationSnapshotTestResultListener.listen(logFileAt: path) { [weak self] testResult in
+//            self?.currentlyFoundTestResults.append(testResult)
+//            self?.output?.didFindNewTestResult(testResult)
+//        }
     }
 
     func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {

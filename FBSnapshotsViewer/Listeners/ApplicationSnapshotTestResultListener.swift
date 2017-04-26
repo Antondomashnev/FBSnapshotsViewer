@@ -7,41 +7,44 @@
 //
 
 import Foundation
+import KZFileWatchers
 
 typealias ApplicationSnapshotTestResultListenerOutput = (SnapshotTestResult) -> Void
 
-struct ApplicationSnapshotTestResultListenerAction {
-    let output: ApplicationSnapshotTestResultListenerOutput
-    let folderEventsListener: FolderEventsListener
-    let application: Application
-
-    func run() {
-        folderEventsListener.startListening()
-    }
-
-    func stop() {
-        folderEventsListener.stopListening()
-    }
-}
-
 class ApplicationSnapshotTestResultListener {
-    fileprivate var runningAction: ApplicationSnapshotTestResultListenerAction?
+    private var listeningOutput: ApplicationSnapshotTestResultListenerOutput?
+    private let fileWatcher: KZFileWatchers.FileWatcher.Local
+    private let applicationLogReader: ApplicationLogReader
 
-    init() {
+    init(fileWatcher: KZFileWatchers.FileWatcher.Local, applicationLogReader: ApplicationLogReader) {
+        self.fileWatcher = fileWatcher
+        self.applicationLogReader = applicationLogReader
     }
 
     deinit {
         resetRunningAction()
     }
 
-    func listen(logFileAt logFilePath: String, outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
+    func startListening(outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
         resetRunningAction()
-//        var folderEventsListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: application.snapshotsDiffFolder)
-//        folderEventsListener.output = self
-//        let snapshotTestImagesCollector = snapshotTestImagesCollectorFactory.applicationSnapshotTestImageCollector()
-//        snapshotTestImagesCollector.output = self
-//        runningAction = ApplicationSnapshotTestResultListenerAction(output: completion, folderEventsListener: folderEventsListener, snapshotTestImagesCollector: snapshotTestImagesCollector, application: application)
-//        runningAction?.run()
+        listeningOutput = completion
+        do {
+            try fileWatcher.start { [weak self] result in
+                self?.handleFileWatcherUpdate(result: result)
+            }
+        }
+        catch KZFileWatchers.FileWatcher.Error.alreadyStarted {
+            resetRunningAction()
+            startListening(outputTo: completion)
+        }
+        catch let error {
+            switch error {
+            case let KZFileWatchers.FileWatcher.Error.failedToStart(reason):
+                print("Failed to start listening: \(reason)")
+            default:
+                print("Failed to start listening: Unknown reason")
+            }
+        }
     }
 
     func stopListening() {
@@ -50,14 +53,12 @@ class ApplicationSnapshotTestResultListener {
 
     // MARK: - Helpers
 
-    private func resetRunningAction() {
-        runningAction?.stop()
-        runningAction = nil
-    }
-}
+    private func handleFileWatcherUpdate(result: KZFileWatchers.FileWatcher.RefreshResult) {
 
-// MARK: - FolderEventsListenerOutput
-extension ApplicationSnapshotTestResultListener: FolderEventsListenerOutput {
-    func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
+    }
+
+    private func resetRunningAction() {
+        listeningOutput = nil
+        try? fileWatcher.stop()
     }
 }
