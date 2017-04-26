@@ -12,33 +12,34 @@ import KZFileWatchers
 typealias ApplicationSnapshotTestResultListenerOutput = (SnapshotTestResult) -> Void
 
 class ApplicationSnapshotTestResultListener {
+    private var readLinesNumber: Int = 0
     private var listeningOutput: ApplicationSnapshotTestResultListenerOutput?
     private let fileWatcher: KZFileWatchers.FileWatcher.Local
     private let applicationLogReader: ApplicationLogReader
+    private let snapshotTestResultFactory: SnapshotTestResultFactory
 
-    init(fileWatcher: KZFileWatchers.FileWatcher.Local, applicationLogReader: ApplicationLogReader) {
+    init(fileWatcher: KZFileWatchers.FileWatcher.Local, applicationLogReader: ApplicationLogReader = ApplicationLogReader(), snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory()) {
         self.fileWatcher = fileWatcher
         self.applicationLogReader = applicationLogReader
+        self.snapshotTestResultFactory = snapshotTestResultFactory
     }
 
     deinit {
-        resetRunningAction()
+        reset()
     }
 
     func startListening(outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
-        resetRunningAction()
+        reset()
         listeningOutput = completion
         do {
             try fileWatcher.start { [weak self] result in
                 self?.handleFileWatcherUpdate(result: result)
             }
         }
-        catch KZFileWatchers.FileWatcher.Error.alreadyStarted {
-            resetRunningAction()
-            startListening(outputTo: completion)
-        }
         catch let error {
             switch error {
+            case KZFileWatchers.FileWatcher.Error.alreadyStarted:
+                assertionFailure("Failed to start listening: Already started")
             case let KZFileWatchers.FileWatcher.Error.failedToStart(reason):
                 print("Failed to start listening: \(reason)")
             default:
@@ -48,16 +49,39 @@ class ApplicationSnapshotTestResultListener {
     }
 
     func stopListening() {
-        resetRunningAction()
+        reset()
     }
 
     // MARK: - Helpers
 
     private func handleFileWatcherUpdate(result: KZFileWatchers.FileWatcher.RefreshResult) {
-
+        guard let listeningOutput = listeningOutput else {
+            return
+        }
+        switch result {
+        case .noChanges:
+            return
+        case let .updated(data):
+            guard let text = String(data: data, encoding: .utf8) else {
+                assertionFailure("Invalid data reported by KZFileWatchers.FileWatcher.Local")
+                return
+            }
+            let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
+            let snapshotTestResults = logLines.flatMap { logLine -> SnapshotTestResult? in
+                switch logLine {
+                case .unknown:
+                    return nil
+                default:
+                    return snapshotTestResultFactory.createSnapshotTestResult(from: logLine)
+                }
+            }
+            snapshotTestResults.forEach { listeningOutput($0) }
+            readLinesNumber = logLines.count
+        }
     }
 
-    private func resetRunningAction() {
+    private func reset() {
+        readLinesNumber = 0
         listeningOutput = nil
         try? fileWatcher.stop()
     }

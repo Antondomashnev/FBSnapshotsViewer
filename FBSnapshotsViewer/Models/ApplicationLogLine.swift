@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ApplicationLogLine {
+enum ApplicationLogLine: AutoEquatable {
     static let kaleidoscopeCommandMessageIndicatorSubstring = "ksdiff "
     static let referenceImageSavedMessageIndicatorSubstring = "Reference image save at: "
 

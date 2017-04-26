@@ -31,6 +31,19 @@ internal func == (lhs: Application, rhs: Application) -> Bool {
 }
 
 // MARK: - AutoEquatable for Enums
+// MARK: - ApplicationLogLine AutoEquatable
+extension ApplicationLogLine: Equatable {}
+internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
+    switch (lhs, rhs) {
+    case (.kaleidoscopeCommandMessage(let lhs), .kaleidoscopeCommandMessage(let rhs)): 
+        return lhs == rhs
+    case (.referenceImageSavedMessage(let lhs), .referenceImageSavedMessage(let rhs)): 
+        return lhs == rhs
+    case (.unknown, .unknown): 
+         return true 
+    default: return false
+    }
+}
 // MARK: - FolderEventFilter AutoEquatable
 extension FolderEventFilter: Equatable {}
 internal func == (lhs: FolderEventFilter, rhs: FolderEventFilter) -> Bool {

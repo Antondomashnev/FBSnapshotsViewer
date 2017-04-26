@@ -15,16 +15,20 @@ class MenuInteractor {
     /// Note: it resets every notification about new application test run
     fileprivate var currentlyFoundTestResults: [SnapshotTestResult] = []
 
-    /// Instance of aplication snapshot test listener
-    fileprivate let applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener
+    /// Dictionary with key:pair - application log path: application snapshot test result listener
+    fileprivate typealias ApplicationLogPath = String
+    fileprivate var applicationSnapshotTestResultListeners: [ApplicationLogPath: ApplicationSnapshotTestResultListener] = [:]
+
+    /// Instance of aplication snapshot test listener factory
+    fileprivate let applicationSnapshotTestResultListenerFactory: ApplicationSnapshotTestResultListenerFactory
 
     /// Instance of applications test log files listener
     fileprivate let applicationTestLogFilesListener: ApplicationTestLogFilesListener
 
-    init(applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener,
+    init(applicationSnapshotTestResultListenerFactory: ApplicationSnapshotTestResultListenerFactory,
          applicationTestLogFilesListener: ApplicationTestLogFilesListener) {
         self.applicationTestLogFilesListener = applicationTestLogFilesListener
-        self.applicationSnapshotTestResultListener = applicationSnapshotTestResultListener
+        self.applicationSnapshotTestResultListenerFactory = applicationSnapshotTestResultListenerFactory
     }
 }
 
@@ -35,10 +39,15 @@ extension MenuInteractor: MenuInteractorInput {
     }
 
     func startSnapshotTestResultListening(fromLogFileAt path: String) {
-//        applicationSnapshotTestResultListener.listen(logFileAt: path) { [weak self] testResult in
-//            self?.currentlyFoundTestResults.append(testResult)
-//            self?.output?.didFindNewTestResult(testResult)
-//        }
+        if applicationSnapshotTestResultListeners[path] != nil {
+            return
+        }
+        let applicationSnapshotTestResultListener = applicationSnapshotTestResultListenerFactory.applicationSnapshotTestResultListener(forLogFileAt: path)
+        applicationSnapshotTestResultListener.startListening { [weak self] testResult in
+            self?.currentlyFoundTestResults.append(testResult)
+            self?.output?.didFindNewTestResult(testResult)
+        }
+        applicationSnapshotTestResultListeners[path] = applicationSnapshotTestResultListener
     }
 
     func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {
