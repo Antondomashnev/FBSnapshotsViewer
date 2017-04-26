@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct XcodeDerivedDataFolder {
+struct XcodeDerivedDataFolder: AutoEquatable {
     let path: String
 
     /// Default Xcode derived data folder

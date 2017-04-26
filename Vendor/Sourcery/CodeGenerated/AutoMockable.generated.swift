@@ -3,6 +3,49 @@
 
 import Cocoa
 
+class ApplicationMock: Application {
+
+
+    //MARK: - terminate
+
+    var terminateCalled = false
+    var terminateReceivedSender: Any?
+
+    func terminate(_ sender: Any?) {
+
+    terminateCalled = true
+    terminateReceivedSender = sender
+    }
+}
+class FolderEventsListenerMock: FolderEventsListener {
+
+    var output: FolderEventsListenerOutput?
+
+    //MARK: - init
+
+    var initReceivedArguments: (folderPath: String, filter: FolderEventFilter?, fileWatcherFactory: FileWatcherFactory)?
+
+    required init(folderPath: String, filter: FolderEventFilter?, fileWatcherFactory: FileWatcherFactory) {
+
+        initReceivedArguments = (folderPath: folderPath, filter: filter, fileWatcherFactory: fileWatcherFactory)
+    }
+    //MARK: - startListening
+
+    var startListeningCalled = false
+
+    func startListening() {
+
+    startListeningCalled = true
+    }
+    //MARK: - stopListening
+
+    var stopListeningCalled = false
+
+    func stopListening() {
+
+    stopListeningCalled = true
+    }
+}
 class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
 
 
@@ -13,10 +56,21 @@ class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
 
     func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
 
-        folderEventsListenerCalled = true
-        folderEventsListenerReceivedArguments = (listener: listener, event: event)
+    folderEventsListenerCalled = true
+    folderEventsListenerReceivedArguments = (listener: listener, event: event)
     }
+}
+class ListMock: List {
 
+
+    //MARK: - reloadData
+
+    var reloadDataCalled = false
+
+    func reloadData() {
+
+    reloadDataCalled = true
+    }
 }
 class MenuInteractorInputMock: MenuInteractorInput {
 
@@ -29,10 +83,9 @@ class MenuInteractorInputMock: MenuInteractorInput {
 
     func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {
 
-        startXcodeBuildsListeningCalled = true
-        startXcodeBuildsListeningReceivedXcodeDerivedDataFolder = xcodeDerivedDataFolder
+    startXcodeBuildsListeningCalled = true
+    startXcodeBuildsListeningReceivedXcodeDerivedDataFolder = xcodeDerivedDataFolder
     }
-
     //MARK: - startSnapshotTestResultListening
 
     var startSnapshotTestResultListeningCalled = false
@@ -40,10 +93,9 @@ class MenuInteractorInputMock: MenuInteractorInput {
 
     func startSnapshotTestResultListening(fromLogFileAt path: String) {
 
-        startSnapshotTestResultListeningCalled = true
-        startSnapshotTestResultListeningReceivedPath = path
+    startSnapshotTestResultListeningCalled = true
+    startSnapshotTestResultListeningReceivedPath = path
     }
-
 }
 class MenuInteractorOutputMock: MenuInteractorOutput {
 
@@ -55,10 +107,9 @@ class MenuInteractorOutputMock: MenuInteractorOutput {
 
     func didFindNewTestResult(_ testResult: SnapshotTestResult) {
 
-        didFindNewTestResultCalled = true
-        didFindNewTestResultReceivedTestResult = testResult
+    didFindNewTestResultCalled = true
+    didFindNewTestResultReceivedTestResult = testResult
     }
-
     //MARK: - didFindNewTestLogFile
 
     var didFindNewTestLogFileCalled = false
@@ -66,10 +117,9 @@ class MenuInteractorOutputMock: MenuInteractorOutput {
 
     func didFindNewTestLogFile(at path: String) {
 
-        didFindNewTestLogFileCalled = true
-        didFindNewTestLogFileReceivedPath = path
+    didFindNewTestLogFileCalled = true
+    didFindNewTestLogFileReceivedPath = path
     }
-
 }
 class MenuModuleInterfaceMock: MenuModuleInterface {
 
@@ -80,36 +130,32 @@ class MenuModuleInterfaceMock: MenuModuleInterface {
 
     func start() {
 
-        startCalled = true
+    startCalled = true
     }
-
     //MARK: - showTestResults
 
     var showTestResultsCalled = false
 
     func showTestResults() {
 
-        showTestResultsCalled = true
+    showTestResultsCalled = true
     }
-
     //MARK: - showApplicationMenu
 
     var showApplicationMenuCalled = false
 
     func showApplicationMenu() {
 
-        showApplicationMenuCalled = true
+    showApplicationMenuCalled = true
     }
-
     //MARK: - quit
 
     var quitCalled = false
 
     func quit() {
 
-        quitCalled = true
+    quitCalled = true
     }
-
 }
 class MenuUserInterfaceMock: MenuUserInterface {
 
@@ -121,19 +167,17 @@ class MenuUserInterfaceMock: MenuUserInterface {
 
     func setNewTestResults(available: Bool) {
 
-        setNewTestResultsCalled = true
-        setNewTestResultsReceivedAvailable = available
+    setNewTestResultsCalled = true
+    setNewTestResultsReceivedAvailable = available
     }
-
     //MARK: - popUpOptionsMenu
 
     var popUpOptionsMenuCalled = false
 
     func popUpOptionsMenu() {
 
-        popUpOptionsMenuCalled = true
+    popUpOptionsMenuCalled = true
     }
-
 }
 class TestResultsInteractorInputMock: TestResultsInteractorInput {
 
@@ -149,9 +193,8 @@ class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
 
     func updateUserInterface() {
 
-        updateUserInterfaceCalled = true
+    updateUserInterfaceCalled = true
     }
-
 }
 class TestResultsUserInterfaceMock: TestResultsUserInterface {
 
@@ -163,8 +206,7 @@ class TestResultsUserInterfaceMock: TestResultsUserInterface {
 
     func show(testResults: [TestResultDisplayInfo]) {
 
-        showCalled = true
-        showReceivedTestResults = testResults
+    showCalled = true
+    showReceivedTestResults = testResults
     }
-
 }

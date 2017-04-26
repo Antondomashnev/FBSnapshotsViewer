@@ -23,10 +23,19 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
 }
 
 // MARK: - AutoEquatable for classes, protocols, structs
-// MARK: - Application AutoEquatable
-extension Application: Equatable {} 
-internal func == (lhs: Application, rhs: Application) -> Bool {
-    guard lhs.snapshotsDiffFolder == rhs.snapshotsDiffFolder else { return false }
+// MARK: - TestResultDisplayInfo AutoEquatable
+extension TestResultDisplayInfo: Equatable {} 
+internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Bool {
+    guard lhs.referenceImageURL == rhs.referenceImageURL else { return false }
+    guard compareOptionals(lhs: lhs.diffImageURL, rhs: rhs.diffImageURL, compare: ==) else { return false }
+    guard compareOptionals(lhs: lhs.failedImageURL, rhs: rhs.failedImageURL, compare: ==) else { return false }
+    guard lhs.testName == rhs.testName else { return false }
+    return true
+}
+// MARK: - XcodeDerivedDataFolder AutoEquatable
+extension XcodeDerivedDataFolder: Equatable {} 
+internal func == (lhs: XcodeDerivedDataFolder, rhs: XcodeDerivedDataFolder) -> Bool {
+    guard lhs.path == rhs.path else { return false }
     return true
 }
 

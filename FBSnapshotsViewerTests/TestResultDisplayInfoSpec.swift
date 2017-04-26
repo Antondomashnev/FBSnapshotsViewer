@@ -16,21 +16,35 @@ class TestResultDisplayInfoSpec: QuickSpec {
         describe(".initWithTestInfo") {
             var testResult: SnapshotTestResult!
 
-            beforeEach {
-                testResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png")
+            context("when failed test result") {
+                beforeEach {
+                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png")
+                }
+
+                it("initializes object correctly") {
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult)
+                    expect(displayInfo.diffImageURL).to(equal(URL(fileURLWithPath: "diffImagePath.png")))
+                    expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
+                    expect(displayInfo.failedImageURL).to(equal(URL(fileURLWithPath: "failedImagePath.png")))
+                    expect(displayInfo.testName).to(equal("testFailed"))
+                }
             }
 
-            it("initializes all properties") {
-                let displayInfo = TestResultDisplayInfo(testResult: testResult)
-                expect(displayInfo.diffImageURL).to(equal(URL(fileURLWithPath: "diffImagePath.png")))
-                expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
-                expect(displayInfo.failedImageURL).to(equal(URL(fileURLWithPath: "failedImagePath.png")))
-                expect(displayInfo.testName).to(equal("testName"))
+            context("when recorded test result") {
+                beforeEach {
+                    testResult = SnapshotTestResult.recorded(testName: "testRecord", referenceImagePath: "referenceImagePath.png")
+                }
+
+                it("initializes object correctly") {
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult)
+                    expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
+                    expect(displayInfo.testName).to(equal("testRecord"))
+                }
             }
         }
 
         describe(".init") {
-            it("initializes all properties") {
+            it("initializes object correctly") {
                 let displayInfo = TestResultDisplayInfo(testName: "testName", referenceImageURL: URL(fileURLWithPath: "referenceImagePath.png"), diffImageURL: URL(fileURLWithPath: "diffImagePath.png"), failedImageURL: URL(fileURLWithPath: "failedImagePath.png"))
                 expect(displayInfo.diffImageURL).to(equal(URL(fileURLWithPath: "diffImagePath.png")))
                 expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))

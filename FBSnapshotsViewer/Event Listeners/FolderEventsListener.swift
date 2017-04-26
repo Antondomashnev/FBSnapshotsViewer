@@ -12,7 +12,7 @@ protocol FolderEventsListenerOutput: class, AutoMockable {
     func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent)
 }
 
-protocol FolderEventsListener {
+protocol FolderEventsListener: AutoMockable {
 
     /// Handler for `FolderEventsListener` output
     weak var output: FolderEventsListenerOutput? { get set }

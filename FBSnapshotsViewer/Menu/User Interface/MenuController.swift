@@ -49,10 +49,9 @@ extension MenuController: MenuActions {
     }
 
     @objc func showSnapshots(sender: NSStatusBarButton) {
-        guard let event = NSApp.currentEvent else {
-            return
+        if let event = NSApp.currentEvent {
+            handleIconMouseEvent(event)
         }
-        handleIconMouseEvent(event)
     }
 }
 

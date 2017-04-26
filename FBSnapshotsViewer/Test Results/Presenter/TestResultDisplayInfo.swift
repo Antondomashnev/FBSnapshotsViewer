@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct TestResultDisplayInfo {
+struct TestResultDisplayInfo: AutoEquatable {
     let referenceImageURL: URL
     let diffImageURL: URL?
     let failedImageURL: URL?
     let testName: String
 
-    init(testName: String, referenceImageURL: URL, diffImageURL: URL?, failedImageURL: URL?) {
+    init(testName: String, referenceImageURL: URL, diffImageURL: URL? = nil, failedImageURL: URL? = nil) {
         self.referenceImageURL = referenceImageURL
         self.diffImageURL = diffImageURL
         self.failedImageURL = failedImageURL

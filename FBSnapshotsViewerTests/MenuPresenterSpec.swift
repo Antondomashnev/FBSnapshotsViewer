@@ -23,19 +23,43 @@ class MenuPresenter_MockMenuWireframe: MenuWireframe {
 
 class MenuPresenterSpec: QuickSpec {
     override func spec() {
+        var xcodeDerivedDataFolder: XcodeDerivedDataFolder!
+        var application: ApplicationMock!
         var userInterface: MenuUserInterfaceMock!
         var presenter: MenuPresenter!
         var interactor: MenuInteractorInputMock!
         var wireframe: MenuPresenter_MockMenuWireframe!
 
         beforeEach {
+            xcodeDerivedDataFolder = XcodeDerivedDataFolder(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
+            application = ApplicationMock()
             wireframe = MenuPresenter_MockMenuWireframe()
             interactor = MenuInteractorInputMock()
-            presenter = MenuPresenter()
+            presenter = MenuPresenter(xcodeDerivedDataFolder: xcodeDerivedDataFolder, application: application)
             userInterface = MenuUserInterfaceMock()
             presenter.userInterface = userInterface
             presenter.interactor = interactor
             presenter.wireframe = wireframe
+        }
+
+        describe(".start") {
+            beforeEach {
+                presenter.start()
+            }
+
+            it("starts the Xcode builds listening") {
+                expect(interactor.startXcodeBuildsListeningReceivedXcodeDerivedDataFolder).to(equal(xcodeDerivedDataFolder))
+            }
+        }
+
+        describe(".quit") {
+            beforeEach {
+                presenter.quit()
+            }
+
+            it("terminates the app") {
+                expect(application.terminateCalled).to(beTrue())
+            }
         }
 
         describe(".showApplicationMenu") {
