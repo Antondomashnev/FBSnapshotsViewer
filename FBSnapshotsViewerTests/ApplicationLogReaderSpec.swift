@@ -24,16 +24,6 @@ class ApplicationLogReaderrSpec: QuickSpec {
             let path: String! = Bundle.init(for: type(of: self)).path(forResource: "TestLog", ofType: "log")
             let log: String! = try? String(contentsOfFile: path)
             var logLines: [ApplicationLogLine] = []
-//
-//            context()
-//            
-//            beforeEach {
-//                logLines = parser.readline()
-//            }
-//
-//            it("parses the recorded snapshot test result") {
-//                expect(snapshotTestResults[1]).to(equal(expectedResult))
-//            }
         }
     }
 }
