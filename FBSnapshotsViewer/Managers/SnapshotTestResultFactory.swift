@@ -24,7 +24,7 @@ class SnapshotTestResultFactory {
         let referenceImagePath = lineComponents[1]
         let failedImagePath = lineComponents[3]
         let diffImagePath = failedImagePath.replacingOccurrences(of: "/failed_", with: "/diff_")
-        guard let testName = failedImagePath.components(separatedBy: "/failed_").last?.components(separatedBy: "@").first else {
+        guard let testName = failedImagePath.components(separatedBy: "/failed_").last?.components(separatedBy: "@").first, !testName.isEmpty else {
             throw SnapshotTestResultFactoryError.unexpectedKaleidoscopeCommandLineFormat
         }
         return SnapshotTestResult.failed(testName: testName, referenceImagePath: referenceImagePath, diffImagePath: diffImagePath, failedImagePath: failedImagePath)
@@ -36,7 +36,7 @@ class SnapshotTestResultFactory {
             throw SnapshotTestResultFactoryError.unexpectedSavedReferenceImageLineFormat
         }
         let referenceImagePath = lineComponents[1]
-        guard let testName = referenceImagePath.components(separatedBy: "/").last?.components(separatedBy: "@").first else {
+        guard let testName = referenceImagePath.components(separatedBy: "/").last?.components(separatedBy: "@").first, !testName.contains(".png") else {
             throw SnapshotTestResultFactoryError.unexpectedSavedReferenceImageLineFormat
         }
         return SnapshotTestResult.recorded(testName: testName, referenceImagePath: referenceImagePath)
