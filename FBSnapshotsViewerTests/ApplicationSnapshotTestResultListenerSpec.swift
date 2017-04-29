@@ -1,112 +1,152 @@
-////
-////  ApplicationSnapshotTestResultListenerSpec.swift
-////  FBSnapshotsViewer
-////
-////  Created by Anton Domashnev on 11/03/2017.
-////  Copyright © 2017 Anton Domashnev. All rights reserved.
-////
 //
-//import Quick
-//import Nimble
+//  ApplicationSnapshotTestResultListenerSpec.swift
+//  FBSnapshotsViewer
 //
-//@testable import FBSnapshotsViewer
+//  Created by Anton Domashnev on 29.04.17.
+//  Copyright © 2017 Anton Domashnev. All rights reserved.
 //
-//class ApplicationSnapshotTestResultListener_MockFolderEventsListener: FolderEventsListener {
-//    weak var output: FolderEventsListenerOutput?
-//
-//    required init(folderPath: String, filter: FolderEventFilter? = nil, fileWatcherFactory: FileWatcherFactory = FileWatcherFactory()) {}
-//
-//    func startListening() {}
-//
-//    func stopListening() {}
-//}
-//
-//class ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestImageCollector: ApplicationSnapshotTestImageCollector {
-//    var collectCalled: Bool = false
-//
-//    override func collect(_ testImage: SnapshotTestImage) {
-//        collectCalled = true
-//    }
-//}
-//
-//class ApplicationSnapshotTestResultListener_MockFolderEventsListenerFactory: FolderEventsListenerFactory {
-//    var mockSnapshotsDiffFolderEventsListener: ApplicationSnapshotTestResultListener_MockFolderEventsListener!
-//
-//    override func snapshotsDiffFolderEventsListener(at folderPath: String) -> FolderEventsListener {
-//        return mockSnapshotsDiffFolderEventsListener
-//    }
-//}
-//
-//class ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestImageCollectorFactory: ApplicationSnapshotTestImageCollectorFactory {
-//    var mockApplicationSnapshotTestImageCollector: ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestImageCollector!
-//
-//    override func applicationSnapshotTestImageCollector() -> ApplicationSnapshotTestImageCollector {
-//        return mockApplicationSnapshotTestImageCollector
-//    }
-//}
-//
-//class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
-//    override func spec() {
-//        var outputtedTestResult: SnapshotTestResult?
-//        var output: ApplicationSnapshotTestResultListenerOutput!
-//        var snapshotTestResultListener: ApplicationSnapshotTestResultListener!
-//        var folderEventsListenerFactory: ApplicationSnapshotTestResultListener_MockFolderEventsListenerFactory!
-//        var snapshotTestImagesCollectorFactory: ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestImageCollectorFactory!
-//
-//        func mockOutput(testResult: SnapshotTestResult) {
-//            outputtedTestResult = testResult
-//        }
-//
-//        beforeEach {
-//            output = mockOutput
-//            folderEventsListenerFactory = ApplicationSnapshotTestResultListener_MockFolderEventsListenerFactory()
-//            snapshotTestImagesCollectorFactory = ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestImageCollectorFactory()
-//            snapshotTestResultListener = ApplicationSnapshotTestResultListener(folderEventsListenerFactory: folderEventsListenerFactory, snapshotTestImagesCollectorFactory: snapshotTestImagesCollectorFactory)
-//        }
-//
-//        describe(".listen") {
-//            beforeEach {
-//                folderEventsListenerFactory.mockSnapshotsDiffFolderEventsListener = ApplicationSnapshotTestResultListener_MockFolderEventsListener(folderPath: "")
-//                snapshotTestImagesCollectorFactory.mockApplicationSnapshotTestImageCollector = ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestImageCollector()
-//                snapshotTestResultListener.listen(application: Application(snapshotsDiffFolder: "myDiffFolder"), outputTo: output)
-//            }
-//
-//            context("when folder listener receives event") {
-//                context("when event is test image event") {
-//                    beforeEach {
-//                        folderEventsListenerFactory.mockSnapshotsDiffFolderEventsListener.output?.folderEventsListener(folderEventsListenerFactory.mockSnapshotsDiffFolderEventsListener, didReceive: FolderEvent.created(path: "reference_image.png", object: .file))
-//                    }
-//
-//                    it("collects it") {
-//                        expect(snapshotTestImagesCollectorFactory.mockApplicationSnapshotTestImageCollector.collectCalled).to(beTrue())
-//                    }
-//
-//                    context("when collector outputs the collected test result") {
-//                        let collectedTestResult = CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName")
-//
-//                        beforeEach {
-//                            snapshotTestImagesCollectorFactory.mockApplicationSnapshotTestImageCollector.output?.applicationSnapshotTestResultCollector(snapshotTestImagesCollectorFactory.mockApplicationSnapshotTestImageCollector, didCollect: collectedTestResult)
-//                        }
-//
-//                        it("outputs it") {
-//                            expect(outputtedTestResult?.referenceImagePath).to(equal(collectedTestResult.referenceImagePath))
-//                            expect(outputtedTestResult?.diffImagePath).to(equal(collectedTestResult.diffImagePath))
-//                            expect(outputtedTestResult?.failedImagePath).to(equal(collectedTestResult.failedImagePath))
-//                            expect(outputtedTestResult?.testName).to(equal(collectedTestResult.testName))
-//                        }
-//                    }
-//                }
-//
-//                context("when event us not a test image event") {
-//                    beforeEach {
-//                        folderEventsListenerFactory.mockSnapshotsDiffFolderEventsListener.output?.folderEventsListener(folderEventsListenerFactory.mockSnapshotsDiffFolderEventsListener, didReceive: FolderEvent.created(path: "image.png", object: .file))
-//                    }
-//
-//                    it("ignores is") {
-//                        expect(snapshotTestImagesCollectorFactory.mockApplicationSnapshotTestImageCollector.collectCalled).to(beFalse())
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+
+import Quick
+import Nimble
+import KZFileWatchers
+
+@testable import FBSnapshotsViewer
+
+class ApplicationSnapshotTestResultListener_MockFileWatcherProtocol: KZFileWatchers.FileWatcherProtocol {
+    var startClosure: KZFileWatchers.FileWatcher.UpdateClosure?
+    var startCalled: Bool = false
+    var startError: KZFileWatchers.FileWatcher.Error?
+    func start(closure: @escaping KZFileWatchers.FileWatcher.UpdateClosure) throws {
+        startClosure = closure
+        startCalled = true
+        if let startError = startError {
+            throw startError
+        }
+    }
+
+    var stopCalled: Bool = false
+    func stop() {
+        stopCalled = true
+    }
+}
+
+class ApplicationSnapshotTestResultListener_MockApplicationLogReader: ApplicationLogReader {
+    var readLines: [ApplicationLogLine] = []
+    override func readline(of logText: String, startingFrom lineNumber: Int) -> [ApplicationLogLine] {
+        return readLines
+    }
+}
+
+class ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory: SnapshotTestResultFactory {
+    var createdSnapshotTestResultForLogLine: [ApplicationLogLine: SnapshotTestResult] = [:]
+    override func createSnapshotTestResult(from logLine: ApplicationLogLine) -> SnapshotTestResult? {
+        return createdSnapshotTestResultForLogLine[logLine]
+    }
+}
+
+class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
+    override func spec() {
+        var fileWatcher: ApplicationSnapshotTestResultListener_MockFileWatcherProtocol!
+        var logReader: ApplicationSnapshotTestResultListener_MockApplicationLogReader!
+        var snapshotTestResultFactory: ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory!
+        var listener: ApplicationSnapshotTestResultListener!
+
+        beforeEach {
+            snapshotTestResultFactory = ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory()
+            fileWatcher = ApplicationSnapshotTestResultListener_MockFileWatcherProtocol()
+            logReader = ApplicationSnapshotTestResultListener_MockApplicationLogReader()
+            listener = ApplicationSnapshotTestResultListener(fileWatcher: fileWatcher, applicationLogReader: logReader, snapshotTestResultFactory: snapshotTestResultFactory)
+        }
+
+        describe(".stopListening") {
+            it("stops file watching") {
+                listener.stopListening()
+                expect(fileWatcher.stopCalled).to(beTrue())
+            }
+        }
+
+        describe(".receiving new file watch event") {
+            var receivedSnapshotTestResults: [SnapshotTestResult] = []
+            let unknownLogLine = ApplicationLogLine.unknown
+            let kaleidoscopeCommandMesageLogLine = ApplicationLogLine.kaleidoscopeCommandMessage(line: "BlaBla")
+            let referenceImageSavedMessageLogLine = ApplicationLogLine.referenceImageSavedMessage(line: "FooFoo")
+            let failedSnapshotTestResult = SnapshotTestResult.failed(testName: "failedTest", referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png")
+            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testName: "recordedTest", referenceImagePath: "referenceTestImage.png")
+
+            beforeEach {
+                snapshotTestResultFactory.createdSnapshotTestResultForLogLine[kaleidoscopeCommandMesageLogLine] = failedSnapshotTestResult
+                snapshotTestResultFactory.createdSnapshotTestResultForLogLine[referenceImageSavedMessageLogLine] = recordedSnapshotTestResult
+                logReader.readLines = [kaleidoscopeCommandMesageLogLine, unknownLogLine, referenceImageSavedMessageLogLine]
+                listener.startListening { result in
+                    receivedSnapshotTestResults += [result]
+                }
+            }
+
+            context("with no changes") {
+                beforeEach {
+                    fileWatcher.startClosure?(.noChanges)
+                }
+
+                it("doesnt output anything") {
+                    expect(receivedSnapshotTestResults.isEmpty).to(beTrue())
+                }
+            }
+
+            context("with invalid updates") {
+                it("thows assertion") {
+                    expect { fileWatcher.startClosure?(.updated(data: Data())) }.to(throwAssertion())
+                }
+            }
+
+            context("with valid updates") {
+                beforeEach {
+                    let update: Data! = "new updated text".data(using: .utf8, allowLossyConversion: false)
+                    fileWatcher.startClosure?(.updated(data: update))
+                }
+
+                it("outputs expected snapshot test resilts") {
+                    expect(receivedSnapshotTestResults).to(equal([failedSnapshotTestResult, recordedSnapshotTestResult]))
+                }
+            }
+        }
+
+        describe("startListening(outputTo:)") {
+            it("starts file watching") {
+                listener.startListening { _ in }
+                expect(fileWatcher.startCalled).to(beTrue())
+            }
+
+            context("when file watcher fails to start") {
+                context("because already started") {
+                    beforeEach {
+                        fileWatcher.startError = KZFileWatchers.FileWatcher.Error.alreadyStarted
+                    }
+
+                    it("throws assertion") {
+                        expect { listener.startListening { _ in } }.to(throwAssertion())
+                    }
+                }
+
+                context("because of internal error") {
+                    beforeEach {
+                        fileWatcher.startError = KZFileWatchers.FileWatcher.Error.failedToStart(reason: "Unknown")
+                    }
+
+                    it("does nothing") {
+                        listener.startListening { _ in }
+                    }
+                }
+
+                context("because of unknown reason") {
+                    beforeEach {
+                        fileWatcher.startError = KZFileWatchers.FileWatcher.Error.notStarted
+                    }
+
+                    it("does nothing") {
+                        listener.startListening { _ in }
+                    }
+                }
+            }
+        }
+    }
+}

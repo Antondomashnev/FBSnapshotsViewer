@@ -14,11 +14,11 @@ typealias ApplicationSnapshotTestResultListenerOutput = (SnapshotTestResult) -> 
 class ApplicationSnapshotTestResultListener {
     private var readLinesNumber: Int = 0
     private var listeningOutput: ApplicationSnapshotTestResultListenerOutput?
-    private let fileWatcher: KZFileWatchers.FileWatcher.Local
+    private let fileWatcher: KZFileWatchers.FileWatcherProtocol
     private let applicationLogReader: ApplicationLogReader
     private let snapshotTestResultFactory: SnapshotTestResultFactory
 
-    init(fileWatcher: KZFileWatchers.FileWatcher.Local, applicationLogReader: ApplicationLogReader = ApplicationLogReader(), snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory()) {
+    init(fileWatcher: KZFileWatchers.FileWatcherProtocol, applicationLogReader: ApplicationLogReader = ApplicationLogReader(), snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory()) {
         self.fileWatcher = fileWatcher
         self.applicationLogReader = applicationLogReader
         self.snapshotTestResultFactory = snapshotTestResultFactory
@@ -62,7 +62,7 @@ class ApplicationSnapshotTestResultListener {
         case .noChanges:
             return
         case let .updated(data):
-            guard let text = String(data: data, encoding: .utf8) else {
+            guard let text = String(data: data, encoding: .utf8), !text.isEmpty else {
                 assertionFailure("Invalid data reported by KZFileWatchers.FileWatcher.Local")
                 return
             }
