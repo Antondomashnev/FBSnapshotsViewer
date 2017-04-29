@@ -12,5 +12,17 @@ import Nimble
 @testable import FBSnapshotsViewer
 
 class ApplicationSnapshotTestResultListenerFactorySpec: QuickSpec {
+    override func spec() {
+        var factory: ApplicationSnapshotTestResultListenerFactory!
 
+        beforeEach {
+            factory = ApplicationSnapshotTestResultListenerFactory()
+        }
+
+        describe(".applicationSnapshotTestResultListener") {
+            it("returns new listener") {
+                expect(factory.applicationSnapshotTestResultListener(forLogFileAt: "Users/antondomashnev/Library/log.log")).toNot(beNil())
+            }
+        }
+    }
 }
