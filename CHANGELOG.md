@@ -1,8 +1,7 @@
 ## Changelog
 
-### 0.2.0 (Next)
+### 0.2.0
 
-* Your contribution here.
 * [#17](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/17): Remove run script leftovers - [@antondomashnev](https://github.com/antondomashnev).
 * [#16](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/16): Add Xcode project logs parser - [@antondomashnev](https://github.com/antondomashnev).
 

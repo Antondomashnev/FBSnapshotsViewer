@@ -14,7 +14,7 @@ bundle exec fastlane osx test
 
 Check that the last build succeeded in [Travis CI](https://travis-ci.org/Antondomashnev/FBSnapshotsViewer) for all supported platforms.
 
-Increment the version, modify [FBSnapshotsViewerRunPhaseScript.podspec](FBSnapshotsViewerRunPhaseScript.podspec).
+Increment the version.
 
 Following the [Semantic Versioning](http://semver.org/):
 *  Increment the third number if the release has bug fixes and/or very minor features with backward compatibility, only (eg. change `0.5.1` to `0.5.2`).
@@ -31,7 +31,7 @@ Remove the line with "* Your contribution here.", since there will be no more co
 Commit your changes.
 
 ```
-git add CHANGELOG.md FBSnapshotsViewerRunPhaseScript.podspec
+git add CHANGELOG.md
 git commit -m "Preparing for release 0.5.2."
 git push origin master
 ```
@@ -52,12 +52,10 @@ Add the next release to [CHANGELOG.md](CHANGELOG.md).
 * Your contribution here.
 ```
 
-Increment the third version number in [FBSnapshotsViewerRunPhaseScript.podspec](FBSnapshotsViewerRunPhaseScript.podspec).
-
 Commit your changes.
 
 ```
-git add CHANGELOG.md FBSnapshotsViewerRunPhaseScript.podspec
+git add CHANGELOG.md
 git commit -m "Preparing for next development iteration, 0.5.3."
 git push origin master
 ```

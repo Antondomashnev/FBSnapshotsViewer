@@ -50,7 +50,7 @@ Implement your feature or bug fix.
 
 Swift style is enforced with [SwiftLint](https://github.com/realm/SwiftLint). The check is done on every compile via run phase. You can check the configuration [here](FBSnapshotsViewer/.swiftlint.yml).
 
-Make sure that `bundle exec fastlane osx build_run_phase_script` and `bundle exec fastlane osx build_app` completes without errors.
+Make sure that `bundle exec fastlane osx build_app` completes without errors.
 
 ### Write Documentation
 
