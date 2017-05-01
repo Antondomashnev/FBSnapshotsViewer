@@ -7,75 +7,82 @@
 //
 
 import Foundation
+import KZFileWatchers
 
-typealias ApplicationSnapshotTestResultListenerOutput = (TestResult) -> Void
-
-struct ApplicationSnapshotTestResultListenerAction {
-    let output: ApplicationSnapshotTestResultListenerOutput
-    let folderEventsListener: FolderEventsListener
-    let snapshotTestImagesCollector: ApplicationSnapshotTestImageCollector
-    let application: Application
-
-    func run() {
-        folderEventsListener.startListening()
-    }
-
-    func stop() {
-        folderEventsListener.stopListening()
-    }
-}
+typealias ApplicationSnapshotTestResultListenerOutput = (SnapshotTestResult) -> Void
 
 class ApplicationSnapshotTestResultListener {
-    fileprivate let folderEventsListenerFactory: FolderEventsListenerFactory
-    fileprivate let snapshotTestImagesCollectorFactory: ApplicationSnapshotTestImageCollectorFactory
-    fileprivate var runningAction: ApplicationSnapshotTestResultListenerAction?
+    private var readLinesNumber: Int = 0
+    private var listeningOutput: ApplicationSnapshotTestResultListenerOutput?
+    private let fileWatcher: KZFileWatchers.FileWatcherProtocol
+    private let applicationLogReader: ApplicationLogReader
+    private let snapshotTestResultFactory: SnapshotTestResultFactory
 
-    init(folderEventsListenerFactory: FolderEventsListenerFactory = FolderEventsListenerFactory(), snapshotTestImagesCollectorFactory: ApplicationSnapshotTestImageCollectorFactory = ApplicationSnapshotTestImageCollectorFactory()) {
-        self.folderEventsListenerFactory = folderEventsListenerFactory
-        self.snapshotTestImagesCollectorFactory = snapshotTestImagesCollectorFactory
+    init(fileWatcher: KZFileWatchers.FileWatcherProtocol, applicationLogReader: ApplicationLogReader = ApplicationLogReader(), snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory()) {
+        self.fileWatcher = fileWatcher
+        self.applicationLogReader = applicationLogReader
+        self.snapshotTestResultFactory = snapshotTestResultFactory
     }
 
     deinit {
-        resetRunningAction()
+        reset()
     }
 
-    func listen(application: Application, outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
-        resetRunningAction()
-        var folderEventsListener = folderEventsListenerFactory.snapshotsDiffFolderEventsListener(at: application.snapshotsDiffFolder)
-        folderEventsListener.output = self
-        let snapshotTestImagesCollector = snapshotTestImagesCollectorFactory.applicationSnapshotTestImageCollector()
-        snapshotTestImagesCollector.output = self
-        runningAction = ApplicationSnapshotTestResultListenerAction(output: completion, folderEventsListener: folderEventsListener, snapshotTestImagesCollector: snapshotTestImagesCollector, application: application)
-        runningAction?.run()
+    func startListening(outputTo completion: @escaping ApplicationSnapshotTestResultListenerOutput) {
+        reset()
+        listeningOutput = completion
+        do {
+            try fileWatcher.start { [weak self] result in
+                self?.handleFileWatcherUpdate(result: result)
+            }
+        }
+        catch let error {
+            switch error {
+            case KZFileWatchers.FileWatcher.Error.alreadyStarted:
+                assertionFailure("Failed to start listening: Already started")
+            case let KZFileWatchers.FileWatcher.Error.failedToStart(reason):
+                print("Failed to start listening: \(reason)")
+            default:
+                print("Failed to start listening: Unknown reason")
+            }
+        }
     }
 
     func stopListening() {
-        resetRunningAction()
+        reset()
     }
 
     // MARK: - Helpers
 
-    private func resetRunningAction() {
-        runningAction?.stop()
-        runningAction = nil
-    }
-}
-
-// MARK: - ApplicationSnapshotTestImageCollectorOutput
-
-extension ApplicationSnapshotTestResultListener: ApplicationSnapshotTestImageCollectorOutput {
-    func applicationSnapshotTestResultCollector(_ collector: ApplicationSnapshotTestImageCollector, didCollect testResult: TestResult) {
-        runningAction?.output(testResult)
-    }
-}
-
-// MARK: - FolderEventsListenerOutput
-extension ApplicationSnapshotTestResultListener: FolderEventsListenerOutput {
-    func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
-        guard let eventPath = event.path, let snapshotTestImage = SnapshotTestImage(imagePath: eventPath) else {
-            print("Unexpected event in ApplicationSnapshotTestResultListener: \(event)")
+    private func handleFileWatcherUpdate(result: KZFileWatchers.FileWatcher.RefreshResult) {
+        guard let listeningOutput = listeningOutput else {
             return
         }
-        runningAction?.snapshotTestImagesCollector.collect(snapshotTestImage)
+        switch result {
+        case .noChanges:
+            return
+        case let .updated(data):
+            guard let text = String(data: data, encoding: .utf8), !text.isEmpty else {
+                assertionFailure("Invalid data reported by KZFileWatchers.FileWatcher.Local")
+                return
+            }
+            let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
+            let snapshotTestResults = logLines.flatMap { logLine -> SnapshotTestResult? in
+                switch logLine {
+                case .unknown:
+                    return nil
+                default:
+                    return snapshotTestResultFactory.createSnapshotTestResult(from: logLine)
+                }
+            }
+            snapshotTestResults.forEach { listeningOutput($0) }
+            readLinesNumber += logLines.count
+        }
+    }
+
+    private func reset() {
+        readLinesNumber = 0
+        listeningOutput = nil
+        try? fileWatcher.stop()
     }
 }

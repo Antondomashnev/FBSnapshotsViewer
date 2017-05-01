@@ -13,9 +13,9 @@ import Nimble
 
 class MenuPresenter_MockMenuWireframe: MenuWireframe {
     var showTestResultsModuleCalled: Bool = false
-    var showTestResultsModuleReceivedParameters: [TestResult] = []
+    var showTestResultsModuleReceivedParameters: [SnapshotTestResult] = []
 
-    override func showTestResultsModule(with testResults: [TestResult]) {
+    override func showTestResultsModule(with testResults: [SnapshotTestResult]) {
         showTestResultsModuleCalled = true
         showTestResultsModuleReceivedParameters = testResults
     }
@@ -23,19 +23,43 @@ class MenuPresenter_MockMenuWireframe: MenuWireframe {
 
 class MenuPresenterSpec: QuickSpec {
     override func spec() {
+        var xcodeDerivedDataFolder: XcodeDerivedDataFolder!
+        var application: ApplicationMock!
         var userInterface: MenuUserInterfaceMock!
         var presenter: MenuPresenter!
         var interactor: MenuInteractorInputMock!
         var wireframe: MenuPresenter_MockMenuWireframe!
 
         beforeEach {
+            xcodeDerivedDataFolder = XcodeDerivedDataFolder(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
+            application = ApplicationMock()
             wireframe = MenuPresenter_MockMenuWireframe()
             interactor = MenuInteractorInputMock()
-            presenter = MenuPresenter()
+            presenter = MenuPresenter(xcodeDerivedDataFolder: xcodeDerivedDataFolder, application: application)
             userInterface = MenuUserInterfaceMock()
             presenter.userInterface = userInterface
             presenter.interactor = interactor
             presenter.wireframe = wireframe
+        }
+
+        describe(".start") {
+            beforeEach {
+                presenter.start()
+            }
+
+            it("starts the Xcode builds listening") {
+                expect(interactor.startXcodeBuildsListeningReceivedXcodeDerivedDataFolder).to(equal(xcodeDerivedDataFolder))
+            }
+        }
+
+        describe(".quit") {
+            beforeEach {
+                presenter.quit()
+            }
+
+            it("terminates the app") {
+                expect(application.terminateCalled).to(beTrue())
+            }
         }
 
         describe(".showApplicationMenu") {
@@ -48,9 +72,20 @@ class MenuPresenterSpec: QuickSpec {
             }
         }
 
-        describe(".didFind") {
+        describe(".didFindNewTestLogFile") {
             beforeEach {
-                presenter.didFind(new: CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName"))
+                presenter.didFindNewTestLogFile(at: "/Users/antondomashnev/Library/Xcode/Logs/MyLog.log")
+            }
+
+            it("starts listening for snapshot tests results from the given test log") {
+                expect(interactor.startSnapshotTestResultListeningCalled).to(beTrue())
+                expect(interactor.startSnapshotTestResultListeningReceivedPath).to(equal("/Users/antondomashnev/Library/Xcode/Logs/MyLog.log"))
+            }
+        }
+
+        describe(".didFindNewTestResult") {
+            beforeEach {
+                presenter.didFindNewTestResult(SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath"))
             }
 
             it("sets that new test results are available in user interface") {
@@ -61,10 +96,10 @@ class MenuPresenterSpec: QuickSpec {
 
         describe(".showTestResults") {
             context("when interactor has test results") {
-                var foundTestResults: [TestResult] = []
+                var foundTestResults: [SnapshotTestResult] = []
 
                 beforeEach {
-                    foundTestResults = [CompletedTestResult(referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", testName: "testName")]
+                    foundTestResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath")]
                     interactor.foundTestResults = foundTestResults
                     presenter.showTestResults()
                 }
@@ -75,11 +110,9 @@ class MenuPresenterSpec: QuickSpec {
                 }
 
                 it("shows test results") {
+                    let expectedPaameter = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath")
                     expect(wireframe.showTestResultsModuleCalled).to(beTrue())
-                    expect(wireframe.showTestResultsModuleReceivedParameters[0].diffImagePath).to(equal("diffImagePath"))
-                    expect(wireframe.showTestResultsModuleReceivedParameters[0].referenceImagePath).to(equal("referenceImagePath"))
-                    expect(wireframe.showTestResultsModuleReceivedParameters[0].failedImagePath).to(equal("failedImagePath"))
-                    expect(wireframe.showTestResultsModuleReceivedParameters[0].testName).to(equal("testName"))
+                    expect(wireframe.showTestResultsModuleReceivedParameters[0]).to(equal(expectedPaameter))
                 }
             }
 

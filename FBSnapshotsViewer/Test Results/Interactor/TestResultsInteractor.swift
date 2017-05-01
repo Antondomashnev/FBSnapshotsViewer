@@ -9,9 +9,9 @@
 import Cocoa
 
 class TestResultsInteractor: TestResultsInteractorInput {
-    let testResults: [TestResult]
+    let testResults: [SnapshotTestResult]
 
-    init(testResults: [TestResult]) {
+    init(testResults: [SnapshotTestResult]) {
         self.testResults = testResults
     }
 }

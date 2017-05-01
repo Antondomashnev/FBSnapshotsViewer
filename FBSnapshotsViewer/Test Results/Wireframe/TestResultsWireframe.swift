@@ -10,7 +10,7 @@ import Cocoa
 
 final class TestResultsWireframe {
 
-    func show(relativeTo rect: NSRect, of view: NSView, with testResults: [TestResult]) {
+    func show(relativeTo rect: NSRect, of view: NSView, with testResults: [SnapshotTestResult]) {
         let userInterface = StoryboardScene.Main.instantiateTestResultsController()
         let interactor = TestResultsInteractor(testResults: testResults)
         let presenter = TestResultsPresenter()

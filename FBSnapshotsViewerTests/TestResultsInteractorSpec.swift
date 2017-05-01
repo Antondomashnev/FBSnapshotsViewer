@@ -14,25 +14,18 @@ import Nimble
 class TestResultsInteractorSpec: QuickSpec {
     override func spec() {
         var interactor: TestResultsInteractor!
-        var testResults: [TestResult] = []
+        var testResults: [SnapshotTestResult] = []
 
         beforeEach {
-            let testResult1 = CompletedTestResult(referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", testName: "testName1")
-            let testResult2 = CompletedTestResult(referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", testName: "testName2")
+            let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1")
+            let testResult2 = SnapshotTestResult.recorded(testName: "testName2", referenceImagePath: "referenceImagePath2")
             testResults = [testResult1, testResult2]
             interactor = TestResultsInteractor(testResults: testResults)
         }
 
         describe(".testResults") {
             it("returns initialized test results") {
-                expect(interactor.testResults[0].referenceImagePath).to(equal("referenceImagePath1"))
-                expect(interactor.testResults[0].diffImagePath).to(equal("diffImagePath1"))
-                expect(interactor.testResults[0].failedImagePath).to(equal("failedImagePath1"))
-                expect(interactor.testResults[0].testName).to(equal("testName1"))
-                expect(interactor.testResults[1].referenceImagePath).to(equal("referenceImagePath2"))
-                expect(interactor.testResults[1].diffImagePath).to(equal("diffImagePath2"))
-                expect(interactor.testResults[1].failedImagePath).to(equal("failedImagePath2"))
-                expect(interactor.testResults[1].testName).to(equal("testName2"))
+                expect(interactor.testResults.count).to(equal(2))
             }
         }
     }

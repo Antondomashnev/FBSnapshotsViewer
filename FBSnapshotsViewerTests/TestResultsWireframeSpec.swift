@@ -20,7 +20,7 @@ class TestResultsWireframeSpec: QuickSpec {
         }
 
         describe(".show") {
-            let testResults: [TestResult] = []
+            let testResults: [SnapshotTestResult] = []
             var rect: NSRect!
             var view: NSView!
 

@@ -8,23 +8,31 @@
 
 import Foundation
 
-struct TestResultDisplayInfo {
+struct TestResultDisplayInfo: AutoEquatable {
     let referenceImageURL: URL
-    let diffImageURL: URL
-    let failedImageURL: URL
+    let diffImageURL: URL?
+    let failedImageURL: URL?
     let testName: String
 
-    init(referenceImageURL: URL, diffImageURL: URL, failedImageURL: URL, testName: String) {
+    init(testName: String, referenceImageURL: URL, diffImageURL: URL? = nil, failedImageURL: URL? = nil) {
         self.referenceImageURL = referenceImageURL
         self.diffImageURL = diffImageURL
         self.failedImageURL = failedImageURL
         self.testName = testName
     }
 
-    init(testResult: TestResult) {
-        testName = testResult.testName
-        referenceImageURL = URL(fileURLWithPath: testResult.referenceImagePath)
-        diffImageURL = URL(fileURLWithPath: testResult.diffImagePath)
-        failedImageURL = URL(fileURLWithPath: testResult.failedImagePath)
+    init(testResult: SnapshotTestResult) {
+        switch testResult {
+        case let .recorded(testName, referenceImagePath):
+            self.testName = testName
+            self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)
+            self.diffImageURL = nil
+            self.failedImageURL = nil
+        case let .failed(testName, referenceImagePath, diffImagePath, failedImagePath):
+            self.testName = testName
+            self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)
+            self.diffImageURL = URL(fileURLWithPath: diffImagePath)
+            self.failedImageURL = URL(fileURLWithPath: failedImagePath)
+        }
     }
 }

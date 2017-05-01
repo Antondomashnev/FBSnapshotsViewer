@@ -50,7 +50,7 @@ class TestResultsCollectionViewOutletsSpec: QuickSpec {
             var testResults: [TestResultDisplayInfo] = []
 
             beforeEach {
-                let testResult = TestResultDisplayInfo(referenceImageURL: URL(fileURLWithPath: "referenceImagePath.png"), diffImageURL: URL(fileURLWithPath: "diffImagePath.png"), failedImageURL: URL(fileURLWithPath: "failedImagePath.png"), testName: "testName")
+                let testResult = TestResultDisplayInfo(testName: "testName", referenceImageURL: URL(fileURLWithPath: "referenceImagePath.png"), diffImageURL: URL(fileURLWithPath: "diffImagePath.png"), failedImageURL: URL(fileURLWithPath: "failedImagePath.png"))
                 testResults = [testResult]
                 collectionViewOutlets.testResults = testResults
             }

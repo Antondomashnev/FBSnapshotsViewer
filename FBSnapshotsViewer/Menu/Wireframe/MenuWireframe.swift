@@ -17,9 +17,8 @@ class MenuWireframe {
 
     func instantinateMenu(in statusBar: NSStatusBar) -> MenuUserInterface {
         let menuController = MenuController(statusBar: statusBar)
-        let interactor = MenuInteractor(snaphotsDiffFolderNotificationListener: SnapshotsViewerApplicationRunNotificationListener(),
-                                        applicationTemporaryFolderFinder: ApplicationTemporaryFolderFinder(),
-                                        applicationSnapshotTestResultListener: ApplicationSnapshotTestResultListener())
+        let interactor = MenuInteractor(applicationSnapshotTestResultListenerFactory: ApplicationSnapshotTestResultListenerFactory(),
+                                        applicationTestLogFilesListener: ApplicationTestLogFilesListener())
         let presenter = MenuPresenter()
         menuController.eventHandler = presenter
         presenter.interactor = interactor
@@ -27,10 +26,11 @@ class MenuWireframe {
         presenter.userInterface = menuController
         presenter.wireframe = self
         userInterface = menuController
+        presenter.start()
         return menuController
     }
 
-    func showTestResultsModule(with testResults: [TestResult]) {
+    func showTestResultsModule(with testResults: [SnapshotTestResult]) {
         guard let presentationView = userInterface?.statusItem.button else {
             return
         }

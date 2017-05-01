@@ -23,40 +23,36 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
 }
 
 // MARK: - AutoEquatable for classes, protocols, structs
-// MARK: - Application AutoEquatable
-extension Application: Equatable {} 
-internal func == (lhs: Application, rhs: Application) -> Bool {
-    guard lhs.snapshotsDiffFolder == rhs.snapshotsDiffFolder else { return false }
-    return true
-}
-// MARK: - CompletedTestResult AutoEquatable
-extension CompletedTestResult: Equatable {} 
-internal func == (lhs: CompletedTestResult, rhs: CompletedTestResult) -> Bool {
-    guard lhs.referenceImagePath == rhs.referenceImagePath else { return false }
-    guard lhs.diffImagePath == rhs.diffImagePath else { return false }
-    guard lhs.failedImagePath == rhs.failedImagePath else { return false }
+// MARK: - TestResultDisplayInfo AutoEquatable
+extension TestResultDisplayInfo: Equatable {} 
+internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Bool {
+    guard lhs.referenceImageURL == rhs.referenceImageURL else { return false }
+    guard compareOptionals(lhs: lhs.diffImageURL, rhs: rhs.diffImageURL, compare: ==) else { return false }
+    guard compareOptionals(lhs: lhs.failedImageURL, rhs: rhs.failedImageURL, compare: ==) else { return false }
     guard lhs.testName == rhs.testName else { return false }
     return true
 }
-// MARK: - PendingTestResult AutoEquatable
-extension PendingTestResult: Equatable {} 
-internal func == (lhs: PendingTestResult, rhs: PendingTestResult) -> Bool {
-    guard lhs.referenceImagePath == rhs.referenceImagePath else { return false }
-    guard lhs.diffImagePath == rhs.diffImagePath else { return false }
-    guard lhs.failedImagePath == rhs.failedImagePath else { return false }
-    guard lhs.testName == rhs.testName else { return false }
-    return true
-}
-// MARK: - TestResult AutoEquatable
-internal func == (lhs: TestResult, rhs: TestResult) -> Bool {
-    guard lhs.referenceImagePath == rhs.referenceImagePath else { return false }
-    guard lhs.diffImagePath == rhs.diffImagePath else { return false }
-    guard lhs.failedImagePath == rhs.failedImagePath else { return false }
-    guard lhs.testName == rhs.testName else { return false }
+// MARK: - XcodeDerivedDataFolder AutoEquatable
+extension XcodeDerivedDataFolder: Equatable {} 
+internal func == (lhs: XcodeDerivedDataFolder, rhs: XcodeDerivedDataFolder) -> Bool {
+    guard lhs.path == rhs.path else { return false }
     return true
 }
 
 // MARK: - AutoEquatable for Enums
+// MARK: - ApplicationLogLine AutoEquatable
+extension ApplicationLogLine: Equatable {}
+internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
+    switch (lhs, rhs) {
+    case (.kaleidoscopeCommandMessage(let lhs), .kaleidoscopeCommandMessage(let rhs)): 
+        return lhs == rhs
+    case (.referenceImageSavedMessage(let lhs), .referenceImageSavedMessage(let rhs)): 
+        return lhs == rhs
+    case (.unknown, .unknown): 
+         return true 
+    default: return false
+    }
+}
 // MARK: - FolderEventFilter AutoEquatable
 extension FolderEventFilter: Equatable {}
 internal func == (lhs: FolderEventFilter, rhs: FolderEventFilter) -> Bool {
@@ -74,16 +70,20 @@ internal func == (lhs: FolderEventFilter, rhs: FolderEventFilter) -> Bool {
     default: return false
     }
 }
-// MARK: - SnapshotTestImage AutoEquatable
-extension SnapshotTestImage: Equatable {}
-internal func == (lhs: SnapshotTestImage, rhs: SnapshotTestImage) -> Bool {
+// MARK: - SnapshotTestResult AutoEquatable
+extension SnapshotTestResult: Equatable {}
+internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
     switch (lhs, rhs) {
-    case (.diff(let lhs), .diff(let rhs)): 
-        return lhs == rhs
-    case (.reference(let lhs), .reference(let rhs)): 
-        return lhs == rhs
+    case (.recorded(let lhs), .recorded(let rhs)): 
+        if lhs.testName != rhs.testName { return false }
+        if lhs.referenceImagePath != rhs.referenceImagePath { return false }
+        return true
     case (.failed(let lhs), .failed(let rhs)): 
-        return lhs == rhs
+        if lhs.testName != rhs.testName { return false }
+        if lhs.referenceImagePath != rhs.referenceImagePath { return false }
+        if lhs.diffImagePath != rhs.diffImagePath { return false }
+        if lhs.failedImagePath != rhs.failedImagePath { return false }
+        return true
     default: return false
     }
 }

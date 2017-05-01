@@ -18,4 +18,8 @@ class FolderEventsListenerFactory {
     func iOSSimulatorApplicationsFolderEventsListener(at simulatorPath: String) -> FolderEventsListener {
         return NonRecursiveFolderEventsListener(folderPath: simulatorPath, filter: FolderEventFilter.known & FolderEventFilter.type(.folder))
     }
+
+    func applicationTestLogsEventsListener(at xcodeDerivedDataFolderPath: String) -> FolderEventsListener {
+        return NonRecursiveFolderEventsListener(folderPath: xcodeDerivedDataFolderPath, filter: FolderEventFilter.known & FolderEventFilter.type(.file) & FolderEventFilter.pathRegex("/Logs/Test/[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}/.+log$"))
+    }
 }
