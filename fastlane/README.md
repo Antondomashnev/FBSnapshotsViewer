@@ -34,16 +34,11 @@ xcode-select --install
 fastlane osx sanity_check
 ```
 Sanity check for the fastfile issues
-### osx build_run_phase_script
-```
-fastlane osx build_run_phase_script
-```
-Create a new build of FBSnapshotsViewerRunPhaseScript
 ### osx build_app
 ```
 fastlane osx build_app
 ```
-Create a new build of FBSnapshotsViewerRunPhaseScript
+Create a new build of FBSnapshotsViewer
 ### osx test
 ```
 fastlane osx test
@@ -55,7 +50,7 @@ fastlane osx release
 ```
 Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk
 
-Before doing so don't forget to move the next version of Changelog to released as well as update FBSnapshotsViewerRunPhaseScript.podspec
+Before doing so don't forget to move the next version of Changelog to released
 
 ----
 
