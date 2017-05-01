@@ -16,20 +16,7 @@ platform :osx do
     puts "Compiling Fastfile to check if the syntax if valid or not"
   end
 
-  desc "Create a new build of FBSnapshotsViewerRunPhaseScript"
-  lane :build_run_phase_script do
-    puts "Building run phase script into /bin folder..."
-    gym(
-      workspace: "FBSnapshotsViewer.xcworkspace",
-      scheme: "FBSnapshotsViewerRunPhaseScript",
-      configuration: "Release",
-      derived_data_path: "#{ENV["BUILD_DIR"]}/tmp/",
-      output_directory: "bin/",
-      clean: true
-    )
-  end
-
-  desc "Create a new build of FBSnapshotsViewerRunPhaseScript"
+  desc "Create a new build of FBSnapshotsViewer"
   lane :build_app do
     puts "Building an app into /bin folder..."
     gym(
@@ -54,14 +41,13 @@ platform :osx do
   end
 
   desc "Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk"
-  desc "Before doing so don't forget to move the next version of Changelog to released as well as update FBSnapshotsViewerRunPhaseScript.podspec"
+  desc "Before doing so don't forget to move the next version of Changelog to released"
   lane :release do
     ensure_git_status_clean
     test
 
-    release_version = read_podspec_version
+    release_version = prompt(text: "Version number: ")
 
-    build_run_phase_script
     build_app
 
     git_add_or_update_tag(
@@ -75,11 +61,6 @@ platform :osx do
       tag_name: release_version,
       upload_assets: github_create_release_assets(release_version: release_version),
       api_token: ENV["FB_SNAPSHOTS_VIEWER_GITHUB_API_TOKEN"]
-    )
-
-    pod_push(
-      path: "./FBSnapshotsViewerRunPhaseScript.podspec",
-      allow_warnings: true
     )
   end
 
@@ -155,17 +136,12 @@ platform :osx do
     sh("git push #{remote} --tags")
   end
 
-  desc "Read the FBSnapshotsViewerRunPhaseScript.podspec version and return it"
-  private_lane :read_podspec_version do
-    read_podspec(path: "./FBSnapshotsViewerRunPhaseScript.podspec")["version"]
-  end
-
   desc "Create assets to be uploaded as a github release"
   desc "####Options"
   desc "* **`release_version`** - releave version to be used as a part of name of asset"
   private_lane :github_create_release_assets do |options|
     release_version = options[:release_version]
-    [github_create_app_release_assets(release_version: release_version), github_create_run_phase_script_release_assets(release_version: release_version)]
+    [github_create_app_release_assets(release_version: release_version)]
   end
 
   desc "Create app asset to be uploaded as a github release"
@@ -184,23 +160,6 @@ platform :osx do
       File.rename(old_name, new_name)
     end
     app_path
-  end
-
-  desc "Create run phase script asset to be uploaded as a github release"
-  desc "####Options"
-  desc "* **`release_version`** - releave version to be used as a part of name of asset"
-  desc "####Return"
-  desc "Path to the asset"
-  private_lane :github_create_run_phase_script_release_assets do |options|
-    release_version = options[:release_version]
-    run_phase_script_path = "./bin/FBSnapshotsViewerRunPhaseScript"
-    run_phase_script_zip_name = "FBSnapshotsViewerRunPhaseScript-#{release_version}.zip"
-    run_phase_script_zip_path = "./bin/#{run_phase_script_zip_name}"
-    zip(
-      path: run_phase_script_path,
-      output_path: run_phase_script_zip_name
-    )
-    run_phase_script_zip_path
   end
 
   desc "Checks if the given 'branch' exists on the 'remote'."
