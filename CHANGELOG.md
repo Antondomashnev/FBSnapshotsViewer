@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.3.0 (Next)
+
+* Your contribution here.
+
 ### 0.2.0
 
 * [#17](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/17): Remove run script leftovers - [@antondomashnev](https://github.com/antondomashnev).
