@@ -573,7 +573,7 @@
 					6D4724B81E3E9F2300F38161 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = XZ2J8VAMV6;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					6D4724C91E3E9F2400F38161 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -949,12 +949,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = XZ2J8VAMV6;
 				INFOPLIST_FILE = FBSnapshotsViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antondomashnev.FBSnapshotsViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e6e7289b-4d86-4caf-af96-05a893733f65";
+				PROVISIONING_PROFILE_SPECIFIER = mac_development_com.antondomashnev.FBSnapshotsView;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -965,12 +968,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = XZ2J8VAMV6;
 				INFOPLIST_FILE = FBSnapshotsViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antondomashnev.FBSnapshotsViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1554e469-0170-445a-8d37-edc1e783edf6";
+				PROVISIONING_PROFILE_SPECIFIER = "mac_production_ com.antondomashnev.FBSnapshotsView";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
