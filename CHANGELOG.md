@@ -3,6 +3,7 @@
 ### 0.3.0 (Next)
 
 * Your contribution here.
+* [#24](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/24): Add black menubar support - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.2.0
 
