@@ -1,4 +1,9 @@
-PrimaryText   : 0x212121DD
-SecondaryText : 0x7575758A
-PrimaryLight  : 0xCFD8DCFF
-Divider       : 0xBDBDBDFF
+PrimaryText.LightMode   : 0x212121DD
+SecondaryText.LightMode : 0x7575758A
+PrimaryLight.LightMode  : 0xCFD8DCFF
+Divider.LightMode       : 0xBDBDBDFF
+
+PrimaryText.DarkMode    : 0xFFFFFFDD
+SecondaryText.DarkMode  : 0xFFFFFF8A
+PrimaryLight.DarkMode   : 0xECEFF1FF
+Divider.DarkMode        : 0xF5F5F5FF

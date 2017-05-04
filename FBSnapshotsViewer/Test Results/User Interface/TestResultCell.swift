@@ -22,35 +22,57 @@ class TestResultCell: NSCollectionViewItem {
     @IBOutlet private weak var diffSeparatorView: NSView!
     @IBOutlet private weak var failedSeparatorView: NSView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        view.layer?.backgroundColor = NSColor(named: .primaryLight).cgColor
-        configureTitleLabelsColorScheme()
-        configureSeparatorsColorScheme()
-    }
-
     // MARK: - Helpers
 
-    private func configureSeparatorsColorScheme() {
-        referenceSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
-        diffSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
-        failedSeparatorView.layer?.backgroundColor = NSColor(named: .divider).cgColor
+    private func configureViewBackgroundColor(for appleInterfaceMode: AppleInterfaceMode) {
+        switch appleInterfaceMode {
+        case .dark:
+            view.layer?.backgroundColor = NSColor(named: .primaryLightDarkMode).cgColor
+        case .light:
+            view.layer?.backgroundColor = NSColor(named: .primaryLightLightMode).cgColor
+        }
     }
 
-    private func configureTitleLabelsColorScheme() {
-        testNameLabel.textColor = NSColor(named: .primaryText)
+    private func configureSeparatorsColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
+        let dividerColor: NSColor
+        switch appleInterfaceMode {
+        case .dark:
+            dividerColor = NSColor(named: .dividerDarkMode)
+        case .light:
+            dividerColor = NSColor(named: .dividerLightMode)
+        }
+        referenceSeparatorView.layer?.backgroundColor = dividerColor.cgColor
+        diffSeparatorView.layer?.backgroundColor = dividerColor.cgColor
+        failedSeparatorView.layer?.backgroundColor = dividerColor.cgColor
+    }
+
+    private func configureTitleLabelsColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
+        let primaryTextColor: NSColor
+        let secondaryTextColor: NSColor
+        switch appleInterfaceMode {
+        case .dark:
+            primaryTextColor = NSColor(named: .primaryTextDarkMode)
+            secondaryTextColor = NSColor(named: .secondaryTextDarkMode)
+        case .light:
+            primaryTextColor = NSColor(named: .primaryTextLightMode)
+            secondaryTextColor = NSColor(named: .secondaryTextLightMode)
+        }
+        testNameLabel.textColor = primaryTextColor
+        referenceImageTitleLabel.textColor = secondaryTextColor
+        diffImageTitleLabel.textColor = secondaryTextColor
+        failedImageTitleLabel.textColor = secondaryTextColor
+    }
+
+    private func configureTitleLabelsBackgroundColorScheme() {
         testNameLabel.layer?.backgroundColor = NSColor.clear.cgColor
         referenceImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
         diffImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
         failedImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
-        referenceImageTitleLabel.textColor = NSColor(named: .secondaryText)
-        diffImageTitleLabel.textColor = NSColor(named: .secondaryText)
-        failedImageTitleLabel.textColor = NSColor(named: .secondaryText)
     }
 
     // MARK: - Interface
 
-    func configure(with testResult: TestResultDisplayInfo) {
+    func configure(with testResult: TestResultDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode()) {
         if let referenceImage = NSImage(contentsOf: testResult.referenceImageURL) {
             referenceImageView.image = referenceImage
         }
@@ -61,5 +83,8 @@ class TestResultCell: NSCollectionViewItem {
             failedImageView.image = failedImage
         }
         testNameLabel.stringValue = testResult.testName
+        configureTitleLabelsColorScheme(for: appleInterfaceMode)
+        configureSeparatorsColorScheme(for: appleInterfaceMode)
+        configureViewBackgroundColor(for: appleInterfaceMode)
     }
 }
