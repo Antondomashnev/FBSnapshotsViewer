@@ -24,6 +24,8 @@
 		6D33A9D41EB4DAF60089AEDD /* AutoHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D33A9D31EB4DAF60089AEDD /* AutoHashable.swift */; };
 		6D33A9D61EB4DB650089AEDD /* AutoHashable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D33A9D51EB4DB650089AEDD /* AutoHashable.generated.swift */; };
 		6D33A9D81EB4E0AD0089AEDD /* ApplicationLogLineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D33A9D71EB4E0AD0089AEDD /* ApplicationLogLineSpec.swift */; };
+		6D342CE01EBBDF80006EEBEC /* AppleInterfaceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D342CDF1EBBDF80006EEBEC /* AppleInterfaceMode.swift */; };
+		6D342CE21EBBDFDF006EEBEC /* AppleInterfaceModeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D342CE11EBBDFDF006EEBEC /* AppleInterfaceModeSpec.swift */; };
 		6D3BA5631E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BA5621E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift */; };
 		6D3BA5651E6E07AA00CAD4EE /* MenuPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BA5641E6E07AA00CAD4EE /* MenuPresenterSpec.swift */; };
 		6D3BA56C1E6E0D2200CAD4EE /* AutoMockable.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BA56B1E6E0D2200CAD4EE /* AutoMockable.stencil */; };
@@ -118,6 +120,8 @@
 		6D33A9D31EB4DAF60089AEDD /* AutoHashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoHashable.swift; sourceTree = "<group>"; };
 		6D33A9D51EB4DB650089AEDD /* AutoHashable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoHashable.generated.swift; sourceTree = "<group>"; };
 		6D33A9D71EB4E0AD0089AEDD /* ApplicationLogLineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogLineSpec.swift; sourceTree = "<group>"; };
+		6D342CDF1EBBDF80006EEBEC /* AppleInterfaceMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleInterfaceMode.swift; sourceTree = "<group>"; };
+		6D342CE11EBBDFDF006EEBEC /* AppleInterfaceModeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleInterfaceModeSpec.swift; sourceTree = "<group>"; };
 		6D3BA5621E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuStatusItemMenuSpec.swift; sourceTree = "<group>"; };
 		6D3BA5641E6E07AA00CAD4EE /* MenuPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuPresenterSpec.swift; sourceTree = "<group>"; };
 		6D3BA56B1E6E0D2200CAD4EE /* AutoMockable.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AutoMockable.stencil; sourceTree = "<group>"; };
@@ -318,6 +322,7 @@
 				6D42C93F1EB27B64003744BF /* SnapshotTestResultFactorySpec.swift */,
 				6D33A9D11EB4D38D0089AEDD /* ApplicationSnapshotTestResultListenerSpec.swift */,
 				6D33A9D71EB4E0AD0089AEDD /* ApplicationLogLineSpec.swift */,
+				6D342CE11EBBDFDF006EEBEC /* AppleInterfaceModeSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -449,6 +454,7 @@
 				6DE347801E47DB19004147DF /* SnapshotTestResult.swift */,
 				6DBD6C4F1EACF1B0006F14DC /* XcodeDerivedDataFolder.swift */,
 				6D7D78FF1EAFF2A80001C1A0 /* ApplicationLogLine.swift */,
+				6D342CDF1EBBDF80006EEBEC /* AppleInterfaceMode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -760,6 +766,7 @@
 				6D5F913A1E4F6D3500C6E5BF /* RecursiveFolderEventsListener.swift in Sources */,
 				6D5BB4C61E5915A10006BAE1 /* FolderEventFilter.swift in Sources */,
 				6D21F74A1E6CC17000BFCE4C /* MenuActions.swift in Sources */,
+				6D342CE01EBBDF80006EEBEC /* AppleInterfaceMode.swift in Sources */,
 				6D7D79021EB081F50001C1A0 /* ApplicationSnapshotTestResultListenerFactory.swift in Sources */,
 				6D8362781E79422D000794AE /* AutoMockable.swift in Sources */,
 				6DDFBD8D1E63268300DFC0A4 /* FolderEvent.swift in Sources */,
@@ -817,6 +824,7 @@
 				6DE3475E1E476F8A004147DF /* FolderEventSpec.swift in Sources */,
 				6D3BA5651E6E07AA00CAD4EE /* MenuPresenterSpec.swift in Sources */,
 				6D42C93E1EB275B6003744BF /* MenuWireframeSpec.swift in Sources */,
+				6D342CE21EBBDFDF006EEBEC /* AppleInterfaceModeSpec.swift in Sources */,
 				6D12F4721E81758500AA4727 /* TestResultsControllerSpec.swift in Sources */,
 				6D33A9D21EB4D38D0089AEDD /* ApplicationSnapshotTestResultListenerSpec.swift in Sources */,
 				6D076B791E7F2FB5001FDA14 /* TestResultsInteractorSpec.swift in Sources */,
@@ -954,6 +962,7 @@
 				DEVELOPMENT_TEAM = XZ2J8VAMV6;
 				INFOPLIST_FILE = FBSnapshotsViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antondomashnev.FBSnapshotsViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e6e7289b-4d86-4caf-af96-05a893733f65";
@@ -973,6 +982,7 @@
 				DEVELOPMENT_TEAM = XZ2J8VAMV6;
 				INFOPLIST_FILE = FBSnapshotsViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antondomashnev.FBSnapshotsViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1554e469-0170-445a-8d37-edc1e783edf6";
