@@ -52,7 +52,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
             }
         }
 
-        describe("isAvailable") {
+        describe(".isAvailable") {
             context("when application finder finds the app with bundleID") {
                 beforeEach {
                     osxApplicationFinder.applicationURL = URL(fileURLWithPath: "foo/bar.app")
@@ -74,7 +74,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
             }
         }
 
-        describe("view") {
+        describe(".view") {
             var testResult: SnapshotTestResult!
 
             context("for recorded snapshot test result") {
