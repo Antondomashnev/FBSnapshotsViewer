@@ -40,6 +40,17 @@ internal func == (lhs: XcodeDerivedDataFolder, rhs: XcodeDerivedDataFolder) -> B
 }
 
 // MARK: - AutoEquatable for Enums
+// MARK: - AppleInterfaceMode AutoEquatable
+extension AppleInterfaceMode: Equatable {}
+internal func == (lhs: AppleInterfaceMode, rhs: AppleInterfaceMode) -> Bool {
+    switch (lhs, rhs) {
+    case (.light, .light): 
+         return true 
+    case (.dark, .dark): 
+         return true 
+    default: return false
+    }
+}
 // MARK: - ApplicationLogLine AutoEquatable
 extension ApplicationLogLine: Equatable {}
 internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {

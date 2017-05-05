@@ -1,5 +1,10 @@
 ## Changelog
 
+### 0.3.0 (Next)
+
+* Your contribution here
+* [#28](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/28): Update UI color scheme for Apple's dark interface mode - [@antondomashnev](https://github.com/antondomashnev).
+
 ### 0.2.1 (03.05.2017)
 
 * [#24](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/24): Add black menubar support - [@antondomashnev](https://github.com/antondomashnev).
