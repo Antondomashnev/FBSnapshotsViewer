@@ -52,6 +52,30 @@ class KaleidoscopeViewerSpec: QuickSpec {
             }
         }
 
+        describe(".canView") {
+            var testResult: SnapshotTestResult!
+
+            context("for recorded snapshot test result") {
+                beforeEach {
+                    testResult = SnapshotTestResult.recorded(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png")
+                }
+
+                it("returns false") {
+                    expect(KaleidoscopeViewer.canView(snapshotTestResult: testResult)).to(beFalse())
+                }
+            }
+
+            context("for failed snapshot test result") {
+                beforeEach {
+                    testResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", diffImagePath: "foo/bar/diffImage.png", failedImagePath: "foo/bar/failedImage.png")
+                }
+
+                it("returns true") {
+                    expect(KaleidoscopeViewer.canView(snapshotTestResult: testResult)).to(beTrue())
+                }
+            }
+        }
+
         describe(".isAvailable") {
             context("when application finder finds the app with bundleID") {
                 beforeEach {

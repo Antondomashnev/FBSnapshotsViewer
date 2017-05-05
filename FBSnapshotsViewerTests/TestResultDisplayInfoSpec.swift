@@ -15,6 +15,9 @@ class TestResultDisplayInfoSpec: QuickSpec {
     override func spec() {
         describe(".initWithTestInfo") {
             var testResult: SnapshotTestResult!
+//            var kaleidoscopeViewer: 
+//            
+//            context("")
 
             context("when failed test result") {
                 beforeEach {

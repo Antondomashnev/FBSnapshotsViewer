@@ -16,7 +16,7 @@
 {{ method.shortName }}ReturnValue
 {% endmacro %}
 
-{% for type in types.based.AutoMockable %}{% if type.kind == 'protocol' %}
+{% for type in types.based.AutoMockable %}{% if type.kind == 'protocol' and not type.isExtension %}
 {% if not type.name == "AutoMockable" %}
 class {{ type.name }}Mock: {{ type.name }} {
 

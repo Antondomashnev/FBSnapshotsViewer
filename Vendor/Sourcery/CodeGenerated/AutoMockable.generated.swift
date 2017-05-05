@@ -22,6 +22,79 @@ terminateCalled
         terminateReceivedSender = sender
     }
 }
+class ExternalViewerMock: ExternalViewer {
+
+    var name: String
+    var bundleID: String
+
+    //MARK: - isAvailable
+
+    var 
+isAvailableCalled
+ = false
+    var isAvailableReceivedOsxApplicationFinder: OSXApplicationFinder?
+    var 
+isAvailableReturnValue
+: Bool!
+
+    func isAvailable(osxApplicationFinder: OSXApplicationFinder) -> Bool {
+
+isAvailableCalled
+ = true
+        isAvailableReceivedOsxApplicationFinder = osxApplicationFinder
+        return 
+isAvailableReturnValue
+    }
+    //MARK: - canView
+
+    var 
+canViewCalled
+ = false
+    var canViewReceivedSnapshotTestResult: SnapshotTestResult?
+    var 
+canViewReturnValue
+: Bool!
+
+    func canView(snapshotTestResult: SnapshotTestResult) -> Bool {
+
+canViewCalled
+ = true
+        canViewReceivedSnapshotTestResult = snapshotTestResult
+        return 
+canViewReturnValue
+    }
+    //MARK: - view
+
+    var 
+viewCalled
+ = false
+    var viewReceivedArguments: (snapshotTestResult: SnapshotTestResult, processLauncher: ProcessLauncher)?
+
+    func view(snapshotTestResult: SnapshotTestResult, using processLauncher: ProcessLauncher) {
+
+viewCalled
+ = true
+        viewReceivedArguments = (snapshotTestResult: snapshotTestResult, processLauncher: processLauncher)
+    }
+    //MARK: - isAvailable
+
+    var 
+isAvailableCalled
+ = false
+    var isAvailableReceivedOsxApplicationFinder: OSXApplicationFinder?
+    var 
+isAvailableReturnValue
+: Bool!
+
+    func isAvailable(osxApplicationFinder: OSXApplicationFinder = OSXApplicationFinder()) -> Bool {
+
+isAvailableCalled
+ = true
+        isAvailableReceivedOsxApplicationFinder = osxApplicationFinder
+        return 
+isAvailableReturnValue
+    }
+}
 class FolderEventsListenerMock: FolderEventsListener {
 
     var output: FolderEventsListenerOutput?

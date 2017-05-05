@@ -8,11 +8,12 @@
 
 import Foundation
 
-protocol ExternalViewer {
+protocol ExternalViewer: AutoMockable {
     static var name: String { get }
     static var bundleID: String { get }
 
     static func isAvailable(osxApplicationFinder: OSXApplicationFinder) -> Bool
+    static func canView(snapshotTestResult: SnapshotTestResult) -> Bool
     static func view(snapshotTestResult: SnapshotTestResult, using processLauncher: ProcessLauncher)
 }
 
