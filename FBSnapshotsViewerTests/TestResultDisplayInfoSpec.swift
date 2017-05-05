@@ -27,6 +27,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.failedImageURL).to(equal(URL(fileURLWithPath: "failedImagePath.png")))
                     expect(displayInfo.testName).to(equal("testFailed"))
+                    expect(displayInfo.testResult).to(equal(testResult))
                 }
             }
 
@@ -40,16 +41,6 @@ class TestResultDisplayInfoSpec: QuickSpec {
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.testName).to(equal("testRecord"))
                 }
-            }
-        }
-
-        describe(".init") {
-            it("initializes object correctly") {
-                let displayInfo = TestResultDisplayInfo(testName: "testName", referenceImageURL: URL(fileURLWithPath: "referenceImagePath.png"), diffImageURL: URL(fileURLWithPath: "diffImagePath.png"), failedImageURL: URL(fileURLWithPath: "failedImagePath.png"))
-                expect(displayInfo.diffImageURL).to(equal(URL(fileURLWithPath: "diffImagePath.png")))
-                expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
-                expect(displayInfo.failedImageURL).to(equal(URL(fileURLWithPath: "failedImagePath.png")))
-                expect(displayInfo.testName).to(equal("testName"))
             }
         }
     }
