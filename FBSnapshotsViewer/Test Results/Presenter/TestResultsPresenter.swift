@@ -21,4 +21,8 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         }
         userInterface?.show(testResults: testResults.map { TestResultDisplayInfo(testResult: $0) })
     }
+
+    func openInKaleidoscope(testResultDisplayInfo: TestResultDisplayInfo) {
+        interactor?.openInKaleidoscope(testResult: testResultDisplayInfo.testResult)
+    }
 }

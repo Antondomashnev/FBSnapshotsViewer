@@ -24,6 +24,18 @@ extension Color {
 
 // swiftlint:disable type_body_length
 enum ColorName {
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#fafafa"></span>
+    /// Alpha: 86% <br/> (0xfafafadd)
+    case buttonBackgroundDarkMode
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#212121"></span>
+    /// Alpha: 86% <br/> (0x212121dd)
+    case buttonBackgroundLightMode
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
+    /// Alpha: 86% <br/> (0xffffffdd)
+    case buttonTitleDarkMode
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
+    /// Alpha: 86% <br/> (0xffffffdd)
+    case buttonTitleLightMode
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#f5f5f5"></span>
     /// Alpha: 100% <br/> (0xf5f5f5ff)
     case dividerDarkMode
@@ -51,6 +63,14 @@ enum ColorName {
     
     var rgbaValue: UInt32 {
         switch self {
+        case .buttonBackgroundDarkMode:
+            return 0xfafafadd
+        case .buttonBackgroundLightMode:
+            return 0x212121dd
+        case .buttonTitleDarkMode:
+            return 0xffffffdd
+        case .buttonTitleLightMode:
+            return 0xffffffdd
         case .dividerDarkMode:
             return 0xf5f5f5ff
         case .dividerLightMode:

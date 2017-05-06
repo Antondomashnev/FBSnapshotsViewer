@@ -24,6 +24,8 @@ class TestResultsPresenterSpec: QuickSpec {
             presenter.interactor = interactor
             presenter.userInterface = userInterface
         }
+        
+        describe(".")
 
         describe(".updateUserInterface") {
             context("when interactor doesn't have test results") {

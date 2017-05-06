@@ -182,6 +182,16 @@ class TestResultsInteractorInputMock: TestResultsInteractorInput {
 
     var testResults: [SnapshotTestResult] = []
 
+    //MARK: - openInKaleidoscope
+
+    var openInKaleidoscopeCalled = false
+    var openInKaleidoscopeReceivedTestResult: SnapshotTestResult?
+
+    func openInKaleidoscope(testResult: SnapshotTestResult) {
+
+        openInKaleidoscopeCalled = true
+        openInKaleidoscopeReceivedTestResult = testResult
+    }
 }
 class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
 
@@ -193,6 +203,16 @@ class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
     func updateUserInterface() {
 
         updateUserInterfaceCalled = true
+    }
+    //MARK: - openInKaleidoscope
+
+    var openInKaleidoscopeCalled = false
+    var openInKaleidoscopeReceivedTestResultDisplayInfo: TestResultDisplayInfo?
+
+    func openInKaleidoscope(testResultDisplayInfo: TestResultDisplayInfo) {
+
+        openInKaleidoscopeCalled = true
+        openInKaleidoscopeReceivedTestResultDisplayInfo = testResultDisplayInfo
     }
 }
 class TestResultsUserInterfaceMock: TestResultsUserInterface {

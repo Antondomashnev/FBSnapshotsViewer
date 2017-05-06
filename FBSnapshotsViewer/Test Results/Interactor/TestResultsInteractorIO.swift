@@ -10,4 +10,5 @@ import Cocoa
 
 protocol TestResultsInteractorInput: class, AutoMockable {
     var testResults: [SnapshotTestResult] { get }
+    func openInKaleidoscope(testResult: SnapshotTestResult)
 }
