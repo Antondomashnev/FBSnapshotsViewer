@@ -126,6 +126,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" size="10" name="HelveticaNeue-Light"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="viewInKaleidoscopeButtonClicked:" target="i7H-GG-lM3" id="wp0-OT-2e2"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>

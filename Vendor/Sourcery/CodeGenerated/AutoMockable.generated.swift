@@ -1,6 +1,7 @@
 // Generated using Sourcery 0.5.9 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
+import Foundation
 
 
 class ApplicationMock: Application {
@@ -176,6 +177,20 @@ class MenuUserInterfaceMock: MenuUserInterface {
     func popUpOptionsMenu() {
 
         popUpOptionsMenuCalled = true
+    }
+}
+class TestResultCellDelegateMock: TestResultCellDelegate {
+
+
+    //MARK: - testResultCell
+
+    var testResultCellCalled = false
+    var testResultCellReceivedArguments: (cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)?
+
+    func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton) {
+
+        testResultCellCalled = true
+        testResultCellReceivedArguments = (cell: cell, viewInKaleidoscopeButtonClicked: viewInKaleidoscopeButtonClicked)
     }
 }
 class TestResultsInteractorInputMock: TestResultsInteractorInput {

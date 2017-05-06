@@ -24,6 +24,10 @@ extension TestResultsInteractor: TestResultsInteractorInput {
     // MARK: - TestResultsInteractorInput
 
     func openInKaleidoscope(testResult: SnapshotTestResult) {
+        guard kaleidoscopeViewer.isAvailable(), kaleidoscopeViewer.canView(snapshotTestResult: testResult) else {
+            assertionFailure("Test result: \(testResult) can not be open in kaleidoscope viewer")
+            return
+        }
         kaleidoscopeViewer.view(snapshotTestResult: testResult, using: processLauncher)
     }
 }

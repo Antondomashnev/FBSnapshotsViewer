@@ -8,8 +8,14 @@
 
 import Cocoa
 
+protocol TestResultCellDelegate: class, AutoMockable {
+    func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)
+}
+
 class TestResultCell: NSCollectionViewItem {
     static let itemIdentifier = "TestResultCell"
+
+    weak var delegate: TestResultCellDelegate?
 
     @IBOutlet private weak var viewInKaleidoscopeButton: NSButton!
     @IBOutlet private weak var referenceImageView: NSImageView!
@@ -88,5 +94,11 @@ class TestResultCell: NSCollectionViewItem {
         configureTitleLabelsColorScheme(for: appleInterfaceMode)
         configureSeparatorsColorScheme(for: appleInterfaceMode)
         configureViewsBackgroundColor(for: appleInterfaceMode)
+    }
+
+    // MARK: - Actions
+
+    @objc @IBAction func viewInKaleidoscopeButtonClicked(_ sender: NSButton) {
+        delegate?.testResultCell(self, viewInKaleidoscopeButtonClicked: sender)
     }
 }

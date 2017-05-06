@@ -24,8 +24,22 @@ class TestResultsPresenterSpec: QuickSpec {
             presenter.interactor = interactor
             presenter.userInterface = userInterface
         }
-        
-        describe(".")
+
+        describe(".openInKaleidoscope") {
+            var testResult: SnapshotTestResult!
+            var testResultDisplayInfo: TestResultDisplayInfo!
+
+            beforeEach {
+                testResult = SnapshotTestResult.recorded(testName: "MyTest", referenceImagePath: "foo/bar.png")
+                testResultDisplayInfo = TestResultDisplayInfo(testResult: testResult)
+                presenter.openInKaleidoscope(testResultDisplayInfo: testResultDisplayInfo)
+            }
+
+            it("passes the message to interactor with correct test result") {
+                expect(interactor.openInKaleidoscopeCalled).to(beTrue())
+                expect(interactor.openInKaleidoscopeReceivedTestResult).to(equal(testResult))
+            }
+        }
 
         describe(".updateUserInterface") {
             context("when interactor doesn't have test results") {

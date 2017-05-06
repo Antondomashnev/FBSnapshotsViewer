@@ -1,3 +1,5 @@
+import Foundation
+
 {% macro methodReceivedParameters method %}
     {%if method.parameters.count == 1 %}
         {{ method.shortName }}Received{% for param in method.parameters %}{{ param.name|upperFirst }} = {{ param.name }}{% endfor %}
