@@ -35,4 +35,8 @@ class KaleidoscopeViewer: ExternalViewer {
         }
         processLauncher.launchProcess(at: "/usr/local/bin/ksdiff", with: [referenceImagePath, failedImagePath])
     }
+
+    static func isAvailable(osxApplicationFinder: OSXApplicationFinder) -> Bool {
+        return osxApplicationFinder.findApplication(with: bundleID) != nil
+    }
 }

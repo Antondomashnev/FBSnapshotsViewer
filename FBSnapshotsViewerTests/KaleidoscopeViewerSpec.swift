@@ -32,6 +32,7 @@ class KaleidoscopeViewer_MockOSXApplicationFinder: OSXApplicationFinder {
 
 class KaleidoscopeViewerSpec: QuickSpec {
     override func spec() {
+        let subject: KaleidoscopeViewer.Type = KaleidoscopeViewer.self
         var processLauncher: KaleidoscopeViewer_MockProcessLauncher!
         var osxApplicationFinder: KaleidoscopeViewer_MockOSXApplicationFinder!
 
@@ -42,13 +43,13 @@ class KaleidoscopeViewerSpec: QuickSpec {
 
         describe("name") {
             it("is Kaleidoscope") {
-                expect(KaleidoscopeViewer.name).to(equal("Kaleidoscope"))
+                expect(subject.name).to(equal("Kaleidoscope"))
             }
         }
 
         describe("bundleID") {
             it("is correct") {
-                expect(KaleidoscopeViewer.bundleID).to(equal("com.blackpixel.kaleidoscope"))
+                expect(subject.bundleID).to(equal("com.blackpixel.kaleidoscope"))
             }
         }
 
@@ -61,7 +62,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
                 }
 
                 it("returns false") {
-                    expect(KaleidoscopeViewer.canView(snapshotTestResult: testResult)).to(beFalse())
+                    expect(subject.canView(snapshotTestResult: testResult)).to(beFalse())
                 }
             }
 
@@ -71,7 +72,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
                 }
 
                 it("returns true") {
-                    expect(KaleidoscopeViewer.canView(snapshotTestResult: testResult)).to(beTrue())
+                    expect(subject.canView(snapshotTestResult: testResult)).to(beTrue())
                 }
             }
         }
@@ -83,7 +84,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
                 }
 
                 it("is true") {
-                    expect(KaleidoscopeViewer.isAvailable(osxApplicationFinder: osxApplicationFinder)).to(beTrue())
+                    expect(subject.isAvailable(osxApplicationFinder: osxApplicationFinder)).to(beTrue())
                 }
             }
 
@@ -93,7 +94,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
                 }
 
                 it("is false") {
-                    expect(KaleidoscopeViewer.isAvailable(osxApplicationFinder: osxApplicationFinder)).to(beFalse())
+                    expect(subject.isAvailable(osxApplicationFinder: osxApplicationFinder)).to(beFalse())
                 }
             }
         }
@@ -107,7 +108,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
                 }
 
                 it("throws an assertion") {
-                    expect { KaleidoscopeViewer.view(snapshotTestResult: testResult, using: processLauncher) }.to(throwAssertion())
+                    expect { subject.view(snapshotTestResult: testResult, using: processLauncher) }.to(throwAssertion())
                 }
             }
 
@@ -117,7 +118,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
                 }
 
                 it("launches correct process") {
-                    KaleidoscopeViewer.view(snapshotTestResult: testResult, using: processLauncher)
+                    subject.view(snapshotTestResult: testResult, using: processLauncher)
                     expect(processLauncher.launchedProcessArguments).to(equal(["foo/bar/referenceImage.png", "foo/bar/failedImage.png"]))
                     expect(processLauncher.launchedProcessPath).to(equal("/usr/local/bin/ksdiff"))
                 }

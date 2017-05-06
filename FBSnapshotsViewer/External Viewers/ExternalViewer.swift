@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ExternalViewer: AutoMockable {
+protocol ExternalViewer {
     static var name: String { get }
     static var bundleID: String { get }
 
@@ -19,6 +19,6 @@ protocol ExternalViewer: AutoMockable {
 
 extension ExternalViewer {
     static func isAvailable(osxApplicationFinder: OSXApplicationFinder = OSXApplicationFinder()) -> Bool {
-        return osxApplicationFinder.findApplication(with: bundleID) != nil
+        return isAvailable(osxApplicationFinder: osxApplicationFinder)
     }
 }

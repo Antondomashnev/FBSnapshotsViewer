@@ -26,6 +26,7 @@
 		6D3000311EBD2C64005B6103 /* ProcessLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3000301EBD2C64005B6103 /* ProcessLauncher.swift */; };
 		6D3000331EBD2DB3005B6103 /* KaleidoscopeViewerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3000321EBD2DB3005B6103 /* KaleidoscopeViewerSpec.swift */; };
 		6D3000351EBD325D005B6103 /* OSXApplicationFinderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3000341EBD325D005B6103 /* OSXApplicationFinderSpec.swift */; };
+		6D3000371EBDD81F005B6103 /* ProcessLauncherSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3000361EBDD81F005B6103 /* ProcessLauncherSpec.swift */; };
 		6D33A9D21EB4D38D0089AEDD /* ApplicationSnapshotTestResultListenerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D33A9D11EB4D38D0089AEDD /* ApplicationSnapshotTestResultListenerSpec.swift */; };
 		6D33A9D41EB4DAF60089AEDD /* AutoHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D33A9D31EB4DAF60089AEDD /* AutoHashable.swift */; };
 		6D33A9D61EB4DB650089AEDD /* AutoHashable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D33A9D51EB4DB650089AEDD /* AutoHashable.generated.swift */; };
@@ -128,6 +129,7 @@
 		6D3000301EBD2C64005B6103 /* ProcessLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessLauncher.swift; sourceTree = "<group>"; };
 		6D3000321EBD2DB3005B6103 /* KaleidoscopeViewerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaleidoscopeViewerSpec.swift; sourceTree = "<group>"; };
 		6D3000341EBD325D005B6103 /* OSXApplicationFinderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSXApplicationFinderSpec.swift; sourceTree = "<group>"; };
+		6D3000361EBDD81F005B6103 /* ProcessLauncherSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessLauncherSpec.swift; sourceTree = "<group>"; };
 		6D33A9D11EB4D38D0089AEDD /* ApplicationSnapshotTestResultListenerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationSnapshotTestResultListenerSpec.swift; sourceTree = "<group>"; };
 		6D33A9D31EB4DAF60089AEDD /* AutoHashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoHashable.swift; sourceTree = "<group>"; };
 		6D33A9D51EB4DB650089AEDD /* AutoHashable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoHashable.generated.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				6D342CE11EBBDFDF006EEBEC /* AppleInterfaceModeSpec.swift */,
 				6D3000321EBD2DB3005B6103 /* KaleidoscopeViewerSpec.swift */,
 				6D3000341EBD325D005B6103 /* OSXApplicationFinderSpec.swift */,
+				6D3000361EBDD81F005B6103 /* ProcessLauncherSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -865,6 +868,7 @@
 				6D7D791E1EB11CA60001C1A0 /* ApplicationSnapshotTestResultListenerFactorySpec.swift in Sources */,
 				6D076B6D1E7CA1B9001FDA14 /* RecursiveFolderEventsListenerSpec.swift in Sources */,
 				6D3BA5631E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift in Sources */,
+				6D3000371EBDD81F005B6103 /* ProcessLauncherSpec.swift in Sources */,
 				6D8BD7231EB144C0004928F7 /* ApplicationTestLogFilesListenerSpec.swift in Sources */,
 				6DA1BF9B1E7756010017D47B /* FolderEventFilterSpec.swift in Sources */,
 				6D21E66F1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift in Sources */,
