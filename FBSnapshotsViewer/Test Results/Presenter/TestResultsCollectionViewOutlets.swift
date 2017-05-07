@@ -10,12 +10,14 @@ import Cocoa
 
 class TestResultsCollectionViewOutlets: NSObject {
     var testResults: [TestResultDisplayInfo] = []
+    fileprivate weak var testResultCellDelegate: TestResultCellDelegate?
 
-    init(collectionView: NSCollectionView) {
+    init(collectionView: NSCollectionView, testResultCellDelegate: TestResultCellDelegate? = nil) {
         guard let nib = NSNib(nibNamed: "TestResultCell", bundle: Bundle.main) else {
             fatalError("TestResultCell is missing in bundle")
         }
         collectionView.register(nib, forItemWithIdentifier: TestResultCell.itemIdentifier)
+        self.testResultCellDelegate = testResultCellDelegate
         super.init()
     }
 }
@@ -44,6 +46,7 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
             fatalError("TestResultCell is not registered in collection view")
         }
         item.configure(with: testResults[indexPath.item])
+        item.delegate = testResultCellDelegate
         return item
     }
 }

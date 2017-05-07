@@ -2,6 +2,11 @@
 // DO NOT EDIT
 
 import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
+import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 
 class ApplicationMock: Application {
