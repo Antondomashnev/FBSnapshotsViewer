@@ -8,9 +8,16 @@
 
 import Cocoa
 
+protocol TestResultCellDelegate: class, AutoMockable {
+    func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)
+}
+
 class TestResultCell: NSCollectionViewItem {
     static let itemIdentifier = "TestResultCell"
 
+    weak var delegate: TestResultCellDelegate?
+
+    @IBOutlet private weak var viewInKaleidoscopeButton: NSButton!
     @IBOutlet private weak var referenceImageView: NSImageView!
     @IBOutlet private weak var diffImageView: NSImageView!
     @IBOutlet private weak var failedImageView: NSImageView!
@@ -24,7 +31,7 @@ class TestResultCell: NSCollectionViewItem {
 
     // MARK: - Helpers
 
-    private func configureViewBackgroundColor(for appleInterfaceMode: AppleInterfaceMode) {
+    private func configureViewsBackgroundColor(for appleInterfaceMode: AppleInterfaceMode) {
         switch appleInterfaceMode {
         case .dark:
             view.layer?.backgroundColor = NSColor(named: .primaryLightDarkMode).cgColor
@@ -82,9 +89,16 @@ class TestResultCell: NSCollectionViewItem {
         if let failedImageURL = testResult.failedImageURL, let failedImage = NSImage(contentsOf: failedImageURL) {
             failedImageView.image = failedImage
         }
+        viewInKaleidoscopeButton.isHidden = !testResult.canBeViewedInKaleidoscope
         testNameLabel.stringValue = testResult.testName
         configureTitleLabelsColorScheme(for: appleInterfaceMode)
         configureSeparatorsColorScheme(for: appleInterfaceMode)
-        configureViewBackgroundColor(for: appleInterfaceMode)
+        configureViewsBackgroundColor(for: appleInterfaceMode)
+    }
+
+    // MARK: - Actions
+
+    @objc @IBAction func viewInKaleidoscopeButtonClicked(_ sender: NSButton) {
+        delegate?.testResultCell(self, viewInKaleidoscopeButtonClicked: sender)
     }
 }

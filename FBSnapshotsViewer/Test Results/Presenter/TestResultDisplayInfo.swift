@@ -13,15 +13,12 @@ struct TestResultDisplayInfo: AutoEquatable {
     let diffImageURL: URL?
     let failedImageURL: URL?
     let testName: String
+    let canBeViewedInKaleidoscope: Bool
+    let testResult: SnapshotTestResult
 
-    init(testName: String, referenceImageURL: URL, diffImageURL: URL? = nil, failedImageURL: URL? = nil) {
-        self.referenceImageURL = referenceImageURL
-        self.diffImageURL = diffImageURL
-        self.failedImageURL = failedImageURL
-        self.testName = testName
-    }
-
-    init(testResult: SnapshotTestResult) {
+    init(testResult: SnapshotTestResult, kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self) {
+        self.testResult = testResult
+        self.canBeViewedInKaleidoscope = kaleidoscopeViewer.isAvailable() && kaleidoscopeViewer.canView(snapshotTestResult: testResult)
         switch testResult {
         case let .recorded(testName, referenceImagePath):
             self.testName = testName
