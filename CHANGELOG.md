@@ -4,6 +4,7 @@
 
 * Your contribution here
 * [#28](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/28): Update UI color scheme for Apple's dark interface mode - [@antondomashnev](https://github.com/antondomashnev).
+* [#29](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/29): Add open in Kaleidoscope feature - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.2.1 (03.05.2017)
 
