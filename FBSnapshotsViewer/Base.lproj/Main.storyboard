@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -659,6 +659,89 @@
                 </application>
             </objects>
             <point key="canvasLocation" x="396" y="-44"/>
+        </scene>
+        <!--Preferences Controller-->
+        <scene sceneID="34C-F2-Brb">
+            <objects>
+                <viewController title="Preferences Controller" id="DIx-ct-IA2" customClass="PreferencesController" customModule="FBSnapshotsViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="u4N-6H-ORc">
+                        <rect key="frame" x="0.0" y="0.0" width="709" height="111"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwU-Qy-4K5">
+                                <rect key="frame" x="88" y="72" width="87" height="17"/>
+                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Derived Data:" id="v1L-Jw-vYr">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RDr-R9-v1N">
+                                <rect key="frame" x="174" y="66" width="76" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Xcode" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="1ub-dy-lmS" id="b7Q-Of-g3B">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="aSR-pR-0es">
+                                        <items>
+                                            <menuItem title="Xcode" state="on" id="1ub-dy-lmS"/>
+                                            <menuItem title="Item 2" id="wxY-gI-jRP"/>
+                                            <menuItem title="Item 3" id="JVY-S9-K2W"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1B-Tw-s5Z">
+                                <rect key="frame" x="254" y="68" width="385" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="FWS-AD-Lzb">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.87" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT9-rL-1Du">
+                                <rect key="frame" x="179" y="50" width="33" height="14"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="hcT-db-XVd">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="0.87145761986301362" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="v1B-Tw-s5Z" secondAttribute="trailing" constant="70" id="Hpj-QQ-x93"/>
+                            <constraint firstItem="v1B-Tw-s5Z" firstAttribute="centerY" secondItem="RDr-R9-v1N" secondAttribute="centerY" id="RkZ-Ma-kUd"/>
+                            <constraint firstItem="RDr-R9-v1N" firstAttribute="leading" secondItem="OwU-Qy-4K5" secondAttribute="trailing" constant="3" id="TIm-Nf-52m"/>
+                            <constraint firstItem="OwU-Qy-4K5" firstAttribute="leading" secondItem="u4N-6H-ORc" secondAttribute="leading" constant="90" id="Tww-Qi-7ro"/>
+                            <constraint firstItem="RDr-R9-v1N" firstAttribute="centerY" secondItem="OwU-Qy-4K5" secondAttribute="centerY" constant="1" id="UaF-sD-HjI"/>
+                            <constraint firstItem="JT9-rL-1Du" firstAttribute="top" secondItem="RDr-R9-v1N" secondAttribute="bottom" constant="5" id="gPi-8e-3iB"/>
+                            <constraint firstItem="v1B-Tw-s5Z" firstAttribute="leading" secondItem="RDr-R9-v1N" secondAttribute="trailing" constant="7" id="gRF-yG-iZv"/>
+                            <constraint firstItem="OwU-Qy-4K5" firstAttribute="top" secondItem="u4N-6H-ORc" secondAttribute="top" constant="22" id="itz-ba-30H"/>
+                            <constraint firstItem="JT9-rL-1Du" firstAttribute="leading" secondItem="RDr-R9-v1N" secondAttribute="leading" constant="5" id="kAV-GP-nJ2"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JT9-rL-1Du" secondAttribute="trailing" constant="70" id="t82-tf-KDa"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="gaG-9M-qFO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1609" y="257"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="dq3-dN-JCf">
+            <objects>
+                <windowController storyboardIdentifier="PreferencesWindowController" id="2V7-mm-B8Q" customClass="PreferencesWindowController" customModule="FBSnapshotsViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="E9d-qH-eRw">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="163" y="208" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
+                    </window>
+                    <connections>
+                        <segue destination="DIx-ct-IA2" kind="relationship" relationship="window.shadowedContentViewController" id="Ghj-hF-nEJ"/>
+                    </connections>
+                </windowController>
+                <customObject id="26d-fH-mrV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="956" y="263"/>
         </scene>
         <!--Test Results Controller-->
         <scene sceneID="3zf-Xo-oAA">

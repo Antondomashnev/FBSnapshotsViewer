@@ -11,6 +11,7 @@ import Cocoa
 protocol MenuModuleInterface: class, AutoMockable {
     func start()
     func showTestResults()
+    func showPreferences()
     func showApplicationMenu()
     func quit()
 }

@@ -60,6 +60,15 @@ enum StoryboardScene {
             }
             return vc
         }
+
+        case preferencesWindowControllerScene = "PreferencesWindowController"
+        static func instantiatePreferencesWindowController() -> FBSnapshotsViewer.PreferencesWindowController {
+            guard let vc = StoryboardScene.Main.preferencesWindowControllerScene.controller() as? FBSnapshotsViewer.PreferencesWindowController
+                else {
+                    fatalError("ViewController 'PreferencesWindowController' is not of the expected class FBSnapshotsViewer.PreferencesWindowController.")
+            }
+            return vc
+        }
     }
 }
 

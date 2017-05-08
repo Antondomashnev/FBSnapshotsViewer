@@ -36,6 +36,10 @@ extension MenuPresenter: MenuModuleInterface {
         userInterface?.popUpOptionsMenu()
     }
 
+    func showPreferences() {
+        wireframe?.showPreferencesModule()
+    }
+
     func quit() {
         application.terminate(self)
     }

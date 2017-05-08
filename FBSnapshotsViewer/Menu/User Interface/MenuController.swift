@@ -59,4 +59,8 @@ extension MenuController: MenuStatusItemMenuTarget {
     func menuStatusItemMenu(_ menu: NSMenu, quitItemClicked: NSMenuItem) {
         eventHandler?.quit()
     }
+
+    func menuStatusItemMenu(_ menu: NSMenu, preferencesItemClicked: NSMenuItem) {
+        eventHandler?.showPreferences()
+    }
 }

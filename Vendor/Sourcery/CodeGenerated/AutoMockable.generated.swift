@@ -145,6 +145,14 @@ class MenuModuleInterfaceMock: MenuModuleInterface {
 
         showTestResultsCalled = true
     }
+    //MARK: - showPreferences
+
+    var showPreferencesCalled = false
+
+    func showPreferences() {
+
+        showPreferencesCalled = true
+    }
     //MARK: - showApplicationMenu
 
     var showApplicationMenuCalled = false
@@ -183,6 +191,22 @@ class MenuUserInterfaceMock: MenuUserInterface {
 
         popUpOptionsMenuCalled = true
     }
+}
+class PreferencesModuleInterfaceMock: PreferencesModuleInterface {
+
+
+    //MARK: - close
+
+    var closeCalled = false
+
+    func close() {
+
+        closeCalled = true
+    }
+}
+class PreferencesUserInterfaceMock: PreferencesUserInterface {
+
+
 }
 class TestResultCellDelegateMock: TestResultCellDelegate {
 

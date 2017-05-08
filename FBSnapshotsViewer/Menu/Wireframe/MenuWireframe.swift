@@ -12,6 +12,7 @@ import Cocoa
 class MenuWireframe {
 
     weak private var userInterface: MenuController?
+    fileprivate var preferencesModule: PreferencesModule?
 
     // MARK: - Interface
 
@@ -36,5 +37,16 @@ class MenuWireframe {
         }
         let wireframe = TestResultsWireframe()
         wireframe.show(relativeTo: presentationView.bounds, of: presentationView, with: testResults)
+    }
+
+    func showPreferencesModule() {
+        let wireframe = PreferencesWireframe()
+        preferencesModule = wireframe.show(withDelegate: self)
+    }
+}
+
+extension MenuWireframe: PreferencesModuleDelegate {
+    func preferencesModuleWillClose(_ preferencesModule: PreferencesModuleInterface) {
+        self.preferencesModule = nil
     }
 }
