@@ -12,6 +12,9 @@ class PreferencesWindowController: NSWindowController {}
 
 class PreferencesController: NSViewController {
     var eventHandler: PreferencesModuleInterface!
+    @IBOutlet fileprivate weak var derivedDataTypePopUpButton: NSPopUpButton!
+    @IBOutlet fileprivate weak var derivedDataPathLabel: NSTextField!
+    @IBOutlet fileprivate weak var derivedDataPathTextField: NSTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,4 +31,12 @@ class PreferencesController: NSViewController {
 }
 
 extension PreferencesController: PreferencesUserInterface {
+}
+
+extension PreferencesController {
+    // MARK: - Actions
+
+    @IBAction func popUpValueChanged(_ sender: NSPopUpButton) {
+        print("LAlala")
+    }
 }

@@ -677,30 +677,33 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RDr-R9-v1N">
-                                <rect key="frame" x="174" y="66" width="76" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Xcode" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="1ub-dy-lmS" id="b7Q-Of-g3B">
+                                <rect key="frame" x="174" y="66" width="94" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Custom" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="JVY-S9-K2W" id="b7Q-Of-g3B">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="aSR-pR-0es">
                                         <items>
-                                            <menuItem title="Xcode" state="on" id="1ub-dy-lmS"/>
-                                            <menuItem title="Item 2" id="wxY-gI-jRP"/>
-                                            <menuItem title="Item 3" id="JVY-S9-K2W"/>
+                                            <menuItem title="Xcode" id="1ub-dy-lmS"/>
+                                            <menuItem title="AppCode" id="wxY-gI-jRP"/>
+                                            <menuItem title="Custom" state="on" id="JVY-S9-K2W"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <action selector="popUpValueChanged:" target="DIx-ct-IA2" id="dmx-mT-Hk1"/>
+                                </connections>
                             </popUpButton>
-                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1B-Tw-s5Z">
-                                <rect key="frame" x="254" y="68" width="385" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="FWS-AD-Lzb">
+                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1B-Tw-s5Z">
+                                <rect key="frame" x="272" y="69" width="367" height="22"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingMiddle" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="FWS-AD-Lzb">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.87" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" white="1" alpha="0.86068600171232879" colorSpace="deviceWhite"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT9-rL-1Du">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT9-rL-1Du">
                                 <rect key="frame" x="179" y="50" width="33" height="14"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="hcT-db-XVd">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="hcT-db-XVd">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="0.87145761986301362" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -720,6 +723,11 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JT9-rL-1Du" secondAttribute="trailing" constant="70" id="t82-tf-KDa"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="derivedDataPathLabel" destination="JT9-rL-1Du" id="Aqw-ZI-QRY"/>
+                        <outlet property="derivedDataPathTextField" destination="v1B-Tw-s5Z" id="X5k-W1-74a"/>
+                        <outlet property="derivedDataTypePopUpButton" destination="RDr-R9-v1N" id="o5I-lH-NQP"/>
+                    </connections>
                 </viewController>
                 <customObject id="gaG-9M-qFO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
