@@ -23,7 +23,7 @@ class MenuPresenter_MockMenuWireframe: MenuWireframe {
 
 class MenuPresenterSpec: QuickSpec {
     override func spec() {
-        var xcodeDerivedDataFolder: XcodeDerivedDataFolder!
+        var derivedDataFolder: DerivedDataFolder!
         var application: ApplicationMock!
         var userInterface: MenuUserInterfaceMock!
         var presenter: MenuPresenter!
@@ -31,11 +31,11 @@ class MenuPresenterSpec: QuickSpec {
         var wireframe: MenuPresenter_MockMenuWireframe!
 
         beforeEach {
-            xcodeDerivedDataFolder = XcodeDerivedDataFolder(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
+            derivedDataFolder = DerivedDataFolder(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
             application = ApplicationMock()
             wireframe = MenuPresenter_MockMenuWireframe()
             interactor = MenuInteractorInputMock()
-            presenter = MenuPresenter(xcodeDerivedDataFolder: xcodeDerivedDataFolder, application: application)
+            presenter = MenuPresenter(derivedDataFolder: derivedDataFolder, application: application)
             userInterface = MenuUserInterfaceMock()
             presenter.userInterface = userInterface
             presenter.interactor = interactor
@@ -48,7 +48,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("starts the Xcode builds listening") {
-                expect(interactor.startXcodeBuildsListeningReceivedXcodeDerivedDataFolder).to(equal(xcodeDerivedDataFolder))
+                expect(interactor.startXcodeBuildsListeningReceivedDerivedDataFolder).to(equal(derivedDataFolder))
             }
         }
 

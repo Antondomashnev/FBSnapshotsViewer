@@ -84,12 +84,12 @@ class MenuInteractorInputMock: MenuInteractorInput {
     //MARK: - startXcodeBuildsListening
 
     var startXcodeBuildsListeningCalled = false
-    var startXcodeBuildsListeningReceivedXcodeDerivedDataFolder: XcodeDerivedDataFolder?
+    var startXcodeBuildsListeningReceivedDerivedDataFolder: DerivedDataFolder?
 
-    func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {
+    func startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder) {
 
         startXcodeBuildsListeningCalled = true
-        startXcodeBuildsListeningReceivedXcodeDerivedDataFolder = xcodeDerivedDataFolder
+        startXcodeBuildsListeningReceivedDerivedDataFolder = derivedDataFolder
     }
     //MARK: - startSnapshotTestResultListening
 

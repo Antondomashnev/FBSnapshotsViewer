@@ -50,9 +50,9 @@ extension MenuInteractor: MenuInteractorInput {
         applicationSnapshotTestResultListeners[path] = applicationSnapshotTestResultListener
     }
 
-    func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {
+    func startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder) {
         applicationTestLogFilesListener.stopListening()
-        applicationTestLogFilesListener.listen(xcodeDerivedDataFolder: xcodeDerivedDataFolder.path) { [weak self] path in
+        applicationTestLogFilesListener.listen(derivedDataFolder: derivedDataFolder.path) { [weak self] path in
             self?.output?.didFindNewTestLogFile(at: path)
         }
     }

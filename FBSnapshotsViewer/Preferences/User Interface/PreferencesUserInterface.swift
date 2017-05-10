@@ -9,5 +9,4 @@
 import Foundation
 
 protocol PreferencesUserInterface: class, AutoMockable {
-
 }

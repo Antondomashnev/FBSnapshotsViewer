@@ -10,14 +10,14 @@ import Cocoa
 
 class MenuPresenter {
     fileprivate let application: Application
-    let xcodeDerivedDataFolder: XcodeDerivedDataFolder
+    let derivedDataFolder: DerivedDataFolder
     var wireframe: MenuWireframe?
     var interactor: MenuInteractorInput?
     weak var userInterface: MenuUserInterface?
 
-    init(xcodeDerivedDataFolder: XcodeDerivedDataFolder = XcodeDerivedDataFolder.default, application: Application = NSApp) {
+    init(derivedDataFolder: DerivedDataFolder = DerivedDataFolder.xcode, application: Application = NSApp) {
         self.application = application
-        self.xcodeDerivedDataFolder = xcodeDerivedDataFolder
+        self.derivedDataFolder = derivedDataFolder
     }
 }
 
@@ -45,7 +45,7 @@ extension MenuPresenter: MenuModuleInterface {
     }
 
     func start() {
-        interactor?.startXcodeBuildsListening(xcodeDerivedDataFolder: xcodeDerivedDataFolder)
+        interactor?.startXcodeBuildsListening(derivedDataFolder: derivedDataFolder)
     }
 }
 
