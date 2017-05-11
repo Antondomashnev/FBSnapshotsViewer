@@ -13,9 +13,13 @@ import Nimble
 
 class MenuStatusItemMenu_MockMenuStatusItemMenuTarget: MenuStatusItemMenuTarget {
     var menuStatusItemMenuQuitItemClickedCalled: Bool = false
-
     func menuStatusItemMenu(_ menu: NSMenu, quitItemClicked: NSMenuItem) {
         menuStatusItemMenuQuitItemClickedCalled = true
+    }
+
+    var menuStatusItemMenuPreferencesItemClickedCalled: Bool = false
+    func menuStatusItemMenu(_ menu: NSMenu, preferencesItemClicked: NSMenuItem) {
+        menuStatusItemMenuPreferencesItemClickedCalled = true
     }
 }
 

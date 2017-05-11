@@ -23,6 +23,7 @@ class MenuPresenter_MockMenuWireframe: MenuWireframe {
 
 class MenuPresenterSpec: QuickSpec {
     override func spec() {
+        var configuration: FBSnapshotsViewer.Configuration!
         var derivedDataFolder: DerivedDataFolder!
         var application: ApplicationMock!
         var userInterface: MenuUserInterfaceMock!
@@ -31,11 +32,12 @@ class MenuPresenterSpec: QuickSpec {
         var wireframe: MenuPresenter_MockMenuWireframe!
 
         beforeEach {
-            derivedDataFolder = DerivedDataFolder(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
+            derivedDataFolder = DerivedDataFolder.custom(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
+            configuration = FBSnapshotsViewer.Configuration(derivedDataFolder: derivedDataFolder)
             application = ApplicationMock()
             wireframe = MenuPresenter_MockMenuWireframe()
             interactor = MenuInteractorInputMock()
-            presenter = MenuPresenter(derivedDataFolder: derivedDataFolder, application: application)
+            presenter = MenuPresenter(configuration: configuration, application: application)
             userInterface = MenuUserInterfaceMock()
             presenter.userInterface = userInterface
             presenter.interactor = interactor

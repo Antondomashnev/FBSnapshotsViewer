@@ -16,10 +16,7 @@ class MenuWireframe {
 
     // MARK: - Interface
 
-    func instantinateMenu(in statusBar: NSStatusBar) -> MenuUserInterface {
-        guard let configuration = UserDefaultsConfigurationStorage().loadConfiguration() else {
-            preconditionFailure("Can not instantinate menu if the confiration of the app doesn't exist")
-        }
+    func instantinateMenu(in statusBar: NSStatusBar, configuration: Configuration) -> MenuUserInterface {
         let menuController = MenuController(statusBar: statusBar)
         let interactor = MenuInteractor(applicationSnapshotTestResultListenerFactory: ApplicationSnapshotTestResultListenerFactory(),
                                         applicationTestLogFilesListener: ApplicationTestLogFilesListener())
