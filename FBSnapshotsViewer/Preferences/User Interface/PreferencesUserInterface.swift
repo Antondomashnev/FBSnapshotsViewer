@@ -9,4 +9,5 @@
 import Foundation
 
 protocol PreferencesUserInterface: class, AutoMockable {
+    func show(preferencesDisplayInfo: PreferencesDisplayInfo)
 }

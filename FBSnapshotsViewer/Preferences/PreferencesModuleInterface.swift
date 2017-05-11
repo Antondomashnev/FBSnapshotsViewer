@@ -10,4 +10,7 @@ import Foundation
 
 protocol PreferencesModuleInterface: AutoMockable {
     func close()
+    func updateUserInterface()
+    func select(derivedDataFolderType: String)
+    func update(derivedDataFolderPath: String)
 }

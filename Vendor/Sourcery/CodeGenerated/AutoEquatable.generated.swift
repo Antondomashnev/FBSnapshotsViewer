@@ -27,6 +27,7 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
 extension DerivedDataFolder: Equatable {} 
 internal func == (lhs: DerivedDataFolder, rhs: DerivedDataFolder) -> Bool {
     guard lhs.path == rhs.path else { return false }
+    guard lhs.type == rhs.type else { return false }
     return true
 }
 // MARK: - TestResultDisplayInfo AutoEquatable
@@ -62,6 +63,17 @@ internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
     case (.referenceImageSavedMessage(let lhs), .referenceImageSavedMessage(let rhs)): 
         return lhs == rhs
     case (.unknown, .unknown): 
+         return true 
+    default: return false
+    }
+}
+// MARK: - DerivedDataFolderType AutoEquatable
+extension DerivedDataFolderType: Equatable {}
+internal func == (lhs: DerivedDataFolderType, rhs: DerivedDataFolderType) -> Bool {
+    switch (lhs, rhs) {
+    case (.xcode, .xcode): 
+         return true 
+    case (.custom, .custom): 
          return true 
     default: return false
     }

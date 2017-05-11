@@ -10,6 +10,7 @@ import Foundation
 import CoreServices
 
 class OSXApplicationFinder {
+    // MARK: - Interface
 
     /// Check whether the application with the given bundle identifier is installed or not on the machine
     ///

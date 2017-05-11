@@ -10,6 +10,8 @@ import Foundation
 
 /// Class `ProcessLauncher` encapsulates the logic to launch OSX processes
 class ProcessLauncher {
+    // MARK: - Interface
+
     func launchProcess(at launchPath: String, with arguments: [String]? = nil) {
         let process = Process()
         process.launchPath = launchPath
