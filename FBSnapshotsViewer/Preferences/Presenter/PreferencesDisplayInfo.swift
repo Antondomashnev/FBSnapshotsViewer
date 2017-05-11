@@ -14,7 +14,8 @@ struct PreferencesDisplayInfo {
     let derivedDataFolderTypeName: String
     let derivedDataFolderTypeNames: [String] = DerivedDataFolderType.allCases.map { $0.rawValue }
 
-    init(derivedDataFolder: DerivedDataFolder) {
+    init(configuration: Configuration) {
+        let derivedDataFolder = configuration.derivedDataFolder
         derivedDataFolderPath = derivedDataFolder.path
         derivedDataFolderTypeName = derivedDataFolder.type.rawValue
         derivedDataFolderPathEditable = derivedDataFolder.type == .custom

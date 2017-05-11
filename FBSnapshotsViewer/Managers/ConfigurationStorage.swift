@@ -24,12 +24,15 @@ class UserDefaultsConfigurationStorage: ConfigurationStorage {
     // MARK: - ConfigurationStorage
 
     func save(configuration: Configuration) {
-
+        let archivedConfiguration = NSKeyedArchiver.archivedData(withRootObject: configuration)
+        userDefaults.setValue(archivedConfiguration, forKey: configurationKey)
     }
 
     func loadConfiguration() -> Configuration? {
-        guard let userDefaults.object(forKey: configurationKey) as? Configuration else {
+        guard let archivedConfiguration = userDefaults.object(forKey: configurationKey) as? Data,
+              let configuration = NSKeyedUnarchiver.unarchiveObject(with: archivedConfiguration) as? Configuration else {
             return nil
         }
+        return configuration
     }
 }

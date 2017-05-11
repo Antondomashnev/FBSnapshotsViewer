@@ -17,10 +17,13 @@ class MenuWireframe {
     // MARK: - Interface
 
     func instantinateMenu(in statusBar: NSStatusBar) -> MenuUserInterface {
+        guard let configuration = UserDefaultsConfigurationStorage().loadConfiguration() else {
+            preconditionFailure("Can not instantinate menu if the confiration of the app doesn't exist")
+        }
         let menuController = MenuController(statusBar: statusBar)
         let interactor = MenuInteractor(applicationSnapshotTestResultListenerFactory: ApplicationSnapshotTestResultListenerFactory(),
                                         applicationTestLogFilesListener: ApplicationTestLogFilesListener())
-        let presenter = MenuPresenter()
+        let presenter = MenuPresenter(configuration: configuration)
         menuController.eventHandler = presenter
         presenter.interactor = interactor
         interactor.output = presenter
@@ -48,5 +51,10 @@ class MenuWireframe {
 extension MenuWireframe: PreferencesModuleDelegate {
     func preferencesModuleWillClose(_ preferencesModule: PreferencesModuleInterface) {
         self.preferencesModule = nil
+        let restartAppAlert = NSAlert()
+        restartAppAlert.addButton(withTitle: "Ok")
+        restartAppAlert.alertStyle = .informational
+        restartAppAlert.messageText = "Please restart the FBSnapshotsViewer in order to apply new preferences"
+        restartAppAlert.runModal()
     }
 }

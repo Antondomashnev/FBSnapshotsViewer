@@ -18,9 +18,9 @@ class PreferencesController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(derivedDataPathTextFieldDidEndEditing(notification:)), name: Notification.Name.NSControlTextDidEndEditing, object: derivedDataPathTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(derivedDataPathTextFieldDidChange(notification:)), name: Notification.Name.NSControlTextDidChange, object: derivedDataPathTextField)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -66,8 +66,9 @@ extension PreferencesController: PreferencesUserInterface {
 extension PreferencesController {
     // MARK: - Notifications
 
-    @objc func derivedDataPathTextFieldDidEndEditing(notification: Notification) {
+    @objc func derivedDataPathTextFieldDidChange(notification: Notification) {
         eventHandler.update(derivedDataFolderPath: derivedDataPathTextField.stringValue)
+        derivedDataPathLabel.stringValue = derivedDataPathTextField.stringValue
     }
 }
 

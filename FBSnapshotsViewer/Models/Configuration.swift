@@ -8,11 +8,18 @@
 
 import Foundation
 
-class Configuration: AutoMockable, NSCoding {
+class Configuration: NSObject, AutoMockable, NSCoding {
     var derivedDataFolder: DerivedDataFolder
 
     init(derivedDataFolder: DerivedDataFolder) {
         self.derivedDataFolder = derivedDataFolder
+        super.init()
+    }
+
+    // MARK: - Static
+
+    static func `default`() -> Configuration {
+        return Configuration(derivedDataFolder: DerivedDataFolder.xcode)
     }
 
     // MARK: - NSCoding
@@ -23,10 +30,17 @@ class Configuration: AutoMockable, NSCoding {
     }
 
     required public convenience init?(coder aDecoder: NSCoder) {
-        guard let derivedDataFolderPath = aDecoder.value(forKey: "derivedDataFolderPath") as? String,
-            let derivedDataFolderType = DerivedDataFolderType(rawValue: aDecoder.value(forKey: "derivedDataFolderType") as? DerivedDataFolderType.RawValue ?? "") else {
+        guard let derivedDataFolderPath = aDecoder.decodeObject(forKey: "derivedDataFolderPath") as? String,
+              let derivedDataFolderType = aDecoder.decodeObject(forKey: "derivedDataFolderType") as? String else {
                 return nil
         }
-        self.init(derivedDataFolder: DerivedDataFolder(path: derivedDataFolderPath, type: derivedDataFolderType))
+        switch derivedDataFolderType {
+        case DerivedDataFolder.xcode.type.rawValue:
+            self.init(derivedDataFolder: DerivedDataFolder.xcode)
+        case DerivedDataFolder.custom(path: "").type.rawValue:
+            self.init(derivedDataFolder: DerivedDataFolder.custom(path: derivedDataFolderPath))
+        default:
+            return nil
+        }
     }
 }

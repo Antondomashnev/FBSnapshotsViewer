@@ -10,8 +10,7 @@ import Foundation
 
 protocol PreferencesInteractorInput: class, AutoMockable {
     func save()
-}
-
-protocol PreferencesInteractorOutput: class, AutoMockable {
-
+    func currentConfiguration() -> Configuration
+    func setNewDerivedDataFolderType(_ type: String)
+    func setNewDerivedDataFolderPath(_ path: String)
 }

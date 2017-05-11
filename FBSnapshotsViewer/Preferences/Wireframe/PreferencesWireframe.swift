@@ -27,7 +27,9 @@ class PreferencesWireframe {
         guard let controller = windowController.contentViewController as? PreferencesController, let window = windowController.window else {
             preconditionFailure("PreferencesWindowController doesn't have expected PreferencesController as a contentViewController or window is nil")
         }
+        let interactor = PreferencesInteractor(configurationStorage: UserDefaultsConfigurationStorage())
         let presenter = PreferencesPresenter()
+        presenter.interactor = interactor
         presenter.userInterface = controller
         presenter.wireframe = self
         presenter.moduleDelegate = delegate

@@ -8,12 +8,25 @@
 
 import Foundation
 
-struct DerivedDataFolder: AutoEquatable {
-    let path: String
-    let type: DerivedDataFolderType
-
-    /// Default Xcode derived data folder
-    static var xcode: DerivedDataFolder {
-        return DerivedDataFolder(path: "\(NSHomeDirectory())/Library/Developer/Xcode/DerivedData", type: .xcode)
+enum DerivedDataFolder: AutoEquatable {
+    var type: DerivedDataFolderType {
+        switch self {
+        case .xcode:
+            return DerivedDataFolderType.xcode
+        case .custom(_):
+            return DerivedDataFolderType.custom
+        }
     }
+
+    var path: String {
+        switch self {
+        case .xcode:
+            return "\(NSHomeDirectory())/Library/Developer/Xcode/DerivedData"
+        case let .custom(path):
+            return path
+        }
+    }
+
+    case custom(path: String)
+    case xcode
 }

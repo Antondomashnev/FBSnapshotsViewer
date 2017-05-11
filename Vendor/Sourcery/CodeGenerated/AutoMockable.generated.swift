@@ -215,10 +215,36 @@ class PreferencesInteractorInputMock: PreferencesInteractorInput {
 
         saveCalled = true
     }
-}
-class PreferencesInteractorOutputMock: PreferencesInteractorOutput {
+    //MARK: - currentConfiguration
 
+    var currentConfigurationCalled = false
+    var currentConfigurationReturnValue: Configuration!
 
+    func currentConfiguration() -> Configuration {
+
+        currentConfigurationCalled = true
+        return currentConfigurationReturnValue
+    }
+    //MARK: - setNewDerivedDataFolderType
+
+    var setNewDerivedDataFolderTypeCalled = false
+    var setNewDerivedDataFolderTypeReceivedType: String?
+
+    func setNewDerivedDataFolderType(_ type: String) {
+
+        setNewDerivedDataFolderTypeCalled = true
+        setNewDerivedDataFolderTypeReceivedType = type
+    }
+    //MARK: - setNewDerivedDataFolderPath
+
+    var setNewDerivedDataFolderPathCalled = false
+    var setNewDerivedDataFolderPathReceivedPath: String?
+
+    func setNewDerivedDataFolderPath(_ path: String) {
+
+        setNewDerivedDataFolderPathCalled = true
+        setNewDerivedDataFolderPathReceivedPath = path
+    }
 }
 class PreferencesModuleInterfaceMock: PreferencesModuleInterface {
 

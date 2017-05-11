@@ -19,16 +19,17 @@ extension PreferencesPresenter: PreferencesModuleInterface {
     // MARK: - PreferencesModuleInterface
 
     func updateUserInterface() {
-        let preferencesDisplayInfo = PreferencesDisplayInfo(derivedDataFolder: DerivedDataFolder.xcode)
+        let preferencesDisplayInfo = PreferencesDisplayInfo(configuration: interactor.currentConfiguration())
         userInterface?.show(preferencesDisplayInfo: preferencesDisplayInfo)
     }
 
     func select(derivedDataFolderType: String) {
-
+        interactor.setNewDerivedDataFolderType(derivedDataFolderType)
+        updateUserInterface()
     }
 
     func update(derivedDataFolderPath: String) {
-
+        interactor.setNewDerivedDataFolderPath(derivedDataFolderPath)
     }
 
     func close() {
