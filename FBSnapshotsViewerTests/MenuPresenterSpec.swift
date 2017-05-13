@@ -14,10 +14,14 @@ import Nimble
 class MenuPresenter_MockMenuWireframe: MenuWireframe {
     var showTestResultsModuleCalled: Bool = false
     var showTestResultsModuleReceivedParameters: [SnapshotTestResult] = []
-
     override func showTestResultsModule(with testResults: [SnapshotTestResult]) {
         showTestResultsModuleCalled = true
         showTestResultsModuleReceivedParameters = testResults
+    }
+
+    var showPreferencesModuleCalled: Bool = false
+    override func showPreferencesModule() {
+        showPreferencesModuleCalled = true
     }
 }
 
@@ -42,6 +46,16 @@ class MenuPresenterSpec: QuickSpec {
             presenter.userInterface = userInterface
             presenter.interactor = interactor
             presenter.wireframe = wireframe
+        }
+
+        describe(".showPreferences") {
+            beforeEach {
+                presenter.showPreferences()
+            }
+
+            it("shows preferences") {
+                expect(wireframe.showPreferencesModuleCalled).to(beTrue())
+            }
         }
 
         describe(".start") {
