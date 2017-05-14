@@ -32,7 +32,7 @@ class {{ type.name }}Mock: {{ type.name }} {
     {% else %}{% if not method.parameters.count == 0 %}
     var {{ method.shortName }}ReceivedArguments: ({% for param in method.parameters %}{{ param.name }}: {% if param.typeAttributes.escaping %}{{ param.unwrappedTypeName }}{% else %}{{ param.typeName }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %})?
     {% endif %}{% endif %}
-    {% if not method.returnTypeName.isVoid and not method.isInitializer %}var {{ method.shortName }}ReturnValue: {{ method.returnTypeName }}!{% endif %}
+    {% if not method.returnTypeName.isVoid and not method.isInitializer %}var {{ method.shortName }}ReturnValue: {{ method.returnTypeName }}{% if not method.returnTypeName.isOptional %}!{% endif %}{% endif %}
 
 {% if method.isInitializer %}
     required {{ method.name }} {

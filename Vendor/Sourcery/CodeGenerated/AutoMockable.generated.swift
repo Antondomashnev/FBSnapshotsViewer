@@ -29,7 +29,7 @@ class ConfigurationStorageMock: ConfigurationStorage {
     //MARK: - loadConfiguration
 
     var loadConfigurationCalled = false
-    var loadConfigurationReturnValue: Configuration?!
+    var loadConfigurationReturnValue: Configuration?
 
     func loadConfiguration() -> Configuration? {
 

@@ -9,7 +9,7 @@
 import Foundation
 
 class Configuration: NSObject, AutoMockable, NSCoding {
-    var derivedDataFolder: DerivedDataFolder
+    let derivedDataFolder: DerivedDataFolder
 
     init(derivedDataFolder: DerivedDataFolder) {
         self.derivedDataFolder = derivedDataFolder
