@@ -22,12 +22,12 @@ class PreferencesWireframe {
     weak private var userInterface: PreferencesController?
     weak private var windowController: PreferencesWindowController!
 
-    func show(withDelegate delegate: PreferencesModuleDelegate? = nil) -> PreferencesModule {
+    func show(withDelegate delegate: PreferencesModuleDelegate? = nil, configurationStorage: ConfigurationStorage = UserDefaultsConfigurationStorage()) -> PreferencesModule {
         windowController = StoryboardScene.Main.instantiatePreferencesWindowController()
         guard let controller = windowController.contentViewController as? PreferencesController, let window = windowController.window else {
             preconditionFailure("PreferencesWindowController doesn't have expected PreferencesController as a contentViewController or window is nil")
         }
-        let interactor = PreferencesInteractor(configurationStorage: UserDefaultsConfigurationStorage())
+        let interactor = PreferencesInteractor(configurationStorage: configurationStorage)
         let presenter = PreferencesPresenter()
         presenter.interactor = interactor
         presenter.userInterface = controller

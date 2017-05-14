@@ -19,6 +19,7 @@
 		6D130B651EC8DA4300E9642A /* PreferencesPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B641EC8DA4300E9642A /* PreferencesPresenterSpec.swift */; };
 		6D130B671EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B661EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift */; };
 		6D130B691EC8E16400E9642A /* PreferencesControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B681EC8E16400E9642A /* PreferencesControllerSpec.swift */; };
+		6D130B6B1EC8E55F00E9642A /* PreferencesWireframeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B6A1EC8E55F00E9642A /* PreferencesWireframeSpec.swift */; };
 		6D21E66D1EAE9E3600800B91 /* ApplicationLogReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */; };
 		6D21E66F1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */; };
 		6D21E6721EAEACD300800B91 /* TestLog.log in Resources */ = {isa = PBXBuildFile; fileRef = 6D21E6711EAEACD300800B91 /* TestLog.log */; };
@@ -144,6 +145,7 @@
 		6D130B641EC8DA4300E9642A /* PreferencesPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesPresenterSpec.swift; sourceTree = "<group>"; };
 		6D130B661EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsConfigurationStorageSpec.swift; sourceTree = "<group>"; };
 		6D130B681EC8E16400E9642A /* PreferencesControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesControllerSpec.swift; sourceTree = "<group>"; };
+		6D130B6A1EC8E55F00E9642A /* PreferencesWireframeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWireframeSpec.swift; sourceTree = "<group>"; };
 		6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReader.swift; sourceTree = "<group>"; };
 		6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReaderSpec.swift; sourceTree = "<group>"; };
 		6D21E6711EAEACD300800B91 /* TestLog.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestLog.log; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				6D130B641EC8DA4300E9642A /* PreferencesPresenterSpec.swift */,
 				6D130B661EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift */,
 				6D130B681EC8E16400E9642A /* PreferencesControllerSpec.swift */,
+				6D130B6A1EC8E55F00E9642A /* PreferencesWireframeSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -998,6 +1001,7 @@
 				6D3000391EBDE7ED005B6103 /* Fonts.swift in Sources */,
 				6D130B651EC8DA4300E9642A /* PreferencesPresenterSpec.swift in Sources */,
 				6D21E66F1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift in Sources */,
+				6D130B6B1EC8E55F00E9642A /* PreferencesWireframeSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
