@@ -20,6 +20,7 @@
 		6D130B671EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B661EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift */; };
 		6D130B691EC8E16400E9642A /* PreferencesControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B681EC8E16400E9642A /* PreferencesControllerSpec.swift */; };
 		6D130B6B1EC8E55F00E9642A /* PreferencesWireframeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B6A1EC8E55F00E9642A /* PreferencesWireframeSpec.swift */; };
+		6D130B6D1EC8E82B00E9642A /* ConfigurationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B6C1EC8E82B00E9642A /* ConfigurationSpec.swift */; };
 		6D21E66D1EAE9E3600800B91 /* ApplicationLogReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */; };
 		6D21E66F1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */; };
 		6D21E6721EAEACD300800B91 /* TestLog.log in Resources */ = {isa = PBXBuildFile; fileRef = 6D21E6711EAEACD300800B91 /* TestLog.log */; };
@@ -146,6 +147,7 @@
 		6D130B661EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsConfigurationStorageSpec.swift; sourceTree = "<group>"; };
 		6D130B681EC8E16400E9642A /* PreferencesControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesControllerSpec.swift; sourceTree = "<group>"; };
 		6D130B6A1EC8E55F00E9642A /* PreferencesWireframeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWireframeSpec.swift; sourceTree = "<group>"; };
+		6D130B6C1EC8E82B00E9642A /* ConfigurationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSpec.swift; sourceTree = "<group>"; };
 		6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReader.swift; sourceTree = "<group>"; };
 		6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReaderSpec.swift; sourceTree = "<group>"; };
 		6D21E6711EAEACD300800B91 /* TestLog.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestLog.log; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				6D130B661EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift */,
 				6D130B681EC8E16400E9642A /* PreferencesControllerSpec.swift */,
 				6D130B6A1EC8E55F00E9642A /* PreferencesWireframeSpec.swift */,
+				6D130B6C1EC8E82B00E9642A /* ConfigurationSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -982,6 +985,7 @@
 				6D3000331EBD2DB3005B6103 /* KaleidoscopeViewerSpec.swift in Sources */,
 				6D42C9401EB27B64003744BF /* SnapshotTestResultFactorySpec.swift in Sources */,
 				6DE3475E1E476F8A004147DF /* FolderEventSpec.swift in Sources */,
+				6D130B6D1EC8E82B00E9642A /* ConfigurationSpec.swift in Sources */,
 				6D3BA5651E6E07AA00CAD4EE /* MenuPresenterSpec.swift in Sources */,
 				6D42C93E1EB275B6003744BF /* MenuWireframeSpec.swift in Sources */,
 				6D342CE21EBBDFDF006EEBEC /* AppleInterfaceModeSpec.swift in Sources */,
