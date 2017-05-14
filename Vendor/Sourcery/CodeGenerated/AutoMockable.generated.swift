@@ -246,6 +246,20 @@ class PreferencesInteractorInputMock: PreferencesInteractorInput {
         setNewDerivedDataFolderPathReceivedPath = path
     }
 }
+class PreferencesModuleDelegateMock: PreferencesModuleDelegate {
+
+
+    //MARK: - preferencesModuleWillClose
+
+    var preferencesModuleWillCloseCalled = false
+    var preferencesModuleWillCloseReceivedPreferencesModule: PreferencesModuleInterface?
+
+    func preferencesModuleWillClose(_ preferencesModule: PreferencesModuleInterface) {
+
+        preferencesModuleWillCloseCalled = true
+        preferencesModuleWillCloseReceivedPreferencesModule = preferencesModule
+    }
+}
 class PreferencesModuleInterfaceMock: PreferencesModuleInterface {
 
 

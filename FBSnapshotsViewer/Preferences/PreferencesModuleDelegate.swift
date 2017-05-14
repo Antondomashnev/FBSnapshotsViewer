@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol PreferencesModuleDelegate: class {
+protocol PreferencesModuleDelegate: class, AutoMockable {
     func preferencesModuleWillClose(_ preferencesModule: PreferencesModuleInterface)
 }
