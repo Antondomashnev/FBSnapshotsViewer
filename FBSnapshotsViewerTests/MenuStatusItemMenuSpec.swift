@@ -33,6 +33,16 @@ class MenuStatusItemMenuSpec: QuickSpec {
             itemMenu = MenuStatusItemMenu(target: target)
         }
 
+        describe(".preferencesItemClicked") {
+            beforeEach {
+                itemMenu.preferencesItemClicked(sender: NSMenuItem(title: "Preferences", action: nil, keyEquivalent: "P"))
+            }
+
+            it("notifies target") {
+                expect(target.menuStatusItemMenuPreferencesItemClickedCalled).to(beTrue())
+            }
+        }
+
         describe(".quitItemClicked") {
             beforeEach {
                 itemMenu.quitItemClicked(sender: NSMenuItem(title: "Quit", action: nil, keyEquivalent: "Q"))
