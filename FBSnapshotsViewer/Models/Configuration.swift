@@ -43,4 +43,13 @@ class Configuration: NSObject, AutoMockable, NSCoding {
             return nil
         }
     }
+
+    // MARK: - Equatable
+
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let configuration = object as? Configuration else {
+            return false
+        }
+        return configuration.derivedDataFolder == self.derivedDataFolder
+    }
 }

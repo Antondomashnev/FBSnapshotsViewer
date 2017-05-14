@@ -15,7 +15,7 @@ protocol ConfigurationStorage: AutoMockable {
 
 class UserDefaultsConfigurationStorage: ConfigurationStorage {
     private let userDefaults: UserDefaults
-    private let configurationKey: String = "com.antondomashnev.FBSnapshotsViewer.UserDefaultsConfigurationStorage.Configuration"
+    let configurationKey: String = "com.antondomashnev.FBSnapshotsViewer.UserDefaultsConfigurationStorage.Configuration"
 
     init(userDefaults: UserDefaults = UserDefaults.standard) {
         self.userDefaults = userDefaults

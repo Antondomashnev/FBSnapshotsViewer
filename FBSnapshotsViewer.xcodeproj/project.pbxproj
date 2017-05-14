@@ -17,6 +17,7 @@
 		6D12F4611E8086F000AA4727 /* TestResultsWireframeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12F4601E8086F000AA4727 /* TestResultsWireframeSpec.swift */; };
 		6D12F4721E81758500AA4727 /* TestResultsControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12F4711E81758500AA4727 /* TestResultsControllerSpec.swift */; };
 		6D130B651EC8DA4300E9642A /* PreferencesPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B641EC8DA4300E9642A /* PreferencesPresenterSpec.swift */; };
+		6D130B671EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B661EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift */; };
 		6D21E66D1EAE9E3600800B91 /* ApplicationLogReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */; };
 		6D21E66F1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */; };
 		6D21E6721EAEACD300800B91 /* TestLog.log in Resources */ = {isa = PBXBuildFile; fileRef = 6D21E6711EAEACD300800B91 /* TestLog.log */; };
@@ -140,6 +141,7 @@
 		6D12F4601E8086F000AA4727 /* TestResultsWireframeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultsWireframeSpec.swift; sourceTree = "<group>"; };
 		6D12F4711E81758500AA4727 /* TestResultsControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultsControllerSpec.swift; sourceTree = "<group>"; };
 		6D130B641EC8DA4300E9642A /* PreferencesPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesPresenterSpec.swift; sourceTree = "<group>"; };
+		6D130B661EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsConfigurationStorageSpec.swift; sourceTree = "<group>"; };
 		6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReader.swift; sourceTree = "<group>"; };
 		6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReaderSpec.swift; sourceTree = "<group>"; };
 		6D21E6711EAEACD300800B91 /* TestLog.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestLog.log; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				6D30003B1EBF29D8005B6103 /* TestResultCellSpec.swift */,
 				6D4D844A1EC7B8E70005932D /* PreferencesInteractorSpec.swift */,
 				6D130B641EC8DA4300E9642A /* PreferencesPresenterSpec.swift */,
+				6D130B661EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -969,6 +972,7 @@
 				6D076B7B1E7F3177001FDA14 /* TestResultsPresenterSpec.swift in Sources */,
 				6D92E1CB1E730A5C00DB73C7 /* MenuInteractorSpec.swift in Sources */,
 				6D076B771E7EBD15001FDA14 /* TestResultDisplayInfoSpec.swift in Sources */,
+				6D130B671EC8DE3E00E9642A /* UserDefaultsConfigurationStorageSpec.swift in Sources */,
 				6D3000331EBD2DB3005B6103 /* KaleidoscopeViewerSpec.swift in Sources */,
 				6D42C9401EB27B64003744BF /* SnapshotTestResultFactorySpec.swift in Sources */,
 				6DE3475E1E476F8A004147DF /* FolderEventSpec.swift in Sources */,
