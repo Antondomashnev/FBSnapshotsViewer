@@ -12,9 +12,9 @@ class PreferencesWindowController: NSWindowController {}
 
 class PreferencesController: NSViewController {
     var eventHandler: PreferencesModuleInterface!
-    @IBOutlet fileprivate weak var derivedDataTypePopUpButton: NSPopUpButton!
-    @IBOutlet fileprivate weak var derivedDataPathLabel: NSTextField!
-    @IBOutlet fileprivate weak var derivedDataPathTextField: NSTextField!
+    @IBOutlet weak var derivedDataTypePopUpButton: NSPopUpButton!
+    @IBOutlet weak var derivedDataPathLabel: NSTextField!
+    @IBOutlet weak var derivedDataPathTextField: NSTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
