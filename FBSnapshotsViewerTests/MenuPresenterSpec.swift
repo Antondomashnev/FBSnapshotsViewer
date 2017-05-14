@@ -14,16 +14,21 @@ import Nimble
 class MenuPresenter_MockMenuWireframe: MenuWireframe {
     var showTestResultsModuleCalled: Bool = false
     var showTestResultsModuleReceivedParameters: [SnapshotTestResult] = []
-
     override func showTestResultsModule(with testResults: [SnapshotTestResult]) {
         showTestResultsModuleCalled = true
         showTestResultsModuleReceivedParameters = testResults
+    }
+
+    var showPreferencesModuleCalled: Bool = false
+    override func showPreferencesModule() {
+        showPreferencesModuleCalled = true
     }
 }
 
 class MenuPresenterSpec: QuickSpec {
     override func spec() {
-        var xcodeDerivedDataFolder: XcodeDerivedDataFolder!
+        var configuration: FBSnapshotsViewer.Configuration!
+        var derivedDataFolder: DerivedDataFolder!
         var application: ApplicationMock!
         var userInterface: MenuUserInterfaceMock!
         var presenter: MenuPresenter!
@@ -31,15 +36,26 @@ class MenuPresenterSpec: QuickSpec {
         var wireframe: MenuPresenter_MockMenuWireframe!
 
         beforeEach {
-            xcodeDerivedDataFolder = XcodeDerivedDataFolder(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
+            derivedDataFolder = DerivedDataFolder.custom(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
+            configuration = FBSnapshotsViewer.Configuration(derivedDataFolder: derivedDataFolder)
             application = ApplicationMock()
             wireframe = MenuPresenter_MockMenuWireframe()
             interactor = MenuInteractorInputMock()
-            presenter = MenuPresenter(xcodeDerivedDataFolder: xcodeDerivedDataFolder, application: application)
+            presenter = MenuPresenter(configuration: configuration, application: application)
             userInterface = MenuUserInterfaceMock()
             presenter.userInterface = userInterface
             presenter.interactor = interactor
             presenter.wireframe = wireframe
+        }
+
+        describe(".showPreferences") {
+            beforeEach {
+                presenter.showPreferences()
+            }
+
+            it("shows preferences") {
+                expect(wireframe.showPreferencesModuleCalled).to(beTrue())
+            }
         }
 
         describe(".start") {
@@ -48,7 +64,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("starts the Xcode builds listening") {
-                expect(interactor.startXcodeBuildsListeningReceivedXcodeDerivedDataFolder).to(equal(xcodeDerivedDataFolder))
+                expect(interactor.startXcodeBuildsListeningReceivedDerivedDataFolder).to(equal(derivedDataFolder))
             }
         }
 

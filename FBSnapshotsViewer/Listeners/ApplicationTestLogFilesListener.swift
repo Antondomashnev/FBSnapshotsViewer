@@ -35,9 +35,9 @@ class ApplicationTestLogFilesListener {
         resetRunningAction()
     }
 
-    func listen(xcodeDerivedDataFolder: String, outputTo completion: @escaping ApplicationTestLogFilesListenerOutput) {
+    func listen(derivedDataFolder: String, outputTo completion: @escaping ApplicationTestLogFilesListenerOutput) {
         resetRunningAction()
-        var folderEventsListener = folderEventsListenerFactory.applicationTestLogsEventsListener(at: xcodeDerivedDataFolder)
+        var folderEventsListener = folderEventsListenerFactory.applicationTestLogsEventsListener(at: derivedDataFolder)
         folderEventsListener.output = self
         runningAction = ApplicationTestLogFilesListenerAction(output: completion, folderEventsListener: folderEventsListener)
         runningAction?.run()

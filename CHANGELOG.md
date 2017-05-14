@@ -3,6 +3,7 @@
 ### 0.3.0 (Next)
 
 * Your contribution here
+* [#31](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/31): Add Derived Data configuration - [@antondomashnev](https://github.com/antondomashnev).
 * [#28](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/28): Update UI color scheme for Apple's dark interface mode - [@antondomashnev](https://github.com/antondomashnev).
 * [#29](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/29): Add open in Kaleidoscope feature - [@antondomashnev](https://github.com/antondomashnev).
 * [#30](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/30): Add application icon - [@antondomashnev](https://github.com/antondomashnev).

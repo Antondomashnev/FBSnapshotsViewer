@@ -14,8 +14,8 @@ protocol MenuInteractorInput: class, AutoMockable {
 
     /// Start listening for xcode builds real-time
     ///
-    /// - Parameter xcodeDerivedDataFolder: xcode derived data folder
-    func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder)
+    /// - Parameter derivedDataFolder: xcode derived data folder
+    func startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder)
 
     /// Start listening for the given test's log file updates to extract
     /// stnapshot test results from it

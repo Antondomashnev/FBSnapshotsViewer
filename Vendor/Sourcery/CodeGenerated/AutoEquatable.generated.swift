@@ -34,12 +34,6 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard lhs.testResult == rhs.testResult else { return false }
     return true
 }
-// MARK: - XcodeDerivedDataFolder AutoEquatable
-extension XcodeDerivedDataFolder: Equatable {} 
-internal func == (lhs: XcodeDerivedDataFolder, rhs: XcodeDerivedDataFolder) -> Bool {
-    guard lhs.path == rhs.path else { return false }
-    return true
-}
 
 // MARK: - AutoEquatable for Enums
 // MARK: - AppleInterfaceMode AutoEquatable
@@ -62,6 +56,28 @@ internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
     case (.referenceImageSavedMessage(let lhs), .referenceImageSavedMessage(let rhs)): 
         return lhs == rhs
     case (.unknown, .unknown): 
+         return true 
+    default: return false
+    }
+}
+// MARK: - DerivedDataFolder AutoEquatable
+extension DerivedDataFolder: Equatable {}
+internal func == (lhs: DerivedDataFolder, rhs: DerivedDataFolder) -> Bool {
+    switch (lhs, rhs) {
+    case (.custom(let lhs), .custom(let rhs)): 
+        return lhs == rhs
+    case (.xcode, .xcode): 
+         return true 
+    default: return false
+    }
+}
+// MARK: - DerivedDataFolderType AutoEquatable
+extension DerivedDataFolderType: Equatable {}
+internal func == (lhs: DerivedDataFolderType, rhs: DerivedDataFolderType) -> Bool {
+    switch (lhs, rhs) {
+    case (.xcode, .xcode): 
+         return true 
+    case (.custom, .custom): 
          return true 
     default: return false
     }

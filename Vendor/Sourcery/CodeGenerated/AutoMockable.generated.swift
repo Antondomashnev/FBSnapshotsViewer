@@ -23,6 +23,30 @@ class ApplicationMock: Application {
         terminateReceivedSender = sender
     }
 }
+class ConfigurationStorageMock: ConfigurationStorage {
+
+
+    //MARK: - loadConfiguration
+
+    var loadConfigurationCalled = false
+    var loadConfigurationReturnValue: Configuration?
+
+    func loadConfiguration() -> Configuration? {
+
+        loadConfigurationCalled = true
+        return loadConfigurationReturnValue
+    }
+    //MARK: - save
+
+    var saveCalled = false
+    var saveReceivedConfiguration: Configuration?
+
+    func save(configuration: Configuration) {
+
+        saveCalled = true
+        saveReceivedConfiguration = configuration
+    }
+}
 class FolderEventsListenerMock: FolderEventsListener {
 
     var output: FolderEventsListenerOutput?
@@ -65,18 +89,6 @@ class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
         folderEventsListenerReceivedArguments = (listener: listener, event: event)
     }
 }
-class ListMock: List {
-
-
-    //MARK: - reloadData
-
-    var reloadDataCalled = false
-
-    func reloadData() {
-
-        reloadDataCalled = true
-    }
-}
 class MenuInteractorInputMock: MenuInteractorInput {
 
     var foundTestResults: [SnapshotTestResult] = []
@@ -84,12 +96,12 @@ class MenuInteractorInputMock: MenuInteractorInput {
     //MARK: - startXcodeBuildsListening
 
     var startXcodeBuildsListeningCalled = false
-    var startXcodeBuildsListeningReceivedXcodeDerivedDataFolder: XcodeDerivedDataFolder?
+    var startXcodeBuildsListeningReceivedDerivedDataFolder: DerivedDataFolder?
 
-    func startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder) {
+    func startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder) {
 
         startXcodeBuildsListeningCalled = true
-        startXcodeBuildsListeningReceivedXcodeDerivedDataFolder = xcodeDerivedDataFolder
+        startXcodeBuildsListeningReceivedDerivedDataFolder = derivedDataFolder
     }
     //MARK: - startSnapshotTestResultListening
 
@@ -145,6 +157,14 @@ class MenuModuleInterfaceMock: MenuModuleInterface {
 
         showTestResultsCalled = true
     }
+    //MARK: - showPreferences
+
+    var showPreferencesCalled = false
+
+    func showPreferences() {
+
+        showPreferencesCalled = true
+    }
     //MARK: - showApplicationMenu
 
     var showApplicationMenuCalled = false
@@ -182,6 +202,116 @@ class MenuUserInterfaceMock: MenuUserInterface {
     func popUpOptionsMenu() {
 
         popUpOptionsMenuCalled = true
+    }
+}
+class PreferencesInteractorInputMock: PreferencesInteractorInput {
+
+
+    //MARK: - save
+
+    var saveCalled = false
+
+    func save() {
+
+        saveCalled = true
+    }
+    //MARK: - currentConfiguration
+
+    var currentConfigurationCalled = false
+    var currentConfigurationReturnValue: Configuration!
+
+    func currentConfiguration() -> Configuration {
+
+        currentConfigurationCalled = true
+        return currentConfigurationReturnValue
+    }
+    //MARK: - setNewDerivedDataFolderType
+
+    var setNewDerivedDataFolderTypeCalled = false
+    var setNewDerivedDataFolderTypeReceivedType: String?
+
+    func setNewDerivedDataFolderType(_ type: String) {
+
+        setNewDerivedDataFolderTypeCalled = true
+        setNewDerivedDataFolderTypeReceivedType = type
+    }
+    //MARK: - setNewDerivedDataFolderPath
+
+    var setNewDerivedDataFolderPathCalled = false
+    var setNewDerivedDataFolderPathReceivedPath: String?
+
+    func setNewDerivedDataFolderPath(_ path: String) {
+
+        setNewDerivedDataFolderPathCalled = true
+        setNewDerivedDataFolderPathReceivedPath = path
+    }
+}
+class PreferencesModuleDelegateMock: PreferencesModuleDelegate {
+
+
+    //MARK: - preferencesModuleWillClose
+
+    var preferencesModuleWillCloseCalled = false
+    var preferencesModuleWillCloseReceivedPreferencesModule: PreferencesModuleInterface?
+
+    func preferencesModuleWillClose(_ preferencesModule: PreferencesModuleInterface) {
+
+        preferencesModuleWillCloseCalled = true
+        preferencesModuleWillCloseReceivedPreferencesModule = preferencesModule
+    }
+}
+class PreferencesModuleInterfaceMock: PreferencesModuleInterface {
+
+
+    //MARK: - close
+
+    var closeCalled = false
+
+    func close() {
+
+        closeCalled = true
+    }
+    //MARK: - updateUserInterface
+
+    var updateUserInterfaceCalled = false
+
+    func updateUserInterface() {
+
+        updateUserInterfaceCalled = true
+    }
+    //MARK: - select
+
+    var selectCalled = false
+    var selectReceivedDerivedDataFolderType: String?
+
+    func select(derivedDataFolderType: String) {
+
+        selectCalled = true
+        selectReceivedDerivedDataFolderType = derivedDataFolderType
+    }
+    //MARK: - update
+
+    var updateCalled = false
+    var updateReceivedDerivedDataFolderPath: String?
+
+    func update(derivedDataFolderPath: String) {
+
+        updateCalled = true
+        updateReceivedDerivedDataFolderPath = derivedDataFolderPath
+    }
+}
+class PreferencesUserInterfaceMock: PreferencesUserInterface {
+
+
+    //MARK: - show
+
+    var showCalled = false
+    var showReceivedPreferencesDisplayInfo: PreferencesDisplayInfo?
+
+    func show(preferencesDisplayInfo: PreferencesDisplayInfo) {
+
+        showCalled = true
+        showReceivedPreferencesDisplayInfo = preferencesDisplayInfo
     }
 }
 class TestResultCellDelegateMock: TestResultCellDelegate {

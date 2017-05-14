@@ -35,8 +35,8 @@ class MenuInteractor_MockApplicationTestLogFilesListener: ApplicationTestLogFile
     var listeningDerivedDataFolder: String!
     var stopListeningCalled: Bool = false
 
-    override func listen(xcodeDerivedDataFolder: String, outputTo completion: @escaping ApplicationTestLogFilesListenerOutput) {
-        listeningDerivedDataFolder = xcodeDerivedDataFolder
+    override func listen(derivedDataFolder: String, outputTo completion: @escaping ApplicationTestLogFilesListenerOutput) {
+        listeningDerivedDataFolder = derivedDataFolder
         output = completion
     }
 
@@ -69,7 +69,7 @@ class MenuInteractorSpec: QuickSpec {
 
         describe(".startXcodeBuildsListening") {
             beforeEach {
-                interactor.startXcodeBuildsListening(xcodeDerivedDataFolder: XcodeDerivedDataFolder(path: "/Users/antondomashnev/Library/Bla"))
+                interactor.startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder.custom(path: "/Users/antondomashnev/Library/Bla"))
             }
 
             it("stops the current xcode builds listening") {

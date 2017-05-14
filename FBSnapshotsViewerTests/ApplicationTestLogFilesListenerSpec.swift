@@ -13,17 +13,17 @@ import Nimble
 
 class ApplicationTestLogFilesListener_MockFolderEventsListenerFactory: FolderEventsListenerFactory {
     var mockApplicationTestLogsEventsListener: FolderEventsListener!
-    var givenXcodeDerivedDataFolderPath: String!
+    var givenDerivedDataFolderPath: String!
 
-    override func applicationTestLogsEventsListener(at xcodeDerivedDataFolderPath: String) -> FolderEventsListener {
-        givenXcodeDerivedDataFolderPath = xcodeDerivedDataFolderPath
+    override func applicationTestLogsEventsListener(at derivedDataFolderPath: String) -> FolderEventsListener {
+        givenDerivedDataFolderPath = derivedDataFolderPath
         return mockApplicationTestLogsEventsListener
     }
 }
 
 class ApplicationTestLogFilesListenerSpec: QuickSpec {
     override func spec() {
-        let xcodeDerivedDataFolder = "Users/Antondomashnev/Library/Xcode/DerivedData/"
+        let derivedDataFolder = "Users/Antondomashnev/Library/Xcode/DerivedData/"
         var folderEventsListenerFactory: ApplicationTestLogFilesListener_MockFolderEventsListenerFactory!
         var applicationTestLogsEventsListener: FolderEventsListenerMock!
         var applicationTestLogFilesListener: ApplicationTestLogFilesListener!
@@ -42,7 +42,7 @@ class ApplicationTestLogFilesListenerSpec: QuickSpec {
 
         describe(".stopListening") {
             beforeEach {
-                applicationTestLogFilesListener.listen(xcodeDerivedDataFolder: xcodeDerivedDataFolder, outputTo: applicationTestLogFilesListenerOutput)
+                applicationTestLogFilesListener.listen(derivedDataFolder: derivedDataFolder, outputTo: applicationTestLogFilesListenerOutput)
                 applicationTestLogFilesListener.stopListening()
                 applicationTestLogFilesListener.folderEventsListener(applicationTestLogsEventsListener, didReceive: FolderEvent.created(path: "createdPath.log", object: .folder))
             }
@@ -54,7 +54,7 @@ class ApplicationTestLogFilesListenerSpec: QuickSpec {
 
         describe(".folderEventsListener(didReceive:)") {
             beforeEach {
-                applicationTestLogFilesListener.listen(xcodeDerivedDataFolder: xcodeDerivedDataFolder, outputTo: applicationTestLogFilesListenerOutput)
+                applicationTestLogFilesListener.listen(derivedDataFolder: derivedDataFolder, outputTo: applicationTestLogFilesListenerOutput)
             }
 
             context("when event without path") {
@@ -82,12 +82,12 @@ class ApplicationTestLogFilesListenerSpec: QuickSpec {
 
         describe(".listen") {
             beforeEach {
-                applicationTestLogFilesListener.listen(xcodeDerivedDataFolder: xcodeDerivedDataFolder, outputTo: applicationTestLogFilesListenerOutput)
+                applicationTestLogFilesListener.listen(derivedDataFolder: derivedDataFolder, outputTo: applicationTestLogFilesListenerOutput)
             }
 
             context("when already listening") {
                 beforeEach {
-                    applicationTestLogFilesListener.listen(xcodeDerivedDataFolder: xcodeDerivedDataFolder, outputTo: applicationTestLogFilesListenerOutput)
+                    applicationTestLogFilesListener.listen(derivedDataFolder: derivedDataFolder, outputTo: applicationTestLogFilesListenerOutput)
                 }
 
                 it("stops current listening") {
@@ -96,7 +96,7 @@ class ApplicationTestLogFilesListenerSpec: QuickSpec {
             }
 
             it("starts listening the given derived data folder") {
-                expect(folderEventsListenerFactory.givenXcodeDerivedDataFolderPath).to(equal(xcodeDerivedDataFolder))
+                expect(folderEventsListenerFactory.givenDerivedDataFolderPath).to(equal(derivedDataFolder))
             }
 
             it("starts listening") {

@@ -13,9 +13,13 @@ import Nimble
 
 class MenuStatusItemMenu_MockMenuStatusItemMenuTarget: MenuStatusItemMenuTarget {
     var menuStatusItemMenuQuitItemClickedCalled: Bool = false
-
     func menuStatusItemMenu(_ menu: NSMenu, quitItemClicked: NSMenuItem) {
         menuStatusItemMenuQuitItemClickedCalled = true
+    }
+
+    var menuStatusItemMenuPreferencesItemClickedCalled: Bool = false
+    func menuStatusItemMenu(_ menu: NSMenu, preferencesItemClicked: NSMenuItem) {
+        menuStatusItemMenuPreferencesItemClickedCalled = true
     }
 }
 
@@ -27,6 +31,16 @@ class MenuStatusItemMenuSpec: QuickSpec {
         beforeEach {
             target = MenuStatusItemMenu_MockMenuStatusItemMenuTarget()
             itemMenu = MenuStatusItemMenu(target: target)
+        }
+
+        describe(".preferencesItemClicked") {
+            beforeEach {
+                itemMenu.preferencesItemClicked(sender: NSMenuItem(title: "Preferences", action: nil, keyEquivalent: "P"))
+            }
+
+            it("notifies target") {
+                expect(target.menuStatusItemMenuPreferencesItemClickedCalled).to(beTrue())
+            }
         }
 
         describe(".quitItemClicked") {
