@@ -4,7 +4,7 @@
 [![codebeat badge](https://codebeat.co/badges/f21f5fd8-5b7e-4cec-bc3e-8ce719300ed7)](https://codebeat.co/projects/github-com-antondomashnev-fbsnapshotsviewer)
 [![codecov](https://codecov.io/gh/Antondomashnev/FBSnapshotsViewer/branch/master/graph/badge.svg)](https://codecov.io/gh/Antondomashnev/FBSnapshotsViewer)
 
-A mac os application that shows the failing snapshot tests from [FBSnapshotTestCase](https://github.com/facebook/ios-snapshot-test-case) because it's a pain to parse the console logs by myself.
+A macOs application that shows the failing snapshot tests from [FBSnapshotTestCase](https://github.com/facebook/ios-snapshot-test-case) because it's a pain to parse the console logs by myself.
 
 ## Why FBSnapshotsViewer?
 
