@@ -69,10 +69,10 @@ class MenuInteractorSpec: QuickSpec {
 
         describe(".startXcodeBuildsListening") {
             beforeEach {
-                interactor.startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder.custom(path: "/Users/antondomashnev/Library/Bla"))
+                interactor.startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "/Users/antondomashnev/Library/Bla"))
             }
 
-            it("stops the current xcode builds listening") {
+            it("stops the current xcodeDefault builds listening") {
                 expect(applicationTestLogFilesListener.stopListeningCalled).to(beTrue())
             }
 

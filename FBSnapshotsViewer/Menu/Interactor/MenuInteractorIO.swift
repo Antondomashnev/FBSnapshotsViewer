@@ -12,9 +12,9 @@ protocol MenuInteractorInput: class, AutoMockable {
     /// Cached test results per one application run
     var foundTestResults: [SnapshotTestResult] { get }
 
-    /// Start listening for xcode builds real-time
+    /// Start listening for xcodeDefault builds real-time
     ///
-    /// - Parameter derivedDataFolder: xcode derived data folder
+    /// - Parameter derivedDataFolder: xcodeDefault derived data folder
     func startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder)
 
     /// Start listening for the given test's log file updates to extract

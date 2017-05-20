@@ -40,7 +40,7 @@ class UserDefaultsConfigurationStorageSpec: QuickSpec {
                 var configuration: FBSnapshotsViewer.Configuration!
 
                 beforeEach {
-                    configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcode)
+                    configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
                     let data: Data! = NSKeyedArchiver.archivedData(withRootObject: configuration)
                     userDefaults.set(data, forKey: storage.configurationKey)
                 }
@@ -55,7 +55,7 @@ class UserDefaultsConfigurationStorageSpec: QuickSpec {
             var configuration: FBSnapshotsViewer.Configuration!
 
             beforeEach {
-                configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcode)
+                configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
                 storage.save(configuration: configuration)
             }
 

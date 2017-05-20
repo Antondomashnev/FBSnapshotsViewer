@@ -11,22 +11,27 @@ import Foundation
 enum DerivedDataFolder: AutoEquatable {
     var type: DerivedDataFolderType {
         switch self {
-        case .xcode:
-            return DerivedDataFolderType.xcode
-        case .custom(_):
-            return DerivedDataFolderType.custom
+        case .xcodeDefault:
+            return DerivedDataFolderType.xcodeDefault
+        case .xcodeCustom(_):
+            return DerivedDataFolderType.xcodeCustom
+        case .appcode(_):
+            return DerivedDataFolderType.appcode
         }
     }
 
     var path: String {
         switch self {
-        case .xcode:
+        case .xcodeDefault:
             return "\(NSHomeDirectory())/Library/Developer/Xcode/DerivedData"
-        case let .custom(path):
+        case let .xcodeCustom(path):
+            return path
+        case let .appcode(path):
             return path
         }
     }
 
-    case custom(path: String)
-    case xcode
+    case xcodeCustom(path: String)
+    case xcodeDefault
+    case appcode(path: String)
 }

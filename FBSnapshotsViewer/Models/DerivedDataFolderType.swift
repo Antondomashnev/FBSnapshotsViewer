@@ -9,8 +9,9 @@
 import Foundation
 
 enum DerivedDataFolderType {
-    case xcode
-    case custom
+    case xcodeDefault
+    case xcodeCustom
+    case appcode
 }
 
 extension DerivedDataFolderType: AutoCases {}
@@ -21,10 +22,12 @@ extension DerivedDataFolderType: RawRepresentable {
 
     init?(rawValue: DerivedDataFolderType.RawValue) {
         switch rawValue {
-        case "Xcode":
-            self = .xcode
-        case "Custom":
-            self = .custom
+        case "Xcode Default":
+            self = .xcodeDefault
+        case "Xcode Custom":
+            self = .xcodeCustom
+        case "AppCode":
+            self = .appcode
         default:
             return nil
         }
@@ -32,10 +35,12 @@ extension DerivedDataFolderType: RawRepresentable {
 
     var rawValue: String {
         switch self {
-        case .xcode:
-            return "Xcode"
-        case .custom:
-            return "Custom"
+        case .xcodeDefault:
+            return "Xcode Default"
+        case .xcodeCustom:
+            return "Xcode Custom"
+        case .appcode:
+            return "AppCode"
         }
     }
 }

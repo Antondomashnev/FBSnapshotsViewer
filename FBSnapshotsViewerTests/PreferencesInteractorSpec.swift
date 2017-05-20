@@ -19,16 +19,16 @@ class PreferencesInteractorSpec: QuickSpec {
 
         beforeEach {
             configurationStorage = ConfigurationStorageMock()
-            configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcode)
+            configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
         }
 
         describe(".setNewDerivedDataFolderPath") {
-            context("when current configuration derived data folder type is custom") {
+            context("when current configuration derived data folder type is xcodeCustom") {
                 var newPath: String!
 
                 beforeEach {
                     newPath = "myNewPath"
-                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.custom(path: "customPath"))
+                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "customPath"))
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                     interactor.setNewDerivedDataFolderPath(newPath)
                 }
@@ -39,7 +39,7 @@ class PreferencesInteractorSpec: QuickSpec {
                 }
             }
 
-            context("when current configuration derived data folder type is xcode") {
+            context("when current configuration derived data folder type is xcodeDefault") {
                 beforeEach {
                     configurationStorage.loadConfigurationReturnValue = configuration
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
@@ -70,40 +70,40 @@ class PreferencesInteractorSpec: QuickSpec {
                 }
 
                 it("does nothing") {
-                    interactor.setNewDerivedDataFolderType(DerivedDataFolderType.xcode.rawValue)
+                    interactor.setNewDerivedDataFolderType(DerivedDataFolderType.xcodeDefault.rawValue)
                 }
             }
 
-            context("when current type is xcode") {
+            context("when current type is xcodeDefault") {
                 beforeEach {
                     configurationStorage.loadConfigurationReturnValue = configuration
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                 }
 
-                context("when set custom type") {
+                context("when set xcodeCustom type") {
                     beforeEach {
-                        interactor.setNewDerivedDataFolderType(DerivedDataFolderType.custom.rawValue)
+                        interactor.setNewDerivedDataFolderType(DerivedDataFolderType.xcodeCustom.rawValue)
                     }
 
-                    it("updates configuration with custom derived data and empty path") {
-                        expect(interactor.currentConfiguration().derivedDataFolder).to(equal(DerivedDataFolder.custom(path: "")))
+                    it("updates configuration with xcodeCustom derived data and empty path") {
+                        expect(interactor.currentConfiguration().derivedDataFolder).to(equal(DerivedDataFolder.xcodeCustom(path: "")))
                     }
                 }
             }
 
-            context("when current type is custom") {
+            context("when current type is xcodeCustom") {
                 beforeEach {
-                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.custom(path: "myPath"))
+                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                 }
 
-                context("when set custom type") {
+                context("when set xcodeCustom type") {
                     beforeEach {
-                        interactor.setNewDerivedDataFolderType(DerivedDataFolderType.xcode.rawValue)
+                        interactor.setNewDerivedDataFolderType(DerivedDataFolderType.xcodeDefault.rawValue)
                     }
 
-                    it("updates configuration with custom derived data and empty path") {
-                        expect(interactor.currentConfiguration().derivedDataFolder).to(equal(DerivedDataFolder.xcode))
+                    it("updates configuration with xcodeCustom derived data and empty path") {
+                        expect(interactor.currentConfiguration().derivedDataFolder).to(equal(DerivedDataFolder.xcodeDefault))
                     }
                 }
             }
@@ -136,7 +136,7 @@ class PreferencesInteractorSpec: QuickSpec {
         describe(".init") {
             context("when configuration storage can load configuration") {
                 beforeEach {
-                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcode)
+                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
                 }
 
                 it("initializes new instance") {

@@ -3,9 +3,10 @@
 
 
 extension DerivedDataFolderType {
-  static let count: Int = 2
+  static let count: Int = 3
   static let allCases: [DerivedDataFolderType] = [
-    .xcode,
-    .custom
+    .xcodeDefault,
+    .xcodeCustom,
+    .appcode
   ]
 }

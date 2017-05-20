@@ -28,23 +28,23 @@ class PreferencesDisplayInfoSpec: QuickSpec {
         describe(".initConfiguration") {
             var configuration: FBSnapshotsViewer.Configuration!
 
-            context("when derived data xcode") {
+            context("when derived data xcodeDefault") {
                 beforeEach {
-                    configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcode)
+                    configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
                     displayInfo = PreferencesDisplayInfo(configuration: configuration)
                 }
 
                 it("initialized new instance") {
-                    expect(displayInfo.derivedDataFolderPath).to(equal(DerivedDataFolder.xcode.path))
+                    expect(displayInfo.derivedDataFolderPath).to(equal(DerivedDataFolder.xcodeDefault.path))
                     expect(displayInfo.derivedDataFolderTypeName).to(equal("Xcode"))
                     expect(displayInfo.derivedDataFolderPathEditable).to(beFalse())
                     expect(displayInfo.derivedDataFolderTypeNames).to(equal(["Xcode", "Custom"]))
                 }
             }
 
-            context("when derived custom") {
+            context("when derived xcodeCustom") {
                 beforeEach {
-                    configuration = Configuration(derivedDataFolder: DerivedDataFolder.custom(path: "Bar"))
+                    configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "Bar"))
                     displayInfo = PreferencesDisplayInfo(configuration: configuration)
                 }
 

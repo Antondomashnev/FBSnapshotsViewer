@@ -24,6 +24,6 @@ struct PreferencesDisplayInfo {
         let derivedDataFolder = configuration.derivedDataFolder
         derivedDataFolderPath = derivedDataFolder.path
         derivedDataFolderTypeName = derivedDataFolder.type.rawValue
-        derivedDataFolderPathEditable = derivedDataFolder.type == .custom
+        derivedDataFolderPathEditable = derivedDataFolder.type == .xcodeCustom
     }
 }
