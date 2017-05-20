@@ -37,7 +37,7 @@ class PreferencesPresenterSpec: QuickSpec {
 
         describe(".selectDerivedDataFolderType") {
             beforeEach {
-                let configuration = Configuration(derivedDataFolder: DerivedDataFolder.custom(path: "myPath"))
+                let configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
                 interactor.currentConfigurationReturnValue = configuration
                 presenter.select(derivedDataFolderType: "Type")
             }
@@ -54,7 +54,7 @@ class PreferencesPresenterSpec: QuickSpec {
 
         describe(".updateDerivedDataFolderPath") {
             beforeEach {
-                let configuration = Configuration(derivedDataFolder: DerivedDataFolder.custom(path: "myPath"))
+                let configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
                 interactor.currentConfigurationReturnValue = configuration
                 presenter.update(derivedDataFolderPath: "newPath")
             }
@@ -81,14 +81,14 @@ class PreferencesPresenterSpec: QuickSpec {
 
         describe(".updateUserInterface") {
             beforeEach {
-                let configuration = Configuration(derivedDataFolder: DerivedDataFolder.custom(path: "myPath"))
+                let configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
                 interactor.currentConfigurationReturnValue = configuration
                 presenter.updateUserInterface()
             }
 
             it("shows preferences display info in user interface") {
                 expect(userInterface.showReceivedPreferencesDisplayInfo?.derivedDataFolderPath).to(equal("myPath"))
-                expect(userInterface.showReceivedPreferencesDisplayInfo?.derivedDataFolderTypeName).to(equal(DerivedDataFolderType.custom.rawValue))
+                expect(userInterface.showReceivedPreferencesDisplayInfo?.derivedDataFolderTypeName).to(equal(DerivedDataFolderType.xcodeCustom.rawValue))
             }
         }
     }

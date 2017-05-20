@@ -1,5 +1,10 @@
 ## Changelog
 
+### 0.4.0 (Next)
+
+* Your contribution here.
+* [#36](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/36): Add AppCode snapshot testing support - [@antondomashnev](https://github.com/antondomashnev).
+
 ### 0.3.0 (14.05.2017)
 
 * [#31](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/31): Add Derived Data configuration - [@antondomashnev](https://github.com/antondomashnev).

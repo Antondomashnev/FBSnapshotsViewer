@@ -17,21 +17,28 @@ class ConfigurationSpec: QuickSpec {
         var configuration: FBSnapshotsViewer.Configuration!
 
         describe(".default") {
-            it("returns xcode configuration") {
-                expect(Configuration.default()).to(equal(Configuration.init(derivedDataFolder: DerivedDataFolder.xcode)))
+            it("returns xcodeDefault configuration") {
+                expect(Configuration.default()).to(equal(Configuration.init(derivedDataFolder: DerivedDataFolder.xcodeDefault)))
             }
         }
 
         describe(".init") {
             it("initializes new configuration") {
-                let derivedDataFolder = DerivedDataFolder.custom(path: "Foo")
+                let derivedDataFolder = DerivedDataFolder.xcodeCustom(path: "Foo")
                 expect(Configuration(derivedDataFolder: derivedDataFolder).derivedDataFolder).to(equal(derivedDataFolder))
             }
         }
 
         describe(".decoding") {
-            it("archives and unarchives the configuration") {
-                configuration = Configuration(derivedDataFolder: DerivedDataFolder.custom(path: "Foo"))
+            it("archives and unarchives the xcodeCustom configuration") {
+                configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "Foo"))
+                let data: Data! = NSKeyedArchiver.archivedData(withRootObject: configuration)
+                let unarchivedConfiguration = NSKeyedUnarchiver.unarchiveObject(with: data)
+                expect(configuration.isEqual(unarchivedConfiguration)).to(beTrue())
+            }
+
+            it("archives and unarchives the appcode configuration") {
+                configuration = Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: "Foo"))
                 let data: Data! = NSKeyedArchiver.archivedData(withRootObject: configuration)
                 let unarchivedConfiguration = NSKeyedUnarchiver.unarchiveObject(with: data)
                 expect(configuration.isEqual(unarchivedConfiguration)).to(beTrue())
@@ -47,8 +54,8 @@ class ConfigurationSpec: QuickSpec {
 
             context("when object is configuration") {
                 it("compares derived data folder") {
-                    expect(Configuration(derivedDataFolder: DerivedDataFolder.xcode)).to(equal(Configuration(derivedDataFolder: DerivedDataFolder.xcode)))
-                    expect(Configuration(derivedDataFolder: DerivedDataFolder.xcode)).toNot(equal(Configuration(derivedDataFolder: DerivedDataFolder.custom(path: "Foo"))))
+                    expect(Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)).to(equal(Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)))
+                    expect(Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)).toNot(equal(Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "Foo"))))
                 }
             }
         }

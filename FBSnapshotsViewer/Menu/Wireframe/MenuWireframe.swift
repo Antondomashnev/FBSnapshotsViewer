@@ -39,9 +39,9 @@ class MenuWireframe {
         wireframe.show(relativeTo: presentationView.bounds, of: presentationView, with: testResults)
     }
 
-    func showPreferencesModule() {
+    func showPreferencesModule(with configurationStorage: ConfigurationStorage = UserDefaultsConfigurationStorage()) {
         let wireframe = PreferencesWireframe()
-        preferencesModule = wireframe.show(withDelegate: self)
+        preferencesModule = wireframe.show(withDelegate: self, configurationStorage: configurationStorage)
     }
 }
 

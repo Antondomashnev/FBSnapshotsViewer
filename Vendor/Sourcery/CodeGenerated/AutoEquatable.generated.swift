@@ -64,10 +64,12 @@ internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
 extension DerivedDataFolder: Equatable {}
 internal func == (lhs: DerivedDataFolder, rhs: DerivedDataFolder) -> Bool {
     switch (lhs, rhs) {
-    case (.custom(let lhs), .custom(let rhs)): 
+    case (.xcodeCustom(let lhs), .xcodeCustom(let rhs)): 
         return lhs == rhs
-    case (.xcode, .xcode): 
+    case (.xcodeDefault, .xcodeDefault): 
          return true 
+    case (.appcode(let lhs), .appcode(let rhs)): 
+        return lhs == rhs
     default: return false
     }
 }
@@ -75,9 +77,11 @@ internal func == (lhs: DerivedDataFolder, rhs: DerivedDataFolder) -> Bool {
 extension DerivedDataFolderType: Equatable {}
 internal func == (lhs: DerivedDataFolderType, rhs: DerivedDataFolderType) -> Bool {
     switch (lhs, rhs) {
-    case (.xcode, .xcode): 
+    case (.xcodeDefault, .xcodeDefault): 
          return true 
-    case (.custom, .custom): 
+    case (.xcodeCustom, .xcodeCustom): 
+         return true 
+    case (.appcode, .appcode): 
          return true 
     default: return false
     }

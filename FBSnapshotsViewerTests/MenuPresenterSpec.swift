@@ -20,7 +20,7 @@ class MenuPresenter_MockMenuWireframe: MenuWireframe {
     }
 
     var showPreferencesModuleCalled: Bool = false
-    override func showPreferencesModule() {
+    override func showPreferencesModule(with configurationStorage: ConfigurationStorage) {
         showPreferencesModuleCalled = true
     }
 }
@@ -36,7 +36,7 @@ class MenuPresenterSpec: QuickSpec {
         var wireframe: MenuPresenter_MockMenuWireframe!
 
         beforeEach {
-            derivedDataFolder = DerivedDataFolder.custom(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
+            derivedDataFolder = DerivedDataFolder.xcodeCustom(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
             configuration = FBSnapshotsViewer.Configuration(derivedDataFolder: derivedDataFolder)
             application = ApplicationMock()
             wireframe = MenuPresenter_MockMenuWireframe()

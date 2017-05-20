@@ -32,20 +32,24 @@ extension PreferencesInteractor: PreferencesInteractorInput {
             return
         }
         switch derivedDataFolderType {
-        case .xcode:
-            configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcode)
-        case .custom:
-            configuration = Configuration(derivedDataFolder: DerivedDataFolder.custom(path: ""))
+        case .xcodeDefault:
+            configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
+        case .xcodeCustom:
+            configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: ""))
+        case .appcode:
+            configuration = Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: ""))
         }
     }
 
     func setNewDerivedDataFolderPath(_ path: String) {
         switch configuration.derivedDataFolder.type {
-        case .xcode:
+        case .xcodeDefault:
             assertionFailure("Unexpected call to modify derived data folder path while the type of derived data is Xcode")
             break
-        case .custom(_):
-            configuration = Configuration(derivedDataFolder: DerivedDataFolder.custom(path: path))
+        case .xcodeCustom(_):
+            configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: path))
+        case .appcode(_):
+            configuration = Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: path))
         }
     }
 

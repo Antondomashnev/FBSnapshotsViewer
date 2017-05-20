@@ -19,7 +19,7 @@ class Configuration: NSObject, AutoMockable, NSCoding {
     // MARK: - Static
 
     static func `default`() -> Configuration {
-        return Configuration(derivedDataFolder: DerivedDataFolder.xcode)
+        return Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
     }
 
     // MARK: - NSCoding
@@ -35,10 +35,12 @@ class Configuration: NSObject, AutoMockable, NSCoding {
                 return nil
         }
         switch derivedDataFolderType {
-        case DerivedDataFolder.xcode.type.rawValue:
-            self.init(derivedDataFolder: DerivedDataFolder.xcode)
-        case DerivedDataFolder.custom(path: "").type.rawValue:
-            self.init(derivedDataFolder: DerivedDataFolder.custom(path: derivedDataFolderPath))
+        case DerivedDataFolder.xcodeDefault.type.rawValue:
+            self.init(derivedDataFolder: DerivedDataFolder.xcodeDefault)
+        case DerivedDataFolder.xcodeCustom(path: "").type.rawValue:
+            self.init(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: derivedDataFolderPath))
+        case DerivedDataFolder.appcode(path: "").type.rawValue:
+            self.init(derivedDataFolder: DerivedDataFolder.appcode(path: derivedDataFolderPath))
         default:
             return nil
         }

@@ -17,7 +17,7 @@ final class NonRecursiveFolderEventsListener: FolderEventsListener {
     fileprivate let watcher: FileWatcher
 
     /// Applied filter for watched events
-    fileprivate let filter: FolderEventFilter?
+    let filter: FolderEventFilter?
 
     /// Currently watching folder path
     let folderPath: String

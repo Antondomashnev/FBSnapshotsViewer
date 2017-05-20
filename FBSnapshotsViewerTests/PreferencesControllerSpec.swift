@@ -47,16 +47,16 @@ class PreferencesControllerSpec: QuickSpec {
             var preferencesDisplayInfo: PreferencesDisplayInfo!
 
             beforeEach {
-                preferencesDisplayInfo = PreferencesDisplayInfo(derivedDataFolderPathEditable: true, derivedDataFolderPath: "myPath", derivedDataFolderTypeName: "Custom")
+                preferencesDisplayInfo = PreferencesDisplayInfo(derivedDataFolderPathEditable: true, derivedDataFolderPath: "myPath", derivedDataFolderTypeName: "Xcode Custom", pathExplanation: "Foo")
                 controller.show(preferencesDisplayInfo: preferencesDisplayInfo)
             }
 
             it("updates UI") {
-                expect(controller.derivedDataPathLabel.stringValue).to(equal("myPath"))
+                expect(controller.derivedDataPathLabel.stringValue).to(equal("Foo"))
                 expect(controller.derivedDataPathTextField.isEnabled).to(beTrue())
                 expect(controller.derivedDataPathTextField.stringValue).to(equal("myPath"))
                 expect(controller.derivedDataTypePopUpButton.itemTitles).to(equal(preferencesDisplayInfo.derivedDataFolderTypeNames))
-                expect(controller.derivedDataTypePopUpButton.titleOfSelectedItem).to(equal("Custom"))
+                expect(controller.derivedDataTypePopUpButton.titleOfSelectedItem).to(equal("Xcode Custom"))
             }
         }
 
@@ -77,10 +77,6 @@ class PreferencesControllerSpec: QuickSpec {
             beforeEach {
                 controller.derivedDataPathTextField.stringValue = "NewPath"
                 controller.derivedDataPathTextFieldDidChange(notification: Notification(name: Notification.Name("Foo")))
-            }
-
-            it("updated dervied data path label") {
-                expect(controller.derivedDataPathLabel.stringValue).to(equal("NewPath"))
             }
 
             it("updates derived data path") {

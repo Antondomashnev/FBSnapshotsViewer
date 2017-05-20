@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreFoundation
 
 /// `ApplicationLogReader` class is responsible to read given log files line by line
 class ApplicationLogReader {
@@ -19,7 +20,8 @@ class ApplicationLogReader {
     ///   - lineNumber: starting line number in case developer wants to skip some
     /// - Returns: read array of `ApplicationLogLine`
     func readline(of logText: String, startingFrom lineNumber: Int = 0) -> [ApplicationLogLine] {
-        let textLines = logText.components(separatedBy: .newlines)
+        // We know that AppCode has test output with HTML escaped characters
+        let textLines = logText.components(separatedBy: .newlines).map { $0.htmlUnescape() }
         if textLines.count <= lineNumber {
             return []
         }

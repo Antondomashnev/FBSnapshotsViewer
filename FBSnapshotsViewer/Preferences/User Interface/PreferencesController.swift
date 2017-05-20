@@ -48,7 +48,7 @@ extension PreferencesController: PreferencesUserInterface {
     // MARK: - Helpers
 
     private func setUpDerivedDataPathLabel(with displayInfo: PreferencesDisplayInfo) {
-        derivedDataPathLabel.stringValue = displayInfo.derivedDataFolderPath
+        derivedDataPathLabel.stringValue = displayInfo.pathExplanation
     }
 
     private func setUpDerivedDataPathTextField(with displayInfo: PreferencesDisplayInfo) {
@@ -68,7 +68,6 @@ extension PreferencesController {
 
     @objc func derivedDataPathTextFieldDidChange(notification: Notification) {
         eventHandler.update(derivedDataFolderPath: derivedDataPathTextField.stringValue)
-        derivedDataPathLabel.stringValue = derivedDataPathTextField.stringValue
     }
 }
 
