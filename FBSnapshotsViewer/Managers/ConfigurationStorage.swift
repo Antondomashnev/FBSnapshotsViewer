@@ -26,6 +26,7 @@ class UserDefaultsConfigurationStorage: ConfigurationStorage {
     func save(configuration: Configuration) {
         let archivedConfiguration = NSKeyedArchiver.archivedData(withRootObject: configuration)
         userDefaults.setValue(archivedConfiguration, forKey: configurationKey)
+        userDefaults.synchronize()
     }
 
     func loadConfiguration() -> Configuration? {

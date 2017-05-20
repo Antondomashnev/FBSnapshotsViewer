@@ -30,8 +30,15 @@ class ConfigurationSpec: QuickSpec {
         }
 
         describe(".decoding") {
-            it("archives and unarchives the configuration") {
+            it("archives and unarchives the xcodeCustom configuration") {
                 configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "Foo"))
+                let data: Data! = NSKeyedArchiver.archivedData(withRootObject: configuration)
+                let unarchivedConfiguration = NSKeyedUnarchiver.unarchiveObject(with: data)
+                expect(configuration.isEqual(unarchivedConfiguration)).to(beTrue())
+            }
+
+            it("archives and unarchives the appcode configuration") {
+                configuration = Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: "Foo"))
                 let data: Data! = NSKeyedArchiver.archivedData(withRootObject: configuration)
                 let unarchivedConfiguration = NSKeyedUnarchiver.unarchiveObject(with: data)
                 expect(configuration.isEqual(unarchivedConfiguration)).to(beTrue())

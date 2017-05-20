@@ -52,7 +52,7 @@ extension MenuInteractor: MenuInteractorInput {
 
     func startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder) {
         applicationTestLogFilesListener.stopListening()
-        applicationTestLogFilesListener.listen(derivedDataFolder: derivedDataFolder.path) { [weak self] path in
+        applicationTestLogFilesListener.listen(derivedDataFolder: derivedDataFolder) { [weak self] path in
             self?.output?.didFindNewTestLogFile(at: path)
         }
     }

@@ -13,17 +13,17 @@ import Nimble
 
 class ApplicationTestLogFilesListener_MockFolderEventsListenerFactory: FolderEventsListenerFactory {
     var mockApplicationTestLogsEventsListener: FolderEventsListener!
-    var givenDerivedDataFolderPath: String!
+    var givenDerivedDataFolder: DerivedDataFolder!
 
-    override func applicationTestLogsEventsListener(at derivedDataFolderPath: String) -> FolderEventsListener {
-        givenDerivedDataFolderPath = derivedDataFolderPath
+    override func applicationTestLogsEventsListener(at derivedDataFolder: DerivedDataFolder) -> FolderEventsListener {
+        givenDerivedDataFolder = derivedDataFolder
         return mockApplicationTestLogsEventsListener
     }
 }
 
 class ApplicationTestLogFilesListenerSpec: QuickSpec {
     override func spec() {
-        let derivedDataFolder = "Users/Antondomashnev/Library/Xcode/DerivedData/"
+        let derivedDataFolder = DerivedDataFolder.xcodeCustom(path: "Users/Antondomashnev/Library/Xcode/DerivedData/")
         var folderEventsListenerFactory: ApplicationTestLogFilesListener_MockFolderEventsListenerFactory!
         var applicationTestLogsEventsListener: FolderEventsListenerMock!
         var applicationTestLogFilesListener: ApplicationTestLogFilesListener!
@@ -96,7 +96,7 @@ class ApplicationTestLogFilesListenerSpec: QuickSpec {
             }
 
             it("starts listening the given derived data folder") {
-                expect(folderEventsListenerFactory.givenDerivedDataFolderPath).to(equal(derivedDataFolder))
+                expect(folderEventsListenerFactory.givenDerivedDataFolder).to(equal(derivedDataFolder))
             }
 
             it("starts listening") {

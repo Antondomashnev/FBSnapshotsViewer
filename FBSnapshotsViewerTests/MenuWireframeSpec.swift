@@ -44,5 +44,19 @@ class MenuWireframeSpec: QuickSpec {
                 wireframe.showTestResultsModule(with: [])
             }
         }
+
+        describe(".showPreferencesModule") {
+            var configurationStorage: ConfigurationStorageMock!
+
+            beforeEach {
+                let configuration = Configuration.default()
+                configurationStorage = ConfigurationStorageMock()
+                configurationStorage.loadConfigurationReturnValue = configuration
+            }
+
+            it("doesnt crash") {
+                wireframe.showPreferencesModule(with: configurationStorage)
+            }
+        }
     }
 }

@@ -47,7 +47,7 @@ class PreferencesControllerSpec: QuickSpec {
             var preferencesDisplayInfo: PreferencesDisplayInfo!
 
             beforeEach {
-                preferencesDisplayInfo = PreferencesDisplayInfo(derivedDataFolderPathEditable: true, derivedDataFolderPath: "myPath", derivedDataFolderTypeName: "Custom")
+                preferencesDisplayInfo = PreferencesDisplayInfo(derivedDataFolderPathEditable: true, derivedDataFolderPath: "myPath", derivedDataFolderTypeName: "Xcode Custom")
                 controller.show(preferencesDisplayInfo: preferencesDisplayInfo)
             }
 
@@ -56,7 +56,7 @@ class PreferencesControllerSpec: QuickSpec {
                 expect(controller.derivedDataPathTextField.isEnabled).to(beTrue())
                 expect(controller.derivedDataPathTextField.stringValue).to(equal("myPath"))
                 expect(controller.derivedDataTypePopUpButton.itemTitles).to(equal(preferencesDisplayInfo.derivedDataFolderTypeNames))
-                expect(controller.derivedDataTypePopUpButton.titleOfSelectedItem).to(equal("Custom"))
+                expect(controller.derivedDataTypePopUpButton.titleOfSelectedItem).to(equal("Xcode Custom"))
             }
         }
 

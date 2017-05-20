@@ -32,10 +32,10 @@ class MenuInteractor_MockApplicationSnapshotTestResultListener: ApplicationSnaps
 
 class MenuInteractor_MockApplicationTestLogFilesListener: ApplicationTestLogFilesListener {
     var output: ApplicationTestLogFilesListenerOutput!
-    var listeningDerivedDataFolder: String!
+    var listeningDerivedDataFolder: DerivedDataFolder!
     var stopListeningCalled: Bool = false
 
-    override func listen(derivedDataFolder: String, outputTo completion: @escaping ApplicationTestLogFilesListenerOutput) {
+    override func listen(derivedDataFolder: DerivedDataFolder, outputTo completion: @escaping ApplicationTestLogFilesListenerOutput) {
         listeningDerivedDataFolder = derivedDataFolder
         output = completion
     }
@@ -77,7 +77,8 @@ class MenuInteractorSpec: QuickSpec {
             }
 
             it("starts a new listening of the given derived data folder") {
-                expect(applicationTestLogFilesListener.listeningDerivedDataFolder).to(equal("/Users/antondomashnev/Library/Bla"))
+                let expectedDerivedDataFolder = DerivedDataFolder.xcodeCustom(path: "/Users/antondomashnev/Library/Bla")
+                expect(applicationTestLogFilesListener.listeningDerivedDataFolder).to(equal(expectedDerivedDataFolder))
             }
 
             context("when find a new test log file") {

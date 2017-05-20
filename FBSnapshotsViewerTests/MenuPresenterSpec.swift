@@ -20,7 +20,7 @@ class MenuPresenter_MockMenuWireframe: MenuWireframe {
     }
 
     var showPreferencesModuleCalled: Bool = false
-    override func showPreferencesModule() {
+    override func showPreferencesModule(with configurationStorage: ConfigurationStorage) {
         showPreferencesModuleCalled = true
     }
 }

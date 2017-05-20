@@ -39,6 +39,8 @@ class Configuration: NSObject, AutoMockable, NSCoding {
             self.init(derivedDataFolder: DerivedDataFolder.xcodeDefault)
         case DerivedDataFolder.xcodeCustom(path: "").type.rawValue:
             self.init(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: derivedDataFolderPath))
+        case DerivedDataFolder.appcode(path: "").type.rawValue:
+            self.init(derivedDataFolder: DerivedDataFolder.appcode(path: derivedDataFolderPath))
         default:
             return nil
         }
