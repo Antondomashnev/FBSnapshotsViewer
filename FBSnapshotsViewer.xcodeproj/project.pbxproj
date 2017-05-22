@@ -1186,8 +1186,8 @@
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antondomashnev.FBSnapshotsViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1554e469-0170-445a-8d37-edc1e783edf6";
-				PROVISIONING_PROFILE_SPECIFIER = "mac_production_ com.antondomashnev.FBSnapshotsView";
+				PROVISIONING_PROFILE = "a27fb3d0-5018-48f4-aa1a-5c52a85c926e";
+				PROVISIONING_PROFILE_SPECIFIER = mac_production_com.antondomashnev.FBSnapshotsView;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
