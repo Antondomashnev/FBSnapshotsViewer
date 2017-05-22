@@ -7,22 +7,29 @@
 //
 
 import Cocoa
+import Sparkle
 
 class MenuPresenter {
     fileprivate let application: Application
+    fileprivate let updater: Updater
     let configuration: Configuration
     var wireframe: MenuWireframe?
     var interactor: MenuInteractorInput?
     weak var userInterface: MenuUserInterface?
 
-    init(configuration: Configuration = Configuration.default(), application: Application = NSApp) {
+    init(configuration: Configuration = Configuration.default(), application: Application = NSApp, updater: Updater = SUUpdater.shared()) {
         self.application = application
         self.configuration = configuration
+        self.updater = updater
     }
 }
 
 // MARK: - MenuModuleInterface
 extension MenuPresenter: MenuModuleInterface {
+    func checkForUpdates() {
+        updater.checkForUpdates()
+    }
+
     func showTestResults() {
         guard let testResults = interactor?.foundTestResults, !testResults.isEmpty else {
             return

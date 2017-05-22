@@ -87,6 +87,26 @@ class MenuControllerSpec: QuickSpec {
             }
         }
 
+        describe("menuStatusItemMenu.preferencesItemClicked") {
+            beforeEach {
+                menuController.menuStatusItemMenu(NSMenu(), preferencesItemClicked: NSMenuItem())
+            }
+
+            it("quits") {
+                expect(eventHandler.showPreferencesCalled).to(beTrue())
+            }
+        }
+
+        describe("menuStatusItemMenu.checkForUpdatesItemClicked") {
+            beforeEach {
+                menuController.menuStatusItemMenu(NSMenu(), checkForUpdatesItemClicked: NSMenuItem())
+            }
+
+            it("quits") {
+                expect(eventHandler.checkForUpdatesCalled).to(beTrue())
+            }
+        }
+
         describe(".handleIconMouseEvent") {
             context("when rightMouseUp") {
                 beforeEach {

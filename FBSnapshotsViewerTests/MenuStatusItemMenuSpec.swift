@@ -21,6 +21,11 @@ class MenuStatusItemMenu_MockMenuStatusItemMenuTarget: MenuStatusItemMenuTarget 
     func menuStatusItemMenu(_ menu: NSMenu, preferencesItemClicked: NSMenuItem) {
         menuStatusItemMenuPreferencesItemClickedCalled = true
     }
+
+    var menuStatusItemMenuCheckForUpdatesItemClickedCalled: Bool = false
+    func menuStatusItemMenu(_ menu: NSMenu, checkForUpdatesItemClicked: NSMenuItem) {
+        menuStatusItemMenuCheckForUpdatesItemClickedCalled = true
+    }
 }
 
 class MenuStatusItemMenuSpec: QuickSpec {
@@ -40,6 +45,16 @@ class MenuStatusItemMenuSpec: QuickSpec {
 
             it("notifies target") {
                 expect(target.menuStatusItemMenuPreferencesItemClickedCalled).to(beTrue())
+            }
+        }
+
+        describe(".checkForUpdatesItemClicked") {
+            beforeEach {
+                itemMenu.checkForUpdatesItemClicked(sender: NSMenuItem(title: "Check for Updates", action: nil, keyEquivalent: "U"))
+            }
+
+            it("notifies target") {
+                expect(target.menuStatusItemMenuCheckForUpdatesItemClickedCalled).to(beTrue())
             }
         }
 

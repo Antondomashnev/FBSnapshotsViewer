@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?><rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+<channel>
+  <title>FBSnapshotsViewer</title>
+  <item>
+    <title>Version 0.4.0</title>
+    <pubDate>Mon, 21 May 2017 00:00:00 +0000</pubDate>
+    <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
+    <description><![CDATA[
+        * Add AppCode snapshot testing support
+    ]]>
+    </description>
+    <enclosure url="https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/0.4.0/FBSnapshotsViewer-0.4.0.app.zip" sparkle:version="1" sparkle:shortVersionString="0.4.0" length="3104757" type="application/octet-stream" sparkle:dsaSignature="MCwCFG5hPFaLTznRp7VY/Edjx2EXxlt1AhQbfssVcSYq3uNZEIwG7aIf1PHH9w=="/>
+  </item>
+</channel></rss>
