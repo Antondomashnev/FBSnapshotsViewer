@@ -3,6 +3,7 @@ PODS:
   - Nimble (6.1.0)
   - Quick (1.1.0)
   - Sourcery (0.6.0)
+  - Sparkle (1.17.0)
   - SwiftGen (4.2.1)
   - SwiftLint (0.18.1)
 
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - Nimble (~> 6.0)
   - Quick (~> 1.0)
   - Sourcery (~> 0.5)
+  - Sparkle (~> 1.17)
   - SwiftGen (~> 4.2)
   - SwiftLint (~> 0.16)
 
@@ -19,9 +21,10 @@ SPEC CHECKSUMS:
   Nimble: c53e6903fee94041b90ded74f135820437d8bf59
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   Sourcery: b3a93fcdf9c256feeb16e85f4d1bbf46baa42464
+  Sparkle: ccfb47699feea7b40b51cf3176f69404e5b1da6c
   SwiftGen: 2ba2a88fc6130b96e38e2baa0029e4bd222ffd85
   SwiftLint: b467d08f5b25dc3b3cfed243d8e1b74b91714c67
 
-PODFILE CHECKSUM: 5d4b37143080129c1708e4b2f45da77b74d4d90e
+PODFILE CHECKSUM: 034b6075c300cb474339b98158a1dd8b42b6b3c6
 
 COCOAPODS: 1.2.1

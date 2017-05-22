@@ -34,18 +34,30 @@ class MenuPresenterSpec: QuickSpec {
         var presenter: MenuPresenter!
         var interactor: MenuInteractorInputMock!
         var wireframe: MenuPresenter_MockMenuWireframe!
+        var updater: UpdaterMock!
 
         beforeEach {
+            updater = UpdaterMock()
             derivedDataFolder = DerivedDataFolder.xcodeCustom(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
             configuration = FBSnapshotsViewer.Configuration(derivedDataFolder: derivedDataFolder)
             application = ApplicationMock()
             wireframe = MenuPresenter_MockMenuWireframe()
             interactor = MenuInteractorInputMock()
-            presenter = MenuPresenter(configuration: configuration, application: application)
+            presenter = MenuPresenter(configuration: configuration, application: application, updater: updater)
             userInterface = MenuUserInterfaceMock()
             presenter.userInterface = userInterface
             presenter.interactor = interactor
             presenter.wireframe = wireframe
+        }
+
+        describe(".checkForUpdates") {
+            beforeEach {
+                presenter.checkForUpdates()
+            }
+
+            it("checks for updaters") {
+                expect(updater.checkForUpdatesCalled).to(beTrue())
+            }
         }
 
         describe(".showPreferences") {

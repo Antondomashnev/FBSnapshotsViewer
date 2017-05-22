@@ -173,6 +173,14 @@ class MenuModuleInterfaceMock: MenuModuleInterface {
 
         showApplicationMenuCalled = true
     }
+    //MARK: - checkForUpdates
+
+    var checkForUpdatesCalled = false
+
+    func checkForUpdates() {
+
+        checkForUpdatesCalled = true
+    }
     //MARK: - quit
 
     var quitCalled = false
@@ -377,5 +385,17 @@ class TestResultsUserInterfaceMock: TestResultsUserInterface {
 
         showCalled = true
         showReceivedTestResults = testResults
+    }
+}
+class UpdaterMock: Updater {
+
+
+    //MARK: - checkForUpdates
+
+    var checkForUpdatesCalled = false
+
+    func checkForUpdates() {
+
+        checkForUpdatesCalled = true
     }
 }

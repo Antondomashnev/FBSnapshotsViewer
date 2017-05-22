@@ -3,6 +3,7 @@
 ### 0.5.0 (Next)
 
 * Your contribution here.
+* [#37](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/37): Add AppCode snapshot testing support - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.4.0 (21.05.2017)
 

@@ -13,5 +13,6 @@ protocol MenuModuleInterface: class, AutoMockable {
     func showTestResults()
     func showPreferences()
     func showApplicationMenu()
+    func checkForUpdates()
     func quit()
 }

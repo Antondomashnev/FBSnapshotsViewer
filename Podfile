@@ -7,6 +7,7 @@ target 'FBSnapshotsViewer' do
   pod 'Sourcery', '~> 0.5'
   pod 'SwiftGen', '~> 4.2'
   pod 'SwiftLint', '~> 0.16'
+  pod 'Sparkle', '~> 1.17'
   target 'FBSnapshotsViewerTests' do
     inherit! :search_paths
     pod 'Quick', '~> 1.0'

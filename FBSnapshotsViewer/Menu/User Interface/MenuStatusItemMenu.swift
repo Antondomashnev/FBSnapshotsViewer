@@ -11,6 +11,7 @@ import Cocoa
 protocol MenuStatusItemMenuTarget: class {
     func menuStatusItemMenu(_ menu: NSMenu, quitItemClicked: NSMenuItem)
     func menuStatusItemMenu(_ menu: NSMenu, preferencesItemClicked: NSMenuItem)
+    func menuStatusItemMenu(_ menu: NSMenu, checkForUpdatesItemClicked: NSMenuItem)
 }
 
 class MenuStatusItemMenu: NSMenu {
@@ -31,7 +32,8 @@ class MenuStatusItemMenu: NSMenu {
     func buildUp() {
         let quitItem = NSMenuItem(title: "Quit", action: #selector(quitItemClicked(sender:)), keyEquivalent: "Q")
         let preferencesItem = NSMenuItem(title: "Preferences", action: #selector(preferencesItemClicked(sender:)), keyEquivalent: "P")
-        let items = [preferencesItem, quitItem]
+        let checkForUpdates = NSMenuItem(title: "Check for Updates", action: #selector(checkForUpdatesItemClicked(sender:)), keyEquivalent: "U")
+        let items = [preferencesItem, checkForUpdates, quitItem]
         for item in items {
             item.target = self
             addItem(item)
@@ -46,5 +48,9 @@ class MenuStatusItemMenu: NSMenu {
 
     @objc func quitItemClicked(sender: NSMenuItem) {
         target?.menuStatusItemMenu(self, quitItemClicked: sender)
+    }
+
+    @objc func checkForUpdatesItemClicked(sender: NSMenuItem) {
+        target?.menuStatusItemMenu(self, checkForUpdatesItemClicked: sender)
     }
 }
