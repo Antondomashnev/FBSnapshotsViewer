@@ -1,3 +1,5 @@
+require 'kramdown'
+
 fastlane_version "2.21.0"
 default_platform :osx
 
@@ -13,7 +15,7 @@ platform :mac do
 
   desc "Sanity check for the fastfile issues"
   lane :sanity_check do
-    puts "Compiling Fastfile to check if the syntax if valid or not"
+    UI.message "Compiling Fastfile to check if the syntax if valid or not"
   end
 
   desc "Create a new build of FBSnapshotsViewer"
@@ -66,13 +68,59 @@ platform :mac do
 
   ##### INTENDED TO BE PRIVATE #####
 
+  desc "Updates sparkle RSS file"
+  desc "####Options"
+  desc "* **`machine_version`** - sparkle's version"
+  desc "* **`human_version`** - sparkle's human visible version"
+  lane :sparkle_add_version do |options|
+    machine_version = options[:machine_version]
+    human_version = options[:human_version]
+    app_download_url = "https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/#{human_version}/FBSnapshotsViewer-#{human_version}.app.zip"
+  end
+
+  desc "Returns the changelog for the given version from CHANGELOG.md"
+  desc "####Options"
+  desc "* **`changelog_path`** - path to the changelog file"
+  desc "* **`version`** - version to get changelog for"
+  desc "* **`convert_to_html`** - whether the changelog result must be converted into HTML"
+  lane :project_version_changelog do |options|
+    given_version = options[:version]
+    changelog_path = options[:changelog_path]
+    convert_to_html = options[:convert_to_html].nil? ? false : options[:convert_to_html]
+    markdown_version_header_prefix = "###"
+    markdown_changelog_entry_prefix = "*"
+    given_version_changelog_entries = []
+    reading_given_version_changelog = false
+    File.readlines(changelog_path).each do |line|
+      if line.start_with? "#{markdown_version_header_prefix} #{given_version}"
+        reading_given_version_changelog = true
+      elsif line.start_with? "#{markdown_version_header_prefix}"
+        next unless reading_given_version_changelog
+        reading_given_version_changelog = false if reading_given_version_changelog
+      elsif reading_given_version_changelog && line.start_with?(markdown_changelog_entry_prefix)
+        given_version_changelog_entries << line
+      else
+        next
+      end
+    end
+
+    result_changelog_string = given_version_changelog_entries.join("\n")
+    UI.message "Changelog for the version #{given_version} is #{result_changelog_string}"
+
+    if convert_to_html
+      Kramdown::Document.new(result_changelog_string).to_html
+    else
+      result_changelog_string
+    end
+  end
+
   desc "Returns the human readable project version"
   lane :project_get_human_version do
     human_version = get_info_plist_value(
       key: "CFBundleShortVersionString",
       path: "./FBSnapshotsViewer/Info.plist"
     )
-    puts "Project's human version: #{human_version}"
+    UI.message "Project's human version: #{human_version}"
     human_version
   end
 
@@ -82,7 +130,7 @@ platform :mac do
       key: "CFBundleVersion",
       path: "./FBSnapshotsViewer/Info.plist"
     )
-    puts "Project's machine version: #{human_version}"
+    UI.message "Project's machine version: #{human_version}"
     machine_version
   end
 

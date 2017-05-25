@@ -52,6 +52,30 @@ fastlane mac release
 Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk
 
 Before doing so don't forget to move the next version of Changelog to released
+### mac sparkle_add_version
+```
+fastlane mac sparkle_add_version
+```
+Updates sparkle RSS file
+
+####Options
+
+* **`machine_version`** - sparkle's version
+
+* **`human_version`** - sparkle's human visible version
+### mac project_version_changelog
+```
+fastlane mac project_version_changelog
+```
+Returns the changelog for the given version from CHANGELOG.md
+
+####Options
+
+* **`changelog_path`** - path to the changelog file
+
+* **`version`** - version to get changelog for
+
+* **`convert_to_html`** - whether the changelog result must be converted into HTML
 ### mac project_get_human_version
 ```
 fastlane mac project_get_human_version
