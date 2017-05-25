@@ -62,14 +62,6 @@ Before doing so don't forget to move the next version of Changelog to released
 fastlane mac sparkle_add_version
 ```
 Updates sparkle RSS file
-
-####Options
-
-* **`machine_version`** - sparkle's version
-
-* **`human_version`** - sparkle's human visible version
-
-* **`app_zip_path`** - built application zip path
 ### mac project_version_changelog
 ```
 fastlane mac project_version_changelog

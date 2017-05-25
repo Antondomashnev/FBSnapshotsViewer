@@ -35,7 +35,9 @@ platform :mac do
   lane :build_app_zip do
     UI.message "Building an app zip into /bin folder..."
     build_app
-    github_create_app_release_assets(release_version: project_get_human_version)
+    app_path = "../" + github_create_app_release_assets(release_version: project_get_human_version)
+    app_zip_path = app_path + '.zip'
+    sh "zip -r \"#{app_zip_path}\" \"#{app_path}\" 2>&1 >/dev/null"
   end
 
   desc "Run test of FBSnapshotsViewer"
@@ -76,9 +78,9 @@ platform :mac do
   ##### INTENDED TO BE PRIVATE =) #####
 
   desc "Updates sparkle RSS file"
-  lane :sparkle_add_version do |options|
-    machine_version = project_get_human_version
-    human_version = project_get_machine_version
+  lane :sparkle_add_version do
+    machine_version = project_get_machine_version
+    human_version = project_get_human_version
     app_zip_path = "../bin/FBSnapshotsViewer-#{human_version}.app.zip"
     app_download_url = "https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/#{human_version}/FBSnapshotsViewer-#{human_version}.app.zip"
     description = project_version_changelog(
@@ -151,7 +153,7 @@ platform :mac do
       key: "CFBundleVersion",
       path: "./FBSnapshotsViewer/Info.plist"
     )
-    UI.message "Project's machine version: #{human_version}"
+    UI.message "Project's machine version: #{machine_version}"
     machine_version
   end
 
