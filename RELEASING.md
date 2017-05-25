@@ -39,7 +39,7 @@ git push origin master
 Release.
 
 ```
-$ bundle exec fastlane osx release
+$ bundle exec fastlane mac release
 ```
 
 ### Prepare for the Next Version

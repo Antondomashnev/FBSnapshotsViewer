@@ -1,7 +1,7 @@
 fastlane_version "2.21.0"
 default_platform :osx
 
-platform :osx do
+platform :mac do
   GITHUB_REMOTE = "origin"
   RELEASE_BRANCH = "master"
   GITHUB_REPOSITORY = "Antondomashnev/FBSnapshotsViewer"
@@ -45,26 +45,46 @@ platform :osx do
   lane :release do
     ensure_git_status_clean
     test
-
-    release_version = prompt(text: "Version number: ")
-
     build_app
 
+    release_human_version = project_get_human_version
+    release_machine_version = project_get_machine_version
+
     git_add_or_update_tag(
-      tag_name: release_version
+      tag_name: release_human_version
     )
 
     github_set_or_update_release(
-      release_name: release_version,
+      release_name: release_human_version,
       repository_name: GITHUB_REPOSITORY,
       description: "",
-      tag_name: release_version,
-      upload_assets: github_create_release_assets(release_version: release_version),
+      tag_name: release_human_version,
+      upload_assets: github_create_release_assets(release_version: release_human_version),
       api_token: ENV["FB_SNAPSHOTS_VIEWER_GITHUB_API_TOKEN"]
     )
   end
 
-  ##### PRIVATE #####
+  ##### INTENDED TO BE PRIVATE #####
+
+  desc "Returns the human readable project version"
+  lane :project_get_human_version do
+    human_version = get_info_plist_value(
+      key: "CFBundleShortVersionString",
+      path: "./FBSnapshotsViewer/Info.plist"
+    )
+    puts "Project's human version: #{human_version}"
+    human_version
+  end
+
+  desc "Returns the machine project version"
+  lane :project_get_machine_version do
+    machine_version = get_info_plist_value(
+      key: "CFBundleVersion",
+      path: "./FBSnapshotsViewer/Info.plist"
+    )
+    puts "Project's machine version: #{human_version}"
+    machine_version
+  end
 
   desc "Creates or updates github release."
   desc "####Options"
@@ -74,7 +94,7 @@ platform :osx do
   desc "* **`tag_name`** - tag name"
   desc "* **`api_token`** - github api token"
   desc "* **`upload_assets`** - array of paths to files to be uploaded and attached to the release"
-  private_lane :github_set_or_update_release do |options|
+  lane :github_set_or_update_release do |options|
     release_name = options[:release_name]
     description = options[:description]
     repository_name = options[:repository_name]
@@ -115,7 +135,7 @@ platform :osx do
   desc "Create or update tag with the given name."
   desc "####Options"
   desc "* **`tag_name`** - tag name to be used"
-  private_lane :git_add_or_update_tag do |options|
+  lane :git_add_or_update_tag do |options|
     remote = GITHUB_REMOTE
     branch = RELEASE_BRANCH
 
@@ -139,7 +159,7 @@ platform :osx do
   desc "Create assets to be uploaded as a github release"
   desc "####Options"
   desc "* **`release_version`** - releave version to be used as a part of name of asset"
-  private_lane :github_create_release_assets do |options|
+  lane :github_create_release_assets do |options|
     release_version = options[:release_version]
     [github_create_app_release_assets(release_version: release_version)]
   end
@@ -149,7 +169,7 @@ platform :osx do
   desc "* **`release_version`** - releave version to be used as a part of name of asset"
   desc "####Return"
   desc "Path to the asset"
-  private_lane :github_create_app_release_assets do |options|
+  lane :github_create_app_release_assets do |options|
     require 'fileutils'
     release_version = options[:release_version]
     app_path = "./bin/FBSnapshotsViewer-#{release_version}.app"
@@ -167,7 +187,7 @@ platform :osx do
   desc "* **`remote`** - git remote in format git@github.com:conichiGMBH/ios-fastlane.git"
   desc "* **`branch`** - branch name"
   desc ""
-  private_lane :git_branch_exists_on_remote do |options|
+  lane :git_branch_exists_on_remote do |options|
     remote = options[:remote]
     branch = options[:branch]
     sh("git ls-remote --heads #{remote} #{branch} | wc -l")
