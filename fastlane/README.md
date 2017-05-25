@@ -63,6 +63,8 @@ Updates sparkle RSS file
 * **`machine_version`** - sparkle's version
 
 * **`human_version`** - sparkle's human visible version
+
+* **`app_zip_path`** - built application zip path
 ### mac project_version_changelog
 ```
 fastlane mac project_version_changelog

@@ -1,7 +1,6 @@
-require 'kramdown'
-
+fastlane_require 'kramdown'
 fastlane_version "2.21.0"
-default_platform :osx
+default_platform :mac
 
 platform :mac do
   GITHUB_REMOTE = "origin"
@@ -72,10 +71,30 @@ platform :mac do
   desc "####Options"
   desc "* **`machine_version`** - sparkle's version"
   desc "* **`human_version`** - sparkle's human visible version"
+  desc "* **`app_zip_path`** - built application zip path"
   lane :sparkle_add_version do |options|
     machine_version = options[:machine_version]
     human_version = options[:human_version]
+    app_zip_path = options[:app_zip_path]
     app_download_url = "https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/#{human_version}/FBSnapshotsViewer-#{human_version}.app.zip"
+    description = project_version_changelog(
+      version: human_version,
+      changelog_path: "../CHANGELOG.md",
+      convert_to_html: true
+    )
+
+    sparkle_add_update(
+      feed_file: "Sparkle.xml",
+      app_download_url: app_download_url,
+      app_size: "#{File.size(app_zip_path)}",
+      machine_version: machine_version,
+      human_version: human_version,
+      title: human_version,
+      description: description,
+      deployment_target: "10.12"
+    )
+
+    UI.message "Successfully added a release item to the Sparkle XML file (review before committing)"
   end
 
   desc "Returns the changelog for the given version from CHANGELOG.md"

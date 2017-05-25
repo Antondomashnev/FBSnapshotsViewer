@@ -1,0 +1,12 @@
+<?xml version='1.0' standalone='yes'?>
+<rss xmlns:sparkle='http://www.andymatuschak.org/xml-namespaces/sparkle' version='2.0'>
+  <channel>
+    <title>FBSnapshotsViewer</title>
+    <item>
+      <title>0.4.0</title>
+      <pubDate>Wed, 24 May 2017 00:22:46 +0200</pubDate>
+      <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
+      <enclosure url='FBSnapshotsViewer-0.4.0.app.zip' sparkle:version='1' sparkle:shortVersionString='0.4.0' length='3104757' type='application/octet-stream'/>
+    </item>
+  </channel>
+</rss>
