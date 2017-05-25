@@ -1,4 +1,5 @@
 fastlane_require 'kramdown'
+fastlane_require 'fileutils'
 fastlane_version "2.21.0"
 default_platform :mac
 
@@ -19,7 +20,7 @@ platform :mac do
 
   desc "Create a new build of FBSnapshotsViewer"
   lane :build_app do
-    puts "Building an app into /bin folder..."
+    UI.message "Building an app into /bin folder..."
     gym(
       workspace: "FBSnapshotsViewer.xcworkspace",
       scheme: "FBSnapshotsViewer",
@@ -28,6 +29,13 @@ platform :mac do
       output_directory: "bin/",
       clean: true
     )
+  end
+
+  desc "Create a new build of FBSnapshotsViewer"
+  lane :build_app_zip do
+    UI.message "Building an app zip into /bin folder..."
+    build_app
+    github_create_app_release_assets(release_version: project_get_human_version)
   end
 
   desc "Run test of FBSnapshotsViewer"
@@ -58,28 +66,23 @@ platform :mac do
     github_set_or_update_release(
       release_name: release_human_version,
       repository_name: GITHUB_REPOSITORY,
-      description: "",
+      description: project_version_changelog(version: human_version, convert_to_html: false),
       tag_name: release_human_version,
       upload_assets: github_create_release_assets(release_version: release_human_version),
       api_token: ENV["FB_SNAPSHOTS_VIEWER_GITHUB_API_TOKEN"]
     )
   end
 
-  ##### INTENDED TO BE PRIVATE #####
+  ##### INTENDED TO BE PRIVATE =) #####
 
   desc "Updates sparkle RSS file"
-  desc "####Options"
-  desc "* **`machine_version`** - sparkle's version"
-  desc "* **`human_version`** - sparkle's human visible version"
-  desc "* **`app_zip_path`** - built application zip path"
   lane :sparkle_add_version do |options|
-    machine_version = options[:machine_version]
-    human_version = options[:human_version]
-    app_zip_path = options[:app_zip_path]
+    machine_version = project_get_human_version
+    human_version = project_get_machine_version
+    app_zip_path = "../bin/FBSnapshotsViewer-#{human_version}.app.zip"
     app_download_url = "https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/#{human_version}/FBSnapshotsViewer-#{human_version}.app.zip"
     description = project_version_changelog(
       version: human_version,
-      changelog_path: "../CHANGELOG.md",
       convert_to_html: true
     )
 
@@ -99,12 +102,11 @@ platform :mac do
 
   desc "Returns the changelog for the given version from CHANGELOG.md"
   desc "####Options"
-  desc "* **`changelog_path`** - path to the changelog file"
   desc "* **`version`** - version to get changelog for"
   desc "* **`convert_to_html`** - whether the changelog result must be converted into HTML"
   lane :project_version_changelog do |options|
+    changelog_path = "../CHANGELOG.md"
     given_version = options[:version]
-    changelog_path = options[:changelog_path]
     convert_to_html = options[:convert_to_html].nil? ? false : options[:convert_to_html]
     markdown_version_header_prefix = "###"
     markdown_changelog_entry_prefix = "*"
@@ -237,7 +239,6 @@ platform :mac do
   desc "####Return"
   desc "Path to the asset"
   lane :github_create_app_release_assets do |options|
-    require 'fileutils'
     release_version = options[:release_version]
     app_path = "./bin/FBSnapshotsViewer-#{release_version}.app"
     Dir.chdir(File.expand_path("./bin", "..")) do

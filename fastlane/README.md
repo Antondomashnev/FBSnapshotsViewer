@@ -40,6 +40,11 @@ Sanity check for the fastfile issues
 fastlane mac build_app
 ```
 Create a new build of FBSnapshotsViewer
+### mac build_app_zip
+```
+fastlane mac build_app_zip
+```
+Create a new build of FBSnapshotsViewer
 ### mac test
 ```
 fastlane mac test
@@ -72,8 +77,6 @@ fastlane mac project_version_changelog
 Returns the changelog for the given version from CHANGELOG.md
 
 ####Options
-
-* **`changelog_path`** - path to the changelog file
 
 * **`version`** - version to get changelog for
 
