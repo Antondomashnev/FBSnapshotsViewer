@@ -15,7 +15,7 @@ install:
 - bundle exec pod repo update
 - bundle exec pod install
 script:
-- xcodebuild -workspace FBSnapshotsViewer.xcworkspace -scheme FBSnapshotsViewer -configuration Debug test -sdk macosx10.12 -destination 'platform=OS X,arch=x86_64' CODE_SIGNING_REQUIRED=NO | xcpretty -c --test
+- xcodebuild -workspace FBSnapshotsViewer.xcworkspace -scheme FBSnapshotsViewer -configuration Debug test -sdk macosx10.12 -destination 'platform=OS X,arch=x86_64' | xcpretty -c --test
 - bundle exec fastlane mac sanity_check
 after_success:
 - bash <(curl -s https://codecov.io/bash)
