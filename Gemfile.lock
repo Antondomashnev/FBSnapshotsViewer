@@ -121,6 +121,7 @@ GEM
     i18n (0.8.1)
     json (2.1.0)
     jwt (1.5.6)
+    kramdown (1.13.2)
     little-plugger (1.1.4)
     logging (2.2.2)
       little-plugger (~> 1.1)
@@ -183,6 +184,7 @@ PLATFORMS
 DEPENDENCIES
   cocoapods
   fastlane
+  kramdown
 
 BUNDLED WITH
    1.13.7

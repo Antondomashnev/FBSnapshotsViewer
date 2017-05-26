@@ -1,7 +1,9 @@
+fastlane_require 'kramdown'
+fastlane_require 'fileutils'
 fastlane_version "2.21.0"
-default_platform :osx
+default_platform :mac
 
-platform :osx do
+platform :mac do
   GITHUB_REMOTE = "origin"
   RELEASE_BRANCH = "master"
   GITHUB_REPOSITORY = "Antondomashnev/FBSnapshotsViewer"
@@ -13,12 +15,12 @@ platform :osx do
 
   desc "Sanity check for the fastfile issues"
   lane :sanity_check do
-    puts "Compiling Fastfile to check if the syntax if valid or not"
+    UI.message "Compiling Fastfile to check if the syntax if valid or not"
   end
 
   desc "Create a new build of FBSnapshotsViewer"
   lane :build_app do
-    puts "Building an app into /bin folder..."
+    UI.message "Building an app into /bin folder..."
     gym(
       workspace: "FBSnapshotsViewer.xcworkspace",
       scheme: "FBSnapshotsViewer",
@@ -27,6 +29,15 @@ platform :osx do
       output_directory: "bin/",
       clean: true
     )
+  end
+
+  desc "Create a new build of FBSnapshotsViewer"
+  lane :build_app_zip do
+    UI.message "Building an app zip into /bin folder..."
+    build_app
+    app_path = "../" + github_create_app_release_assets(release_version: project_get_human_version)
+    app_zip_path = app_path + '.zip'
+    sh "zip -r \"#{app_zip_path}\" \"#{app_path}\" 2>&1 >/dev/null"
   end
 
   desc "Run test of FBSnapshotsViewer"
@@ -45,26 +56,106 @@ platform :osx do
   lane :release do
     ensure_git_status_clean
     test
-
-    release_version = prompt(text: "Version number: ")
-
     build_app
 
+    release_human_version = project_get_human_version
+    release_machine_version = project_get_machine_version
+
     git_add_or_update_tag(
-      tag_name: release_version
+      tag_name: release_human_version
     )
 
     github_set_or_update_release(
-      release_name: release_version,
+      release_name: release_human_version,
       repository_name: GITHUB_REPOSITORY,
-      description: "",
-      tag_name: release_version,
-      upload_assets: github_create_release_assets(release_version: release_version),
+      description: project_version_changelog(version: human_version, convert_to_html: false),
+      tag_name: release_human_version,
+      upload_assets: github_create_release_assets(release_version: release_human_version),
       api_token: ENV["FB_SNAPSHOTS_VIEWER_GITHUB_API_TOKEN"]
     )
   end
 
-  ##### PRIVATE #####
+  ##### INTENDED TO BE PRIVATE =) #####
+
+  desc "Updates sparkle RSS file"
+  lane :sparkle_add_version do
+    machine_version = project_get_machine_version
+    human_version = project_get_human_version
+    app_zip_path = "../bin/FBSnapshotsViewer-#{human_version}.app.zip"
+    app_download_url = "https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/#{human_version}/FBSnapshotsViewer-#{human_version}.app.zip"
+    description = project_version_changelog(
+      version: human_version,
+      convert_to_html: true
+    )
+
+    sparkle_add_update(
+      feed_file: "Sparkle.xml",
+      app_download_url: app_download_url,
+      app_size: "#{File.size(app_zip_path)}",
+      machine_version: machine_version,
+      human_version: human_version,
+      title: human_version,
+      description: description,
+      deployment_target: "10.12"
+    )
+
+    UI.message "Successfully added a release item to the Sparkle XML file (review before committing)"
+  end
+
+  desc "Returns the changelog for the given version from CHANGELOG.md"
+  desc "####Options"
+  desc "* **`version`** - version to get changelog for"
+  desc "* **`convert_to_html`** - whether the changelog result must be converted into HTML"
+  lane :project_version_changelog do |options|
+    changelog_path = "../CHANGELOG.md"
+    given_version = options[:version]
+    convert_to_html = options[:convert_to_html].nil? ? false : options[:convert_to_html]
+    markdown_version_header_prefix = "###"
+    markdown_changelog_entry_prefix = "*"
+    given_version_changelog_entries = []
+    reading_given_version_changelog = false
+    File.readlines(changelog_path).each do |line|
+      if line.start_with? "#{markdown_version_header_prefix} #{given_version}"
+        reading_given_version_changelog = true
+      elsif line.start_with? "#{markdown_version_header_prefix}"
+        next unless reading_given_version_changelog
+        reading_given_version_changelog = false if reading_given_version_changelog
+      elsif reading_given_version_changelog && line.start_with?(markdown_changelog_entry_prefix)
+        given_version_changelog_entries << line
+      else
+        next
+      end
+    end
+
+    result_changelog_string = given_version_changelog_entries.join("\n")
+    UI.message "Changelog for the version #{given_version} is #{result_changelog_string}"
+
+    if convert_to_html
+      Kramdown::Document.new(result_changelog_string).to_html
+    else
+      result_changelog_string
+    end
+  end
+
+  desc "Returns the human readable project version"
+  lane :project_get_human_version do
+    human_version = get_info_plist_value(
+      key: "CFBundleShortVersionString",
+      path: "./FBSnapshotsViewer/Info.plist"
+    )
+    UI.message "Project's human version: #{human_version}"
+    human_version
+  end
+
+  desc "Returns the machine project version"
+  lane :project_get_machine_version do
+    machine_version = get_info_plist_value(
+      key: "CFBundleVersion",
+      path: "./FBSnapshotsViewer/Info.plist"
+    )
+    UI.message "Project's machine version: #{machine_version}"
+    machine_version
+  end
 
   desc "Creates or updates github release."
   desc "####Options"
@@ -74,7 +165,7 @@ platform :osx do
   desc "* **`tag_name`** - tag name"
   desc "* **`api_token`** - github api token"
   desc "* **`upload_assets`** - array of paths to files to be uploaded and attached to the release"
-  private_lane :github_set_or_update_release do |options|
+  lane :github_set_or_update_release do |options|
     release_name = options[:release_name]
     description = options[:description]
     repository_name = options[:repository_name]
@@ -115,7 +206,7 @@ platform :osx do
   desc "Create or update tag with the given name."
   desc "####Options"
   desc "* **`tag_name`** - tag name to be used"
-  private_lane :git_add_or_update_tag do |options|
+  lane :git_add_or_update_tag do |options|
     remote = GITHUB_REMOTE
     branch = RELEASE_BRANCH
 
@@ -139,7 +230,7 @@ platform :osx do
   desc "Create assets to be uploaded as a github release"
   desc "####Options"
   desc "* **`release_version`** - releave version to be used as a part of name of asset"
-  private_lane :github_create_release_assets do |options|
+  lane :github_create_release_assets do |options|
     release_version = options[:release_version]
     [github_create_app_release_assets(release_version: release_version)]
   end
@@ -149,8 +240,7 @@ platform :osx do
   desc "* **`release_version`** - releave version to be used as a part of name of asset"
   desc "####Return"
   desc "Path to the asset"
-  private_lane :github_create_app_release_assets do |options|
-    require 'fileutils'
+  lane :github_create_app_release_assets do |options|
     release_version = options[:release_version]
     app_path = "./bin/FBSnapshotsViewer-#{release_version}.app"
     Dir.chdir(File.expand_path("./bin", "..")) do
@@ -167,7 +257,7 @@ platform :osx do
   desc "* **`remote`** - git remote in format git@github.com:conichiGMBH/ios-fastlane.git"
   desc "* **`branch`** - branch name"
   desc ""
-  private_lane :git_branch_exists_on_remote do |options|
+  lane :git_branch_exists_on_remote do |options|
     remote = options[:remote]
     branch = options[:branch]
     sh("git ls-remote --heads #{remote} #{branch} | wc -l")
