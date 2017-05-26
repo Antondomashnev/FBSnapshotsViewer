@@ -31,8 +31,6 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>https://whispering-savannah-78358.herokuapp.com/FBSnapshotsViewer/appcast.xml</string>
-	<key>SUPublicDSAKeyFile</key>
-	<string>dsa_pub.pem</string>
+	<string>https://raw.githubusercontent.com/Antondomashnev/FBSnapshotsViewerSparkle/master/appcast.xml</string>
 </dict>
 </plist>

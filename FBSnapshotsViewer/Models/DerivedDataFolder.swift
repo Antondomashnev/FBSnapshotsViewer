@@ -13,9 +13,9 @@ enum DerivedDataFolder: AutoEquatable {
         switch self {
         case .xcodeDefault:
             return DerivedDataFolderType.xcodeDefault
-        case .xcodeCustom(_):
+        case .xcodeCustom:
             return DerivedDataFolderType.xcodeCustom
-        case .appcode(_):
+        case .appcode:
             return DerivedDataFolderType.appcode
         }
     }

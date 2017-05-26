@@ -1,9 +1,9 @@
 ## Changelog
 
-### 0.5.0 (Next)
+### 0.5.0 (26.05.2017)
 
-* Your contribution here.
-* [#37](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/37): Add AppCode snapshot testing support - [@antondomashnev](https://github.com/antondomashnev).
+* [#39](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/39): Update RELEASING process with some new cool automation - [@antondomashnev](https://github.com/antondomashnev).
+* [#37](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/37): Initial Sparkle setup for autoupdates - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.4.0 (21.05.2017)
 

@@ -56,7 +56,7 @@ fastlane mac release
 ```
 Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk
 
-Before doing so don't forget to move the next version of Changelog to released
+Before doing so don't forget to follow all steps in RELEASING.md
 ### mac sparkle_add_version
 ```
 fastlane mac sparkle_add_version

@@ -52,10 +52,9 @@ platform :mac do
   end
 
   desc "Release a new version of the FBSnapshotsViewer. Uploading a new release to a GitHub and CocoaPods trunk"
-  desc "Before doing so don't forget to move the next version of Changelog to released"
+  desc "Before doing so don't forget to follow all steps in RELEASING.md"
   lane :release do
     ensure_git_status_clean
-    test
     build_app
 
     release_human_version = project_get_human_version
@@ -68,7 +67,7 @@ platform :mac do
     github_set_or_update_release(
       release_name: release_human_version,
       repository_name: GITHUB_REPOSITORY,
-      description: project_version_changelog(version: human_version, convert_to_html: false),
+      description: project_version_changelog(version: release_human_version, convert_to_html: false),
       tag_name: release_human_version,
       upload_assets: github_create_release_assets(release_version: release_human_version),
       api_token: ENV["FB_SNAPSHOTS_VIEWER_GITHUB_API_TOKEN"]

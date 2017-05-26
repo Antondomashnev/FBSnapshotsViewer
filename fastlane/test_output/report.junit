@@ -1,154 +1,154 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <testsuites name='FBSnapshotsViewerTests.xctest' tests='190' failures='0'>
   <testsuite name='FBSnapshotsViewerTests.AppleInterfaceModeSpec' tests='2' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.AppleInterfaceModeSpec' name='AppleInterfaceMode__when_settings_contains_AppleInterfaceStyle_key__is_dark' time='0.120'/>
-    <testcase classname='FBSnapshotsViewerTests.AppleInterfaceModeSpec' name='AppleInterfaceMode__when_settings_doesnt_contain_AppleInterfaceStyle_key__is_light' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.AppleInterfaceModeSpec' name='AppleInterfaceMode__when_settings_contains_AppleInterfaceStyle_key__is_dark' time='0.137'/>
+    <testcase classname='FBSnapshotsViewerTests.AppleInterfaceModeSpec' name='AppleInterfaceMode__when_settings_doesnt_contain_AppleInterfaceStyle_key__is_light' time='0.004'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.ApplicationLogLineSpec' tests='3' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.ApplicationLogLineSpec' name='init_line____when_line_with_the_kaleidoscope_command_to_check_failed_snapshot_test__returns_referenceImageSavedMessage_log_line' time='0.004'/>
     <testcase classname='FBSnapshotsViewerTests.ApplicationLogLineSpec' name='init_line____when_line_with_the_reference_to_recorded_image__returns_referenceImageSavedMessage_log_line' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationLogLineSpec' name='init_line____when_random_line__returns_unknown' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationLogLineSpec' name='init_line____when_random_line__returns_unknown' time='0.003'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.ApplicationLogReaderrSpec' tests='3' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationLogReaderrSpec' name='_readline_of_startingFrom____when_without_starting_line__reads_the_whole_file' time='0.013'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationLogReaderrSpec' name='_readline_of_startingFrom____when_starting_line__out_of_bounds__skips_reading' time='0.010'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationLogReaderrSpec' name='_readline_of_startingFrom____when_starting_line__in_range__reads_part_of_the_file' time='0.011'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationLogReaderrSpec' name='_readline_of_startingFrom____when_without_starting_line__reads_the_whole_file' time='0.018'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationLogReaderrSpec' name='_readline_of_startingFrom____when_starting_line__out_of_bounds__skips_reading' time='0.015'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationLogReaderrSpec' name='_readline_of_startingFrom____when_starting_line__in_range__reads_part_of_the_file' time='0.015'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerFactorySpec' tests='1' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerFactorySpec' name='_applicationSnapshotTestResultListener__returns_new_listener' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerFactorySpec' name='_applicationSnapshotTestResultListener__returns_new_listener' time='0.004'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' tests='8' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='_stopListening__stops_file_watching' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='_receiving_new_file_watch_event__with_no_changes__doesnt_output_anything' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='_receiving_new_file_watch_event__with_invalid_updates__thows_assertion' time='0.013'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='_receiving_new_file_watch_event__with_valid_updates__outputs_expected_snapshot_test_resilts' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='startListening_outputTo____starts_file_watching' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='_receiving_new_file_watch_event__with_invalid_updates__thows_assertion' time='0.051'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='_receiving_new_file_watch_event__with_valid_updates__outputs_expected_snapshot_test_resilts' time='0.006'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='startListening_outputTo____starts_file_watching' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='startListening_outputTo____when_file_watcher_fails_to_start__because_already_started__throws_assertion' time='0.010'/>
     <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='startListening_outputTo____when_file_watcher_fails_to_start__because_of_internal_error__does_nothing' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='startListening_outputTo____when_file_watcher_fails_to_start__because_of_unknown_reason__does_nothing' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationSnapshotTestResultListenerSpec' name='startListening_outputTo____when_file_watcher_fails_to_start__because_of_unknown_reason__does_nothing' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' tests='6' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_stopListening__stops_current_listening' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_folderEventsListener_didReceive____when_event_without_path__doesnt_output_it' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_folderEventsListener_didReceive____when_event_with_path__outputs_it' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_listen__starts_listening_the_given_derived_data_folder' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_listen__starts_listening' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_listen__when_already_listening__stops_current_listening' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_stopListening__stops_current_listening' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_folderEventsListener_didReceive____when_event_without_path__doesnt_output_it' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_folderEventsListener_didReceive____when_event_with_path__outputs_it' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_listen__starts_listening_the_given_derived_data_folder' time='0.006'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_listen__starts_listening' time='0.008'/>
+    <testcase classname='FBSnapshotsViewerTests.ApplicationTestLogFilesListenerSpec' name='_listen__when_already_listening__stops_current_listening' time='0.003'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.ConfigurationSpec' tests='6' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_default__returns_xcodeDefault_configuration' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_init__initializes_new_configuration' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_decoding__archives_and_unarchives_the_xcodeCustom_configuration' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_decoding__archives_and_unarchives_the_appcode_configuration' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_default__returns_xcodeDefault_configuration' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_init__initializes_new_configuration' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_decoding__archives_and_unarchives_the_xcodeCustom_configuration' time='0.005'/>
+    <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_decoding__archives_and_unarchives_the_appcode_configuration' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_isEqual__when_object_is_not_configuration__returns_false' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.ConfigurationSpec' name='_isEqual__when_object_is_configuration__compares_derived_data_folder' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.FolderEventFilterSpec' tests='4' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.FolderEventFilterSpec' name='_apply__when_known_filter__filters_unknown_events' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventFilterSpec' name='_apply__when_type_filder__filters_by_type' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.FolderEventFilterSpec' name='_apply__when_path_regex__filters_using_regular_expression_on_path' time='0.005'/>
+    <testcase classname='FBSnapshotsViewerTests.FolderEventFilterSpec' name='_apply__when_path_regex__filters_using_regular_expression_on_path' time='0.007'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventFilterSpec' name='_apply__when_compound__sums_up_two_filters' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.FolderEventSpec' tests='19' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_object__when_modified__returns_correct_object' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_object__when_created__returns_correct_object' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_object__when_created__returns_correct_object' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_object__when_deleted__returns_correct_object' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_object__when_renamed__returns_correct_object' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_object__when_unknown__returns_nil' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_path__when_modified__returns_correct_path' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_path__when_created__returns_correct_path' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_path__when_deleted__returns_correct_path' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_path__when_deleted__returns_correct_path' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_path__when_renamed__returns_correct_path' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='_path__when_unknown__returns_nil' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_file_event__when_renamed__returns_correct_folder_event' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_file_event__when_modified__returns_correct_folder_event' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_file_event__when_created__returns_correct_folder_event' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_file_event__when_deleted__returns_correct_folder_event' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_folder_event__when_unknown__returns_correct_folder_event' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_folder_event__when_renamed__returns_correct_folder_event' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_folder_event__when_unknown__returns_correct_folder_event' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_folder_event__when_renamed__returns_correct_folder_event' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_folder_event__when_modified__returns_correct_folder_event' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_folder_event__when_created__returns_correct_folder_event' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventSpec' name='when_folder_event__when_deleted__returns_correct_folder_event' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.FolderEventsListenerFactorySpec' tests='4' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.FolderEventsListenerFactorySpec' name='_applicationTestLogsEventsListener__when_derived_data_folder_is_xcode_default__returns_correct_listener' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.FolderEventsListenerFactorySpec' name='_applicationTestLogsEventsListener__when_derived_data_folder_is_xcode_default__returns_correct_listener' time='0.005'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventsListenerFactorySpec' name='_applicationTestLogsEventsListener__when_derived_data_folder_is_xcode_custom__returns_correct_listener' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventsListenerFactorySpec' name='_applicationTestLogsEventsListener__when_derived_data_folder_is_appcode__returns_correct_listener' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.FolderEventsListenerFactorySpec' name='_iOSSimulatorApplicationsFolderEventsListener__returns_correct_listener' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' tests='8' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='name__is_Kaleidoscope' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='bundleID__is_correct' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='name__is_Kaleidoscope' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='bundleID__is_correct' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='_canView__for_recorded_snapshot_test_result__returns_false' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='_canView__for_failed_snapshot_test_result__returns_true' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='_isAvailable__when_application_finder_finds_the_app_with_bundleID__is_true' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='_isAvailable__when_application_finder_doesn_t_find_the_app_with_bundleID__is_false' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='_view__for_recorded_snapshot_test_result__throws_an_assertion' time='0.013'/>
+    <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='_isAvailable__when_application_finder_doesn_t_find_the_app_with_bundleID__is_false' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='_view__for_recorded_snapshot_test_result__throws_an_assertion' time='0.010'/>
     <testcase classname='FBSnapshotsViewerTests.KaleidoscopeViewerSpec' name='_view__for_failed_snapshot_test_result__launches_correct_process' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.MenuControllerSpec' tests='9' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='menuStatusItemMenu_quitItemClicked__quits' time='0.010'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='menuStatusItemMenu_preferencesItemClicked__quits' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='menuStatusItemMenu_checkForUpdatesItemClicked__quits' time='0.006'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_handleIconMouseEvent__when_rightMouseUp__shows_application_menu' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_handleIconMouseEvent__when_leftMouseUp__shows_test_results' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_setNewTestResults__when_there_are_new_test_results__updates_status_bar_button_image' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_setNewTestResults__when_there_are_no_new_test_results__updates_status_bar_button_image' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_popUpOptionsMenu__shows_menu' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_popUpOptionsMenu__shows_correct_menu' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='menuStatusItemMenu_quitItemClicked__quits' time='0.017'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='menuStatusItemMenu_preferencesItemClicked__quits' time='0.006'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='menuStatusItemMenu_checkForUpdatesItemClicked__quits' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_handleIconMouseEvent__when_rightMouseUp__shows_application_menu' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_handleIconMouseEvent__when_leftMouseUp__shows_test_results' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_setNewTestResults__when_there_are_new_test_results__updates_status_bar_button_image' time='0.007'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_setNewTestResults__when_there_are_no_new_test_results__updates_status_bar_button_image' time='0.004'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_popUpOptionsMenu__shows_menu' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuControllerSpec' name='_popUpOptionsMenu__shows_correct_menu' time='0.008'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.MenuInteractorSpec' tests='7' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startXcodeBuildsListening__stops_the_current_xcodeDefault_builds_listening' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startXcodeBuildsListening__starts_a_new_listening_of_the_given_derived_data_folder' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startXcodeBuildsListening__stops_the_current_xcodeDefault_builds_listening' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startXcodeBuildsListening__starts_a_new_listening_of_the_given_derived_data_folder' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startXcodeBuildsListening__when_find_a_new_test_log_file__outputs_it' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startSnapshotTestResultListening__when_start_listening_unique_log_file_path__creates_listener_for_correct_log_file_path' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startSnapshotTestResultListening__when_start_listening_unique_log_file_path__creates_listener_for_correct_log_file_path' time='0.004'/>
     <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startSnapshotTestResultListening__when_start_listening_unique_log_file_path__when_find_new_test_result__outputs_it' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startSnapshotTestResultListening__when_start_listening_unique_log_file_path__when_find_three_test_results_consequently__stores_all_of_them' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startSnapshotTestResultListening__when_start_listening_already_listened_log_file_path__doesnt_create_duplicate_listener' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startSnapshotTestResultListening__when_start_listening_unique_log_file_path__when_find_three_test_results_consequently__stores_all_of_them' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuInteractorSpec' name='_startSnapshotTestResultListening__when_start_listening_already_listened_log_file_path__doesnt_create_duplicate_listener' time='0.004'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.MenuPresenterSpec' tests='11' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_checkForUpdates__checks_for_updaters' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_showPreferences__shows_preferences' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_start__starts_the_Xcode_builds_listening' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_quit__terminates_the_app' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_showApplicationMenu__pop_ups_the_menu_in_user_interface' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_didFindNewTestLogFile__starts_listening_for_snapshot_tests_results_from_the_given_test_log' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_checkForUpdates__checks_for_updaters' time='0.005'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_showPreferences__shows_preferences' time='0.007'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_start__starts_the_Xcode_builds_listening' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_quit__terminates_the_app' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_showApplicationMenu__pop_ups_the_menu_in_user_interface' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_didFindNewTestLogFile__starts_listening_for_snapshot_tests_results_from_the_given_test_log' time='0.004'/>
     <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_didFindNewTestResult__sets_that_new_test_results_are_available_in_user_interface' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_showTestResults__when_interactor_has_test_results__sets_that_there_no_new_test_results_in_user_interface' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_showTestResults__when_interactor_has_test_results__shows_test_results' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_showTestResults__when_interactor_has_test_results__shows_test_results' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_showTestResults__when_interactor_doesn_t_have_test_result__doesn_t_update_user_interface' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.MenuPresenterSpec' name='_showTestResults__when_interactor_doesn_t_have_test_result__doesn_t_show_test_results' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.MenuStatusItemMenuSpec' tests='3' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.MenuStatusItemMenuSpec' name='_preferencesItemClicked__notifies_target' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuStatusItemMenuSpec' name='_checkForUpdatesItemClicked__notifies_target' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuStatusItemMenuSpec' name='_checkForUpdatesItemClicked__notifies_target' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.MenuStatusItemMenuSpec' name='_quitItemClicked__notifies_target' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.MenuWireframeSpec' tests='3' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.MenuWireframeSpec' name='instantinateMenu_in____returns_initialized_module' time='0.036'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuWireframeSpec' name='instantinateMenu_in____returns_initialized_module' time='0.055'/>
     <testcase classname='FBSnapshotsViewerTests.MenuWireframeSpec' name='_showTestResultsModule_with____doesnt_crash' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.MenuWireframeSpec' name='_showPreferencesModule__doesnt_crash' time='0.066'/>
+    <testcase classname='FBSnapshotsViewerTests.MenuWireframeSpec' name='_showPreferencesModule__doesnt_crash' time='0.156'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' tests='8' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_init__creates_a_watcher_with_on_the_given_path' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_init__assigns_folder_path' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_stopListening__stops_the_file_watcher' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_init__creates_a_watcher_with_on_the_given_path' time='0.004'/>
+    <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_init__assigns_folder_path' time='0.006'/>
+    <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_stopListening__stops_the_file_watcher' time='0.004'/>
     <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_an_event__when_there_are_no_filters__outputs_folder_event' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_an_event__when_there_are_no_filters__outputs_correct_folder_event' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_an_event__when_there_are_filters__when_the_event_passes_the_filter__outputs_folder_event' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_an_event__when_there_are_filters__when_the_event_passes_the_filter__outputs_correct_folder_event' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_an_event__when_there_are_filters__when_the_event_doesn_t_pass_the_filter__doesn_t_output_folder_event' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.NonRecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_an_event__when_there_are_filters__when_the_event_doesn_t_pass_the_filter__doesn_t_output_folder_event' time='0.003'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.OSXApplicationFinderSpec' tests='2' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.OSXApplicationFinderSpec' name='_findApplication__finds_application_that_is_installed_on_the_machine' time='0.004'/>
-    <testcase classname='FBSnapshotsViewerTests.OSXApplicationFinderSpec' name='_findApplication__doesn_t_find_application_that_is_not_installed_on_the_machine' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.OSXApplicationFinderSpec' name='_findApplication__finds_application_that_is_installed_on_the_machine' time='0.006'/>
+    <testcase classname='FBSnapshotsViewerTests.OSXApplicationFinderSpec' name='_findApplication__doesn_t_find_application_that_is_not_installed_on_the_machine' time='0.005'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.PreferencesControllerSpec' tests='5' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_viewWillAppear__updates_user_interface' time='0.014'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_viewDidDisappear__closes' time='0.009'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_showPreferencesDisplayInfo__updates_UI' time='0.007'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_popUpValueChanged__updates_derived_data_type' time='0.009'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_derivedDataPathTextFieldDidChange__updates_derived_data_path' time='0.009'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_viewWillAppear__updates_user_interface' time='0.022'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_viewDidDisappear__closes' time='0.014'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_showPreferencesDisplayInfo__updates_UI' time='0.015'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_popUpValueChanged__updates_derived_data_type' time='0.010'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesControllerSpec' name='_derivedDataPathTextFieldDidChange__updates_derived_data_path' time='0.015'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.PreferencesDisplayInfoSpec' tests='4' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.PreferencesDisplayInfoSpec' name='_init__initializes_new_instance' time='0.002'/>
@@ -158,77 +158,77 @@
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.PreferencesInteractorSpec' tests='15' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderPath__when_current_configuration_derived_data_folder_type_is_xcodeCustom__updates_configuration' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderPath__when_current_configuration_derived_data_folder_type_is_appcode__updates_configuration' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderPath__when_current_configuration_derived_data_folder_type_is_xcodeDefault__asserts' time='0.009'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_type_is_not_derived_data_folder_type__asserts' time='0.010'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_type_is_equal_to_current_one__does_nothing' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderPath__when_current_configuration_derived_data_folder_type_is_appcode__updates_configuration' time='0.051'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderPath__when_current_configuration_derived_data_folder_type_is_xcodeDefault__asserts' time='0.030'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_type_is_not_derived_data_folder_type__asserts' time='0.014'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_type_is_equal_to_current_one__does_nothing' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_xcodeDefault__when_set_xcodeCustom_type__updates_configuration_with_xcodeCustom_derived_data_and_empty_path' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_xcodeDefault__when_set_appcode_type__updates_configuration_with_appcode_derived_data_and_empty_path' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_xcodeCustom__when_set_xcodeDefault_type__updates_configuration_with_xcodeDefault_derived_data_and_empty_path' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_xcodeCustom__when_set_appcode_type__updates_configuration_with_appcode_derived_data_and_empty_path' time='0.004'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_appcode__when_set_xcodeDefault_type__updates_configuration_with_xcodeDefault_derived_data_and_empty_path' time='0.010'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_xcodeDefault__when_set_appcode_type__updates_configuration_with_appcode_derived_data_and_empty_path' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_xcodeCustom__when_set_xcodeDefault_type__updates_configuration_with_xcodeDefault_derived_data_and_empty_path' time='0.005'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_xcodeCustom__when_set_appcode_type__updates_configuration_with_appcode_derived_data_and_empty_path' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_appcode__when_set_xcodeDefault_type__updates_configuration_with_xcodeDefault_derived_data_and_empty_path' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_setNewDerivedDataFolderType__when_current_type_is_appcode__when_set_xcodeCustom_type__updates_configuration_with_xcodeCustom_derived_data_and_empty_path' time='0.005'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_currentConfiguration__returns_correct_configuration' time='0.006'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_save__saves_configuration' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_init__when_configuration_storage_can_load_configuration__initializes_new_instance' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_currentConfiguration__returns_correct_configuration' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_save__saves_configuration' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_init__when_configuration_storage_can_load_configuration__initializes_new_instance' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.PreferencesInteractorSpec' name='_init__when_configuration_storage_can_not_load_configuration__asserts' time='0.014'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.PreferencesPresenterSpec' tests='6' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_selectDerivedDataFolderType__passes_the_message_to_interactor' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_selectDerivedDataFolderType__updates_user_interface' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_updateDerivedDataFolderPath__passes_the_message_to_interactor' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_selectDerivedDataFolderType__passes_the_message_to_interactor' time='0.006'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_selectDerivedDataFolderType__updates_user_interface' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_updateDerivedDataFolderPath__passes_the_message_to_interactor' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_close__saves' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_close__notifies_the_module_delegate_that_module_will_close' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_updateUserInterface__shows_preferences_display_info_in_user_interface' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesPresenterSpec' name='_updateUserInterface__shows_preferences_display_info_in_user_interface' time='0.003'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.PreferencesWireframeSpec' tests='1' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.PreferencesWireframeSpec' name='_show__returns_preferences_module' time='0.020'/>
+    <testcase classname='FBSnapshotsViewerTests.PreferencesWireframeSpec' name='_show__returns_preferences_module' time='0.036'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.ProcessLauncherSpec' tests='1' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.ProcessLauncherSpec' name='launch__doesnt_crash' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.ProcessLauncherSpec' name='launch__doesnt_crash' time='0.004'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' tests='15' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_init__creates_a_watcher_with_on_the_given_path' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_init__creates_a_watcher_with_on_the_given_path' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_init__assigns_folder_path' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_stopListening__stops_the_file_watcher' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_folder_event__when_event_is_created__creates_a_dependent_listener' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_folder_event__when_event_is_modified__doesn_t_create_a_dependent_listener' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_folder_event__when_event_is_renamed__doesn_t_create_a_dependent_listener' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_folder_event__when_event_is_removed__removes_a_dependent_listener' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_folder_event__when_event_is_removed__removes_a_dependent_listener' time='0.004'/>
     <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_no_filters__outputs_folder_event' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_no_filters__outputs_correct_folder_event' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_no_filters__doesn_t_create_a_new_dependent_listener' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_no_filters__outputs_correct_folder_event' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_no_filters__doesn_t_create_a_new_dependent_listener' time='0.007'/>
     <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_filters__when_the_event_passes_the_filter__doesn_t_create_a_new_dependent_listener' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_filters__when_the_event_passes_the_filter__outputs_folder_event' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_filters__when_the_event_passes_the_filter__outputs_correct_folder_event' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_filters__when_the_event_doesn_t_pass_the_filter__doesn_t_create_a_new_dependent_listener' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_filters__when_the_event_doesn_t_pass_the_filter__doesn_t_output_folder_event' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_filters__when_the_event_doesn_t_pass_the_filter__doesn_t_create_a_new_dependent_listener' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.RecursiveFolderEventsListenerSpec' name='_startListening__when_there_is_a_file_event__when_there_are_filters__when_the_event_doesn_t_pass_the_filter__doesn_t_output_folder_event' time='0.003'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' tests='7' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_unknown_log_line__doesnt_create_test_result' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_reference_image_saved_message_log_line__when_invalid__when_without_expected_FBSnapshotTests_message__returns_nil' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_reference_image_saved_message_log_line__when_invalid__when_without_expected_image_path_suffix__returns_nil' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_reference_image_saved_message_log_line__when_valid__creates_recorded_test_result' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_unknown_log_line__doesnt_create_test_result' time='0.006'/>
+    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_reference_image_saved_message_log_line__when_invalid__when_without_expected_FBSnapshotTests_message__returns_nil' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_reference_image_saved_message_log_line__when_invalid__when_without_expected_image_path_suffix__returns_nil' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_reference_image_saved_message_log_line__when_valid__creates_recorded_test_result' time='0.002'/>
     <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_kaleidoscope_command_message_log_line__when_invalid__when_without_expected_FBSnapshotTests_message__returns_nil' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_kaleidoscope_command_message_log_line__when_invalid__when_without_proper_failed_image_path__returns_nil' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_kaleidoscope_command_message_log_line__when_valid__creates_failed_test_result' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_kaleidoscope_command_message_log_line__when_invalid__when_without_proper_failed_image_path__returns_nil' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.SnapshotTestResultFactorySpec' name='_createSnapshotTestResult_from____when_kaleidoscope_command_message_log_line__when_valid__creates_failed_test_result' time='0.089'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.StringHTMLSpec' tests='1' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.StringHTMLSpec' name='_htmlUnescape__unescapes_the_string' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.StringHTMLSpec' name='_htmlUnescape__unescapes_the_string' time='0.037'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.TestResultCellSpec' tests='1' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.TestResultCellSpec' name='_viewInKaleidoscopeButtonClicked__calls_delegate' time='0.003'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' tests='5' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' name='_initWithTestInfo__canBeViewedInKaleidoscope__when_kaleidoscope_viewer_is_available__and_can_show_test_result__can_be_viewed_in_kaleidoscope' time='0.002'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' name='_initWithTestInfo__canBeViewedInKaleidoscope__when_kaleidoscope_viewer_is_available__and_can_show_test_result__can_be_viewed_in_kaleidoscope' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' name='_initWithTestInfo__canBeViewedInKaleidoscope__when_kaleidoscope_viewer_is_available__and_can_not_show_test_result__can_not_be_viewed_in_kaleidoscope' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' name='_initWithTestInfo__canBeViewedInKaleidoscope__when_kaleidoscope_viewer_is_not_available__can_not_be_viewed_in_kaleidoscope' time='0.002'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' name='_initWithTestInfo__when_failed_test_result__initializes_object_correctly' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' name='_initWithTestInfo__when_recorded_test_result__initializes_object_correctly' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' name='_initWithTestInfo__canBeViewedInKaleidoscope__when_kaleidoscope_viewer_is_not_available__can_not_be_viewed_in_kaleidoscope' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' name='_initWithTestInfo__when_failed_test_result__initializes_object_correctly' time='0.006'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultDisplayInfoSpec' name='_initWithTestInfo__when_recorded_test_result__initializes_object_correctly' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.TestResultsCollectionViewOutletsSpec' tests='4' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.TestResultsCollectionViewOutletsSpec' name='_numberOfSections__returns_one' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultsCollectionViewOutletsSpec' name='_sizeForItemAt__returns_correct_size' time='0.003'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultsCollectionViewOutletsSpec' name='_sizeForItemAt__returns_correct_size' time='0.011'/>
     <testcase classname='FBSnapshotsViewerTests.TestResultsCollectionViewOutletsSpec' name='_insetForSectionAt__returns_correct_insets' time='0.003'/>
     <testcase classname='FBSnapshotsViewerTests.TestResultsCollectionViewOutletsSpec' name='_numberOfItemsInSection__returns_correct_number_of_rows' time='0.003'/>
   </testsuite>
@@ -236,15 +236,15 @@
     <testcase classname='FBSnapshotsViewerTests.TestResultsControllerSpec' name='_show__reloads_collection_view' time='0.005'/>
     <testcase classname='FBSnapshotsViewerTests.TestResultsControllerSpec' name='_show__shows_test_results' time='0.004'/>
     <testcase classname='FBSnapshotsViewerTests.TestResultsControllerSpec' name='_viewWillAppear__updates_user_interface' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultsControllerSpec' name='_testResultCell_viewInKaleidoscopeButtonClicked__when_cell_is_not_visible__asserts' time='0.010'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultsControllerSpec' name='_testResultCell_viewInKaleidoscopeButtonClicked__when_test_result_is_not_presented_in_controller__asserts' time='0.009'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultsControllerSpec' name='_testResultCell_viewInKaleidoscopeButtonClicked__when_test_result_is_presented_and_cell_is_visible__opens_test_result_in_kaleidoscope' time='0.004'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultsControllerSpec' name='_testResultCell_viewInKaleidoscopeButtonClicked__when_cell_is_not_visible__asserts' time='0.013'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultsControllerSpec' name='_testResultCell_viewInKaleidoscopeButtonClicked__when_test_result_is_not_presented_in_controller__asserts' time='0.011'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultsControllerSpec' name='_testResultCell_viewInKaleidoscopeButtonClicked__when_test_result_is_presented_and_cell_is_visible__opens_test_result_in_kaleidoscope' time='0.005'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.TestResultsInteractorSpec' tests='4' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.TestResultsInteractorSpec' name='_openInKaleidoscope__when_kaleidoscope_viewer_is_available__and_can_view_the_test_resukt__views_the_test_result' time='0.003'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultsInteractorSpec' name='_openInKaleidoscope__when_kaleidoscope_viewer_is_available__and_can_not_view_the_test_resukt__asserts' time='0.012'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultsInteractorSpec' name='_openInKaleidoscope__when_kaleidoscope_viewer_is_not_available__asserts' time='0.009'/>
-    <testcase classname='FBSnapshotsViewerTests.TestResultsInteractorSpec' name='_testResults__returns_initialized_test_results' time='0.001'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultsInteractorSpec' name='_openInKaleidoscope__when_kaleidoscope_viewer_is_available__and_can_view_the_test_resukt__views_the_test_result' time='0.004'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultsInteractorSpec' name='_openInKaleidoscope__when_kaleidoscope_viewer_is_available__and_can_not_view_the_test_resukt__asserts' time='0.013'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultsInteractorSpec' name='_openInKaleidoscope__when_kaleidoscope_viewer_is_not_available__asserts' time='0.013'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultsInteractorSpec' name='_testResults__returns_initialized_test_results' time='0.002'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.TestResultsPresenterSpec' tests='4' failures='0'>
     <testcase classname='FBSnapshotsViewerTests.TestResultsPresenterSpec' name='_openInKaleidoscope__passes_the_message_to_interactor_with_correct_test_result' time='0.003'/>
@@ -253,11 +253,11 @@
     <testcase classname='FBSnapshotsViewerTests.TestResultsPresenterSpec' name='_updateUserInterface__when_interactor_has_test_results__shows_correct_test_results_in_user_interface' time='0.003'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.TestResultsWireframeSpec' tests='1' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.TestResultsWireframeSpec' name='_show__initializes_the_module' time='0.013'/>
+    <testcase classname='FBSnapshotsViewerTests.TestResultsWireframeSpec' name='_show__initializes_the_module' time='0.014'/>
   </testsuite>
   <testsuite name='FBSnapshotsViewerTests.UserDefaultsConfigurationStorageSpec' tests='3' failures='0'>
-    <testcase classname='FBSnapshotsViewerTests.UserDefaultsConfigurationStorageSpec' name='_loadConfiguration__when_there_is_nothing_to_load__returns_nil' time='0.005'/>
-    <testcase classname='FBSnapshotsViewerTests.UserDefaultsConfigurationStorageSpec' name='_loadConfiguration__when_there_is_saved_configuration__returns_configuration' time='0.004'/>
-    <testcase classname='FBSnapshotsViewerTests.UserDefaultsConfigurationStorageSpec' name='_save__saves_given_configuration_in_user_defaults' time='0.004'/>
+    <testcase classname='FBSnapshotsViewerTests.UserDefaultsConfigurationStorageSpec' name='_loadConfiguration__when_there_is_nothing_to_load__returns_nil' time='0.007'/>
+    <testcase classname='FBSnapshotsViewerTests.UserDefaultsConfigurationStorageSpec' name='_loadConfiguration__when_there_is_saved_configuration__returns_configuration' time='0.008'/>
+    <testcase classname='FBSnapshotsViewerTests.UserDefaultsConfigurationStorageSpec' name='_save__saves_given_configuration_in_user_defaults' time='0.015'/>
   </testsuite>
 </testsuites>
