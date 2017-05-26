@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.5.1 (Next)
+
+* Your contribution here.
+
 ### 0.5.0 (26.05.2017)
 
 * [#39](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/39): Update RELEASING process with some new cool automation - [@antondomashnev](https://github.com/antondomashnev).
