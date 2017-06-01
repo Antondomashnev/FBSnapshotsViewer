@@ -27,7 +27,7 @@ class SnapshotTestResultFactory {
         guard let testName = failedImagePath.components(separatedBy: "/failed_").last?.components(separatedBy: "@").first, !testName.isEmpty else {
             throw SnapshotTestResultFactoryError.unexpectedKaleidoscopeCommandLineFormat
         }
-        return SnapshotTestResult.failed(testName: testName, referenceImagePath: referenceImagePath, diffImagePath: diffImagePath, failedImagePath: failedImagePath)
+        return SnapshotTestResult.failed(testName: testName, referenceImagePath: referenceImagePath, diffImagePath: diffImagePath, failedImagePath: failedImagePath, createdAt: Date())
     }
 
     private func createSnapshotTestResult(fromSavedReferenceImageLine line: String) throws -> SnapshotTestResult {
@@ -39,7 +39,7 @@ class SnapshotTestResultFactory {
         guard let testName = referenceImagePath.components(separatedBy: "/").last?.components(separatedBy: "@").first, !testName.contains(".png") else {
             throw SnapshotTestResultFactoryError.unexpectedSavedReferenceImageLineFormat
         }
-        return SnapshotTestResult.recorded(testName: testName, referenceImagePath: referenceImagePath)
+        return SnapshotTestResult.recorded(testName: testName, referenceImagePath: referenceImagePath, createdAt: Date())
     }
 
     // MARK: - Interface

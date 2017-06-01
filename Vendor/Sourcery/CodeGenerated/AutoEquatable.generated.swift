@@ -32,6 +32,7 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard lhs.testName == rhs.testName else { return false }
     guard lhs.canBeViewedInKaleidoscope == rhs.canBeViewedInKaleidoscope else { return false }
     guard lhs.testResult == rhs.testResult else { return false }
+    guard lhs.createdAt == rhs.createdAt else { return false }
     return true
 }
 
@@ -110,12 +111,14 @@ internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
     case (.recorded(let lhs), .recorded(let rhs)): 
         if lhs.testName != rhs.testName { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
+        if lhs.createdAt != rhs.createdAt { return false }
         return true
     case (.failed(let lhs), .failed(let rhs)): 
         if lhs.testName != rhs.testName { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
         if lhs.diffImagePath != rhs.diffImagePath { return false }
         if lhs.failedImagePath != rhs.failedImagePath { return false }
+        if lhs.createdAt != rhs.createdAt { return false }
         return true
     default: return false
     }

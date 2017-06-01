@@ -30,7 +30,7 @@ class TestResultsPresenterSpec: QuickSpec {
             var testResultDisplayInfo: TestResultDisplayInfo!
 
             beforeEach {
-                testResult = SnapshotTestResult.recorded(testName: "MyTest", referenceImagePath: "foo/bar.png")
+                testResult = SnapshotTestResult.recorded(testName: "MyTest", referenceImagePath: "foo/bar.png", createdAt: Date())
                 testResultDisplayInfo = TestResultDisplayInfo(testResult: testResult)
                 presenter.openInKaleidoscope(testResultDisplayInfo: testResultDisplayInfo)
             }
@@ -56,7 +56,7 @@ class TestResultsPresenterSpec: QuickSpec {
                 var testResults: [SnapshotTestResult] = []
 
                 beforeEach {
-                    testResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath")]
+                    testResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: Date())]
                     interactor.testResults = testResults
                     presenter.updateUserInterface()
                 }

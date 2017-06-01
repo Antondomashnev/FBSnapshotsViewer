@@ -22,14 +22,14 @@ class KaleidoscopeViewer: ExternalViewer {
     }
 
     static func canView(snapshotTestResult: SnapshotTestResult) -> Bool {
-        if case SnapshotTestResult.failed(_, _, _, _) = snapshotTestResult {
+        if case SnapshotTestResult.failed(_, _, _, _, _) = snapshotTestResult {
             return true
         }
         return false
     }
 
     static func view(snapshotTestResult: SnapshotTestResult, using processLauncher: ProcessLauncher = ProcessLauncher()) {
-        guard case let SnapshotTestResult.failed(_, referenceImagePath, _, failedImagePath) = snapshotTestResult else {
+        guard case let SnapshotTestResult.failed(_, referenceImagePath, _, failedImagePath, _) = snapshotTestResult else {
             assertionFailure("Trying to open Kaleidoscope viewer for test result without diff")
             return
         }

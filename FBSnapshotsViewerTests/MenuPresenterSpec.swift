@@ -27,6 +27,7 @@ class MenuPresenter_MockMenuWireframe: MenuWireframe {
 
 class MenuPresenterSpec: QuickSpec {
     override func spec() {
+        let testResultsDate = Date()
         var configuration: FBSnapshotsViewer.Configuration!
         var derivedDataFolder: DerivedDataFolder!
         var application: ApplicationMock!
@@ -113,7 +114,7 @@ class MenuPresenterSpec: QuickSpec {
 
         describe(".didFindNewTestResult") {
             beforeEach {
-                presenter.didFindNewTestResult(SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath"))
+                presenter.didFindNewTestResult(SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: testResultsDate))
             }
 
             it("sets that new test results are available in user interface") {
@@ -127,7 +128,7 @@ class MenuPresenterSpec: QuickSpec {
                 var foundTestResults: [SnapshotTestResult] = []
 
                 beforeEach {
-                    foundTestResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath")]
+                    foundTestResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: testResultsDate)]
                     interactor.foundTestResults = foundTestResults
                     presenter.showTestResults()
                 }
@@ -138,7 +139,7 @@ class MenuPresenterSpec: QuickSpec {
                 }
 
                 it("shows test results") {
-                    let expectedPaameter = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath")
+                    let expectedPaameter = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: testResultsDate)
                     expect(wireframe.showTestResultsModuleCalled).to(beTrue())
                     expect(wireframe.showTestResultsModuleReceivedParameters[0]).to(equal(expectedPaameter))
                 }

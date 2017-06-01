@@ -8,8 +8,15 @@
 
 import Quick
 import Nimble
+import Foundation
 
 @testable import FBSnapshotsViewer
+
+class TestResultDisplayInfo_MockDateComponentsFormatter: DateComponentsFormatter {
+    override func string(from startDate: Date, to endDate: Date) -> String? {
+        return "10 minutes ago"
+    }
+}
 
 class TestResultDisplayInfo_MockKaleidoscopeViewer: ExternalViewer {
     static var name: String = ""
@@ -41,7 +48,12 @@ class TestResultDisplayInfoSpec: QuickSpec {
     override func spec() {
         describe(".initWithTestInfo") {
             var testResult: SnapshotTestResult!
+            var dateFormatter: TestResultDisplayInfo_MockDateComponentsFormatter!
             let kaleidoscopeViewer: TestResultDisplayInfo_MockKaleidoscopeViewer.Type = TestResultDisplayInfo_MockKaleidoscopeViewer.self
+
+            beforeEach {
+                dateFormatter = TestResultDisplayInfo_MockDateComponentsFormatter()
+            }
 
             afterEach {
                 kaleidoscopeViewer.reset()
@@ -49,7 +61,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             describe("canBeViewedInKaleidoscope") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png")
+                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date())
                 }
 
                 context("when kaleidoscope viewer is available") {
@@ -94,28 +106,30 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when failed test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png")
+                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date())
                 }
 
                 it("initializes object correctly") {
-                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer, dateFormatter: dateFormatter)
                     expect(displayInfo.diffImageURL).to(equal(URL(fileURLWithPath: "diffImagePath.png")))
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.failedImageURL).to(equal(URL(fileURLWithPath: "failedImagePath.png")))
                     expect(displayInfo.testName).to(equal("testFailed"))
                     expect(displayInfo.testResult).to(equal(testResult))
+                    expect(displayInfo.createdAt).to(equal("10 minutes ago"))
                 }
             }
 
             context("when recorded test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testName: "testRecord", referenceImagePath: "referenceImagePath.png")
+                    testResult = SnapshotTestResult.recorded(testName: "testRecord", referenceImagePath: "referenceImagePath.png", createdAt: Date())
                 }
 
                 it("initializes object correctly") {
-                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer, dateFormatter: dateFormatter)
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.testName).to(equal("testRecord"))
+                    expect(displayInfo.createdAt).to(equal("10 minutes ago"))
                 }
             }
         }
