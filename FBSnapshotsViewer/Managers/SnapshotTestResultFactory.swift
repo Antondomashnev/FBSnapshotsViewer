@@ -16,6 +16,28 @@ enum SnapshotTestResultFactoryError: Error {
 class SnapshotTestResultFactory {
     // MARK: - Helpers
 
+    private func extractTestName(fromFailedImage path: String) throws -> String {
+        let pathComponents = path.components(separatedBy: "/")
+        guard pathComponents.count >= 2,
+              let testName = pathComponents.last?.components(separatedBy: "failed_").last?.components(separatedBy: "@").first,
+              !testName.isEmpty else {
+            throw SnapshotTestResultFactoryError.unexpectedKaleidoscopeCommandLineFormat
+        }
+        let testClassName = pathComponents[pathComponents.count - 2]
+        return "\(testClassName) \(testName)"
+    }
+
+    private func extractTestName(fromSavedReferenceImage path: String) throws -> String {
+        let pathComponents = path.components(separatedBy: "/")
+        guard pathComponents.count >= 2,
+              let testName = pathComponents.last?.components(separatedBy: "@").first,
+              !testName.contains(".png") else {
+            throw SnapshotTestResultFactoryError.unexpectedSavedReferenceImageLineFormat
+        }
+        let testClassName = pathComponents[pathComponents.count - 2]
+        return "\(testClassName) \(testName)"
+    }
+
     private func createSnapshotTestResult(fromKaleidoscopeCommandLine line: String) throws -> SnapshotTestResult {
         let lineComponents = line.components(separatedBy: "\"")
         guard lineComponents.count == 5 else {
@@ -24,9 +46,7 @@ class SnapshotTestResultFactory {
         let referenceImagePath = lineComponents[1]
         let failedImagePath = lineComponents[3]
         let diffImagePath = failedImagePath.replacingOccurrences(of: "/failed_", with: "/diff_")
-        guard let testName = failedImagePath.components(separatedBy: "/failed_").last?.components(separatedBy: "@").first, !testName.isEmpty else {
-            throw SnapshotTestResultFactoryError.unexpectedKaleidoscopeCommandLineFormat
-        }
+        let testName = try extractTestName(fromFailedImage: failedImagePath)
         return SnapshotTestResult.failed(testName: testName, referenceImagePath: referenceImagePath, diffImagePath: diffImagePath, failedImagePath: failedImagePath, createdAt: Date())
     }
 
@@ -36,9 +56,7 @@ class SnapshotTestResultFactory {
             throw SnapshotTestResultFactoryError.unexpectedSavedReferenceImageLineFormat
         }
         let referenceImagePath = lineComponents[1]
-        guard let testName = referenceImagePath.components(separatedBy: "/").last?.components(separatedBy: "@").first, !testName.contains(".png") else {
-            throw SnapshotTestResultFactoryError.unexpectedSavedReferenceImageLineFormat
-        }
+        let testName = try extractTestName(fromSavedReferenceImage: referenceImagePath)
         return SnapshotTestResult.recorded(testName: testName, referenceImagePath: referenceImagePath, createdAt: Date())
     }
 

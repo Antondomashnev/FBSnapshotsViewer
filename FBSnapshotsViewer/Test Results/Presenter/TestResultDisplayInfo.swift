@@ -13,6 +13,7 @@ struct TestResultDisplayInfo: AutoEquatable {
     let diffImageURL: URL?
     let failedImageURL: URL?
     let testName: String
+    let testContext: String
     let canBeViewedInKaleidoscope: Bool
     let testResult: SnapshotTestResult
     let createdAt: String
@@ -31,6 +32,9 @@ struct TestResultDisplayInfo: AutoEquatable {
             self.failedImageURL = URL(fileURLWithPath: failedImagePath)
         }
         self.createdAt = dateFormatter.string(from: testResult.createdAt, to: Date()) ?? "Just now"
-        self.testName = testResult.testName
+
+        let testNameComponents = testResult.testName.replacingOccurrences(of: "_", with: " ").components(separatedBy: " ")
+        self.testContext = testNameComponents[0..<(testNameComponents.count - 1)].joined(separator: " ")
+        self.testName = testNameComponents[testNameComponents.count - 1]
     }
 }
