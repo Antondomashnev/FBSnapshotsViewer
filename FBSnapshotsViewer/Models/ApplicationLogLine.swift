@@ -8,6 +8,20 @@
 
 import Foundation
 
+class ApplicationLogLineIndicatorContainer {
+    func kaleidoscopeCommandMessageIndicator(for configuration: Configuration) -> String {
+        return ""
+    }
+
+    func referenceImageSavedMessageIndicator(for configuration) -> String {
+        return ""
+    }
+
+    func kaleidoscopeCommandMessageIndicator(for configuration) -> String {
+        return ""
+    }
+}
+
 enum ApplicationLogLine: AutoEquatable, AutoHashable {
     static let kaleidoscopeCommandMessageIndicatorSubstring = "ksdiff "
     static let referenceImageSavedMessageIndicatorSubstring = "Reference image save at: "
@@ -18,7 +32,7 @@ enum ApplicationLogLine: AutoEquatable, AutoHashable {
     case applicationNameMessage(line: String)
     case unknown
 
-    init(line: String) {
+    init(line: String, configuration: Configuration = Configuration.default()) {
         if line.contains(ApplicationLogLine.kaleidoscopeCommandMessageIndicatorSubstring) {
             self = ApplicationLogLine.kaleidoscopeCommandMessage(line: line)
         }
