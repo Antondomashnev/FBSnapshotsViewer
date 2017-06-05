@@ -13,6 +13,7 @@ typealias ApplicationSnapshotTestResultListenerOutput = (SnapshotTestResult) -> 
 
 class ApplicationSnapshotTestResultListener {
     private var readLinesNumber: Int = 0
+    private var readApplicationName: String = ""
     private var listeningOutput: ApplicationSnapshotTestResultListenerOutput?
     private let fileWatcher: KZFileWatchers.FileWatcherProtocol
     private let applicationLogReader: ApplicationLogReader
@@ -71,8 +72,11 @@ class ApplicationSnapshotTestResultListener {
                 switch logLine {
                 case .unknown:
                     return nil
+                case let .applicationNameMessage(line):
+                    readApplicationName = line
+                    return nil
                 default:
-                    return snapshotTestResultFactory.createSnapshotTestResult(from: logLine)
+                    return snapshotTestResultFactory.createSnapshotTestResult(from: logLine, applicationName: readApplicationName)
                 }
             }
             snapshotTestResults.forEach { listeningOutput($0) }

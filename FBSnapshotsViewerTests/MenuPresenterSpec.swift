@@ -114,7 +114,7 @@ class MenuPresenterSpec: QuickSpec {
 
         describe(".didFindNewTestResult") {
             beforeEach {
-                presenter.didFindNewTestResult(SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: testResultsDate))
+                presenter.didFindNewTestResult(SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: testResultsDate, applicationName: "MyApp"))
             }
 
             it("sets that new test results are available in user interface") {
@@ -128,7 +128,7 @@ class MenuPresenterSpec: QuickSpec {
                 var foundTestResults: [SnapshotTestResult] = []
 
                 beforeEach {
-                    foundTestResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: testResultsDate)]
+                    foundTestResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: testResultsDate, applicationName: "MyApp")]
                     interactor.foundTestResults = foundTestResults
                     presenter.showTestResults()
                 }
@@ -139,7 +139,7 @@ class MenuPresenterSpec: QuickSpec {
                 }
 
                 it("shows test results") {
-                    let expectedPaameter = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: testResultsDate)
+                    let expectedPaameter = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: testResultsDate, applicationName: "MyApp")
                     expect(wireframe.showTestResultsModuleCalled).to(beTrue())
                     expect(wireframe.showTestResultsModuleReceivedParameters[0]).to(equal(expectedPaameter))
                 }

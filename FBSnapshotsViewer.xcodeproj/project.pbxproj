@@ -105,6 +105,9 @@
 		6DA1BF981E7755110017D47B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1BF961E7755110017D47B /* Colors.swift */; };
 		6DA1BF991E7755110017D47B /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1BF971E7755110017D47B /* Storyboards.swift */; };
 		6DA1BF9B1E7756010017D47B /* FolderEventFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1BF9A1E7756010017D47B /* FolderEventFilterSpec.swift */; };
+		6DB94C9D1EE569BA00095C37 /* ApplicationNameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB94C9C1EE569BA00095C37 /* ApplicationNameExtractor.swift */; };
+		6DB94C9F1EE56EFE00095C37 /* ApplicationNameExtractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB94C9E1EE56EFE00095C37 /* ApplicationNameExtractorSpec.swift */; };
+		6DB94CA11EE5AB9800095C37 /* ApplicationNameExtractorFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB94CA01EE5AB9800095C37 /* ApplicationNameExtractorFactorySpec.swift */; };
 		6DBD6C501EACF1B0006F14DC /* DerivedDataFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD6C4F1EACF1B0006F14DC /* DerivedDataFolder.swift */; };
 		6DBD6C541EAD4B2B006F14DC /* ApplicationTestLogFilesListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD6C531EAD4B2B006F14DC /* ApplicationTestLogFilesListener.swift */; };
 		6DBD99D91E7AB31B00E1714E /* NonRecursiveFolderEventsListenerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD99D81E7AB31B00E1714E /* NonRecursiveFolderEventsListenerSpec.swift */; };
@@ -243,6 +246,9 @@
 		6DA1BF961E7755110017D47B /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6DA1BF971E7755110017D47B /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		6DA1BF9A1E7756010017D47B /* FolderEventFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderEventFilterSpec.swift; sourceTree = "<group>"; };
+		6DB94C9C1EE569BA00095C37 /* ApplicationNameExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationNameExtractor.swift; sourceTree = "<group>"; };
+		6DB94C9E1EE56EFE00095C37 /* ApplicationNameExtractorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationNameExtractorSpec.swift; sourceTree = "<group>"; };
+		6DB94CA01EE5AB9800095C37 /* ApplicationNameExtractorFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationNameExtractorFactorySpec.swift; sourceTree = "<group>"; };
 		6DBD6C4F1EACF1B0006F14DC /* DerivedDataFolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DerivedDataFolder.swift; sourceTree = "<group>"; };
 		6DBD6C531EAD4B2B006F14DC /* ApplicationTestLogFilesListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationTestLogFilesListener.swift; sourceTree = "<group>"; };
 		6DBD99D81E7AB31B00E1714E /* NonRecursiveFolderEventsListenerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonRecursiveFolderEventsListenerSpec.swift; sourceTree = "<group>"; };
@@ -477,6 +483,8 @@
 				6D130B6E1EC8EB2F00E9642A /* PreferencesDisplayInfoSpec.swift */,
 				6D8BF2BE1ED0CCD600C368D1 /* StringHTMLSpec.swift */,
 				6D51834A1EDF52C6007EC15C /* NaturalApproximationFormatterSpec.swift */,
+				6DB94C9E1EE56EFE00095C37 /* ApplicationNameExtractorSpec.swift */,
+				6DB94CA01EE5AB9800095C37 /* ApplicationNameExtractorFactorySpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -531,6 +539,7 @@
 				6D30002E1EBD276A005B6103 /* OSXApplicationFinder.swift */,
 				6D3000301EBD2C64005B6103 /* ProcessLauncher.swift */,
 				6D789CE71EC3C19F00EEF7EE /* ConfigurationStorage.swift */,
+				6DB94C9C1EE569BA00095C37 /* ApplicationNameExtractor.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -969,6 +978,7 @@
 				6DF15B7A1E662E0500DFA181 /* TestResultsWireframe.swift in Sources */,
 				6D0AF6B21EC50B6300F9A410 /* AppProcessInfo.swift in Sources */,
 				6D65C6301E62F3AB00733118 /* ApplicationSnapshotTestResultListener.swift in Sources */,
+				6DB94C9D1EE569BA00095C37 /* ApplicationNameExtractor.swift in Sources */,
 				6D30002F1EBD276A005B6103 /* OSXApplicationFinder.swift in Sources */,
 				6D21E66D1EAE9E3600800B91 /* ApplicationLogReader.swift in Sources */,
 				6D848C5F1E68D7940000FC1E /* TestResultsModuleInterface.swift in Sources */,
@@ -1038,9 +1048,11 @@
 				6D076B6D1E7CA1B9001FDA14 /* RecursiveFolderEventsListenerSpec.swift in Sources */,
 				6D3BA5631E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift in Sources */,
 				6D3000371EBDD81F005B6103 /* ProcessLauncherSpec.swift in Sources */,
+				6DB94CA11EE5AB9800095C37 /* ApplicationNameExtractorFactorySpec.swift in Sources */,
 				6D8BD7231EB144C0004928F7 /* ApplicationTestLogFilesListenerSpec.swift in Sources */,
 				6D130B691EC8E16400E9642A /* PreferencesControllerSpec.swift in Sources */,
 				6DA1BF9B1E7756010017D47B /* FolderEventFilterSpec.swift in Sources */,
+				6DB94C9F1EE56EFE00095C37 /* ApplicationNameExtractorSpec.swift in Sources */,
 				6D3000391EBDE7ED005B6103 /* Fonts.swift in Sources */,
 				6D130B651EC8DA4300E9642A /* PreferencesPresenterSpec.swift in Sources */,
 				6D21E66F1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift in Sources */,

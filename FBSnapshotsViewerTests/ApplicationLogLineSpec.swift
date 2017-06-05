@@ -30,6 +30,14 @@ class ApplicationLogLineSpec: QuickSpec {
                 }
             }
 
+            context("when line with the XCInjectBundleInto environment variable") {
+                let line = "XCInjectBundleInto = \"/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerExample-eeuapqepwoebslcfqojhfzyfuhmp/Build/Products/Debug-iphonesimulator/FBSnapshotsViewerExample.app/FBSnapshotsViewerExample\";"
+
+                it("returns applicationNameMessage log line") {
+                    expect(ApplicationLogLine(line: line)).to(equal(ApplicationLogLine.applicationNameMessage(line: line)))
+                }
+            }
+
             context("when random line") {
                 let line = "21:15:27.395 Xcode[4221:116855] Beginning test session FBSnapshotsViewerExampleTests-C6CA3D7B-D217-41C0-8B95-2E9C49ECA4C2 at 2017-04-25 21:15:27.395 with Xcode 8E2002 on target <DVTiPhoneSimulator: 0x7fc33b1b9300> {"
 

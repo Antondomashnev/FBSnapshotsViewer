@@ -48,9 +48,10 @@ class MenuInteractor_MockApplicationTestLogFilesListener: ApplicationTestLogFile
 class MenuInteractorSpec: QuickSpec {
     override func spec() {
         let testResultsDate = Date()
-        let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", createdAt: testResultsDate)
-        let testResult2 = SnapshotTestResult.failed(testName: "testName2", referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", createdAt: testResultsDate)
-        let testResult3 = SnapshotTestResult.recorded(testName: "testName3", referenceImagePath: "referenceImagePath3", createdAt: testResultsDate)
+        let applicationName = "FBSnapshotsViewer"
+        let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", createdAt: testResultsDate, applicationName: applicationName)
+        let testResult2 = SnapshotTestResult.failed(testName: "testName2", referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", createdAt: testResultsDate, applicationName: applicationName)
+        let testResult3 = SnapshotTestResult.recorded(testName: "testName3", referenceImagePath: "referenceImagePath3", createdAt: testResultsDate, applicationName: applicationName)
 
         var output: MenuInteractorOutputMock!
         var interactor: MenuInteractor!
@@ -110,7 +111,7 @@ class MenuInteractorSpec: QuickSpec {
                     }
 
                     it("outputs it") {
-                        let expectedTestResult = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", createdAt: testResultsDate)
+                        let expectedTestResult = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", createdAt: testResultsDate, applicationName: applicationName)
                         expect(output.didFindNewTestResultReceivedTestResult).to(equal(expectedTestResult))
                     }
                 }

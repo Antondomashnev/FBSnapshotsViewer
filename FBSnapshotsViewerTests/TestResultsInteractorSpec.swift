@@ -45,8 +45,8 @@ class TestResultsInteractorSpec: QuickSpec {
         var testResults: [SnapshotTestResult] = []
 
         beforeEach {
-            let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", createdAt: Date())
-            let testResult2 = SnapshotTestResult.recorded(testName: "testName2", referenceImagePath: "referenceImagePath2", createdAt: Date())
+            let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", createdAt: Date(), applicationName: "MyApp")
+            let testResult2 = SnapshotTestResult.recorded(testName: "testName2", referenceImagePath: "referenceImagePath2", createdAt: Date(), applicationName: "MyApp")
             testResults = [testResult1, testResult2]
             processLauncher = ProcessLauncher()
             interactor = TestResultsInteractor(testResults: testResults, kaleidoscopeViewer: kaleidoscopeViewer, processLauncher: processLauncher)

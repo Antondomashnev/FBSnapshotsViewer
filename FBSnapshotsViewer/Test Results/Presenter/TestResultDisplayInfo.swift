@@ -17,16 +17,17 @@ struct TestResultDisplayInfo: AutoEquatable {
     let canBeViewedInKaleidoscope: Bool
     let testResult: SnapshotTestResult
     let createdAt: String
+    let applicationName: String
 
     init(testResult: SnapshotTestResult, kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, dateFormatter: DateComponentsFormatter = DateComponentsFormatter.naturalApproximationFormatter) {
         self.testResult = testResult
         self.canBeViewedInKaleidoscope = kaleidoscopeViewer.isAvailable() && kaleidoscopeViewer.canView(snapshotTestResult: testResult)
         switch testResult {
-        case let .recorded(_, referenceImagePath, _):
+        case let .recorded(_, referenceImagePath, _, _):
             self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)
             self.diffImageURL = nil
             self.failedImageURL = nil
-        case let .failed(_, referenceImagePath, diffImagePath, failedImagePath, _):
+        case let .failed(_, referenceImagePath, diffImagePath, failedImagePath, _, _):
             self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)
             self.diffImageURL = URL(fileURLWithPath: diffImagePath)
             self.failedImageURL = URL(fileURLWithPath: failedImagePath)
@@ -36,5 +37,6 @@ struct TestResultDisplayInfo: AutoEquatable {
         let testNameComponents = testResult.testName.replacingOccurrences(of: "_", with: " ").components(separatedBy: " ")
         self.testContext = testNameComponents[0..<(testNameComponents.count - 1)].joined(separator: " ")
         self.testName = testNameComponents[testNameComponents.count - 1]
+        self.applicationName = testResult.applicationName
     }
 }

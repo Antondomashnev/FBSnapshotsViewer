@@ -62,7 +62,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
             describe("testName") {
                 context("when test name with undrscore") {
                     beforeEach {
-                        testResult = SnapshotTestResult.failed(testName: "TestClass_testName_has_replaced_all_underscore_with_spaces", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date())
+                        testResult = SnapshotTestResult.failed(testName: "TestClass_testName_has_replaced_all_underscore_with_spaces", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
                     }
 
                     it("has correct test name") {
@@ -78,7 +78,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
                 context("when test name without undrscore") {
                     beforeEach {
-                        testResult = SnapshotTestResult.failed(testName: "TestClass testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date())
+                        testResult = SnapshotTestResult.failed(testName: "TestClass testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
                     }
 
                     it("has correct test name") {
@@ -95,7 +95,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             describe("canBeViewedInKaleidoscope") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date())
+                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
                 }
 
                 context("when kaleidoscope viewer is available") {
@@ -140,7 +140,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when failed test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "TestClass testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date())
+                    testResult = SnapshotTestResult.failed(testName: "TestClass testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
                 }
 
                 it("initializes object correctly") {
@@ -157,7 +157,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when recorded test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testName: "ExampleTestClass testRecord", referenceImagePath: "referenceImagePath.png", createdAt: Date())
+                    testResult = SnapshotTestResult.recorded(testName: "ExampleTestClass testRecord", referenceImagePath: "referenceImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
                 }
 
                 it("initializes object correctly") {

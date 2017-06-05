@@ -39,7 +39,7 @@ class ApplicationSnapshotTestResultListener_MockApplicationLogReader: Applicatio
 
 class ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory: SnapshotTestResultFactory {
     var createdSnapshotTestResultForLogLine: [ApplicationLogLine: SnapshotTestResult] = [:]
-    override func createSnapshotTestResult(from logLine: ApplicationLogLine) -> SnapshotTestResult? {
+    override func createSnapshotTestResult(from logLine: ApplicationLogLine, applicationName: String) -> SnapshotTestResult? {
         return createdSnapshotTestResultForLogLine[logLine]
     }
 }
@@ -68,15 +68,16 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
         describe(".receiving new file watch event") {
             var receivedSnapshotTestResults: [SnapshotTestResult] = []
             let unknownLogLine = ApplicationLogLine.unknown
+            let applicationNameMessageLogLine = ApplicationLogLine.applicationNameMessage(line: "MyApp")
             let kaleidoscopeCommandMesageLogLine = ApplicationLogLine.kaleidoscopeCommandMessage(line: "BlaBla")
             let referenceImageSavedMessageLogLine = ApplicationLogLine.referenceImageSavedMessage(line: "FooFoo")
-            let failedSnapshotTestResult = SnapshotTestResult.failed(testName: "failedTest", referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", createdAt: Date())
-            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testName: "recordedTest", referenceImagePath: "referenceTestImage.png", createdAt: Date())
+            let failedSnapshotTestResult = SnapshotTestResult.failed(testName: "failedTest", referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", createdAt: Date(), applicationName: "MyApp")
+            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testName: "recordedTest", referenceImagePath: "referenceTestImage.png", createdAt: Date(), applicationName: "MyApp")
 
             beforeEach {
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[kaleidoscopeCommandMesageLogLine] = failedSnapshotTestResult
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[referenceImageSavedMessageLogLine] = recordedSnapshotTestResult
-                logReader.readLines = [kaleidoscopeCommandMesageLogLine, unknownLogLine, referenceImageSavedMessageLogLine]
+                logReader.readLines = [applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, unknownLogLine, referenceImageSavedMessageLogLine]
                 listener.startListening { result in
                     receivedSnapshotTestResults += [result]
                 }

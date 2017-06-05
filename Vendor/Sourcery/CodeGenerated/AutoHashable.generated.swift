@@ -31,8 +31,10 @@ extension ApplicationLogLine: Hashable {
             return combineHashes([1, data.hashValue])
         case .referenceImageSavedMessage(let data): 
             return combineHashes([2, data.hashValue])
+        case .applicationNameMessage(let data): 
+            return combineHashes([3, data.hashValue])
          case .unknown: 
-            return 3.hashValue
+            return 4.hashValue
         }
     }
 }

@@ -11,9 +11,11 @@ import Foundation
 enum ApplicationLogLine: AutoEquatable, AutoHashable {
     static let kaleidoscopeCommandMessageIndicatorSubstring = "ksdiff "
     static let referenceImageSavedMessageIndicatorSubstring = "Reference image save at: "
+    static let applicationNameMessageIndicatorSubstring = "XCInjectBundleInto"
 
     case kaleidoscopeCommandMessage(line: String)
     case referenceImageSavedMessage(line: String)
+    case applicationNameMessage(line: String)
     case unknown
 
     init(line: String) {
@@ -22,6 +24,9 @@ enum ApplicationLogLine: AutoEquatable, AutoHashable {
         }
         else if line.contains(ApplicationLogLine.referenceImageSavedMessageIndicatorSubstring) {
             self = ApplicationLogLine.referenceImageSavedMessage(line: line)
+        }
+        else if line.contains(ApplicationLogLine.applicationNameMessageIndicatorSubstring) {
+            self = ApplicationLogLine.applicationNameMessage(line: line)
         }
         else {
             self = ApplicationLogLine.unknown
