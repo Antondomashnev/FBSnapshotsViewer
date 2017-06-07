@@ -8,17 +8,23 @@
 
 import Foundation
 
-class ApplicationLogLineIndicatorContainer {
-    func kaleidoscopeCommandMessageIndicator(for configuration: Configuration) -> String {
-        return ""
+struct ApplicationLogLineIndicatorContainer {
+    static func kaleidoscopeCommandMessageIndicator(for configuration: Configuration) -> String {
+        return "ksdiff "
     }
 
-    func referenceImageSavedMessageIndicator(for configuration) -> String {
-        return ""
+    static func referenceImageSavedMessageIndicator(for configuration: Configuration = Configuration.default()) -> String {
+        return "Reference image save at: "
     }
 
-    func kaleidoscopeCommandMessageIndicator(for configuration) -> String {
-        return ""
+    static func applicationNameMessageIndicator(for configuration: Configuration = Configuration.default()) -> String {
+        switch configuration.derivedDataFolder {
+        case .xcodeDefault,
+             .xcodeCustom:
+            return "XCInjectBundleInto"
+        case .appcode:
+            return ""
+        }
     }
 }
 
@@ -33,13 +39,13 @@ enum ApplicationLogLine: AutoEquatable, AutoHashable {
     case unknown
 
     init(line: String, configuration: Configuration = Configuration.default()) {
-        if line.contains(ApplicationLogLine.kaleidoscopeCommandMessageIndicatorSubstring) {
+        if line.contains(ApplicationLogLineIndicatorContainer.kaleidoscopeCommandMessageIndicator(for: configuration)) {
             self = ApplicationLogLine.kaleidoscopeCommandMessage(line: line)
         }
-        else if line.contains(ApplicationLogLine.referenceImageSavedMessageIndicatorSubstring) {
+        else if line.contains(ApplicationLogLineIndicatorContainer.referenceImageSavedMessageIndicator(for: configuration)) {
             self = ApplicationLogLine.referenceImageSavedMessage(line: line)
         }
-        else if line.contains(ApplicationLogLine.applicationNameMessageIndicatorSubstring) {
+        else if line.contains(ApplicationLogLineIndicatorContainer.applicationNameMessageIndicator(for: configuration)) {
             self = ApplicationLogLine.applicationNameMessage(line: line)
         }
         else {
