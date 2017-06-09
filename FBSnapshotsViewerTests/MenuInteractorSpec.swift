@@ -15,9 +15,11 @@ import KZFileWatchers
 class MenuInteractor_MockApplicationSnapshotTestResultListenerFactory: ApplicationSnapshotTestResultListenerFactory {
     var mockApplicationSnapshotTestResultListener: MenuInteractor_MockApplicationSnapshotTestResultListener!
     var givenLogFilePath: String!
+    var givenConfiguration: FBSnapshotsViewer.Configuration!
 
-    override func applicationSnapshotTestResultListener(forLogFileAt path: String) -> ApplicationSnapshotTestResultListener {
+    override func applicationSnapshotTestResultListener(forLogFileAt path: String, configuration: FBSnapshotsViewer.Configuration) -> ApplicationSnapshotTestResultListener {
         givenLogFilePath = path
+        givenConfiguration = configuration
         return mockApplicationSnapshotTestResultListener
     }
 }
@@ -52,7 +54,9 @@ class MenuInteractorSpec: QuickSpec {
         let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", createdAt: testResultsDate, applicationName: applicationName)
         let testResult2 = SnapshotTestResult.failed(testName: "testName2", referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", createdAt: testResultsDate, applicationName: applicationName)
         let testResult3 = SnapshotTestResult.recorded(testName: "testName3", referenceImagePath: "referenceImagePath3", createdAt: testResultsDate, applicationName: applicationName)
-
+        
+        var configuration: FBSnapshotsViewer.Configuration!
+        var applicationNameExtractor: ApplicationNameExtractorMock!
         var output: MenuInteractorOutputMock!
         var interactor: MenuInteractor!
         var applicationSnapshotTestResultListener: MenuInteractor_MockApplicationSnapshotTestResultListener!
@@ -60,12 +64,14 @@ class MenuInteractorSpec: QuickSpec {
         var applicationTestLogFilesListener: MenuInteractor_MockApplicationTestLogFilesListener!
 
         beforeEach {
+            configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
+            applicationNameExtractor = ApplicationNameExtractorMock()
             output = MenuInteractorOutputMock()
-            applicationSnapshotTestResultListener = MenuInteractor_MockApplicationSnapshotTestResultListener(fileWatcher: KZFileWatchers.FileWatcher.Local(path: "testpath"))
+            applicationSnapshotTestResultListener = MenuInteractor_MockApplicationSnapshotTestResultListener(fileWatcher: KZFileWatchers.FileWatcher.Local(path: "testpath"), applicationLogReader: ApplicationLogReader(), applicationNameExtractor: applicationNameExtractor)
             applicationSnapshotTestResultListenerFactory = MenuInteractor_MockApplicationSnapshotTestResultListenerFactory()
             applicationSnapshotTestResultListenerFactory.mockApplicationSnapshotTestResultListener = applicationSnapshotTestResultListener
             applicationTestLogFilesListener = MenuInteractor_MockApplicationTestLogFilesListener()
-            interactor = MenuInteractor(applicationSnapshotTestResultListenerFactory: applicationSnapshotTestResultListenerFactory, applicationTestLogFilesListener: applicationTestLogFilesListener)
+            interactor = MenuInteractor(applicationSnapshotTestResultListenerFactory: applicationSnapshotTestResultListenerFactory, applicationTestLogFilesListener: applicationTestLogFilesListener, configuration: configuration)
             interactor.output = output
         }
 
@@ -103,6 +109,10 @@ class MenuInteractorSpec: QuickSpec {
 
                 it("creates listener for correct log file path") {
                     expect(applicationSnapshotTestResultListenerFactory.givenLogFilePath).to(equal("/Users/antondomashnev/Library/Bla/Bla.log"))
+                }
+                
+                it("creates listener with correct configuration") {
+                    expect(applicationSnapshotTestResultListenerFactory.givenConfiguration).to(equal(configuration))
                 }
 
                 context("when find new test result") {

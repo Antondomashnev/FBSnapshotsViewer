@@ -6,6 +6,7 @@ disabled_rules:
   - function_parameter_count
   - function_body_length
   - statement_position
+  - trailing_whitespace
 
 opt_in_rules:
   - empty_count

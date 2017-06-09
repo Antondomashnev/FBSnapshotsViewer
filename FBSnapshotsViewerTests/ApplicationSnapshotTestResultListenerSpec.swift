@@ -39,8 +39,26 @@ class ApplicationSnapshotTestResultListener_MockApplicationLogReader: Applicatio
 
 class ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory: SnapshotTestResultFactory {
     var createdSnapshotTestResultForLogLine: [ApplicationLogLine: SnapshotTestResult] = [:]
+    var givenApplicationName: String!
     override func createSnapshotTestResult(from logLine: ApplicationLogLine, applicationName: String) -> SnapshotTestResult? {
+        givenApplicationName = applicationName
         return createdSnapshotTestResultForLogLine[logLine]
+    }
+}
+
+class ApplicationSnapshotTestResultListener_MockApplicationNameExtractor: ApplicationNameExtractor {
+    var extractApplicationNameCalled = false
+    var extractApplicationNameThrows = false
+    var extractApplicationNameReceivedLogLine: ApplicationLogLine?
+    var extractApplicationNameReturnValue: String!
+    
+    func extractApplicationName(from logLine: ApplicationLogLine) throws -> String {
+        if extractApplicationNameThrows {
+            throw NSError(domain: "", code: 0, userInfo: nil)
+        }
+        extractApplicationNameCalled = true
+        extractApplicationNameReceivedLogLine = logLine
+        return extractApplicationNameReturnValue
     }
 }
 
@@ -49,13 +67,15 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
         var fileWatcher: ApplicationSnapshotTestResultListener_MockFileWatcherProtocol!
         var logReader: ApplicationSnapshotTestResultListener_MockApplicationLogReader!
         var snapshotTestResultFactory: ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory!
+        var applicationNameExtractor: ApplicationSnapshotTestResultListener_MockApplicationNameExtractor!
         var listener: ApplicationSnapshotTestResultListener!
 
         beforeEach {
+            applicationNameExtractor = ApplicationSnapshotTestResultListener_MockApplicationNameExtractor()
             snapshotTestResultFactory = ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory()
             fileWatcher = ApplicationSnapshotTestResultListener_MockFileWatcherProtocol()
             logReader = ApplicationSnapshotTestResultListener_MockApplicationLogReader()
-            listener = ApplicationSnapshotTestResultListener(fileWatcher: fileWatcher, applicationLogReader: logReader, snapshotTestResultFactory: snapshotTestResultFactory)
+            listener = ApplicationSnapshotTestResultListener(fileWatcher: fileWatcher, applicationLogReader: logReader, applicationNameExtractor: applicationNameExtractor, snapshotTestResultFactory: snapshotTestResultFactory)
         }
 
         describe(".stopListening") {
@@ -75,6 +95,7 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
             let recordedSnapshotTestResult = SnapshotTestResult.recorded(testName: "recordedTest", referenceImagePath: "referenceTestImage.png", createdAt: Date(), applicationName: "MyApp")
 
             beforeEach {
+                applicationNameExtractor.extractApplicationNameReturnValue = "MyApp"
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[kaleidoscopeCommandMesageLogLine] = failedSnapshotTestResult
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[referenceImageSavedMessageLogLine] = recordedSnapshotTestResult
                 logReader.readLines = [applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, unknownLogLine, referenceImageSavedMessageLogLine]
@@ -100,13 +121,30 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
             }
 
             context("with valid updates") {
-                beforeEach {
-                    let update: Data! = "new updated text".data(using: .utf8, allowLossyConversion: false)
-                    fileWatcher.startClosure?(.updated(data: update))
+                let update: Data! = "new updated text".data(using: .utf8, allowLossyConversion: false)
+                
+                context("when can not parse application name") {
+                    beforeEach {
+                        applicationNameExtractor.extractApplicationNameThrows = true
+                    }
+                    
+                    it("outputs expected snapshot test resilts") {
+                        expect { fileWatcher.startClosure?(.updated(data: update)) }.to(throwAssertion())
+                    }
                 }
-
-                it("outputs expected snapshot test resilts") {
-                    expect(receivedSnapshotTestResults).to(equal([failedSnapshotTestResult, recordedSnapshotTestResult]))
+                
+                context("when can parse applicaion name") {
+                    beforeEach {
+                        fileWatcher.startClosure?(.updated(data: update))
+                    }
+                    
+                    it("outputs expected snapshot test resilts") {
+                        expect(receivedSnapshotTestResults).to(equal([failedSnapshotTestResult, recordedSnapshotTestResult]))
+                    }
+                    
+                    it("creates test results with correct application name") {
+                    expect(snapshotTestResultFactory.givenApplicationName).to(equal(applicationNameExtractor.extractApplicationNameReturnValue))
+                    }
                 }
             }
         }
