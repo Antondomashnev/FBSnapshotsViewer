@@ -23,7 +23,7 @@ struct ApplicationLogLineIndicatorContainer {
              .xcodeCustom:
             return "XCInjectBundleInto"
         case .appcode:
-            return ""
+            return "PROJECT_NAME="
         }
     }
 }

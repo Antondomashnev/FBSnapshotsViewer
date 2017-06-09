@@ -1,15 +1,15 @@
 PODS:
   - KZFileWatchers (1.0.3)
-  - Nimble (6.1.0)
+  - Nimble (7.0.1)
   - Quick (1.1.0)
-  - Sourcery (0.6.0)
+  - Sourcery (0.6.1)
   - Sparkle (1.17.0)
   - SwiftGen (4.2.1)
   - SwiftLint (0.19.0)
 
 DEPENDENCIES:
   - KZFileWatchers (~> 1.0)
-  - Nimble (~> 6.0)
+  - Nimble (~> 7.0)
   - Quick (~> 1.0)
   - Sourcery (~> 0.5)
   - Sparkle (~> 1.17)
@@ -18,13 +18,13 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   KZFileWatchers: f09964686a0713834020a0eb328725cad58da0ea
-  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Sourcery: b3a93fcdf9c256feeb16e85f4d1bbf46baa42464
+  Sourcery: 1426fbb5fe2d53f1e03845e989a89b6b67ce4e33
   Sparkle: ccfb47699feea7b40b51cf3176f69404e5b1da6c
   SwiftGen: 2ba2a88fc6130b96e38e2baa0029e4bd222ffd85
   SwiftLint: 3537a05b34060e78e7510f04fb7537d738247803
 
-PODFILE CHECKSUM: 034b6075c300cb474339b98158a1dd8b42b6b3c6
+PODFILE CHECKSUM: 0dbbef3b5b87674b50f34a26f1ff0ca7045cf428
 
 COCOAPODS: 1.2.1

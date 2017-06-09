@@ -12,9 +12,9 @@ import CoreFoundation
 /// `ApplicationLogReader` class is responsible to read given log files line by line
 class ApplicationLogReader {
     // MAKR: - Interface
-    
+
     private var configuration: Configuration
-    
+
     init(configuration: Configuration = Configuration.default()) {
         self.configuration = configuration
     }

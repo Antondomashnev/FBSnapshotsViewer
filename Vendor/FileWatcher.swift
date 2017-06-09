@@ -153,8 +153,12 @@ public class FileWatcher {
     // MARK: - Helpers
 
     // http://stackoverflow.com/questions/33260808/swift-proper-use-of-cfnotificationcenteraddobserver-w-callback
-    private static let StreamCallback: FSEventStreamCallback = {(streamRef: ConstFSEventStreamRef, clientCallBackInfo: UnsafeMutableRawPointer?, numEvents: Int, eventPaths: UnsafeMutableRawPointer, eventFlags: UnsafePointer<FSEventStreamEventFlags>?, eventIds: UnsafePointer<FSEventStreamEventId>?) -> Void in
-
+    private static let StreamCallback: FSEventStreamCallback = { (streamRef: ConstFSEventStreamRef,
+                                                                  clientCallBackInfo: UnsafeMutableRawPointer?,
+                                                                  numEvents: Int,
+                                                                  eventPaths: UnsafeMutableRawPointer,
+                                                                  eventFlags: UnsafePointer<FSEventStreamEventFlags>,
+                                                                  eventIds: UnsafePointer<FSEventStreamEventId>) -> Void in
         let `self` = unsafeBitCast(clientCallBackInfo, to: FileWatcher.self)
         guard let eventPathArray = unsafeBitCast(eventPaths, to: NSArray.self) as? [String] else {
             return
