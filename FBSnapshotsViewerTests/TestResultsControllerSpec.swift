@@ -28,6 +28,7 @@ class TestResultsController_MockTestResultsCollectionViewOutlets: TestResultsCol
 
 class TestResultsControllerSpec: QuickSpec {
     override func spec() {
+        let build: Build = Build(date: Date(), applicationName: "FBSnapshotsViewer")
         var collectionViewOutlets: TestResultsController_MockTestResultsCollectionViewOutlets!
         var collectionView: TestResultsController_MockNSCollectionView!
         var controller: TestResultsController!
@@ -47,7 +48,7 @@ class TestResultsControllerSpec: QuickSpec {
             var testResults: [TestResultDisplayInfo]!
 
             beforeEach {
-                let testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", createdAt: Date(), applicationName: "MyApp"))
+                let testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", build: build))
                 testResults = [testResultDisplayInfo]
                 controller.show(testResults: testResults)
             }
@@ -92,7 +93,7 @@ class TestResultsControllerSpec: QuickSpec {
 
             context("when test result is not presented in controller") {
                 beforeEach {
-                    let testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", createdAt: Date(), applicationName: "MyApp"))
+                    let testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", build: build))
                     collectionViewOutlets.testResults = [testResultDisplayInfo]
                     collectionView.indexPathForItemReturnValue = IndexPath(item: 1, section: 0)
                 }
@@ -106,7 +107,7 @@ class TestResultsControllerSpec: QuickSpec {
                 var testResultDisplayInfo: TestResultDisplayInfo!
 
                 beforeEach {
-                    testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", createdAt: Date(), applicationName: "MyApp"))
+                    testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", build: build))
                     collectionViewOutlets.testResults = [testResultDisplayInfo]
                     collectionView.indexPathForItemReturnValue = IndexPath(item: 0, section: 0)
                     controller.testResultCell(cell, viewInKaleidoscopeButtonClicked: viewInKaleidoscopeButton)

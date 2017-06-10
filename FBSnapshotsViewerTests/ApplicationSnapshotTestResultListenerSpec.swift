@@ -39,9 +39,9 @@ class ApplicationSnapshotTestResultListener_MockApplicationLogReader: Applicatio
 
 class ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory: SnapshotTestResultFactory {
     var createdSnapshotTestResultForLogLine: [ApplicationLogLine: SnapshotTestResult] = [:]
-    var givenApplicationName: String!
-    override func createSnapshotTestResult(from logLine: ApplicationLogLine, applicationName: String) -> SnapshotTestResult? {
-        givenApplicationName = applicationName
+    var givenBuild: Build!
+    override func createSnapshotTestResult(from logLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
+        givenBuild = build
         return createdSnapshotTestResultForLogLine[logLine]
     }
 }
@@ -87,12 +87,13 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
 
         describe(".receiving new file watch event") {
             var receivedSnapshotTestResults: [SnapshotTestResult] = []
+            let build = Build(date: Date(), applicationName: "MyApp")
             let unknownLogLine = ApplicationLogLine.unknown
             let applicationNameMessageLogLine = ApplicationLogLine.applicationNameMessage(line: "MyApp")
             let kaleidoscopeCommandMesageLogLine = ApplicationLogLine.kaleidoscopeCommandMessage(line: "BlaBla")
             let referenceImageSavedMessageLogLine = ApplicationLogLine.referenceImageSavedMessage(line: "FooFoo")
-            let failedSnapshotTestResult = SnapshotTestResult.failed(testName: "failedTest", referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", createdAt: Date(), applicationName: "MyApp")
-            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testName: "recordedTest", referenceImagePath: "referenceTestImage.png", createdAt: Date(), applicationName: "MyApp")
+            let failedSnapshotTestResult = SnapshotTestResult.failed(testName: "failedTest", referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", build: build)
+            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testName: "recordedTest", referenceImagePath: "referenceTestImage.png", build: build)
 
             beforeEach {
                 applicationNameExtractor.extractApplicationNameReturnValue = "MyApp"
@@ -142,8 +143,9 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
                         expect(receivedSnapshotTestResults).to(equal([failedSnapshotTestResult, recordedSnapshotTestResult]))
                     }
                     
-                    it("creates test results with correct application name") {
-                    expect(snapshotTestResultFactory.givenApplicationName).to(equal(applicationNameExtractor.extractApplicationNameReturnValue))
+                    it("creates test results with correct build") {
+                        expect(snapshotTestResultFactory.givenBuild.applicationName) == applicationNameExtractor.extractApplicationNameReturnValue
+                        expect(snapshotTestResultFactory.givenBuild.date.timeIntervalSince1970).to(beCloseTo(Date().timeIntervalSince1970, within: 0.01))
                     }
                 }
             }

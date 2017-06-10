@@ -23,6 +23,13 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
 }
 
 // MARK: - AutoEquatable for classes, protocols, structs
+// MARK: - Build AutoEquatable
+extension Build: Equatable {} 
+internal func == (lhs: Build, rhs: Build) -> Bool {
+    guard lhs.date == rhs.date else { return false }
+    guard lhs.applicationName == rhs.applicationName else { return false }
+    return true
+}
 // MARK: - TestResultDisplayInfo AutoEquatable
 extension TestResultDisplayInfo: Equatable {} 
 internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Bool {
@@ -115,16 +122,14 @@ internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
     case (.recorded(let lhs), .recorded(let rhs)): 
         if lhs.testName != rhs.testName { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
-        if lhs.createdAt != rhs.createdAt { return false }
-        if lhs.applicationName != rhs.applicationName { return false }
+        if lhs.build != rhs.build { return false }
         return true
     case (.failed(let lhs), .failed(let rhs)): 
         if lhs.testName != rhs.testName { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
         if lhs.diffImagePath != rhs.diffImagePath { return false }
         if lhs.failedImagePath != rhs.failedImagePath { return false }
-        if lhs.createdAt != rhs.createdAt { return false }
-        if lhs.applicationName != rhs.applicationName { return false }
+        if lhs.build != rhs.build { return false }
         return true
     default: return false
     }

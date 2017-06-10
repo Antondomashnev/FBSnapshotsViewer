@@ -38,7 +38,7 @@ class SnapshotTestResultFactory {
         return "\(testClassName) \(testName)"
     }
 
-    private func createSnapshotTestResult(fromKaleidoscopeCommandLine line: String, applicationName: String) throws -> SnapshotTestResult {
+    private func createSnapshotTestResult(fromKaleidoscopeCommandLine line: String, build: Build) throws -> SnapshotTestResult {
         let lineComponents = line.components(separatedBy: "\"")
         guard lineComponents.count == 5 else {
             throw SnapshotTestResultFactoryError.unexpectedKaleidoscopeCommandLineFormat
@@ -47,31 +47,31 @@ class SnapshotTestResultFactory {
         let failedImagePath = lineComponents[3]
         let diffImagePath = failedImagePath.replacingOccurrences(of: "/failed_", with: "/diff_")
         let testName = try extractTestName(fromFailedImage: failedImagePath)
-        return SnapshotTestResult.failed(testName: testName, referenceImagePath: referenceImagePath, diffImagePath: diffImagePath, failedImagePath: failedImagePath, createdAt: Date(), applicationName: applicationName)
+        return SnapshotTestResult.failed(testName: testName, referenceImagePath: referenceImagePath, diffImagePath: diffImagePath, failedImagePath: failedImagePath, build: build)
     }
 
-    private func createSnapshotTestResult(fromSavedReferenceImageLine line: String, applicationName: String) throws -> SnapshotTestResult {
+    private func createSnapshotTestResult(fromSavedReferenceImageLine line: String, build: Build) throws -> SnapshotTestResult {
         let lineComponents = line.components(separatedBy: ApplicationLogLine.referenceImageSavedMessageIndicatorSubstring)
         guard lineComponents.count == 2 else {
             throw SnapshotTestResultFactoryError.unexpectedSavedReferenceImageLineFormat
         }
         let referenceImagePath = lineComponents[1]
         let testName = try extractTestName(fromSavedReferenceImage: referenceImagePath)
-        return SnapshotTestResult.recorded(testName: testName, referenceImagePath: referenceImagePath, createdAt: Date(), applicationName: applicationName)
+        return SnapshotTestResult.recorded(testName: testName, referenceImagePath: referenceImagePath, build: build)
     }
 
     // MARK: - Interface
 
-    func createSnapshotTestResult(from logLine: ApplicationLogLine, applicationName: String = "") -> SnapshotTestResult? {
+    func createSnapshotTestResult(from logLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
         switch logLine {
         case .unknown:
             return nil
         case .applicationNameMessage:
             return nil
         case let .kaleidoscopeCommandMessage(line):
-            return try? self.createSnapshotTestResult(fromKaleidoscopeCommandLine: line, applicationName: applicationName)
+            return try? self.createSnapshotTestResult(fromKaleidoscopeCommandLine: line, build: build)
         case let .referenceImageSavedMessage(line):
-            return try? self.createSnapshotTestResult(fromSavedReferenceImageLine: line, applicationName: applicationName)
+            return try? self.createSnapshotTestResult(fromSavedReferenceImageLine: line, build: build)
         }
     }
 }

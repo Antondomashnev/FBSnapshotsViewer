@@ -13,11 +13,11 @@ import Nimble
 
 class SnapshotTestResultFactorySpec: QuickSpec {
     override func spec() {
-        var applicationName: String!
+        var build: Build!
         var factory: SnapshotTestResultFactory!
 
         beforeEach {
-            applicationName = "FBSnapshotsViewer"
+            build = Build(applicationName: "FBSnapshotsViewer")
             factory = SnapshotTestResultFactory()
         }
 
@@ -26,7 +26,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                 var createdTestResult: SnapshotTestResult?
 
                 beforeEach {
-                    createdTestResult = factory.createSnapshotTestResult(from: .unknown)
+                    createdTestResult = factory.createSnapshotTestResult(from: .unknown, build: build)
                 }
 
                 it("doesnt create test result") {
@@ -45,7 +45,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                         }
 
                         it("returns nil") {
-                            expect(factory.createSnapshotTestResult(from: referenceImageSavedMessage)).to(beNil())
+                            expect(factory.createSnapshotTestResult(from: referenceImageSavedMessage, build: build)).to(beNil())
                         }
                     }
 
@@ -55,7 +55,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                         }
 
                         it("returns nil") {
-                            expect(factory.createSnapshotTestResult(from: referenceImageSavedMessage)).to(beNil())
+                            expect(factory.createSnapshotTestResult(from: referenceImageSavedMessage, build: build)).to(beNil())
                         }
                     }
                 }
@@ -63,13 +63,12 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                 context("when valid") {
                     beforeEach {
                         referenceImageSavedMessage = ApplicationLogLine.referenceImageSavedMessage(line: "Reference image save at: /Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord@2x.png")
-                        createdTestResult = factory.createSnapshotTestResult(from: referenceImageSavedMessage, applicationName: applicationName)
+                        createdTestResult = factory.createSnapshotTestResult(from: referenceImageSavedMessage, build: build)
                     }
 
                     it("creates recorded test result") {
-                        let expectedTestResult = SnapshotTestResult.recorded(testName: "FBSnapshotsViewerExampleTests testRecord", referenceImagePath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord@2x.png", createdAt: createdTestResult.createdAt, applicationName: applicationName)
+                        let expectedTestResult = SnapshotTestResult.recorded(testName: "FBSnapshotsViewerExampleTests testRecord", referenceImagePath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord@2x.png", build: build)
                         expect(createdTestResult).to(equal(expectedTestResult))
-                        expect(createdTestResult.createdAt.timeIntervalSince1970).to(beCloseTo(Date().timeIntervalSince1970, within: 0.01))
                     }
                 }
             }
@@ -85,7 +84,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                         }
 
                         it("returns nil") {
-                            expect(factory.createSnapshotTestResult(from: kaleidoscopeCommandMessage)).to(beNil())
+                            expect(factory.createSnapshotTestResult(from: kaleidoscopeCommandMessage, build: build)).to(beNil())
                         }
                     }
 
@@ -95,7 +94,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                         }
 
                         it("returns nil") {
-                            expect(factory.createSnapshotTestResult(from: kaleidoscopeCommandMessage)).to(beNil())
+                            expect(factory.createSnapshotTestResult(from: kaleidoscopeCommandMessage, build: build)).to(beNil())
                         }
                     }
                 }
@@ -103,13 +102,13 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                 context("when valid") {
                     beforeEach {
                         kaleidoscopeCommandMessage = ApplicationLogLine.kaleidoscopeCommandMessage(line: "ksdiff \"/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/B1AC0517-7FC0-4B32-8543-9EC263071FE5/data/Containers/Data/Application/8EEE157C-41B9-47F8-8634-CF3D60962E19/tmp/FBSnapshotsViewerExampleTests/reference_testFail@2x.png\" \"/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/B1AC0517-7FC0-4B32-8543-9EC263071FE5/data/Containers/Data/Application/8EEE157C-41B9-47F8-8634-CF3D60962E19/tmp/FBSnapshotsViewerExampleTests/failed_testFail@2x.png\"")
-                        createdTestResult = factory.createSnapshotTestResult(from: kaleidoscopeCommandMessage, applicationName: applicationName)
+                        createdTestResult = factory.createSnapshotTestResult(from: kaleidoscopeCommandMessage, build: build)
                     }
 
                     it("creates failed test result") {
-                        let expectedTestResult = SnapshotTestResult.failed(testName: "FBSnapshotsViewerExampleTests testFail", referenceImagePath: "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/B1AC0517-7FC0-4B32-8543-9EC263071FE5/data/Containers/Data/Application/8EEE157C-41B9-47F8-8634-CF3D60962E19/tmp/FBSnapshotsViewerExampleTests/reference_testFail@2x.png", diffImagePath: "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/B1AC0517-7FC0-4B32-8543-9EC263071FE5/data/Containers/Data/Application/8EEE157C-41B9-47F8-8634-CF3D60962E19/tmp/FBSnapshotsViewerExampleTests/diff_testFail@2x.png", failedImagePath: "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/B1AC0517-7FC0-4B32-8543-9EC263071FE5/data/Containers/Data/Application/8EEE157C-41B9-47F8-8634-CF3D60962E19/tmp/FBSnapshotsViewerExampleTests/failed_testFail@2x.png", createdAt: createdTestResult.createdAt, applicationName: applicationName)
+                        let expectedTestResult = SnapshotTestResult.failed(testName: "FBSnapshotsViewerExampleTests testFail", referenceImagePath: "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/B1AC0517-7FC0-4B32-8543-9EC263071FE5/data/Containers/Data/Application/8EEE157C-41B9-47F8-8634-CF3D60962E19/tmp/FBSnapshotsViewerExampleTests/reference_testFail@2x.png", diffImagePath: "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/B1AC0517-7FC0-4B32-8543-9EC263071FE5/data/Containers/Data/Application/8EEE157C-41B9-47F8-8634-CF3D60962E19/tmp/FBSnapshotsViewerExampleTests/diff_testFail@2x.png", failedImagePath: "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/B1AC0517-7FC0-4B32-8543-9EC263071FE5/data/Containers/Data/Application/8EEE157C-41B9-47F8-8634-CF3D60962E19/tmp/FBSnapshotsViewerExampleTests/failed_testFail@2x.png", build: build)
                         expect(createdTestResult).to(equal(expectedTestResult))
-                        expect(createdTestResult.createdAt.timeIntervalSince1970).to(beCloseTo(Date().timeIntervalSince1970, within: 0.01))
+                        
                     }
                 }
             }
