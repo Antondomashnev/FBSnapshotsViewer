@@ -13,15 +13,18 @@ typealias ApplicationSnapshotTestResultListenerOutput = (SnapshotTestResult) -> 
 
 class ApplicationSnapshotTestResultListener {
     private var readLinesNumber: Int = 0
+    private var readApplicationName: String = ""
     private var listeningOutput: ApplicationSnapshotTestResultListenerOutput?
     private let fileWatcher: KZFileWatchers.FileWatcherProtocol
     private let applicationLogReader: ApplicationLogReader
     private let snapshotTestResultFactory: SnapshotTestResultFactory
-
-    init(fileWatcher: KZFileWatchers.FileWatcherProtocol, applicationLogReader: ApplicationLogReader = ApplicationLogReader(), snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory()) {
+    private let applicationNameExtractor: ApplicationNameExtractor
+    
+    init(fileWatcher: KZFileWatchers.FileWatcherProtocol, applicationLogReader: ApplicationLogReader, applicationNameExtractor: ApplicationNameExtractor, snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory()) {
         self.fileWatcher = fileWatcher
         self.applicationLogReader = applicationLogReader
         self.snapshotTestResultFactory = snapshotTestResultFactory
+        self.applicationNameExtractor = applicationNameExtractor
     }
 
     deinit {
@@ -55,9 +58,6 @@ class ApplicationSnapshotTestResultListener {
     // MARK: - Helpers
 
     private func handleFileWatcherUpdate(result: KZFileWatchers.FileWatcher.RefreshResult) {
-        guard let listeningOutput = listeningOutput else {
-            return
-        }
         switch result {
         case .noChanges:
             return
@@ -66,18 +66,33 @@ class ApplicationSnapshotTestResultListener {
                 assertionFailure("Invalid data reported by KZFileWatchers.FileWatcher.Local")
                 return
             }
-            let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
-            let snapshotTestResults = logLines.flatMap { logLine -> SnapshotTestResult? in
-                switch logLine {
-                case .unknown:
-                    return nil
-                default:
-                    return snapshotTestResultFactory.createSnapshotTestResult(from: logLine)
-                }
+            do {
+                try handleFileWatcherUpdate(text: text)
             }
-            snapshotTestResults.forEach { listeningOutput($0) }
-            readLinesNumber += logLines.count
+            catch let error {
+                assertionFailure("\(error)")
+            }
         }
+    }
+
+    private func handleFileWatcherUpdate(text: String) throws {
+        guard let listeningOutput = listeningOutput else {
+            return
+        }
+        let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
+        let snapshotTestResults = try logLines.flatMap { logLine -> SnapshotTestResult? in
+            switch logLine {
+            case .unknown:
+                return nil
+            case .applicationNameMessage:
+                readApplicationName = try applicationNameExtractor.extractApplicationName(from: logLine)
+                return nil
+            default:
+                return snapshotTestResultFactory.createSnapshotTestResult(from: logLine, applicationName: readApplicationName)
+            }
+        }
+        snapshotTestResults.forEach { listeningOutput($0) }
+        readLinesNumber += logLines.count
     }
 
     private func reset() {

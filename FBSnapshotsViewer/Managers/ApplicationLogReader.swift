@@ -13,6 +13,12 @@ import CoreFoundation
 class ApplicationLogReader {
     // MAKR: - Interface
 
+    private var configuration: Configuration
+
+    init(configuration: Configuration = Configuration.default()) {
+        self.configuration = configuration
+    }
+
     /// Reads the given log starting from the given line number
     ///
     /// - Parameters:
@@ -25,6 +31,6 @@ class ApplicationLogReader {
         if textLines.count <= lineNumber {
             return []
         }
-        return textLines[lineNumber...(textLines.count - 1)].map { ApplicationLogLine(line: $0) }
+        return textLines[lineNumber...(textLines.count - 1)].map { ApplicationLogLine(line: $0, configuration: configuration) }
     }
 }

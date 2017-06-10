@@ -13,23 +13,30 @@ struct TestResultDisplayInfo: AutoEquatable {
     let diffImageURL: URL?
     let failedImageURL: URL?
     let testName: String
+    let testContext: String
     let canBeViewedInKaleidoscope: Bool
     let testResult: SnapshotTestResult
+    let createdAt: String
+    let applicationName: String
 
-    init(testResult: SnapshotTestResult, kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self) {
+    init(testResult: SnapshotTestResult, kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, dateFormatter: DateComponentsFormatter = DateComponentsFormatter.naturalApproximationFormatter) {
         self.testResult = testResult
         self.canBeViewedInKaleidoscope = kaleidoscopeViewer.isAvailable() && kaleidoscopeViewer.canView(snapshotTestResult: testResult)
         switch testResult {
-        case let .recorded(testName, referenceImagePath):
-            self.testName = testName
+        case let .recorded(_, referenceImagePath, _, _):
             self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)
             self.diffImageURL = nil
             self.failedImageURL = nil
-        case let .failed(testName, referenceImagePath, diffImagePath, failedImagePath):
-            self.testName = testName
+        case let .failed(_, referenceImagePath, diffImagePath, failedImagePath, _, _):
             self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)
             self.diffImageURL = URL(fileURLWithPath: diffImagePath)
             self.failedImageURL = URL(fileURLWithPath: failedImagePath)
         }
+        self.createdAt = dateFormatter.string(from: testResult.createdAt, to: Date()) ?? "Just now"
+
+        let testNameComponents = testResult.testName.replacingOccurrences(of: "_", with: " ").components(separatedBy: " ")
+        self.testContext = testNameComponents[0..<(testNameComponents.count - 1)].joined(separator: " ")
+        self.testName = testNameComponents[testNameComponents.count - 1]
+        self.applicationName = testResult.applicationName
     }
 }

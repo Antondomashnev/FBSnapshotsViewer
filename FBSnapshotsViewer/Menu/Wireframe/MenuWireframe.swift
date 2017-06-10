@@ -19,7 +19,8 @@ class MenuWireframe {
     func instantinateMenu(in statusBar: NSStatusBar, configuration: Configuration) -> MenuUserInterface {
         let menuController = MenuController(statusBar: statusBar)
         let interactor = MenuInteractor(applicationSnapshotTestResultListenerFactory: ApplicationSnapshotTestResultListenerFactory(),
-                                        applicationTestLogFilesListener: ApplicationTestLogFilesListener())
+                                        applicationTestLogFilesListener: ApplicationTestLogFilesListener(),
+                                        configuration: configuration)
         let presenter = MenuPresenter(configuration: configuration)
         menuController.eventHandler = presenter
         presenter.interactor = interactor

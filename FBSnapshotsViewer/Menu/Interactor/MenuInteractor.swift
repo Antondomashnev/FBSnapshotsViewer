@@ -24,11 +24,16 @@ class MenuInteractor {
 
     /// Instance of applications test log files listener
     fileprivate let applicationTestLogFilesListener: ApplicationTestLogFilesListener
+    
+    /// Instance of applications configuration
+    fileprivate let configuration: Configuration
 
     init(applicationSnapshotTestResultListenerFactory: ApplicationSnapshotTestResultListenerFactory,
-         applicationTestLogFilesListener: ApplicationTestLogFilesListener) {
+         applicationTestLogFilesListener: ApplicationTestLogFilesListener,
+         configuration: Configuration) {
         self.applicationTestLogFilesListener = applicationTestLogFilesListener
         self.applicationSnapshotTestResultListenerFactory = applicationSnapshotTestResultListenerFactory
+        self.configuration = configuration
     }
 }
 
@@ -42,7 +47,7 @@ extension MenuInteractor: MenuInteractorInput {
         if applicationSnapshotTestResultListeners[path] != nil {
             return
         }
-        let applicationSnapshotTestResultListener = applicationSnapshotTestResultListenerFactory.applicationSnapshotTestResultListener(forLogFileAt: path)
+        let applicationSnapshotTestResultListener = applicationSnapshotTestResultListenerFactory.applicationSnapshotTestResultListener(forLogFileAt: path, configuration: configuration)
         applicationSnapshotTestResultListener.startListening { [weak self] testResult in
             self?.currentlyFoundTestResults.insert(testResult, at: 0)
             self?.output?.didFindNewTestResult(testResult)

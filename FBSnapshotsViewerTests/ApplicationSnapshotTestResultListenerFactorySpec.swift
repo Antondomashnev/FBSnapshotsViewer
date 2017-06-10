@@ -21,7 +21,7 @@ class ApplicationSnapshotTestResultListenerFactorySpec: QuickSpec {
 
         describe(".applicationSnapshotTestResultListener") {
             it("returns new listener") {
-                expect(factory.applicationSnapshotTestResultListener(forLogFileAt: "Users/antondomashnev/Library/log.log")).toNot(beNil())
+                expect(factory.applicationSnapshotTestResultListener(forLogFileAt: "Users/antondomashnev/Library/log.log", configuration: Configuration.default())).toNot(beNil())
             }
         }
     }

@@ -8,8 +8,15 @@
 
 import Quick
 import Nimble
+import Foundation
 
 @testable import FBSnapshotsViewer
+
+class TestResultDisplayInfo_MockDateComponentsFormatter: DateComponentsFormatter {
+    override func string(from startDate: Date, to endDate: Date) -> String? {
+        return "10 minutes ago"
+    }
+}
 
 class TestResultDisplayInfo_MockKaleidoscopeViewer: ExternalViewer {
     static var name: String = ""
@@ -41,15 +48,54 @@ class TestResultDisplayInfoSpec: QuickSpec {
     override func spec() {
         describe(".initWithTestInfo") {
             var testResult: SnapshotTestResult!
+            var dateFormatter: TestResultDisplayInfo_MockDateComponentsFormatter!
             let kaleidoscopeViewer: TestResultDisplayInfo_MockKaleidoscopeViewer.Type = TestResultDisplayInfo_MockKaleidoscopeViewer.self
+
+            beforeEach {
+                dateFormatter = TestResultDisplayInfo_MockDateComponentsFormatter()
+            }
 
             afterEach {
                 kaleidoscopeViewer.reset()
             }
 
+            describe("testName") {
+                context("when test name with undrscore") {
+                    beforeEach {
+                        testResult = SnapshotTestResult.failed(testName: "TestClass_testName_has_replaced_all_underscore_with_spaces", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
+                    }
+
+                    it("has correct test name") {
+                        let displayInfo = TestResultDisplayInfo(testResult: testResult)
+                        expect(displayInfo.testName).to(equal("spaces"))
+                    }
+
+                    it("has correct test context") {
+                        let displayInfo = TestResultDisplayInfo(testResult: testResult)
+                        expect(displayInfo.testContext).to(equal("TestClass testName has replaced all underscore with"))
+                    }
+                }
+
+                context("when test name without undrscore") {
+                    beforeEach {
+                        testResult = SnapshotTestResult.failed(testName: "TestClass testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
+                    }
+
+                    it("has correct test name") {
+                        let displayInfo = TestResultDisplayInfo(testResult: testResult)
+                        expect(displayInfo.testName).to(equal("testName"))
+                    }
+
+                    it("has correct test context") {
+                        let displayInfo = TestResultDisplayInfo(testResult: testResult)
+                        expect(displayInfo.testContext).to(equal("TestClass"))
+                    }
+                }
+            }
+
             describe("canBeViewedInKaleidoscope") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png")
+                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
                 }
 
                 context("when kaleidoscope viewer is available") {
@@ -94,28 +140,32 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when failed test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png")
+                    testResult = SnapshotTestResult.failed(testName: "TestClass testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
                 }
 
                 it("initializes object correctly") {
-                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer, dateFormatter: dateFormatter)
                     expect(displayInfo.diffImageURL).to(equal(URL(fileURLWithPath: "diffImagePath.png")))
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.failedImageURL).to(equal(URL(fileURLWithPath: "failedImagePath.png")))
                     expect(displayInfo.testName).to(equal("testFailed"))
+                    expect(displayInfo.testContext).to(equal("TestClass"))
                     expect(displayInfo.testResult).to(equal(testResult))
+                    expect(displayInfo.createdAt).to(equal("10 minutes ago"))
                 }
             }
 
             context("when recorded test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testName: "testRecord", referenceImagePath: "referenceImagePath.png")
+                    testResult = SnapshotTestResult.recorded(testName: "ExampleTestClass testRecord", referenceImagePath: "referenceImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
                 }
 
                 it("initializes object correctly") {
-                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer, dateFormatter: dateFormatter)
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.testName).to(equal("testRecord"))
+                    expect(displayInfo.testContext).to(equal("ExampleTestClass"))
+                    expect(displayInfo.createdAt).to(equal("10 minutes ago"))
                 }
             }
         }

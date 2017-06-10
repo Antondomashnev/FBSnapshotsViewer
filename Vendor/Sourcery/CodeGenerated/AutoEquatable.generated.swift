@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.6.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.6.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 // swiftlint:disable file_length
@@ -30,8 +30,11 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard compareOptionals(lhs: lhs.diffImageURL, rhs: rhs.diffImageURL, compare: ==) else { return false }
     guard compareOptionals(lhs: lhs.failedImageURL, rhs: rhs.failedImageURL, compare: ==) else { return false }
     guard lhs.testName == rhs.testName else { return false }
+    guard lhs.testContext == rhs.testContext else { return false }
     guard lhs.canBeViewedInKaleidoscope == rhs.canBeViewedInKaleidoscope else { return false }
     guard lhs.testResult == rhs.testResult else { return false }
+    guard lhs.createdAt == rhs.createdAt else { return false }
+    guard lhs.applicationName == rhs.applicationName else { return false }
     return true
 }
 
@@ -54,6 +57,8 @@ internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
     case (.kaleidoscopeCommandMessage(let lhs), .kaleidoscopeCommandMessage(let rhs)): 
         return lhs == rhs
     case (.referenceImageSavedMessage(let lhs), .referenceImageSavedMessage(let rhs)): 
+        return lhs == rhs
+    case (.applicationNameMessage(let lhs), .applicationNameMessage(let rhs)): 
         return lhs == rhs
     case (.unknown, .unknown): 
          return true 
@@ -110,12 +115,16 @@ internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
     case (.recorded(let lhs), .recorded(let rhs)): 
         if lhs.testName != rhs.testName { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
+        if lhs.createdAt != rhs.createdAt { return false }
+        if lhs.applicationName != rhs.applicationName { return false }
         return true
     case (.failed(let lhs), .failed(let rhs)): 
         if lhs.testName != rhs.testName { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
         if lhs.diffImagePath != rhs.diffImagePath { return false }
         if lhs.failedImagePath != rhs.failedImagePath { return false }
+        if lhs.createdAt != rhs.createdAt { return false }
+        if lhs.applicationName != rhs.applicationName { return false }
         return true
     default: return false
     }

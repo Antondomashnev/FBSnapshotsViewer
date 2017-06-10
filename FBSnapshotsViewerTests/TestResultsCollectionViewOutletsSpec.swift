@@ -50,7 +50,7 @@ class TestResultsCollectionViewOutletsSpec: QuickSpec {
             var testResults: [TestResultDisplayInfo] = []
 
             beforeEach {
-                let snapshotTestResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png")
+                let snapshotTestResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "MyApp")
                 let testResult = TestResultDisplayInfo(testResult: snapshotTestResult)
                 testResults = [testResult]
                 collectionViewOutlets.testResults = testResults

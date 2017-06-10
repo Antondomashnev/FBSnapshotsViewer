@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.6.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.6.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 import Foundation
@@ -21,6 +21,22 @@ class ApplicationMock: Application {
 
         terminateCalled = true
         terminateReceivedSender = sender
+    }
+}
+class ApplicationNameExtractorMock: ApplicationNameExtractor {
+
+
+    //MARK: - extractApplicationName
+
+    var extractApplicationNameCalled = false
+    var extractApplicationNameReceivedLogLine: ApplicationLogLine?
+    var extractApplicationNameReturnValue: String!
+
+    func extractApplicationName(from logLine: ApplicationLogLine) -> String {
+
+        extractApplicationNameCalled = true
+        extractApplicationNameReceivedLogLine = logLine
+        return extractApplicationNameReturnValue
     }
 }
 class ConfigurationStorageMock: ConfigurationStorage {
