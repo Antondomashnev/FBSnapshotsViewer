@@ -16,29 +16,27 @@ class TestResultCell: NSCollectionViewItem {
     static let itemIdentifier = "TestResultCell"
 
     weak var delegate: TestResultCellDelegate?
-
+    
+    @IBOutlet private weak var actionsContainerView: NSView!
     @IBOutlet private weak var viewInKaleidoscopeButton: NSButton!
-    @IBOutlet private weak var referenceImageView: NSImageView!
-    @IBOutlet private weak var diffImageView: NSImageView!
+    
+    @IBOutlet private weak var imagesContainerView: NSView!
     @IBOutlet private weak var failedImageView: NSImageView!
-    @IBOutlet private weak var testNameLabel: NSTextField!
+    @IBOutlet private weak var referenceImageView: NSImageView!
     @IBOutlet private weak var referenceImageTitleLabel: NSTextField!
-    @IBOutlet private weak var diffImageTitleLabel: NSTextField!
     @IBOutlet private weak var failedImageTitleLabel: NSTextField!
-    @IBOutlet private weak var referenceSeparatorView: NSView!
-    @IBOutlet private weak var diffSeparatorView: NSView!
-    @IBOutlet private weak var failedSeparatorView: NSView!
+    
+    @IBOutlet private weak var diffContainerView: NSView!
+    @IBOutlet private weak var diffImageView: NSImageView!
+    
+    @IBOutlet private weak var testInfoContainerView: NSView!
+    @IBOutlet private weak var testNameLabel: NSTextField!
+    
+    @IBOutlet private weak var separatorView: NSView!
 
     // MARK: - Helpers
 
-    private func configureViewsBackgroundColor(for appleInterfaceMode: AppleInterfaceMode) {
-        switch appleInterfaceMode {
-        case .dark:
-            view.layer?.backgroundColor = NSColor(named: .primaryLightDarkMode).cgColor
-        case .light:
-            view.layer?.backgroundColor = NSColor(named: .primaryLightLightMode).cgColor
-        }
-    }
+    private func configureViewsBackgroundColor(for appleInterfaceMode: AppleInterfaceMode) {}
 
     private func configureSeparatorsColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
         let dividerColor: NSColor
@@ -48,9 +46,7 @@ class TestResultCell: NSCollectionViewItem {
         case .light:
             dividerColor = NSColor(named: .dividerLightMode)
         }
-        referenceSeparatorView.layer?.backgroundColor = dividerColor.cgColor
-        diffSeparatorView.layer?.backgroundColor = dividerColor.cgColor
-        failedSeparatorView.layer?.backgroundColor = dividerColor.cgColor
+        separatorView.layer?.backgroundColor = dividerColor.cgColor
     }
 
     private func configureTitleLabelsColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
@@ -66,15 +62,7 @@ class TestResultCell: NSCollectionViewItem {
         }
         testNameLabel.textColor = primaryTextColor
         referenceImageTitleLabel.textColor = secondaryTextColor
-        diffImageTitleLabel.textColor = secondaryTextColor
         failedImageTitleLabel.textColor = secondaryTextColor
-    }
-
-    private func configureTitleLabelsBackgroundColorScheme() {
-        testNameLabel.layer?.backgroundColor = NSColor.clear.cgColor
-        referenceImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
-        diffImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
-        failedImageTitleLabel.layer?.backgroundColor = NSColor.clear.cgColor
     }
 
     // MARK: - Interface
