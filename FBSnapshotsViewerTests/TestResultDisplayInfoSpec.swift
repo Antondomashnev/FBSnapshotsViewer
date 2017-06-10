@@ -47,6 +47,7 @@ class TestResultDisplayInfo_MockKaleidoscopeViewer: ExternalViewer {
 class TestResultDisplayInfoSpec: QuickSpec {
     override func spec() {
         describe(".initWithTestInfo") {
+            var build: Build!
             var testResult: SnapshotTestResult!
             var dateFormatter: TestResultDisplayInfo_MockDateComponentsFormatter!
             let kaleidoscopeViewer: TestResultDisplayInfo_MockKaleidoscopeViewer.Type = TestResultDisplayInfo_MockKaleidoscopeViewer.self
@@ -62,7 +63,8 @@ class TestResultDisplayInfoSpec: QuickSpec {
             describe("testName") {
                 context("when test name with undrscore") {
                     beforeEach {
-                        testResult = SnapshotTestResult.failed(testName: "TestClass_testName_has_replaced_all_underscore_with_spaces", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
+                        build = Build(date: Date(), applicationName: "FBSnapshotsViewer")
+                        testResult = SnapshotTestResult.failed(testName: "TestClass_testName_has_replaced_all_underscore_with_spaces", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
 
                     it("has correct test name") {
@@ -78,7 +80,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
                 context("when test name without undrscore") {
                     beforeEach {
-                        testResult = SnapshotTestResult.failed(testName: "TestClass testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
+                        testResult = SnapshotTestResult.failed(testName: "TestClass testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
 
                     it("has correct test name") {
@@ -95,7 +97,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             describe("canBeViewedInKaleidoscope") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
+                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                 }
 
                 context("when kaleidoscope viewer is available") {
@@ -140,7 +142,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when failed test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "TestClass testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
+                    testResult = SnapshotTestResult.failed(testName: "TestClass testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                 }
 
                 it("initializes object correctly") {
@@ -157,7 +159,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when recorded test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testName: "ExampleTestClass testRecord", referenceImagePath: "referenceImagePath.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
+                    testResult = SnapshotTestResult.recorded(testName: "ExampleTestClass testRecord", referenceImagePath: "referenceImagePath.png", build: build)
                 }
 
                 it("initializes object correctly") {

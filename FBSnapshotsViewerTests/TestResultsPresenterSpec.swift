@@ -28,9 +28,11 @@ class TestResultsPresenterSpec: QuickSpec {
         describe(".openInKaleidoscope") {
             var testResult: SnapshotTestResult!
             var testResultDisplayInfo: TestResultDisplayInfo!
+            var build: Build!
 
             beforeEach {
-                testResult = SnapshotTestResult.recorded(testName: "MyTest", referenceImagePath: "foo/bar.png", createdAt: Date(), applicationName: "FBSnapshotsViewer")
+                build = Build(applicationName: "FBSnapshotsViewer")
+                testResult = SnapshotTestResult.recorded(testName: "MyTest", referenceImagePath: "foo/bar.png", build: build)
                 testResultDisplayInfo = TestResultDisplayInfo(testResult: testResult)
                 presenter.openInKaleidoscope(testResultDisplayInfo: testResultDisplayInfo)
             }
@@ -54,9 +56,11 @@ class TestResultsPresenterSpec: QuickSpec {
 
             context("when interactor has test results") {
                 var testResults: [SnapshotTestResult] = []
+                var build: Build!
 
                 beforeEach {
-                    testResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", createdAt: Date(), applicationName: "FBSnapshotsViewer")]
+                    build = Build(applicationName: "FBSnapshotsViewer")
+                    testResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)]
                     interactor.testResults = testResults
                     presenter.updateUserInterface()
                 }

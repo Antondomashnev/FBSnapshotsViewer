@@ -39,14 +39,15 @@ class TestResultsInteractor_Mock: ExternalViewer {
 
 class TestResultsInteractorSpec: QuickSpec {
     override func spec() {
+        let build: Build = Build(date: Date(), applicationName: "MyApp")
         let kaleidoscopeViewer: TestResultsInteractor_Mock.Type = TestResultsInteractor_Mock.self
         var processLauncher: ProcessLauncher!
         var interactor: TestResultsInteractor!
         var testResults: [SnapshotTestResult] = []
 
         beforeEach {
-            let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", createdAt: Date(), applicationName: "MyApp")
-            let testResult2 = SnapshotTestResult.recorded(testName: "testName2", referenceImagePath: "referenceImagePath2", createdAt: Date(), applicationName: "MyApp")
+            let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
+            let testResult2 = SnapshotTestResult.recorded(testName: "testName2", referenceImagePath: "referenceImagePath2", build: build)
             testResults = [testResult1, testResult2]
             processLauncher = ProcessLauncher()
             interactor = TestResultsInteractor(testResults: testResults, kaleidoscopeViewer: kaleidoscopeViewer, processLauncher: processLauncher)

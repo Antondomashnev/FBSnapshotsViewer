@@ -55,10 +55,12 @@ class KaleidoscopeViewerSpec: QuickSpec {
 
         describe(".canView") {
             var testResult: SnapshotTestResult!
+            var build: Build!
 
             context("for recorded snapshot test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", createdAt: Date(), applicationName: "MyApp")
+                    build = Build(applicationName: "MyApp")
+                    testResult = SnapshotTestResult.recorded(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", build: build)
                 }
 
                 it("returns false") {
@@ -68,7 +70,8 @@ class KaleidoscopeViewerSpec: QuickSpec {
 
             context("for failed snapshot test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", diffImagePath: "foo/bar/diffImage.png", failedImagePath: "foo/bar/failedImage.png", createdAt: Date(), applicationName: "MyApp")
+                    build = Build(applicationName: "MyApp")
+                    testResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", diffImagePath: "foo/bar/diffImage.png", failedImagePath: "foo/bar/failedImage.png", build: build)
                 }
 
                 it("returns true") {
@@ -101,10 +104,12 @@ class KaleidoscopeViewerSpec: QuickSpec {
 
         describe(".view") {
             var testResult: SnapshotTestResult!
+            var build: Build!
 
             context("for recorded snapshot test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", createdAt: Date(), applicationName: "MyApp")
+                    build = Build(date: Date(), applicationName: "MyApp")
+                    testResult = SnapshotTestResult.recorded(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", build: build)
                 }
 
                 it("throws an assertion") {
@@ -114,7 +119,8 @@ class KaleidoscopeViewerSpec: QuickSpec {
 
             context("for failed snapshot test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", diffImagePath: "foo/bar/diffImage.png", failedImagePath: "foo/bar/failedImage.png", createdAt: Date(), applicationName: "MyApp")
+                    build = Build(date: Date(), applicationName: "MyApp")
+                    testResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", diffImagePath: "foo/bar/diffImage.png", failedImagePath: "foo/bar/failedImage.png", build: build)
                 }
 
                 it("launches correct process") {
