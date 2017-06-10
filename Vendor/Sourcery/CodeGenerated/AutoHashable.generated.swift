@@ -20,6 +20,12 @@ fileprivate func combineHashValues(_ initial: Int, _ other: Int) -> Int {
 }
 
 // MARK: - AutoHashable for classes, protocols, structs
+// MARK: - Build AutoHashable
+extension Build: Hashable {
+    internal var hashValue: Int {
+        return combineHashes([date.hashValue, applicationName.hashValue, 0])
+    }
+}
 
 // MARK: - AutoHashable for Enums
 

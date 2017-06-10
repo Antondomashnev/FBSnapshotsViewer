@@ -12,8 +12,8 @@ import KZFileWatchers
 typealias ApplicationSnapshotTestResultListenerOutput = (SnapshotTestResult) -> Void
 
 class ApplicationSnapshotTestResultListener {
+    private var build: Build?
     private var readLinesNumber: Int = 0
-    private var readApplicationName: String = ""
     private var listeningOutput: ApplicationSnapshotTestResultListenerOutput?
     private let fileWatcher: KZFileWatchers.FileWatcherProtocol
     private let applicationLogReader: ApplicationLogReader
@@ -85,10 +85,14 @@ class ApplicationSnapshotTestResultListener {
             case .unknown:
                 return nil
             case .applicationNameMessage:
-                readApplicationName = try applicationNameExtractor.extractApplicationName(from: logLine)
+                build = Build(applicationName: try applicationNameExtractor.extractApplicationName(from: logLine))
                 return nil
             default:
-                return snapshotTestResultFactory.createSnapshotTestResult(from: logLine, applicationName: readApplicationName)
+                guard let build = build else {
+                    assertionFailure("Unexpected snapshot test result line \(logLine) before build information line")
+                    return nil
+                }
+                return snapshotTestResultFactory.createSnapshotTestResult(from: logLine, build: build)
             }
         }
         snapshotTestResults.forEach { listeningOutput($0) }
@@ -98,6 +102,7 @@ class ApplicationSnapshotTestResultListener {
     private func reset() {
         readLinesNumber = 0
         listeningOutput = nil
+        build = nil
         try? fileWatcher.stop()
     }
 }
