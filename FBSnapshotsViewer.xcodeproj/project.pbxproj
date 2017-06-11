@@ -32,6 +32,7 @@
 		6D28147C1EED9C2000C4E67C /* TestResultsSectionDisplayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D28147B1EED9C2000C4E67C /* TestResultsSectionDisplayInfo.swift */; };
 		6D28147E1EED9E4100C4E67C /* TestResultsDisplayInfoCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D28147D1EED9E4100C4E67C /* TestResultsDisplayInfoCollector.swift */; };
 		6D2814801EEDC6C800C4E67C /* TestResultsSectionTitleDisplayInfoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D28147F1EEDC6C800C4E67C /* TestResultsSectionTitleDisplayInfoSpec.swift */; };
+		6D2814821EEDECDA00C4E67C /* TestResultsSectionDisplayInfoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2814811EEDECDA00C4E67C /* TestResultsSectionDisplayInfoSpec.swift */; };
 		6D30002B1EBD242E005B6103 /* ExternalViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D30002A1EBD242E005B6103 /* ExternalViewer.swift */; };
 		6D30002D1EBD251A005B6103 /* KaleidoscopeViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D30002C1EBD251A005B6103 /* KaleidoscopeViewer.swift */; };
 		6D30002F1EBD276A005B6103 /* OSXApplicationFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D30002E1EBD276A005B6103 /* OSXApplicationFinder.swift */; };
@@ -177,6 +178,7 @@
 		6D28147B1EED9C2000C4E67C /* TestResultsSectionDisplayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsSectionDisplayInfo.swift; sourceTree = "<group>"; };
 		6D28147D1EED9E4100C4E67C /* TestResultsDisplayInfoCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsDisplayInfoCollector.swift; sourceTree = "<group>"; };
 		6D28147F1EEDC6C800C4E67C /* TestResultsSectionTitleDisplayInfoSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsSectionTitleDisplayInfoSpec.swift; sourceTree = "<group>"; };
+		6D2814811EEDECDA00C4E67C /* TestResultsSectionDisplayInfoSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsSectionDisplayInfoSpec.swift; sourceTree = "<group>"; };
 		6D30002A1EBD242E005B6103 /* ExternalViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalViewer.swift; sourceTree = "<group>"; };
 		6D30002C1EBD251A005B6103 /* KaleidoscopeViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaleidoscopeViewer.swift; sourceTree = "<group>"; };
 		6D30002E1EBD276A005B6103 /* OSXApplicationFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSXApplicationFinder.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				6DB94C9E1EE56EFE00095C37 /* ApplicationNameExtractorSpec.swift */,
 				6DB94CA01EE5AB9800095C37 /* ApplicationNameExtractorFactorySpec.swift */,
 				6D28147F1EEDC6C800C4E67C /* TestResultsSectionTitleDisplayInfoSpec.swift */,
+				6D2814811EEDECDA00C4E67C /* TestResultsSectionDisplayInfoSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -1067,6 +1070,7 @@
 				6D12F4721E81758500AA4727 /* TestResultsControllerSpec.swift in Sources */,
 				6D33A9D21EB4D38D0089AEDD /* ApplicationSnapshotTestResultListenerSpec.swift in Sources */,
 				6D076B791E7F2FB5001FDA14 /* TestResultsInteractorSpec.swift in Sources */,
+				6D2814821EEDECDA00C4E67C /* TestResultsSectionDisplayInfoSpec.swift in Sources */,
 				6DBD99D91E7AB31B00E1714E /* NonRecursiveFolderEventsListenerSpec.swift in Sources */,
 				6D4D844B1EC7B8E70005932D /* PreferencesInteractorSpec.swift in Sources */,
 				6D076B711E7EAC94001FDA14 /* FolderEventsListenerFactorySpec.swift in Sources */,
