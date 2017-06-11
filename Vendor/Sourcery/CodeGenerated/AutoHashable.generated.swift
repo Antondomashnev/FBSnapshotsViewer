@@ -26,6 +26,12 @@ extension Build: Hashable {
         return combineHashes([date.hashValue, applicationName.hashValue, 0])
     }
 }
+// MARK: - TestResultsSectionTitleDisplayInfo AutoHashable
+extension TestResultsSectionTitleDisplayInfo: Hashable {
+    internal var hashValue: Int {
+        return combineHashes([title.hashValue, timeAgo.hashValue, 0])
+    }
+}
 
 // MARK: - AutoHashable for Enums
 

@@ -40,8 +40,20 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard lhs.testContext == rhs.testContext else { return false }
     guard lhs.canBeViewedInKaleidoscope == rhs.canBeViewedInKaleidoscope else { return false }
     guard lhs.testResult == rhs.testResult else { return false }
-    guard lhs.createdAt == rhs.createdAt else { return false }
-    guard lhs.applicationName == rhs.applicationName else { return false }
+    return true
+}
+// MARK: - TestResultsSectionDisplayInfo AutoEquatable
+extension TestResultsSectionDisplayInfo: Equatable {} 
+internal func == (lhs: TestResultsSectionDisplayInfo, rhs: TestResultsSectionDisplayInfo) -> Bool {
+    guard lhs.titleInfo == rhs.titleInfo else { return false }
+    guard lhs.itemInfos == rhs.itemInfos else { return false }
+    return true
+}
+// MARK: - TestResultsSectionTitleDisplayInfo AutoEquatable
+extension TestResultsSectionTitleDisplayInfo: Equatable {} 
+internal func == (lhs: TestResultsSectionTitleDisplayInfo, rhs: TestResultsSectionTitleDisplayInfo) -> Bool {
+    guard lhs.title == rhs.title else { return false }
+    guard lhs.timeAgo == rhs.timeAgo else { return false }
     return true
 }
 
