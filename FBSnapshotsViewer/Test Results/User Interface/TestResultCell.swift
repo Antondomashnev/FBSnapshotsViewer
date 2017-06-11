@@ -36,8 +36,6 @@ class TestResultCell: NSCollectionViewItem {
 
     // MARK: - Helpers
 
-    private func configureViewsBackgroundColor(for appleInterfaceMode: AppleInterfaceMode) {}
-
     private func configureSeparatorsColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
         let dividerColor: NSColor
         switch appleInterfaceMode {
@@ -46,6 +44,7 @@ class TestResultCell: NSCollectionViewItem {
         case .light:
             dividerColor = NSColor(named: .dividerLightMode)
         }
+        separatorView.wantsLayer = true
         separatorView.layer?.backgroundColor = dividerColor.cgColor
     }
 
@@ -64,6 +63,25 @@ class TestResultCell: NSCollectionViewItem {
         referenceImageTitleLabel.textColor = secondaryTextColor
         failedImageTitleLabel.textColor = secondaryTextColor
     }
+    
+    private func configureBordersColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
+        let borderColor: NSColor
+        switch appleInterfaceMode {
+        case .dark:
+            borderColor = NSColor(named: .dividerDarkMode)
+        case .light:
+            borderColor = NSColor(named: .dividerLightMode)
+        }
+        failedImageView.wantsLayer = true
+        referenceImageView.wantsLayer = true
+        diffContainerView.wantsLayer = true
+        failedImageView.layer?.borderColor = borderColor.cgColor
+        referenceImageView.layer?.borderColor = borderColor.cgColor
+        diffContainerView.layer?.borderColor = borderColor.cgColor
+        referenceImageView.layer?.borderWidth = 1
+        failedImageView.layer?.borderWidth = 1
+        diffContainerView.layer?.borderWidth = 1
+    }
 
     // MARK: - Interface
 
@@ -72,7 +90,7 @@ class TestResultCell: NSCollectionViewItem {
             referenceImageView.image = referenceImage
         }
         if let diffImageURL = testResult.diffImageURL, let diffImage = NSImage(contentsOf: diffImageURL) {
-            diffImageView.image = diffImage
+//            diffImageView.image = diffImage
         }
         if let failedImageURL = testResult.failedImageURL, let failedImage = NSImage(contentsOf: failedImageURL) {
             failedImageView.image = failedImage
@@ -81,7 +99,7 @@ class TestResultCell: NSCollectionViewItem {
         testNameLabel.stringValue = testResult.testName
         configureTitleLabelsColorScheme(for: appleInterfaceMode)
         configureSeparatorsColorScheme(for: appleInterfaceMode)
-        configureViewsBackgroundColor(for: appleInterfaceMode)
+        configureBordersColorScheme(for: appleInterfaceMode)
     }
 
     // MARK: - Actions

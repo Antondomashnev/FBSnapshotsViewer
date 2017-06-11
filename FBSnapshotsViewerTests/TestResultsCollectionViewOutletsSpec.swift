@@ -29,7 +29,7 @@ class TestResultsCollectionViewOutletsSpec: QuickSpec {
 
         describe(".sizeForItemAt") {
             it("returns correct size") {
-                let expectedSize = NSSize(width: 530, height: 346)
+                let expectedSize = NSSize(width: 732, height: 408)
                 let size = collectionViewOutlets.collectionView(collectionView, layout: NSCollectionViewLayout(), sizeForItemAt: IndexPath(item: 0, section: 0))
                 expect(size).to(equal(expectedSize))
             }

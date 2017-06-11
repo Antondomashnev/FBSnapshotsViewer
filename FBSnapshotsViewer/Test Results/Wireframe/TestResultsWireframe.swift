@@ -21,6 +21,7 @@ final class TestResultsWireframe {
         presenter.wireframe = self
         userInterface.eventHandler = presenter
         popover.contentViewController = userInterface
+        popover.contentSize = NSSize(width: 732, height: 600)
         popover.show(relativeTo: rect, of: view, preferredEdge: NSRectEdge.minY)
     }
 }
