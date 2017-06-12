@@ -30,9 +30,10 @@
 		6D2814781EED7F9300C4E67C /* TestResultsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2814771EED7F9300C4E67C /* TestResultsHeader.swift */; };
 		6D28147A1EED7F9E00C4E67C /* TestResultsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2814791EED7F9E00C4E67C /* TestResultsHeader.xib */; };
 		6D28147C1EED9C2000C4E67C /* TestResultsSectionDisplayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D28147B1EED9C2000C4E67C /* TestResultsSectionDisplayInfo.swift */; };
-		6D28147E1EED9E4100C4E67C /* TestResultsDisplayInfoCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D28147D1EED9E4100C4E67C /* TestResultsDisplayInfoCollector.swift */; };
+		6D28147E1EED9E4100C4E67C /* TestResultsDisplayInfosCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D28147D1EED9E4100C4E67C /* TestResultsDisplayInfosCollector.swift */; };
 		6D2814801EEDC6C800C4E67C /* TestResultsSectionTitleDisplayInfoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D28147F1EEDC6C800C4E67C /* TestResultsSectionTitleDisplayInfoSpec.swift */; };
 		6D2814821EEDECDA00C4E67C /* TestResultsSectionDisplayInfoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2814811EEDECDA00C4E67C /* TestResultsSectionDisplayInfoSpec.swift */; };
+		6D2814841EEDEE3C00C4E67C /* TestResultsDisplayInfosCollectorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2814831EEDEE3C00C4E67C /* TestResultsDisplayInfosCollectorSpec.swift */; };
 		6D30002B1EBD242E005B6103 /* ExternalViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D30002A1EBD242E005B6103 /* ExternalViewer.swift */; };
 		6D30002D1EBD251A005B6103 /* KaleidoscopeViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D30002C1EBD251A005B6103 /* KaleidoscopeViewer.swift */; };
 		6D30002F1EBD276A005B6103 /* OSXApplicationFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D30002E1EBD276A005B6103 /* OSXApplicationFinder.swift */; };
@@ -176,9 +177,10 @@
 		6D2814771EED7F9300C4E67C /* TestResultsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsHeader.swift; sourceTree = "<group>"; };
 		6D2814791EED7F9E00C4E67C /* TestResultsHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestResultsHeader.xib; sourceTree = "<group>"; };
 		6D28147B1EED9C2000C4E67C /* TestResultsSectionDisplayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsSectionDisplayInfo.swift; sourceTree = "<group>"; };
-		6D28147D1EED9E4100C4E67C /* TestResultsDisplayInfoCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsDisplayInfoCollector.swift; sourceTree = "<group>"; };
+		6D28147D1EED9E4100C4E67C /* TestResultsDisplayInfosCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsDisplayInfosCollector.swift; sourceTree = "<group>"; };
 		6D28147F1EEDC6C800C4E67C /* TestResultsSectionTitleDisplayInfoSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsSectionTitleDisplayInfoSpec.swift; sourceTree = "<group>"; };
 		6D2814811EEDECDA00C4E67C /* TestResultsSectionDisplayInfoSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsSectionDisplayInfoSpec.swift; sourceTree = "<group>"; };
+		6D2814831EEDEE3C00C4E67C /* TestResultsDisplayInfosCollectorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsDisplayInfosCollectorSpec.swift; sourceTree = "<group>"; };
 		6D30002A1EBD242E005B6103 /* ExternalViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalViewer.swift; sourceTree = "<group>"; };
 		6D30002C1EBD251A005B6103 /* KaleidoscopeViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaleidoscopeViewer.swift; sourceTree = "<group>"; };
 		6D30002E1EBD276A005B6103 /* OSXApplicationFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSXApplicationFinder.swift; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 				6DB94CA01EE5AB9800095C37 /* ApplicationNameExtractorFactorySpec.swift */,
 				6D28147F1EEDC6C800C4E67C /* TestResultsSectionTitleDisplayInfoSpec.swift */,
 				6D2814811EEDECDA00C4E67C /* TestResultsSectionDisplayInfoSpec.swift */,
+				6D2814831EEDEE3C00C4E67C /* TestResultsDisplayInfosCollectorSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -687,7 +690,7 @@
 				6D848C621E6964D90000FC1E /* TestResultsCollectionViewOutlets.swift */,
 				6D848C581E68D3960000FC1E /* TestResultDisplayInfo.swift */,
 				6D28147B1EED9C2000C4E67C /* TestResultsSectionDisplayInfo.swift */,
-				6D28147D1EED9E4100C4E67C /* TestResultsDisplayInfoCollector.swift */,
+				6D28147D1EED9E4100C4E67C /* TestResultsDisplayInfosCollector.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -995,7 +998,7 @@
 				6D7C1F941EEC198A0045117E /* Build.swift in Sources */,
 				6D848C591E68D3960000FC1E /* TestResultDisplayInfo.swift in Sources */,
 				6D5BB4C51E5915A10006BAE1 /* ApplicationTemporaryFolderEventFilter.swift in Sources */,
-				6D28147E1EED9E4100C4E67C /* TestResultsDisplayInfoCollector.swift in Sources */,
+				6D28147E1EED9E4100C4E67C /* TestResultsDisplayInfosCollector.swift in Sources */,
 				6D848C5D1E68D6A50000FC1E /* TestResultsInteractor.swift in Sources */,
 				6D8362771E79422D000794AE /* AutoEquatable.swift in Sources */,
 				6D5F91391E4F6D3500C6E5BF /* NonRecursiveFolderEventsListener.swift in Sources */,
@@ -1078,6 +1081,7 @@
 				6D51834B1EDF52C6007EC15C /* NaturalApproximationFormatterSpec.swift in Sources */,
 				6D076B6D1E7CA1B9001FDA14 /* RecursiveFolderEventsListenerSpec.swift in Sources */,
 				6D3BA5631E6E063600CAD4EE /* MenuStatusItemMenuSpec.swift in Sources */,
+				6D2814841EEDEE3C00C4E67C /* TestResultsDisplayInfosCollectorSpec.swift in Sources */,
 				6D2814801EEDC6C800C4E67C /* TestResultsSectionTitleDisplayInfoSpec.swift in Sources */,
 				6D3000371EBDD81F005B6103 /* ProcessLauncherSpec.swift in Sources */,
 				6DB94CA11EE5AB9800095C37 /* ApplicationNameExtractorFactorySpec.swift in Sources */,

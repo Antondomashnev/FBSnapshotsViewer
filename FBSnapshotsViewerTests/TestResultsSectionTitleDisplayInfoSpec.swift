@@ -56,7 +56,7 @@ class TestResultsSectionTitleDisplayInfoSpec: QuickSpec {
                 }
                 
                 it("initializes correct timeAgo") {
-                    expect(displayInfo.timeAgo).to(equal("just now"))
+                    expect(displayInfo.timeAgo).to(equal("Just now"))
                 }
             }
         }

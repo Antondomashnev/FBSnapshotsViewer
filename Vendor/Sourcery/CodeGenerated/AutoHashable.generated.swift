@@ -29,7 +29,7 @@ extension Build: Hashable {
 // MARK: - TestResultsSectionTitleDisplayInfo AutoHashable
 extension TestResultsSectionTitleDisplayInfo: Hashable {
     internal var hashValue: Int {
-        return combineHashes([title.hashValue, timeAgo.hashValue, 0])
+        return combineHashes([title.hashValue, timeAgo.hashValue, timeAgoDate.hashValue, 0])
     }
 }
 

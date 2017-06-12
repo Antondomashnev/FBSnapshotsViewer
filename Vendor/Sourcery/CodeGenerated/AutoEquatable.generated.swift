@@ -54,6 +54,7 @@ extension TestResultsSectionTitleDisplayInfo: Equatable {}
 internal func == (lhs: TestResultsSectionTitleDisplayInfo, rhs: TestResultsSectionTitleDisplayInfo) -> Bool {
     guard lhs.title == rhs.title else { return false }
     guard lhs.timeAgo == rhs.timeAgo else { return false }
+    guard lhs.timeAgoDate == rhs.timeAgoDate else { return false }
     return true
 }
 
