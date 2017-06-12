@@ -33,6 +33,7 @@ class TestResultsControllerSpec: QuickSpec {
         var collectionView: TestResultsController_MockNSCollectionView!
         var controller: TestResultsController!
         var eventHandler: TestResultsModuleInterfaceMock!
+        var testResults: [TestResultsSectionDisplayInfo] = []
 
         beforeEach {
             collectionView = TestResultsController_MockNSCollectionView(frame: NSRect.zero)
@@ -42,14 +43,15 @@ class TestResultsControllerSpec: QuickSpec {
             controller.eventHandler = eventHandler
             controller.collectionViewOutlets = collectionViewOutlets
             controller.collectionView = collectionView
+            
+            let testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", build: build))
+            let titleInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "Foo")
+            let sectionInfo = TestResultsSectionDisplayInfo(title: titleInfo, items: [testResultDisplayInfo])
+            testResults = [sectionInfo]
         }
 
         describe(".show") {
-            var testResults: [TestResultDisplayInfo]!
-
             beforeEach {
-                let testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", build: build))
-                testResults = [testResultDisplayInfo]
                 controller.show(testResults: testResults)
             }
 
@@ -58,7 +60,7 @@ class TestResultsControllerSpec: QuickSpec {
             }
 
             it("shows test results") {
-                expect(collectionViewOutlets.testResults).to(equal(testResults))
+                expect(collectionViewOutlets.testResultsSections).to(equal(testResults))
             }
         }
 
@@ -93,8 +95,7 @@ class TestResultsControllerSpec: QuickSpec {
 
             context("when test result is not presented in controller") {
                 beforeEach {
-                    let testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", build: build))
-                    collectionViewOutlets.testResults = [testResultDisplayInfo]
+                    collectionViewOutlets.testResultsSections = testResults
                     collectionView.indexPathForItemReturnValue = IndexPath(item: 1, section: 0)
                 }
 
@@ -104,18 +105,15 @@ class TestResultsControllerSpec: QuickSpec {
             }
 
             context("when test result is presented and cell is visible") {
-                var testResultDisplayInfo: TestResultDisplayInfo!
-
                 beforeEach {
-                    testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", build: build))
-                    collectionViewOutlets.testResults = [testResultDisplayInfo]
+                    collectionViewOutlets.testResultsSections = testResults
                     collectionView.indexPathForItemReturnValue = IndexPath(item: 0, section: 0)
                     controller.testResultCell(cell, viewInKaleidoscopeButtonClicked: viewInKaleidoscopeButton)
                 }
 
                 it("opens test result in kaleidoscope") {
                     expect(eventHandler.openInKaleidoscopeCalled).to(beTrue())
-                    expect(eventHandler.openInKaleidoscopeReceivedTestResultDisplayInfo).to(equal(testResultDisplayInfo))
+                    expect(eventHandler.openInKaleidoscopeReceivedTestResultDisplayInfo).to(equal(testResults[0].itemInfos[0]))
                 }
             }
         }

@@ -40,7 +40,7 @@ class TestResultsSectionTitleDisplayInfoSpec: QuickSpec {
             
             context("when date can be formatter") {
                 beforeEach {
-                    dateFormatter.formattedValue = "10 minutes ago"
+                    dateFormatter.formattedValue = "10 minutes"
                     displayInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "TestContext", dateFormatter: dateFormatter)
                 }
                 

@@ -99,7 +99,6 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
                 applicationNameExtractor.extractApplicationNameReturnValue = "MyApp"
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[kaleidoscopeCommandMesageLogLine] = failedSnapshotTestResult
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[referenceImageSavedMessageLogLine] = recordedSnapshotTestResult
-                logReader.readLines = [applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, unknownLogLine, referenceImageSavedMessageLogLine]
                 listener.startListening { result in
                     receivedSnapshotTestResults += [result]
                 }
@@ -120,32 +119,48 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
                     expect { fileWatcher.startClosure?(.updated(data: Data())) }.to(throwAssertion())
                 }
             }
-
+            
             context("with valid updates") {
                 let update: Data! = "new updated text".data(using: .utf8, allowLossyConversion: false)
                 
-                context("when can not parse application name") {
+                context("when application name is unknown at the moment of reading snapshot test result log line") {
                     beforeEach {
-                        applicationNameExtractor.extractApplicationNameThrows = true
+                        logReader.readLines = [unknownLogLine, kaleidoscopeCommandMesageLogLine, applicationNameMessageLogLine, referenceImageSavedMessageLogLine]
                     }
                     
-                    it("outputs expected snapshot test resilts") {
+                    it("thows assertion") {
                         expect { fileWatcher.startClosure?(.updated(data: update)) }.to(throwAssertion())
                     }
                 }
                 
-                context("when can parse applicaion name") {
+                context("when application name is known at the moment of reading snapshot test result log line") {
                     beforeEach {
-                        fileWatcher.startClosure?(.updated(data: update))
+                        logReader.readLines = [applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, unknownLogLine, referenceImageSavedMessageLogLine]
                     }
                     
-                    it("outputs expected snapshot test resilts") {
-                        expect(receivedSnapshotTestResults).to(equal([failedSnapshotTestResult, recordedSnapshotTestResult]))
+                    context("when can not parse application name") {
+                        beforeEach {
+                            applicationNameExtractor.extractApplicationNameThrows = true
+                        }
+                        
+                        it("outputs expected snapshot test resilts") {
+                            expect { fileWatcher.startClosure?(.updated(data: update)) }.to(throwAssertion())
+                        }
                     }
                     
-                    it("creates test results with correct build") {
-                        expect(snapshotTestResultFactory.givenBuild.applicationName) == applicationNameExtractor.extractApplicationNameReturnValue
-                        expect(snapshotTestResultFactory.givenBuild.date.timeIntervalSince1970).to(beCloseTo(Date().timeIntervalSince1970, within: 0.01))
+                    context("when can parse applicaion name") {
+                        beforeEach {
+                            fileWatcher.startClosure?(.updated(data: update))
+                        }
+                        
+                        it("outputs expected snapshot test resilts") {
+                            expect(receivedSnapshotTestResults).to(equal([failedSnapshotTestResult, recordedSnapshotTestResult]))
+                        }
+                        
+                        it("creates test results with correct build") {
+                            expect(snapshotTestResultFactory.givenBuild.applicationName) == applicationNameExtractor.extractApplicationNameReturnValue
+                            expect(snapshotTestResultFactory.givenBuild.date.timeIntervalSince1970).to(beCloseTo(Date().timeIntervalSince1970, within: 0.01))
+                        }
                     }
                 }
             }

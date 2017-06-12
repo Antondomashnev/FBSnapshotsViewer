@@ -33,6 +33,18 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                     expect(createdTestResult).to(beNil())
                 }
             }
+            
+            context("when application name log line") {
+                var createdTestResult: SnapshotTestResult?
+                
+                beforeEach {
+                    createdTestResult = factory.createSnapshotTestResult(from: .applicationNameMessage(line: "MyApp"), build: build)
+                }
+                
+                it("doesnt create test result") {
+                    expect(createdTestResult).to(beNil())
+                }
+            }
 
             context("when reference image saved message log line") {
                 var createdTestResult: SnapshotTestResult!

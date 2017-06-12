@@ -11,16 +11,27 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
+class TestResultsPresenter_MockTestResultsDisplayInfosCollector: TestResultsDisplayInfosCollector {
+    var collectedTestResults: [TestResultsSectionDisplayInfo] = []
+    var collectCalledTestResults: [SnapshotTestResult] = []
+    override func collect(testResults: [SnapshotTestResult]) -> [TestResultsSectionDisplayInfo] {
+        collectCalledTestResults = testResults
+        return collectedTestResults
+    }
+}
+
 class TestResultsPresenterSpec: QuickSpec {
     override func spec() {
         var presenter: TestResultsPresenter!
         var interactor: TestResultsInteractorInputMock!
         var userInterface: TestResultsUserInterfaceMock!
+        var testResultsCollector: TestResultsPresenter_MockTestResultsDisplayInfosCollector!
 
         beforeEach {
+            testResultsCollector = TestResultsPresenter_MockTestResultsDisplayInfosCollector()
             interactor = TestResultsInteractorInputMock()
             userInterface = TestResultsUserInterfaceMock()
-            presenter = TestResultsPresenter()
+            presenter = TestResultsPresenter(testResultsCollector: testResultsCollector)
             presenter.interactor = interactor
             presenter.userInterface = userInterface
         }
@@ -56,12 +67,15 @@ class TestResultsPresenterSpec: QuickSpec {
 
             context("when interactor has test results") {
                 var testResults: [SnapshotTestResult] = []
-                var build: Build!
 
                 beforeEach {
-                    build = Build(applicationName: "FBSnapshotsViewer")
-                    testResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)]
+                    let build = Build(applicationName: "FBSnapshotsViewer")
+                    let snapshotTestResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
+                    let titleInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "Context")
+                    let sectionInfo = TestResultsSectionDisplayInfo(title: titleInfo, items: [TestResultDisplayInfo(testResult: snapshotTestResult)])
+                    testResults = [snapshotTestResult]
                     interactor.testResults = testResults
+                    testResultsCollector.collectedTestResults = [sectionInfo, sectionInfo]
                     presenter.updateUserInterface()
                 }
 
@@ -70,7 +84,11 @@ class TestResultsPresenterSpec: QuickSpec {
                 }
 
                 it("shows correct test results in user interface") {
-                    expect(userInterface.showReceivedTestResults?.count).to(equal(1))
+                    expect(userInterface.showReceivedTestResults?.count).to(equal(2))
+                }
+                
+                it("uses collector") {
+                    expect(testResultsCollector.collectCalledTestResults).to(equal(testResults))
                 }
             }
         }
