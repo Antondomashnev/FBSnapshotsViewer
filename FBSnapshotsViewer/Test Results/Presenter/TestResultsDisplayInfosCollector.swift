@@ -9,15 +9,9 @@
 import Foundation
 
 class TestResultsDisplayInfosCollector {
-    private let testResults: [SnapshotTestResult]
-    
-    init(testResults: [SnapshotTestResult] = []) {
-        self.testResults = testResults
-    }
-    
     // MARK: - Interface
     
-    func collect() -> [TestResultsSectionDisplayInfo] {
+    func collect(testResults: [SnapshotTestResult] = []) -> [TestResultsSectionDisplayInfo] {
         var temporaryDictionary: [TestResultsSectionTitleDisplayInfo: [TestResultDisplayInfo]] = [:]
         testResults.forEach {
             let testResultInfo = TestResultDisplayInfo(testResult: $0)

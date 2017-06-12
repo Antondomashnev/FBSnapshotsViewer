@@ -27,18 +27,21 @@ class TestResultsController: NSViewController {
 }
 
 extension TestResultsController: TestResultsUserInterface {
-    func show(testResults: [TestResultDisplayInfo]) {
-        collectionViewOutlets.testResults = testResults
+    func show(testResults: [TestResultsSectionDisplayInfo]) {
+        collectionViewOutlets.testResultsSections = testResults
         collectionView.reloadData()
     }
 }
 
 extension TestResultsController: TestResultCellDelegate {
     func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton) {
-        guard let cellIndex = collectionView.indexPath(for: cell)?.item, collectionViewOutlets.testResults.count > cellIndex else {
+        guard let cellIndexPath = collectionView.indexPath(for: cell),
+                  collectionViewOutlets.testResultsSections.count > cellIndexPath.section,
+                  collectionViewOutlets.testResultsSections[cellIndexPath.section].itemInfos.count > cellIndexPath.item else {
             assertionFailure("Unexpected TestResultCellDelegate callback about Kaleidoscope button click")
             return
         }
-        eventHandler.openInKaleidoscope(testResultDisplayInfo: collectionViewOutlets.testResults[cellIndex])
+        let testResultInfo = collectionViewOutlets.testResultsSections[cellIndexPath.section].itemInfos[cellIndexPath.item]
+        eventHandler.openInKaleidoscope(testResultDisplayInfo: testResultInfo)
     }
 }

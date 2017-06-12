@@ -33,7 +33,12 @@ class TestResultCell: NSCollectionViewItem {
     @IBOutlet private weak var testNameLabel: NSTextField!
     
     @IBOutlet private weak var separatorView: NSView!
-
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        separatorView.isHidden = true
+    }
+    
     // MARK: - Helpers
 
     private func configureSeparatorsColorScheme(for appleInterfaceMode: AppleInterfaceMode) {

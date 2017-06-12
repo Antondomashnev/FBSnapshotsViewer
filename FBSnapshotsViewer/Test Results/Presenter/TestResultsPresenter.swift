@@ -9,9 +9,14 @@
 import Cocoa
 
 class TestResultsPresenter {
+    fileprivate let testResultsCollector: TestResultsDisplayInfosCollector
     var interactor: TestResultsInteractorInput?
     var wireframe: TestResultsWireframe?
     weak var userInterface: TestResultsUserInterface?
+    
+    init(testResultsCollector: TestResultsDisplayInfosCollector = TestResultsDisplayInfosCollector()) {
+        self.testResultsCollector = testResultsCollector
+    }
 }
 
 extension TestResultsPresenter: TestResultsModuleInterface {
@@ -19,7 +24,7 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         guard let testResults = interactor?.testResults, !testResults.isEmpty  else {
             return
         }
-        userInterface?.show(testResults: testResults.map { TestResultDisplayInfo(testResult: $0) })
+        userInterface?.show(testResults: testResultsCollector.collect(testResults: testResults))
     }
 
     func openInKaleidoscope(testResultDisplayInfo: TestResultDisplayInfo) {

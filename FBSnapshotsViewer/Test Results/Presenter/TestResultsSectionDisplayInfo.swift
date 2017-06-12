@@ -17,7 +17,7 @@ struct TestResultsSectionTitleDisplayInfo: AutoEquatable, AutoHashable {
         self.title = "\(build.applicationName) | \(testContext)"
         self.timeAgoDate = build.date
         if let timeAgo = dateFormatter.string(from: build.date, to: Date()) {
-            self.timeAgo = timeAgo == "About 0 seconds" ? "Just now" : timeAgo
+            self.timeAgo = timeAgo == "About 0 seconds" ? "Just now" : "\(timeAgo) ago"
         }
         else {
             self.timeAgo = "Just now"

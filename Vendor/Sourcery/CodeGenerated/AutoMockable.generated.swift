@@ -395,9 +395,9 @@ class TestResultsUserInterfaceMock: TestResultsUserInterface {
     //MARK: - show
 
     var showCalled = false
-    var showReceivedTestResults: [TestResultDisplayInfo]?
+    var showReceivedTestResults: [TestResultsSectionDisplayInfo]?
 
-    func show(testResults: [TestResultDisplayInfo]) {
+    func show(testResults: [TestResultsSectionDisplayInfo]) {
 
         showCalled = true
         showReceivedTestResults = testResults
