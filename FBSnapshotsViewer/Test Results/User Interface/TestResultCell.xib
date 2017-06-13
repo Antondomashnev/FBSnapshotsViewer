@@ -4,7 +4,6 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TestResultCell" customModule="FBSnapshotsViewer" customModuleProvider="target"/>
@@ -16,17 +15,84 @@
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="HvH-e1-A4r">
                     <rect key="frame" x="340" y="16" width="384" height="371"/>
+                    <subviews>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ee5-hf-BtO">
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ema-ND-GKx"/>
+                        </imageView>
+                    </subviews>
                     <constraints>
                         <constraint firstAttribute="width" constant="384" id="EfS-4S-FJx"/>
+                        <constraint firstAttribute="trailing" secondItem="Ee5-hf-BtO" secondAttribute="trailing" id="KH1-Vq-489"/>
+                        <constraint firstItem="Ee5-hf-BtO" firstAttribute="leading" secondItem="HvH-e1-A4r" secondAttribute="leading" id="NMh-Ya-oC5"/>
+                        <constraint firstItem="Ee5-hf-BtO" firstAttribute="top" secondItem="HvH-e1-A4r" secondAttribute="top" id="PpE-Ka-tz0"/>
+                        <constraint firstAttribute="bottom" secondItem="Ee5-hf-BtO" secondAttribute="bottom" id="WtI-EH-EsP"/>
                     </constraints>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="oaS-Kh-fqd" customClass="TestResultSplitView" customModule="FBSnapshotsViewer" customModuleProvider="target">
+                    <rect key="frame" x="340" y="16" width="384" height="371"/>
+                    <subviews>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3La-JX-RJk">
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
+                            <imageCell key="cell" enabled="NO" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lZF-Ju-Vz2"/>
+                        </imageView>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="kOh-vw-j4b">
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
+                        </customView>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bKL-w8-TU4">
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
+                            <imageCell key="cell" enabled="NO" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="v5o-yX-yK3"/>
+                        </imageView>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="9ON-y2-dyr">
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
+                        </customView>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="514-ga-cqk">
+                            <rect key="frame" x="191" y="0.0" width="2" height="371"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="2" id="KFJ-2p-nB3"/>
+                            </constraints>
+                        </customView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="514-ga-cqk" secondAttribute="bottom" id="8RT-7K-8Wv"/>
+                        <constraint firstItem="kOh-vw-j4b" firstAttribute="trailing" secondItem="3La-JX-RJk" secondAttribute="trailing" id="Em2-Q5-p4g"/>
+                        <constraint firstAttribute="trailing" secondItem="3La-JX-RJk" secondAttribute="trailing" id="JzE-Gf-pDV"/>
+                        <constraint firstAttribute="width" constant="384" id="PJC-3f-xQx"/>
+                        <constraint firstItem="3La-JX-RJk" firstAttribute="leading" secondItem="oaS-Kh-fqd" secondAttribute="leading" id="Xsz-vF-Okt"/>
+                        <constraint firstItem="kOh-vw-j4b" firstAttribute="bottom" secondItem="3La-JX-RJk" secondAttribute="bottom" id="Y6I-u0-UdK"/>
+                        <constraint firstItem="kOh-vw-j4b" firstAttribute="top" secondItem="3La-JX-RJk" secondAttribute="top" id="ZSz-x0-t9R"/>
+                        <constraint firstItem="kOh-vw-j4b" firstAttribute="leading" secondItem="3La-JX-RJk" secondAttribute="leading" id="Zkj-wW-M41"/>
+                        <constraint firstAttribute="trailing" secondItem="bKL-w8-TU4" secondAttribute="trailing" id="a4j-Ah-ztW"/>
+                        <constraint firstItem="9ON-y2-dyr" firstAttribute="top" secondItem="bKL-w8-TU4" secondAttribute="top" id="bVP-Z5-mp0"/>
+                        <constraint firstAttribute="bottom" secondItem="3La-JX-RJk" secondAttribute="bottom" id="cZE-4M-7oc"/>
+                        <constraint firstItem="9ON-y2-dyr" firstAttribute="trailing" secondItem="bKL-w8-TU4" secondAttribute="trailing" id="eod-PZ-i0A"/>
+                        <constraint firstItem="bKL-w8-TU4" firstAttribute="top" secondItem="oaS-Kh-fqd" secondAttribute="top" id="fqq-yY-dLB"/>
+                        <constraint firstItem="9ON-y2-dyr" firstAttribute="leading" secondItem="bKL-w8-TU4" secondAttribute="leading" id="frB-ac-j0N"/>
+                        <constraint firstItem="bKL-w8-TU4" firstAttribute="leading" secondItem="oaS-Kh-fqd" secondAttribute="leading" id="g6B-md-SiP"/>
+                        <constraint firstItem="3La-JX-RJk" firstAttribute="top" secondItem="oaS-Kh-fqd" secondAttribute="top" id="hBF-Hk-u1a"/>
+                        <constraint firstItem="9ON-y2-dyr" firstAttribute="bottom" secondItem="bKL-w8-TU4" secondAttribute="bottom" id="huH-00-RAp"/>
+                        <constraint firstItem="514-ga-cqk" firstAttribute="top" secondItem="oaS-Kh-fqd" secondAttribute="top" id="n8B-w1-5WO"/>
+                        <constraint firstAttribute="bottom" secondItem="bKL-w8-TU4" secondAttribute="bottom" id="p42-eN-PPh"/>
+                        <constraint firstItem="514-ga-cqk" firstAttribute="centerX" secondItem="oaS-Kh-fqd" secondAttribute="centerX" id="ye0-z4-462"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="splitFailedImageView" destination="bKL-w8-TU4" id="7yE-72-83t"/>
+                        <outlet property="splitFailedMaskView" destination="9ON-y2-dyr" id="LfZ-IU-Rj4"/>
+                        <outlet property="splitFailedMaskViewLeading" destination="frB-ac-j0N" id="dbc-tq-zvQ"/>
+                        <outlet property="splitReferenceImageView" destination="3La-JX-RJk" id="Y02-L6-PDI"/>
+                        <outlet property="splitReferenceMaskView" destination="kOh-vw-j4b" id="5YN-Lq-Mf1"/>
+                        <outlet property="splitReferenceMaskViewTrailing" destination="Em2-Q5-p4g" id="iUc-zi-KRZ"/>
+                        <outlet property="splitSeparatorView" destination="514-ga-cqk" id="8dZ-8a-E79"/>
+                        <outlet property="splitSeparatorViewHorizontalCenter" destination="ye0-z4-462" id="kmN-7Q-Aof"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="LJB-1E-GeF">
                     <rect key="frame" x="8" y="16" width="324" height="312"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H6x-U9-K6u">
-                            <rect key="frame" x="47" y="288" width="65" height="18"/>
+                            <rect key="frame" x="48" y="288" width="62" height="18"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Reference" id="pke-Me-J00">
-                                <font key="font" metaFont="systemLight" size="12"/>
+                                <font key="font" metaFont="system" size="11"/>
                                 <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -36,9 +102,9 @@
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="X18-iU-nWD"/>
                         </imageView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mF1-a0-3eY">
-                            <rect key="frame" x="225" y="288" width="41" height="18"/>
+                            <rect key="frame" x="226" y="288" width="39" height="18"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Failed" id="DeN-Nc-l24">
-                                <font key="font" metaFont="systemLight" size="12"/>
+                                <font key="font" metaFont="system" size="11"/>
                                 <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -102,6 +168,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystemBold"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="viewInKaleidoscopeButtonClicked:" target="i7H-GG-lM3" id="39C-6q-BzH"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
@@ -117,9 +186,12 @@
                 <constraint firstItem="HvH-e1-A4r" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="DKM-kf-mJe"/>
                 <constraint firstItem="YEn-VX-jtO" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="Gh8-yT-9dB"/>
                 <constraint firstAttribute="bottom" secondItem="Xdr-DA-S5B" secondAttribute="bottom" constant="7" id="Itp-iE-eYn"/>
+                <constraint firstItem="oaS-Kh-fqd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="Kwb-rm-ylx"/>
+                <constraint firstAttribute="trailing" secondItem="oaS-Kh-fqd" secondAttribute="trailing" constant="8" id="RiO-af-T9t"/>
                 <constraint firstAttribute="bottom" secondItem="LJB-1E-GeF" secondAttribute="bottom" constant="16" id="SIA-bt-J1r"/>
                 <constraint firstAttribute="bottom" secondItem="HvH-e1-A4r" secondAttribute="bottom" constant="16" id="USg-gK-kFf"/>
                 <constraint firstItem="YEn-VX-jtO" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="8" id="Wkg-Zf-fbh"/>
+                <constraint firstAttribute="bottom" secondItem="oaS-Kh-fqd" secondAttribute="bottom" constant="16" id="aef-qh-R7T"/>
                 <constraint firstItem="AHf-ta-nvJ" firstAttribute="width" secondItem="YEn-VX-jtO" secondAttribute="width" id="aoj-Rd-j7e"/>
                 <constraint firstItem="AHf-ta-nvJ" firstAttribute="top" secondItem="YEn-VX-jtO" secondAttribute="bottom" constant="4" id="cJD-Sd-YXr"/>
                 <constraint firstItem="LJB-1E-GeF" firstAttribute="top" secondItem="AHf-ta-nvJ" secondAttribute="bottom" constant="4" id="dZz-aM-IW6"/>
@@ -134,12 +206,14 @@
             <connections>
                 <outlet property="actionsContainerView" destination="AHf-ta-nvJ" id="ggA-yn-13p"/>
                 <outlet property="diffContainerView" destination="HvH-e1-A4r" id="Ydb-cW-xPt"/>
+                <outlet property="diffImageView" destination="Ee5-hf-BtO" id="JL7-SB-l8a"/>
                 <outlet property="failedImageTitleLabel" destination="mF1-a0-3eY" id="Na5-EW-FET"/>
                 <outlet property="failedImageView" destination="iBD-ow-lst" id="NuQ-7Q-nBY"/>
                 <outlet property="imagesContainerView" destination="LJB-1E-GeF" id="15u-q3-AcU"/>
                 <outlet property="referenceImageTitleLabel" destination="H6x-U9-K6u" id="wXt-ua-Ggv"/>
                 <outlet property="referenceImageView" destination="K85-1M-wcy" id="UtW-Gp-pOZ"/>
                 <outlet property="separatorView" destination="Xdr-DA-S5B" id="axP-xd-ghd"/>
+                <outlet property="splitContainerView" destination="oaS-Kh-fqd" id="ID4-fk-Axc"/>
                 <outlet property="testInfoContainerView" destination="YEn-VX-jtO" id="RRJ-ht-Nth"/>
                 <outlet property="testNameLabel" destination="MCk-nZ-jTQ" id="4DF-7O-GL0"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="t7t-hF-Vsm"/>

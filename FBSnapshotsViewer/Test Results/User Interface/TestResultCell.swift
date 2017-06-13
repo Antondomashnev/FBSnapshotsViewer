@@ -6,7 +6,7 @@
 //  Copyright © 2017 Anton Domashnev. All rights reserved.
 //
 
-import Cocoa
+import AppKit
 
 protocol TestResultCellDelegate: class, AutoMockable {
     func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)
@@ -25,6 +25,8 @@ class TestResultCell: NSCollectionViewItem {
     @IBOutlet private weak var referenceImageView: NSImageView!
     @IBOutlet private weak var referenceImageTitleLabel: NSTextField!
     @IBOutlet private weak var failedImageTitleLabel: NSTextField!
+    
+    @IBOutlet private weak var splitContainerView: TestResultSplitView!
     
     @IBOutlet private weak var diffContainerView: NSView!
     @IBOutlet private weak var diffImageView: NSImageView!
@@ -80,31 +82,49 @@ class TestResultCell: NSCollectionViewItem {
         failedImageView.wantsLayer = true
         referenceImageView.wantsLayer = true
         diffContainerView.wantsLayer = true
+        splitContainerView.wantsLayer = true
         failedImageView.layer?.borderColor = borderColor.cgColor
         referenceImageView.layer?.borderColor = borderColor.cgColor
         diffContainerView.layer?.borderColor = borderColor.cgColor
+        splitContainerView.layer?.borderColor = borderColor.cgColor
         referenceImageView.layer?.borderWidth = 1
         failedImageView.layer?.borderWidth = 1
         diffContainerView.layer?.borderWidth = 1
+        splitContainerView.layer?.borderWidth = 1
+        splitContainerView.configureBordersColorScheme(for: appleInterfaceMode)
+    }
+    
+    private func configureUI(for diffMode: TestResultsDiffMode) {
+        switch diffMode {
+        case .`default`:
+            splitContainerView.isHidden = true
+            diffContainerView.isHidden = false
+        case .mouseOver:
+            diffContainerView.isHidden = true
+            splitContainerView.isHidden = false
+        }
     }
 
     // MARK: - Interface
 
-    func configure(with testResult: TestResultDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode()) {
+    func configure(with testResult: TestResultDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode(), diffMode: TestResultsDiffMode = .mouseOver) {
         if let referenceImage = NSImage(contentsOf: testResult.referenceImageURL) {
             referenceImageView.image = referenceImage
+            splitContainerView.splitReferenceImageView.image = referenceImage
         }
         if let diffImageURL = testResult.diffImageURL, let diffImage = NSImage(contentsOf: diffImageURL) {
-//            diffImageView.image = diffImage
+            diffImageView.image = diffImage
         }
         if let failedImageURL = testResult.failedImageURL, let failedImage = NSImage(contentsOf: failedImageURL) {
             failedImageView.image = failedImage
+            splitContainerView.splitFailedImageView.image = failedImage
         }
         viewInKaleidoscopeButton.isHidden = !testResult.canBeViewedInKaleidoscope
         testNameLabel.stringValue = testResult.testName
         configureTitleLabelsColorScheme(for: appleInterfaceMode)
         configureSeparatorsColorScheme(for: appleInterfaceMode)
         configureBordersColorScheme(for: appleInterfaceMode)
+        configureUI(for: diffMode)
     }
 
     // MARK: - Actions

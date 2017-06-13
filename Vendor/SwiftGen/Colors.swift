@@ -66,27 +66,27 @@ enum ColorName {
         case .buttonBackgroundDarkMode:
             return 0xfafafadd
         case .buttonBackgroundLightMode:
-            return 0x212121dd
+            return 0x212121de
         case .buttonTitleDarkMode:
             return 0xffffffdd
         case .buttonTitleLightMode:
-            return 0xffffffdd
+            return 0xffffffde
         case .dividerDarkMode:
             return 0xf5f5f5ff
         case .dividerLightMode:
-            return 0xbdbdbdff
+            return 0xbdbdbdde
         case .primaryLightDarkMode:
             return 0xeceff1ff
         case .primaryLightLightMode:
-            return 0xcfd8dcff
+            return 0xcfd8dcde
         case .primaryTextDarkMode:
             return 0xffffffdd
         case .primaryTextLightMode:
-            return 0x212121dd
+            return 0x212121de
         case .secondaryTextDarkMode:
             return 0xffffff8a
         case .secondaryTextLightMode:
-            return 0x7575758a
+            return 0x757575de
         }
     }
     
