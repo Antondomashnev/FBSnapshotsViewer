@@ -91,7 +91,6 @@ class TestResultCell: NSCollectionViewItem {
         failedImageView.layer?.borderWidth = 1
         diffContainerView.layer?.borderWidth = 1
         splitContainerView.layer?.borderWidth = 1
-        splitContainerView.configureBordersColorScheme(for: appleInterfaceMode)
     }
     
     private func configureUI(for diffMode: TestResultsDiffMode) {
@@ -110,14 +109,12 @@ class TestResultCell: NSCollectionViewItem {
     func configure(with testResult: TestResultDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode(), diffMode: TestResultsDiffMode = .mouseOver) {
         if let referenceImage = NSImage(contentsOf: testResult.referenceImageURL) {
             referenceImageView.image = referenceImage
-            splitContainerView.splitReferenceImageView.image = referenceImage
         }
         if let diffImageURL = testResult.diffImageURL, let diffImage = NSImage(contentsOf: diffImageURL) {
             diffImageView.image = diffImage
         }
         if let failedImageURL = testResult.failedImageURL, let failedImage = NSImage(contentsOf: failedImageURL) {
             failedImageView.image = failedImage
-            splitContainerView.splitFailedImageView.image = failedImage
         }
         viewInKaleidoscopeButton.isHidden = !testResult.canBeViewedInKaleidoscope
         testNameLabel.stringValue = testResult.testName
@@ -125,6 +122,7 @@ class TestResultCell: NSCollectionViewItem {
         configureSeparatorsColorScheme(for: appleInterfaceMode)
         configureBordersColorScheme(for: appleInterfaceMode)
         configureUI(for: diffMode)
+        splitContainerView.configure(with: testResult, appleInterfaceMode: appleInterfaceMode)
     }
 
     // MARK: - Actions
