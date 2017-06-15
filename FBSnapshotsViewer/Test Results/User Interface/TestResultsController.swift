@@ -10,19 +10,31 @@ import Cocoa
 
 class TestResultsController: NSViewController {
     @IBOutlet var collectionView: NSCollectionView!
+    @IBOutlet var topView: NSView!
     var collectionViewOutlets: TestResultsCollectionViewOutlets!
     var eventHandler: TestResultsModuleInterface!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionViewOutlets = TestResultsCollectionViewOutlets(collectionView: collectionView, testResultCellDelegate: self)
-        collectionView.delegate = collectionViewOutlets
-        collectionView.dataSource = collectionViewOutlets
+        setupCollectionView()
     }
 
     override func viewWillAppear() {
         super.viewWillAppear()
         eventHandler.updateUserInterface()
+    }
+    
+    // MARK: - Helpers
+    
+    private func setupCollectionView() {
+        collectionViewOutlets = TestResultsCollectionViewOutlets(collectionView: collectionView, testResultCellDelegate: self)
+        collectionView.delegate = collectionViewOutlets
+        collectionView.dataSource = collectionViewOutlets
+    }
+    
+    private func setupTopView() {
+        topView.wantsLayer = true
+        topView.layer?.backgroundColor = 
     }
 }
 
