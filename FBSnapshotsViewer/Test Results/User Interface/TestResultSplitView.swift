@@ -38,13 +38,10 @@ class TestResultSplitView: NSView {
     }
     
     private func prepareUI() {
-        [splitReferenceImageView, splitFailedImageView, splitReferenceMaskView, splitFailedMaskView].forEach {
+        [splitReferenceMaskView, splitFailedMaskView].forEach {
             $0?.wantsLayer = true
+            $0?.layer?.masksToBounds = true
         }
-        splitReferenceImageView.layer?.masksToBounds = true
-        splitFailedImageView.layer?.masksToBounds = true
-        splitReferenceImageView.layer?.mask = splitReferenceMaskView.layer
-        splitFailedImageView.layer?.mask = splitFailedMaskView.layer
     }
     
     private func resetConstraints() {
@@ -76,7 +73,6 @@ class TestResultSplitView: NSView {
         splitSeparatorViewHorizontalCenter.constant = mousePosition.x - selfMidX
         splitReferenceMaskViewTrailing.constant = bounds.width - mousePosition.x
         splitFailedMaskViewLeading.constant = mousePosition.x
-        
     }
     
     // MARK: - Interface

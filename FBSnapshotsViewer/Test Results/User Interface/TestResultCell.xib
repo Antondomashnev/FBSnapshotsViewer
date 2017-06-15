@@ -32,19 +32,33 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="oaS-Kh-fqd" customClass="TestResultSplitView" customModule="FBSnapshotsViewer" customModuleProvider="target">
                     <rect key="frame" x="340" y="16" width="384" height="371"/>
                     <subviews>
-                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3La-JX-RJk">
+                        <customView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ra2-gE-6Sd">
                             <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
-                            <imageCell key="cell" enabled="NO" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lZF-Ju-Vz2"/>
-                        </imageView>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="kOh-vw-j4b">
-                            <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3La-JX-RJk">
+                                    <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
+                                    <imageCell key="cell" enabled="NO" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lZF-Ju-Vz2"/>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="3La-JX-RJk" firstAttribute="leading" secondItem="ra2-gE-6Sd" secondAttribute="leading" id="PNy-mC-InC"/>
+                                <constraint firstItem="3La-JX-RJk" firstAttribute="top" secondItem="ra2-gE-6Sd" secondAttribute="top" id="YFx-s6-fAp"/>
+                                <constraint firstAttribute="bottom" secondItem="3La-JX-RJk" secondAttribute="bottom" id="s5q-nb-qyO"/>
+                            </constraints>
                         </customView>
-                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bKL-w8-TU4">
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="jdx-9f-fLR">
                             <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
-                            <imageCell key="cell" enabled="NO" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="v5o-yX-yK3"/>
-                        </imageView>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="9ON-y2-dyr">
-                            <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bKL-w8-TU4">
+                                    <rect key="frame" x="0.0" y="0.0" width="384" height="371"/>
+                                    <imageCell key="cell" enabled="NO" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="v5o-yX-yK3"/>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="bKL-w8-TU4" secondAttribute="bottom" id="1sP-TR-q13"/>
+                                <constraint firstAttribute="trailing" secondItem="bKL-w8-TU4" secondAttribute="trailing" id="B29-xJ-01M"/>
+                                <constraint firstItem="bKL-w8-TU4" firstAttribute="top" secondItem="jdx-9f-fLR" secondAttribute="top" id="QmG-eC-tqm"/>
+                            </constraints>
                         </customView>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="514-ga-cqk">
                             <rect key="frame" x="191" y="0.0" width="2" height="371"/>
@@ -54,34 +68,28 @@
                         </customView>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="jdx-9f-fLR" firstAttribute="leading" secondItem="oaS-Kh-fqd" secondAttribute="leading" id="10V-bB-NDP"/>
+                        <constraint firstItem="bKL-w8-TU4" firstAttribute="width" secondItem="oaS-Kh-fqd" secondAttribute="width" id="2U5-c4-XgS"/>
                         <constraint firstAttribute="bottom" secondItem="514-ga-cqk" secondAttribute="bottom" id="8RT-7K-8Wv"/>
-                        <constraint firstItem="kOh-vw-j4b" firstAttribute="trailing" secondItem="3La-JX-RJk" secondAttribute="trailing" id="Em2-Q5-p4g"/>
-                        <constraint firstAttribute="trailing" secondItem="3La-JX-RJk" secondAttribute="trailing" id="JzE-Gf-pDV"/>
+                        <constraint firstItem="ra2-gE-6Sd" firstAttribute="top" secondItem="oaS-Kh-fqd" secondAttribute="top" id="OY8-dm-KOJ"/>
                         <constraint firstAttribute="width" constant="384" id="PJC-3f-xQx"/>
-                        <constraint firstItem="3La-JX-RJk" firstAttribute="leading" secondItem="oaS-Kh-fqd" secondAttribute="leading" id="Xsz-vF-Okt"/>
-                        <constraint firstItem="kOh-vw-j4b" firstAttribute="bottom" secondItem="3La-JX-RJk" secondAttribute="bottom" id="Y6I-u0-UdK"/>
-                        <constraint firstItem="kOh-vw-j4b" firstAttribute="top" secondItem="3La-JX-RJk" secondAttribute="top" id="ZSz-x0-t9R"/>
-                        <constraint firstItem="kOh-vw-j4b" firstAttribute="leading" secondItem="3La-JX-RJk" secondAttribute="leading" id="Zkj-wW-M41"/>
-                        <constraint firstAttribute="trailing" secondItem="bKL-w8-TU4" secondAttribute="trailing" id="a4j-Ah-ztW"/>
-                        <constraint firstItem="9ON-y2-dyr" firstAttribute="top" secondItem="bKL-w8-TU4" secondAttribute="top" id="bVP-Z5-mp0"/>
-                        <constraint firstAttribute="bottom" secondItem="3La-JX-RJk" secondAttribute="bottom" id="cZE-4M-7oc"/>
-                        <constraint firstItem="9ON-y2-dyr" firstAttribute="trailing" secondItem="bKL-w8-TU4" secondAttribute="trailing" id="eod-PZ-i0A"/>
-                        <constraint firstItem="bKL-w8-TU4" firstAttribute="top" secondItem="oaS-Kh-fqd" secondAttribute="top" id="fqq-yY-dLB"/>
-                        <constraint firstItem="9ON-y2-dyr" firstAttribute="leading" secondItem="bKL-w8-TU4" secondAttribute="leading" id="frB-ac-j0N"/>
-                        <constraint firstItem="bKL-w8-TU4" firstAttribute="leading" secondItem="oaS-Kh-fqd" secondAttribute="leading" id="g6B-md-SiP"/>
-                        <constraint firstItem="3La-JX-RJk" firstAttribute="top" secondItem="oaS-Kh-fqd" secondAttribute="top" id="hBF-Hk-u1a"/>
-                        <constraint firstItem="9ON-y2-dyr" firstAttribute="bottom" secondItem="bKL-w8-TU4" secondAttribute="bottom" id="huH-00-RAp"/>
+                        <constraint firstAttribute="bottom" secondItem="ra2-gE-6Sd" secondAttribute="bottom" id="Tzc-br-H3s"/>
+                        <constraint firstAttribute="trailing" secondItem="jdx-9f-fLR" secondAttribute="trailing" id="Y4p-0R-XUz"/>
+                        <constraint firstAttribute="bottom" secondItem="jdx-9f-fLR" secondAttribute="bottom" id="bq5-F3-SB2"/>
+                        <constraint firstItem="3La-JX-RJk" firstAttribute="width" secondItem="oaS-Kh-fqd" secondAttribute="width" id="kfs-by-XTV"/>
+                        <constraint firstItem="jdx-9f-fLR" firstAttribute="top" secondItem="oaS-Kh-fqd" secondAttribute="top" id="lau-uf-BRm"/>
                         <constraint firstItem="514-ga-cqk" firstAttribute="top" secondItem="oaS-Kh-fqd" secondAttribute="top" id="n8B-w1-5WO"/>
-                        <constraint firstAttribute="bottom" secondItem="bKL-w8-TU4" secondAttribute="bottom" id="p42-eN-PPh"/>
+                        <constraint firstAttribute="trailing" secondItem="ra2-gE-6Sd" secondAttribute="trailing" id="pfk-bf-y3q"/>
                         <constraint firstItem="514-ga-cqk" firstAttribute="centerX" secondItem="oaS-Kh-fqd" secondAttribute="centerX" id="ye0-z4-462"/>
+                        <constraint firstItem="ra2-gE-6Sd" firstAttribute="leading" secondItem="oaS-Kh-fqd" secondAttribute="leading" id="zdH-Fi-83d"/>
                     </constraints>
                     <connections>
                         <outlet property="splitFailedImageView" destination="bKL-w8-TU4" id="7yE-72-83t"/>
-                        <outlet property="splitFailedMaskView" destination="9ON-y2-dyr" id="LfZ-IU-Rj4"/>
-                        <outlet property="splitFailedMaskViewLeading" destination="frB-ac-j0N" id="dbc-tq-zvQ"/>
+                        <outlet property="splitFailedMaskView" destination="jdx-9f-fLR" id="cuG-tf-pOd"/>
+                        <outlet property="splitFailedMaskViewLeading" destination="10V-bB-NDP" id="15i-4t-mIz"/>
                         <outlet property="splitReferenceImageView" destination="3La-JX-RJk" id="Y02-L6-PDI"/>
-                        <outlet property="splitReferenceMaskView" destination="kOh-vw-j4b" id="5YN-Lq-Mf1"/>
-                        <outlet property="splitReferenceMaskViewTrailing" destination="Em2-Q5-p4g" id="iUc-zi-KRZ"/>
+                        <outlet property="splitReferenceMaskView" destination="ra2-gE-6Sd" id="Evw-Zn-l9p"/>
+                        <outlet property="splitReferenceMaskViewTrailing" destination="pfk-bf-y3q" id="dsT-S3-nhK"/>
                         <outlet property="splitSeparatorView" destination="514-ga-cqk" id="8dZ-8a-E79"/>
                         <outlet property="splitSeparatorViewHorizontalCenter" destination="ye0-z4-462" id="kmN-7Q-Aof"/>
                     </connections>
@@ -92,7 +100,7 @@
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H6x-U9-K6u">
                             <rect key="frame" x="48" y="288" width="62" height="18"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Reference" id="pke-Me-J00">
-                                <font key="font" metaFont="system" size="11"/>
+                                <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -104,7 +112,7 @@
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mF1-a0-3eY">
                             <rect key="frame" x="226" y="288" width="39" height="18"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Failed" id="DeN-Nc-l24">
-                                <font key="font" metaFont="system" size="11"/>
+                                <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
