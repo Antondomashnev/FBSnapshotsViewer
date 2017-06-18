@@ -4,6 +4,7 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -755,20 +756,10 @@
         <scene sceneID="3zf-Xo-oAA">
             <objects>
                 <viewController storyboardIdentifier="TestResultsController" id="snw-7P-K4v" customClass="TestResultsController" customModule="FBSnapshotsViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="n56-98-JjZ">
+                    <view key="view" id="n56-98-JjZ">
                         <rect key="frame" x="0.0" y="0.0" width="550" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView alphaValue="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="yWN-mK-KOE">
-                                <rect key="frame" x="0.0" y="406" width="550" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="wMk-jQ-8gP"/>
-                                </constraints>
-                                <shadow key="shadow" blurRadius="1">
-                                    <size key="offset" width="0.0" height="-1"/>
-                                    <color key="color" white="0.0" alpha="0.20258989726027396" colorSpace="calibratedWhite"/>
-                                </shadow>
-                            </customView>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIS-NX-4M6">
                                 <rect key="frame" x="0.0" y="0.0" width="550" height="406"/>
                                 <clipView key="contentView" drawsBackground="NO" id="oh3-gr-epx">
@@ -796,12 +787,43 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yWN-mK-KOE" customClass="TestResultsTopView" customModule="FBSnapshotsViewer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="406" width="550" height="44"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Rv-5m-eGV">
+                                        <rect key="frame" x="6" y="13" width="40" height="18"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="psS-Np-Q97">
+                                            <font key="font" metaFont="systemMedium" size="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2hI-Qn-ZeL">
+                                        <rect key="frame" x="449" y="9" width="95" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="zU9-3T-4F1">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Split" width="44"/>
+                                                <segment label="Diff" width="44" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="2hI-Qn-ZeL" firstAttribute="centerY" secondItem="yWN-mK-KOE" secondAttribute="centerY" id="I2g-ZW-bQY"/>
+                                    <constraint firstItem="2hI-Qn-ZeL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4Rv-5m-eGV" secondAttribute="trailing" constant="32" id="MtC-xf-udu"/>
+                                    <constraint firstItem="4Rv-5m-eGV" firstAttribute="centerY" secondItem="yWN-mK-KOE" secondAttribute="centerY" id="Y0E-KF-T32"/>
+                                    <constraint firstAttribute="trailing" secondItem="2hI-Qn-ZeL" secondAttribute="trailing" constant="8" id="b8O-Wp-S3G"/>
+                                    <constraint firstItem="4Rv-5m-eGV" firstAttribute="leading" secondItem="yWN-mK-KOE" secondAttribute="leading" constant="8" id="ouu-Jt-J64"/>
+                                    <constraint firstAttribute="height" constant="44" id="wMk-jQ-8gP"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eIS-NX-4M6" secondAttribute="trailing" id="8ZS-Rw-QUN"/>
                             <constraint firstItem="yWN-mK-KOE" firstAttribute="leading" secondItem="n56-98-JjZ" secondAttribute="leading" id="TaM-VC-mnb"/>
                             <constraint firstAttribute="trailing" secondItem="yWN-mK-KOE" secondAttribute="trailing" id="URF-W1-K44"/>
-                            <constraint firstItem="eIS-NX-4M6" firstAttribute="top" secondItem="n56-98-JjZ" secondAttribute="top" constant="44" id="gLZ-aM-UsU"/>
+                            <constraint firstItem="eIS-NX-4M6" firstAttribute="top" secondItem="yWN-mK-KOE" secondAttribute="bottom" id="Wft-xx-95n"/>
                             <constraint firstAttribute="bottom" secondItem="eIS-NX-4M6" secondAttribute="bottom" id="rni-LK-bTM"/>
                             <constraint firstItem="eIS-NX-4M6" firstAttribute="leading" secondItem="n56-98-JjZ" secondAttribute="leading" id="wtf-U1-EAP"/>
                             <constraint firstItem="yWN-mK-KOE" firstAttribute="top" secondItem="n56-98-JjZ" secondAttribute="top" id="ytD-YM-KHi"/>

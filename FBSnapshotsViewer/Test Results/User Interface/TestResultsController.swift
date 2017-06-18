@@ -31,11 +31,6 @@ class TestResultsController: NSViewController {
         collectionView.delegate = collectionViewOutlets
         collectionView.dataSource = collectionViewOutlets
     }
-    
-    private func setupTopView() {
-        topView.wantsLayer = true
-        topView.layer?.backgroundColor = 
-    }
 }
 
 extension TestResultsController: TestResultsUserInterface {
@@ -55,5 +50,11 @@ extension TestResultsController: TestResultCellDelegate {
         }
         let testResultInfo = collectionViewOutlets.testResultsSections[cellIndexPath.section].itemInfos[cellIndexPath.item]
         eventHandler.openInKaleidoscope(testResultDisplayInfo: testResultInfo)
+    }
+}
+
+extension TestResultsController: TestResultsTopViewDelegate {
+    func testResultsTopView(_ topView: TestResultsTopView, didSelect diffMode: TestResultsDiffMode) {
+        
     }
 }

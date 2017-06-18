@@ -1,13 +1,16 @@
-PrimaryText.LightMode        : 0x000000DE
-SecondaryText.LightMode      : 0x757575DE
-PrimaryLight.LightMode       : 0xCFD8DCDE
-Divider.LightMode            : 0xBDBDBDFF
-ButtonBackground.LightMode   : 0x212121DD
-ButtonTitle.LightMode        : 0xFFFFFFDD
+TestResultsTopViewColorTop      : 0xE7E6E7FF
+TestResultsTopViewColorBottom   : 0xD1D0D1FF
 
-PrimaryText.DarkMode        : 0xFFFFFFDE
-SecondaryText.DarkMode      : 0xFFFFFFDE
-PrimaryLight.DarkMode       : 0xECEFF1DE
-Divider.DarkMode            : 0xF5F5F5FF
-ButtonBackground.DarkMode   : 0xFAFAFADD
-ButtonTitle.DarkMode        : 0xFFFFFFDD
+PrimaryText.LightMode           : 0x000000DE
+SecondaryText.LightMode         : 0x757575DE
+PrimaryLight.LightMode          : 0xCFD8DCDE
+Divider.LightMode               : 0xBDBDBDFF
+ButtonBackground.LightMode      : 0x212121DD
+ButtonTitle.LightMode           : 0xFFFFFFDD
+
+PrimaryText.DarkMode            : 0xFFFFFFDE
+SecondaryText.DarkMode          : 0xFFFFFFDE
+PrimaryLight.DarkMode           : 0xECEFF1DE
+Divider.DarkMode                : 0xF5F5F5FF
+ButtonBackground.DarkMode       : 0xFAFAFADD
+ButtonTitle.DarkMode            : 0xFFFFFFDD

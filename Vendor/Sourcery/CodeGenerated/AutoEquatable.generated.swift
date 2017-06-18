@@ -42,6 +42,14 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard lhs.testResult == rhs.testResult else { return false }
     return true
 }
+// MARK: - TestResultsDisplayInfo AutoEquatable
+extension TestResultsDisplayInfo: Equatable {} 
+internal func == (lhs: TestResultsDisplayInfo, rhs: TestResultsDisplayInfo) -> Bool {
+    guard lhs.sectionInfos == rhs.sectionInfos else { return false }
+    guard lhs.topTitle == rhs.topTitle else { return false }
+    guard lhs.testResultsDiffMode == rhs.testResultsDiffMode else { return false }
+    return true
+}
 // MARK: - TestResultsSectionDisplayInfo AutoEquatable
 extension TestResultsSectionDisplayInfo: Equatable {} 
 internal func == (lhs: TestResultsSectionDisplayInfo, rhs: TestResultsSectionDisplayInfo) -> Bool {

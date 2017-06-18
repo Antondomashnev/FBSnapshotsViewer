@@ -1,4 +1,4 @@
-// Generated using SwiftGen, by O.Halligon — https://github.com/AliSoftware/SwiftGen
+// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 #if os(iOS) || os(tvOS) || os(watchOS)
     import UIKit.UIColor
@@ -8,6 +8,7 @@
     typealias Color = NSColor
 #endif
 
+// swiftlint:disable operator_usage_whitespace
 extension Color {
     convenience init(rgbaValue: UInt32) {
         let red   = CGFloat((rgbaValue >> 24) & 0xff) / 255.0
@@ -18,6 +19,7 @@ extension Color {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
+// swiftlint:enable operator_usage_whitespace
 
 // swiftlint:disable file_length
 // swiftlint:disable line_length
@@ -43,50 +45,60 @@ enum ColorName {
     /// Alpha: 100% <br/> (0xbdbdbdff)
     case dividerLightMode
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#eceff1"></span>
-    /// Alpha: 100% <br/> (0xeceff1ff)
+    /// Alpha: 87% <br/> (0xeceff1de)
     case primaryLightDarkMode
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#cfd8dc"></span>
-    /// Alpha: 100% <br/> (0xcfd8dcff)
+    /// Alpha: 87% <br/> (0xcfd8dcde)
     case primaryLightLightMode
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
-    /// Alpha: 86% <br/> (0xffffffdd)
+    /// Alpha: 87% <br/> (0xffffffde)
     case primaryTextDarkMode
-    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#212121"></span>
-    /// Alpha: 86% <br/> (0x212121dd)
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#000000"></span>
+    /// Alpha: 87% <br/> (0x000000de)
     case primaryTextLightMode
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
-    /// Alpha: 54% <br/> (0xffffff8a)
+    /// Alpha: 87% <br/> (0xffffffde)
     case secondaryTextDarkMode
     /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#757575"></span>
-    /// Alpha: 54% <br/> (0x7575758a)
+    /// Alpha: 87% <br/> (0x757575de)
     case secondaryTextLightMode
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#d1d0d1"></span>
+    /// Alpha: 100% <br/> (0xd1d0d1ff)
+    case testResultsTopViewColorBottom
+    /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#e7e6e7"></span>
+    /// Alpha: 100% <br/> (0xe7e6e7ff)
+    case testResultsTopViewColorTop
     
     var rgbaValue: UInt32 {
         switch self {
         case .buttonBackgroundDarkMode:
             return 0xfafafadd
         case .buttonBackgroundLightMode:
-            return 0x212121de
+            return 0x212121dd
         case .buttonTitleDarkMode:
             return 0xffffffdd
         case .buttonTitleLightMode:
-            return 0xffffffde
+            return 0xffffffdd
         case .dividerDarkMode:
             return 0xf5f5f5ff
         case .dividerLightMode:
-            return 0xbdbdbdde
+            return 0xbdbdbdff
         case .primaryLightDarkMode:
-            return 0xeceff1ff
+            return 0xeceff1de
         case .primaryLightLightMode:
             return 0xcfd8dcde
         case .primaryTextDarkMode:
-            return 0xffffffdd
+            return 0xffffffde
         case .primaryTextLightMode:
-            return 0x212121de
+            return 0x000000de
         case .secondaryTextDarkMode:
-            return 0xffffff8a
+            return 0xffffffde
         case .secondaryTextLightMode:
             return 0x757575de
+        case .testResultsTopViewColorBottom:
+            return 0xd1d0d1ff
+        case .testResultsTopViewColorTop:
+            return 0xe7e6e7ff
         }
     }
     
@@ -101,3 +113,5 @@ extension Color {
         self.init(rgbaValue: name.rgbaValue)
     }
 }
+// swiftlint:enable file_length
+// swiftlint:enable line_length
