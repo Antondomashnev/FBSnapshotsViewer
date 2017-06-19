@@ -9,7 +9,7 @@
 import AppKit
 
 class TestResultsCollectionViewOutlets: NSObject {
-    var testResultsSections: [TestResultsSectionDisplayInfo] = []
+    var testResultsDisplayInfo: TestResultsDisplayInfo = TestResultsDisplayInfo()
     fileprivate weak var testResultCellDelegate: TestResultCellDelegate?
 
     init(collectionView: NSCollectionView, testResultCellDelegate: TestResultCellDelegate? = nil) {
@@ -48,18 +48,18 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDelegateFlowLayout {
 
 extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
-        return testResultsSections.count
+        return testResultsDisplayInfo.sectionInfos.count
     }
 
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return testResultsSections[section].itemInfos.count
+        return testResultsDisplayInfo.sectionInfos[section].itemInfos.count
     }
     
     func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> NSView {
         guard let view = collectionView.makeSupplementaryView(ofKind: NSCollectionElementKindSectionHeader, withIdentifier: TestResultsHeader.itemIdentifier, for: indexPath) as? TestResultsHeader else {
             fatalError("TestResultsHeader is not registered in collection view")
         }
-        let titleInfo = testResultsSections[indexPath.section].titleInfo
+        let titleInfo = testResultsDisplayInfo.sectionInfos[indexPath.section].titleInfo
         view.configure(with: titleInfo)
         return view
     }
@@ -68,7 +68,7 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
         guard let item = collectionView.makeItem(withIdentifier: TestResultCell.itemIdentifier, for: indexPath) as? TestResultCell else {
             fatalError("TestResultCell is not registered in collection view")
         }
-        let testResultInfo = testResultsSections[indexPath.section].itemInfos[indexPath.item]
+        let testResultInfo = testResultsDisplayInfo.sectionInfos[indexPath.section].itemInfos[indexPath.item]
         item.configure(with: testResultInfo)
         item.delegate = testResultCellDelegate
         return item

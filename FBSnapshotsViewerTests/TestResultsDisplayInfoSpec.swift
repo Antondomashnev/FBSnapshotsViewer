@@ -45,13 +45,13 @@ class TestResultsDisplayInfoSpec: QuickSpec {
                 }
                 
                 it("has correct topTitle") {
-                    expect(displayInfo.topTitle).to(equal("1 test result"))
+                    expect(displayInfo.topTitle).to(equal("1 Test Result"))
                 }
             }
             
             context("when multiple test results") {
                 it("has correct topTitle") {
-                    expect(displayInfo.topTitle).to(equal("4 test results"))
+                    expect(displayInfo.topTitle).to(equal("4 Test Results"))
                 }
             }
             

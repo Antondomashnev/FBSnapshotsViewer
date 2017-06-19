@@ -66,6 +66,7 @@ class TestResultsPresenterSpec: QuickSpec {
             }
 
             context("when interactor has test results") {
+                var expectTestResultsDisplayInfo: TestResultsDisplayInfo!
                 var testResults: [SnapshotTestResult] = []
 
                 beforeEach {
@@ -76,6 +77,7 @@ class TestResultsPresenterSpec: QuickSpec {
                     testResults = [snapshotTestResult]
                     interactor.testResults = testResults
                     testResultsCollector.collectedTestResults = [sectionInfo, sectionInfo]
+                    expectTestResultsDisplayInfo = TestResultsDisplayInfo(sectionInfos: testResultsCollector.collectedTestResults, testResultsDiffMode: .mouseOver)
                     presenter.updateUserInterface()
                 }
 
@@ -84,7 +86,7 @@ class TestResultsPresenterSpec: QuickSpec {
                 }
 
                 it("shows correct test results in user interface") {
-                    expect(userInterface.showReceivedTestResults?.count).to(equal(2))
+                    expect(userInterface.showReceivedDisplayInfo).to(equal(expectTestResultsDisplayInfo))
                 }
                 
                 it("uses collector") {

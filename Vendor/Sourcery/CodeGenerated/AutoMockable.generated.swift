@@ -395,12 +395,12 @@ class TestResultsUserInterfaceMock: TestResultsUserInterface {
     //MARK: - show
 
     var showCalled = false
-    var showReceivedTestResults: [TestResultsSectionDisplayInfo]?
+    var showReceivedDisplayInfo: TestResultsDisplayInfo?
 
-    func show(testResults: [TestResultsSectionDisplayInfo]) {
+    func show(displayInfo: TestResultsDisplayInfo) {
 
         showCalled = true
-        showReceivedTestResults = testResults
+        showReceivedDisplayInfo = displayInfo
     }
 }
 class UpdaterMock: Updater {

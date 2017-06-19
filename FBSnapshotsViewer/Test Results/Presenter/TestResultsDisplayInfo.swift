@@ -13,10 +13,10 @@ struct TestResultsDisplayInfo: AutoEquatable {
     let topTitle: String
     let testResultsDiffMode: TestResultsDiffMode
 
-    init(sectionInfos: [TestResultsSectionDisplayInfo], testResultsDiffMode: TestResultsDiffMode = .mouseOver) {
+    init(sectionInfos: [TestResultsSectionDisplayInfo] = [], testResultsDiffMode: TestResultsDiffMode = .mouseOver) {
         self.sectionInfos = sectionInfos
         self.testResultsDiffMode = testResultsDiffMode
         let numberOfTests = sectionInfos.reduce(0, { $0 + $1.itemInfos.count })
-        self.topTitle = "\(numberOfTests) test result" + (numberOfTests > 1 ? "s" : "")
+        self.topTitle = "\(numberOfTests) Test Result" + (numberOfTests > 1 ? "s" : "")
     }
 }

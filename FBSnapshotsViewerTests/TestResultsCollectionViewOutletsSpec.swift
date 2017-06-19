@@ -16,6 +16,7 @@ class TestResultsCollectionViewOutletsSpec: QuickSpec {
         var collectionView: NSCollectionView!
         var collectionViewOutlets: TestResultsCollectionViewOutlets!
         var testResultsSections: [TestResultsSectionDisplayInfo] = []
+        var testResultsDisplayInfo: TestResultsDisplayInfo!
 
         beforeEach {
             let build1 = Build(date: Date(), applicationName: "MyApp")
@@ -32,9 +33,11 @@ class TestResultsCollectionViewOutletsSpec: QuickSpec {
             let sectionTitle2 = TestResultsSectionTitleDisplayInfo(build: build2, testContext: "Context2")
             let section2 = TestResultsSectionDisplayInfo(title: sectionTitle2, items: [testResult2, testResult3])
             testResultsSections = [section1, section2]
+            testResultsDisplayInfo = TestResultsDisplayInfo(sectionInfos: testResultsSections, testResultsDiffMode: .mouseOver)
+            
             collectionView = NSCollectionView(frame: NSRect(x: 0, y: 0, width: 200, height: 200))
             collectionViewOutlets = TestResultsCollectionViewOutlets(collectionView: collectionView)
-            collectionViewOutlets.testResultsSections = testResultsSections
+            collectionViewOutlets.testResultsDisplayInfo = testResultsDisplayInfo
         }
 
         describe(".numberOfSections") {

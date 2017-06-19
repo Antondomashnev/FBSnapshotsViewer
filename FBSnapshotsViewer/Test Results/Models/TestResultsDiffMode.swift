@@ -9,6 +9,6 @@
 import Foundation
 
 enum TestResultsDiffMode: AutoEquatable {
-    case `default`
+    case diff
     case mouseOver
 }

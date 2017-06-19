@@ -24,6 +24,15 @@ class TestResultsController_MockNSCollectionView: NSCollectionView {
     }
 }
 
+class TestResultsController_MockTestResultsTopView: TestResultsTopView {
+    var configureCalled = false
+    var configureTestResultsDisplayInfo: TestResultsDisplayInfo?
+    override func configure(with testResultsDisplayInfo: TestResultsDisplayInfo) {
+        configureTestResultsDisplayInfo = testResultsDisplayInfo
+        configureCalled = true
+    }
+}
+
 class TestResultsController_MockTestResultsCollectionViewOutlets: TestResultsCollectionViewOutlets {}
 
 class TestResultsControllerSpec: QuickSpec {
@@ -34,8 +43,11 @@ class TestResultsControllerSpec: QuickSpec {
         var controller: TestResultsController!
         var eventHandler: TestResultsModuleInterfaceMock!
         var testResults: [TestResultsSectionDisplayInfo] = []
+        var topView: TestResultsController_MockTestResultsTopView!
+        var displayInfo: TestResultsDisplayInfo!
 
         beforeEach {
+            topView = TestResultsController_MockTestResultsTopView()
             collectionView = TestResultsController_MockNSCollectionView(frame: NSRect.zero)
             collectionViewOutlets = TestResultsController_MockTestResultsCollectionViewOutlets(collectionView: collectionView)
             eventHandler = TestResultsModuleInterfaceMock()
@@ -43,16 +55,18 @@ class TestResultsControllerSpec: QuickSpec {
             controller.eventHandler = eventHandler
             controller.collectionViewOutlets = collectionViewOutlets
             controller.collectionView = collectionView
+            controller.topView = topView
             
             let testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", build: build))
             let titleInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "Foo")
             let sectionInfo = TestResultsSectionDisplayInfo(title: titleInfo, items: [testResultDisplayInfo])
             testResults = [sectionInfo]
+            displayInfo = TestResultsDisplayInfo(sectionInfos: testResults, testResultsDiffMode: .mouseOver)
         }
 
         describe(".show") {
             beforeEach {
-                controller.show(testResults: testResults)
+                controller.show(displayInfo: displayInfo)
             }
 
             it("reloads collection view") {
@@ -60,7 +74,12 @@ class TestResultsControllerSpec: QuickSpec {
             }
 
             it("shows test results") {
-                expect(collectionViewOutlets.testResultsSections).to(equal(testResults))
+                expect(collectionViewOutlets.testResultsDisplayInfo).to(equal(displayInfo))
+            }
+            
+            it("configures top view") {
+                expect(topView.configureCalled).to(beTrue())
+                expect(topView.configureTestResultsDisplayInfo).to(equal(displayInfo))
             }
         }
 
@@ -95,7 +114,7 @@ class TestResultsControllerSpec: QuickSpec {
 
             context("when test result is not presented in controller") {
                 beforeEach {
-                    collectionViewOutlets.testResultsSections = testResults
+                    collectionViewOutlets.testResultsDisplayInfo = displayInfo
                     collectionView.indexPathForItemReturnValue = IndexPath(item: 1, section: 0)
                 }
 
@@ -106,7 +125,7 @@ class TestResultsControllerSpec: QuickSpec {
 
             context("when test result is presented and cell is visible") {
                 beforeEach {
-                    collectionViewOutlets.testResultsSections = testResults
+                    collectionViewOutlets.testResultsDisplayInfo = displayInfo
                     collectionView.indexPathForItemReturnValue = IndexPath(item: 0, section: 0)
                     controller.testResultCell(cell, viewInKaleidoscopeButtonClicked: viewInKaleidoscopeButton)
                 }

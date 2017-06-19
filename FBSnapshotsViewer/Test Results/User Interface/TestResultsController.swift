@@ -10,7 +10,7 @@ import Cocoa
 
 class TestResultsController: NSViewController {
     @IBOutlet var collectionView: NSCollectionView!
-    @IBOutlet var topView: NSView!
+    @IBOutlet var topView: TestResultsTopView!
     var collectionViewOutlets: TestResultsCollectionViewOutlets!
     var eventHandler: TestResultsModuleInterface!
 
@@ -34,21 +34,23 @@ class TestResultsController: NSViewController {
 }
 
 extension TestResultsController: TestResultsUserInterface {
-    func show(testResults: [TestResultsSectionDisplayInfo]) {
-        collectionViewOutlets.testResultsSections = testResults
+    func show(displayInfo: TestResultsDisplayInfo) {
+        topView.configure(with: displayInfo)
+        collectionViewOutlets.testResultsDisplayInfo = displayInfo
         collectionView.reloadData()
     }
 }
 
 extension TestResultsController: TestResultCellDelegate {
     func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton) {
+        let sectionInfos = collectionViewOutlets.testResultsDisplayInfo.sectionInfos
         guard let cellIndexPath = collectionView.indexPath(for: cell),
-                  collectionViewOutlets.testResultsSections.count > cellIndexPath.section,
-                  collectionViewOutlets.testResultsSections[cellIndexPath.section].itemInfos.count > cellIndexPath.item else {
+                  sectionInfos.count > cellIndexPath.section,
+                  sectionInfos[cellIndexPath.section].itemInfos.count > cellIndexPath.item else {
             assertionFailure("Unexpected TestResultCellDelegate callback about Kaleidoscope button click")
             return
         }
-        let testResultInfo = collectionViewOutlets.testResultsSections[cellIndexPath.section].itemInfos[cellIndexPath.item]
+        let testResultInfo = sectionInfos[cellIndexPath.section].itemInfos[cellIndexPath.item]
         eventHandler.openInKaleidoscope(testResultDisplayInfo: testResultInfo)
     }
 }

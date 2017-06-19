@@ -159,7 +159,7 @@ internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
 extension TestResultsDiffMode: Equatable {}
 internal func == (lhs: TestResultsDiffMode, rhs: TestResultsDiffMode) -> Bool {
     switch (lhs, rhs) {
-    case (.`default`, .`default`): 
+    case (.diff, .diff): 
          return true 
     case (.mouseOver, .mouseOver): 
          return true 

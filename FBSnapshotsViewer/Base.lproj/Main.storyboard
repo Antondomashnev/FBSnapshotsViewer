@@ -817,6 +817,10 @@
                                     <constraint firstItem="4Rv-5m-eGV" firstAttribute="leading" secondItem="yWN-mK-KOE" secondAttribute="leading" constant="8" id="ouu-Jt-J64"/>
                                     <constraint firstAttribute="height" constant="44" id="wMk-jQ-8gP"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="numberOfTestsLabel" destination="4Rv-5m-eGV" id="K1N-VK-gj2"/>
+                                    <outlet property="testResultsDiffModeSegementedControl" destination="2hI-Qn-ZeL" id="ESu-XE-khC"/>
+                                </connections>
                             </customView>
                         </subviews>
                         <constraints>

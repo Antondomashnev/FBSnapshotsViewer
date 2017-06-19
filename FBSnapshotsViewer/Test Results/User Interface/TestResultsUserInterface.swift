@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TestResultsUserInterface: class, AutoMockable {
-    func show(testResults: [TestResultsSectionDisplayInfo])
+    func show(displayInfo: TestResultsDisplayInfo)
 }

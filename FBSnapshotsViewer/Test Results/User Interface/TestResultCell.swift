@@ -95,7 +95,7 @@ class TestResultCell: NSCollectionViewItem {
     
     private func configureUI(for diffMode: TestResultsDiffMode) {
         switch diffMode {
-        case .`default`:
+        case .diff:
             splitContainerView.isHidden = true
             diffContainerView.isHidden = false
         case .mouseOver:

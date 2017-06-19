@@ -19,14 +19,14 @@ class TestResultsTopView: NSView {
     @IBOutlet private weak var testResultsDiffModeSegementedControl: NSSegmentedControl!
     
     override func draw(_ dirtyRect: NSRect) {
-        let gradient = NSGradient(starting: Color(named: .primaryTextLightMode), ending: Color(named: .testResultsTopViewColorBottom))
+        let gradient = NSGradient(starting: Color(named: .testResultsTopViewColorBottom), ending: Color(named: .testResultsTopViewColorTop))
         gradient?.draw(in: bounds, angle: 90)
     }
     
     // MARK: - Helpers
     
     private func convertToDiffMode(testResultsDiffModeSegement: Int) -> TestResultsDiffMode {
-        return (testResultsDiffModeSegement == 1) ? TestResultsDiffMode.mouseOver : TestResultsDiffMode.`default`
+        return (testResultsDiffModeSegement == 1) ? TestResultsDiffMode.mouseOver : TestResultsDiffMode.diff
     }
     
     private func convertToTestResultsDiffModeSegement(diffMode: TestResultsDiffMode) -> Int {

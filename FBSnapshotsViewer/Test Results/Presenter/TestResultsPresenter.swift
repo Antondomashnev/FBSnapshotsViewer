@@ -9,6 +9,7 @@
 import Cocoa
 
 class TestResultsPresenter {
+    fileprivate var selectedDiffMode: TestResultsDiffMode = .mouseOver
     fileprivate let testResultsCollector: TestResultsDisplayInfosCollector
     var interactor: TestResultsInteractorInput?
     var wireframe: TestResultsWireframe?
@@ -24,7 +25,8 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         guard let testResults = interactor?.testResults, !testResults.isEmpty  else {
             return
         }
-        userInterface?.show(testResults: testResultsCollector.collect(testResults: testResults))
+        let testResultsDisplayInfo = TestResultsDisplayInfo(sectionInfos: testResultsCollector.collect(testResults: testResults), testResultsDiffMode: .mouseOver)
+        userInterface?.show(displayInfo: testResultsDisplayInfo)
     }
 
     func openInKaleidoscope(testResultDisplayInfo: TestResultDisplayInfo) {
