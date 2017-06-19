@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TestResultsDiffMode {
+enum TestResultsDiffMode: AutoEquatable {
     case `default`
     case mouseOver
 }

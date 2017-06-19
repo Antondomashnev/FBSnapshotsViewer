@@ -155,5 +155,16 @@ internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
     default: return false
     }
 }
+// MARK: - TestResultsDiffMode AutoEquatable
+extension TestResultsDiffMode: Equatable {}
+internal func == (lhs: TestResultsDiffMode, rhs: TestResultsDiffMode) -> Bool {
+    switch (lhs, rhs) {
+    case (.`default`, .`default`): 
+         return true 
+    case (.mouseOver, .mouseOver): 
+         return true 
+    default: return false
+    }
+}
 
 // MARK: -
