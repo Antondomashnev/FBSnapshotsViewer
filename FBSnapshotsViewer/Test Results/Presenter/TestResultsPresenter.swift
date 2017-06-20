@@ -25,11 +25,16 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         guard let testResults = interactor?.testResults, !testResults.isEmpty  else {
             return
         }
-        let testResultsDisplayInfo = TestResultsDisplayInfo(sectionInfos: testResultsCollector.collect(testResults: testResults), testResultsDiffMode: .mouseOver)
+        let testResultsDisplayInfo = TestResultsDisplayInfo(sectionInfos: testResultsCollector.collect(testResults: testResults), testResultsDiffMode: selectedDiffMode)
         userInterface?.show(displayInfo: testResultsDisplayInfo)
     }
 
     func openInKaleidoscope(testResultDisplayInfo: TestResultDisplayInfo) {
         interactor?.openInKaleidoscope(testResult: testResultDisplayInfo.testResult)
+    }
+    
+    func selectDiffMode(_ diffMode: TestResultsDiffMode) {
+        selectedDiffMode = diffMode
+        updateUserInterface()
     }
 }

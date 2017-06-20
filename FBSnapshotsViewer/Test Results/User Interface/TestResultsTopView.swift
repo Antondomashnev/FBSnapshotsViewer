@@ -23,21 +23,27 @@ class TestResultsTopView: NSView {
         gradient?.draw(in: bounds, angle: 90)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        testResultsDiffModeSegementedControl.target = self
+        testResultsDiffModeSegementedControl.action = #selector(testResultsDiffModeSegementedControlValueChanged(sender:))
+    }
+    
     // MARK: - Helpers
     
     private func convertToDiffMode(testResultsDiffModeSegement: Int) -> TestResultsDiffMode {
-        return (testResultsDiffModeSegement == 1) ? TestResultsDiffMode.mouseOver : TestResultsDiffMode.diff
+        return (testResultsDiffModeSegement == 1) ? TestResultsDiffMode.diff : TestResultsDiffMode.mouseOver
     }
     
     private func convertToTestResultsDiffModeSegement(diffMode: TestResultsDiffMode) -> Int {
-        return (diffMode == .mouseOver) ? 1 : 0
+        return (diffMode == .mouseOver) ? 0 : 1
     }
     
     // MARK: - Interface
     
     func configure(with testResultsDisplayInfo: TestResultsDisplayInfo) {
-        self.numberOfTestsLabel.stringValue = testResultsDisplayInfo.topTitle
-        self.testResultsDiffModeSegementedControl.selectedSegment = convertToTestResultsDiffModeSegement(diffMode: testResultsDisplayInfo.testResultsDiffMode)
+        numberOfTestsLabel.stringValue = testResultsDisplayInfo.topTitle
+        testResultsDiffModeSegementedControl.setSelected(true, forSegment: convertToTestResultsDiffModeSegement(diffMode: testResultsDisplayInfo.testResultsDiffMode))
     }
     
     // MARK: - Actions

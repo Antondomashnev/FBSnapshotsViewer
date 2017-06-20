@@ -16,6 +16,7 @@ class TestResultsController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        topView.delegate = self
         setupCollectionView()
     }
 
@@ -57,6 +58,6 @@ extension TestResultsController: TestResultCellDelegate {
 
 extension TestResultsController: TestResultsTopViewDelegate {
     func testResultsTopView(_ topView: TestResultsTopView, didSelect diffMode: TestResultsDiffMode) {
-        
+        eventHandler.selectDiffMode(diffMode)
     }
 }

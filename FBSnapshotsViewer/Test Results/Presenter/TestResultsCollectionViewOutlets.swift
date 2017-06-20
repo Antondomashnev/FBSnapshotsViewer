@@ -69,7 +69,7 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
             fatalError("TestResultCell is not registered in collection view")
         }
         let testResultInfo = testResultsDisplayInfo.sectionInfos[indexPath.section].itemInfos[indexPath.item]
-        item.configure(with: testResultInfo)
+        item.configure(with: testResultInfo, diffMode: testResultsDisplayInfo.testResultsDiffMode)
         item.delegate = testResultCellDelegate
         return item
     }

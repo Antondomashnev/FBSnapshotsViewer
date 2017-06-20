@@ -92,6 +92,16 @@ class TestResultsControllerSpec: QuickSpec {
                 expect(eventHandler.updateUserInterfaceCalled).to(beTrue())
             }
         }
+        
+        describe(".testResultsTopView:didSelect") {
+            beforeEach {
+                controller.testResultsTopView(topView, didSelect: TestResultsDiffMode.diff)
+            }
+            
+            it("selects diff mode") {
+                expect(eventHandler.selectDiffModeReceivedDiffMode).to(equal(TestResultsDiffMode.diff))
+            }
+        }
 
         describe(".testResultCell:viewInKaleidoscopeButtonClicked") {
             var cell: TestResultCell!

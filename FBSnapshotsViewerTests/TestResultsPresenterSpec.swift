@@ -94,5 +94,22 @@ class TestResultsPresenterSpec: QuickSpec {
                 }
             }
         }
+        
+        describe(".selectDiffMode") {
+            var testResults: [SnapshotTestResult] = []
+            
+            beforeEach {
+                let build = Build(applicationName: "FBSnapshotsViewer")
+                let snapshotTestResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
+                testResults = [snapshotTestResult]
+                interactor.testResults = testResults
+                presenter.selectDiffMode(TestResultsDiffMode.diff)
+            }
+            
+            it("updates user interface") {
+                expect(userInterface.showCalled).to(beTrue())
+                expect(userInterface.showReceivedDisplayInfo?.testResultsDiffMode).to(equal(TestResultsDiffMode.diff))
+            }
+        }
     }
 }

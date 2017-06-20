@@ -388,6 +388,16 @@ class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
         openInKaleidoscopeCalled = true
         openInKaleidoscopeReceivedTestResultDisplayInfo = testResultDisplayInfo
     }
+    //MARK: - selectDiffMode
+
+    var selectDiffModeCalled = false
+    var selectDiffModeReceivedDiffMode: TestResultsDiffMode?
+
+    func selectDiffMode(_ diffMode: TestResultsDiffMode) {
+
+        selectDiffModeCalled = true
+        selectDiffModeReceivedDiffMode = diffMode
+    }
 }
 class TestResultsUserInterfaceMock: TestResultsUserInterface {
 
