@@ -40,8 +40,29 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard lhs.testContext == rhs.testContext else { return false }
     guard lhs.canBeViewedInKaleidoscope == rhs.canBeViewedInKaleidoscope else { return false }
     guard lhs.testResult == rhs.testResult else { return false }
-    guard lhs.createdAt == rhs.createdAt else { return false }
-    guard lhs.applicationName == rhs.applicationName else { return false }
+    return true
+}
+// MARK: - TestResultsDisplayInfo AutoEquatable
+extension TestResultsDisplayInfo: Equatable {} 
+internal func == (lhs: TestResultsDisplayInfo, rhs: TestResultsDisplayInfo) -> Bool {
+    guard lhs.sectionInfos == rhs.sectionInfos else { return false }
+    guard lhs.topTitle == rhs.topTitle else { return false }
+    guard lhs.testResultsDiffMode == rhs.testResultsDiffMode else { return false }
+    return true
+}
+// MARK: - TestResultsSectionDisplayInfo AutoEquatable
+extension TestResultsSectionDisplayInfo: Equatable {} 
+internal func == (lhs: TestResultsSectionDisplayInfo, rhs: TestResultsSectionDisplayInfo) -> Bool {
+    guard lhs.titleInfo == rhs.titleInfo else { return false }
+    guard lhs.itemInfos == rhs.itemInfos else { return false }
+    return true
+}
+// MARK: - TestResultsSectionTitleDisplayInfo AutoEquatable
+extension TestResultsSectionTitleDisplayInfo: Equatable {} 
+internal func == (lhs: TestResultsSectionTitleDisplayInfo, rhs: TestResultsSectionTitleDisplayInfo) -> Bool {
+    guard lhs.title == rhs.title else { return false }
+    guard lhs.timeAgo == rhs.timeAgo else { return false }
+    guard lhs.timeAgoDate == rhs.timeAgoDate else { return false }
     return true
 }
 
@@ -131,6 +152,17 @@ internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
         if lhs.failedImagePath != rhs.failedImagePath { return false }
         if lhs.build != rhs.build { return false }
         return true
+    default: return false
+    }
+}
+// MARK: - TestResultsDiffMode AutoEquatable
+extension TestResultsDiffMode: Equatable {}
+internal func == (lhs: TestResultsDiffMode, rhs: TestResultsDiffMode) -> Bool {
+    switch (lhs, rhs) {
+    case (.diff, .diff): 
+         return true 
+    case (.mouseOver, .mouseOver): 
+         return true 
     default: return false
     }
 }

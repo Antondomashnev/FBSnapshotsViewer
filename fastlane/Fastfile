@@ -13,6 +13,12 @@ platform :mac do
     bundle_install
   end
 
+  desc "Generate colors with SwiftGen"
+  lane :generate_colors do
+    IO.popen("pbcopy", "w") { |pipe| pipe.puts `../Pods/SwiftGen/bin/swiftgen colors -t swift3 ../FBSnapshotsViewer/ColorsPalette.txt` }
+    UI.message "Generated code is copied in your pasteboard"
+  end
+
   desc "Sanity check for the fastfile issues"
   lane :sanity_check do
     UI.message "Compiling Fastfile to check if the syntax if valid or not"

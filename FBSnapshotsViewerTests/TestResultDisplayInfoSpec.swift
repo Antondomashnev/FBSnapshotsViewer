@@ -12,12 +12,6 @@ import Foundation
 
 @testable import FBSnapshotsViewer
 
-class TestResultDisplayInfo_MockDateComponentsFormatter: DateComponentsFormatter {
-    override func string(from startDate: Date, to endDate: Date) -> String? {
-        return "10 minutes ago"
-    }
-}
-
 class TestResultDisplayInfo_MockKaleidoscopeViewer: ExternalViewer {
     static var name: String = ""
     static var bundleID: String = ""
@@ -49,12 +43,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
         describe(".initWithTestInfo") {
             var build: Build!
             var testResult: SnapshotTestResult!
-            var dateFormatter: TestResultDisplayInfo_MockDateComponentsFormatter!
             let kaleidoscopeViewer: TestResultDisplayInfo_MockKaleidoscopeViewer.Type = TestResultDisplayInfo_MockKaleidoscopeViewer.self
-
-            beforeEach {
-                dateFormatter = TestResultDisplayInfo_MockDateComponentsFormatter()
-            }
 
             afterEach {
                 kaleidoscopeViewer.reset()
@@ -146,14 +135,13 @@ class TestResultDisplayInfoSpec: QuickSpec {
                 }
 
                 it("initializes object correctly") {
-                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer, dateFormatter: dateFormatter)
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
                     expect(displayInfo.diffImageURL).to(equal(URL(fileURLWithPath: "diffImagePath.png")))
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.failedImageURL).to(equal(URL(fileURLWithPath: "failedImagePath.png")))
                     expect(displayInfo.testName).to(equal("testFailed"))
                     expect(displayInfo.testContext).to(equal("TestClass"))
                     expect(displayInfo.testResult).to(equal(testResult))
-                    expect(displayInfo.createdAt).to(equal("10 minutes ago"))
                 }
             }
 
@@ -163,11 +151,10 @@ class TestResultDisplayInfoSpec: QuickSpec {
                 }
 
                 it("initializes object correctly") {
-                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer, dateFormatter: dateFormatter)
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.testName).to(equal("testRecord"))
                     expect(displayInfo.testContext).to(equal("ExampleTestClass"))
-                    expect(displayInfo.createdAt).to(equal("10 minutes ago"))
                 }
             }
         }

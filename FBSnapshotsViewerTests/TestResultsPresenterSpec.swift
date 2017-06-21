@@ -11,16 +11,27 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
+class TestResultsPresenter_MockTestResultsDisplayInfosCollector: TestResultsDisplayInfosCollector {
+    var collectedTestResults: [TestResultsSectionDisplayInfo] = []
+    var collectCalledTestResults: [SnapshotTestResult] = []
+    override func collect(testResults: [SnapshotTestResult]) -> [TestResultsSectionDisplayInfo] {
+        collectCalledTestResults = testResults
+        return collectedTestResults
+    }
+}
+
 class TestResultsPresenterSpec: QuickSpec {
     override func spec() {
         var presenter: TestResultsPresenter!
         var interactor: TestResultsInteractorInputMock!
         var userInterface: TestResultsUserInterfaceMock!
+        var testResultsCollector: TestResultsPresenter_MockTestResultsDisplayInfosCollector!
 
         beforeEach {
+            testResultsCollector = TestResultsPresenter_MockTestResultsDisplayInfosCollector()
             interactor = TestResultsInteractorInputMock()
             userInterface = TestResultsUserInterfaceMock()
-            presenter = TestResultsPresenter()
+            presenter = TestResultsPresenter(testResultsCollector: testResultsCollector)
             presenter.interactor = interactor
             presenter.userInterface = userInterface
         }
@@ -55,13 +66,18 @@ class TestResultsPresenterSpec: QuickSpec {
             }
 
             context("when interactor has test results") {
+                var expectTestResultsDisplayInfo: TestResultsDisplayInfo!
                 var testResults: [SnapshotTestResult] = []
-                var build: Build!
 
                 beforeEach {
-                    build = Build(applicationName: "FBSnapshotsViewer")
-                    testResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)]
+                    let build = Build(applicationName: "FBSnapshotsViewer")
+                    let snapshotTestResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
+                    let titleInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "Context")
+                    let sectionInfo = TestResultsSectionDisplayInfo(title: titleInfo, items: [TestResultDisplayInfo(testResult: snapshotTestResult)])
+                    testResults = [snapshotTestResult]
                     interactor.testResults = testResults
+                    testResultsCollector.collectedTestResults = [sectionInfo, sectionInfo]
+                    expectTestResultsDisplayInfo = TestResultsDisplayInfo(sectionInfos: testResultsCollector.collectedTestResults, testResultsDiffMode: .mouseOver)
                     presenter.updateUserInterface()
                 }
 
@@ -70,8 +86,29 @@ class TestResultsPresenterSpec: QuickSpec {
                 }
 
                 it("shows correct test results in user interface") {
-                    expect(userInterface.showReceivedTestResults?.count).to(equal(1))
+                    expect(userInterface.showReceivedDisplayInfo).to(equal(expectTestResultsDisplayInfo))
                 }
+                
+                it("uses collector") {
+                    expect(testResultsCollector.collectCalledTestResults).to(equal(testResults))
+                }
+            }
+        }
+        
+        describe(".selectDiffMode") {
+            var testResults: [SnapshotTestResult] = []
+            
+            beforeEach {
+                let build = Build(applicationName: "FBSnapshotsViewer")
+                let snapshotTestResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
+                testResults = [snapshotTestResult]
+                interactor.testResults = testResults
+                presenter.selectDiffMode(TestResultsDiffMode.diff)
+            }
+            
+            it("updates user interface") {
+                expect(userInterface.showCalled).to(beTrue())
+                expect(userInterface.showReceivedDisplayInfo?.testResultsDiffMode).to(equal(TestResultsDiffMode.diff))
             }
         }
     }

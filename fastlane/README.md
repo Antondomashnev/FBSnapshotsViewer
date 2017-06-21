@@ -30,6 +30,11 @@ xcode-select --install
 
 # Available Actions
 ## Mac
+### mac generate_colors
+```
+fastlane mac generate_colors
+```
+Generate colors with SwiftGen
 ### mac sanity_check
 ```
 fastlane mac sanity_check

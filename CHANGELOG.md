@@ -4,6 +4,7 @@
 
 * Your contribution here.
 * [#41](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/41): Add additional information for tests - [@antondomashnev](https://github.com/antondomashnev).
+* [#44](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/44): Compact view redesign - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.5.0 (26.05.2017)
 

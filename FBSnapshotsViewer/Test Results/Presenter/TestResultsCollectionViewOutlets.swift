@@ -6,17 +6,19 @@
 //  Copyright © 2017 Anton Domashnev. All rights reserved.
 //
 
-import Cocoa
+import AppKit
 
 class TestResultsCollectionViewOutlets: NSObject {
-    var testResults: [TestResultDisplayInfo] = []
+    var testResultsDisplayInfo: TestResultsDisplayInfo = TestResultsDisplayInfo()
     fileprivate weak var testResultCellDelegate: TestResultCellDelegate?
 
     init(collectionView: NSCollectionView, testResultCellDelegate: TestResultCellDelegate? = nil) {
-        guard let nib = NSNib(nibNamed: "TestResultCell", bundle: Bundle.main) else {
-            fatalError("TestResultCell is missing in bundle")
+        guard let testResultCellNib = NSNib(nibNamed: TestResultCell.itemIdentifier, bundle: Bundle.main),
+              let testResultHeaderNib = NSNib(nibNamed: TestResultsHeader.itemIdentifier, bundle: Bundle.main) else {
+            fatalError("TestResultCell || TestResultsHeader is missing in bundle")
         }
-        collectionView.register(nib, forItemWithIdentifier: TestResultCell.itemIdentifier)
+        collectionView.register(testResultCellNib, forItemWithIdentifier: TestResultCell.itemIdentifier)
+        collectionView.register(testResultHeaderNib, forSupplementaryViewOfKind: NSCollectionElementKindSectionHeader, withIdentifier: TestResultsHeader.itemIdentifier)
         self.testResultCellDelegate = testResultCellDelegate
         super.init()
     }
@@ -24,28 +26,50 @@ class TestResultsCollectionViewOutlets: NSObject {
 
 extension TestResultsCollectionViewOutlets: NSCollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
-        return NSSize(width: 530, height: 346)
+        return NSSize(width: 732, height: 408)
     }
 
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, insetForSectionAt section: Int) -> EdgeInsets {
         return EdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
+    
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+         return 0
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {
+        return NSSize(width: 732, height: 30)
+    }
 }
 
 extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
-        return 1
+        return testResultsDisplayInfo.sectionInfos.count
     }
 
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return testResults.count
+        return testResultsDisplayInfo.sectionInfos[section].itemInfos.count
     }
-
+    
+    func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> NSView {
+        guard let view = collectionView.makeSupplementaryView(ofKind: NSCollectionElementKindSectionHeader, withIdentifier: TestResultsHeader.itemIdentifier, for: indexPath) as? TestResultsHeader else {
+            fatalError("TestResultsHeader is not registered in collection view")
+        }
+        let titleInfo = testResultsDisplayInfo.sectionInfos[indexPath.section].titleInfo
+        view.configure(with: titleInfo)
+        return view
+    }
+    
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         guard let item = collectionView.makeItem(withIdentifier: TestResultCell.itemIdentifier, for: indexPath) as? TestResultCell else {
             fatalError("TestResultCell is not registered in collection view")
         }
-        item.configure(with: testResults[indexPath.item])
+        let testResultInfo = testResultsDisplayInfo.sectionInfos[indexPath.section].itemInfos[indexPath.item]
+        item.configure(with: testResultInfo, diffMode: testResultsDisplayInfo.testResultsDiffMode)
         item.delegate = testResultCellDelegate
         return item
     }
