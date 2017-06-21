@@ -52,13 +52,7 @@ class TestResultSplitView: NSView {
     }
     
     private func configureBordersColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
-        let borderColor: NSColor
-        switch appleInterfaceMode {
-        case .dark:
-            borderColor = NSColor(named: .dividerDarkMode)
-        case .light:
-            borderColor = NSColor(named: .dividerLightMode)
-        }
+        let borderColor = Color.divider(for: appleInterfaceMode)
         splitSeparatorView.wantsLayer = true
         splitSeparatorView.layer?.backgroundColor = borderColor.cgColor
     }

@@ -22,6 +22,7 @@
 		6D130B6B1EC8E55F00E9642A /* PreferencesWireframeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B6A1EC8E55F00E9642A /* PreferencesWireframeSpec.swift */; };
 		6D130B6D1EC8E82B00E9642A /* ConfigurationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B6C1EC8E82B00E9642A /* ConfigurationSpec.swift */; };
 		6D130B6F1EC8EB2F00E9642A /* PreferencesDisplayInfoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D130B6E1EC8EB2F00E9642A /* PreferencesDisplayInfoSpec.swift */; };
+		6D1C40761EFA628F00D4D5F1 /* Colors+AppleInterfaceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C40751EFA628F00D4D5F1 /* Colors+AppleInterfaceMode.swift */; };
 		6D21E66D1EAE9E3600800B91 /* ApplicationLogReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */; };
 		6D21E66F1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */; };
 		6D21E6721EAEACD300800B91 /* TestLog.log in Resources */ = {isa = PBXBuildFile; fileRef = 6D21E6711EAEACD300800B91 /* TestLog.log */; };
@@ -174,6 +175,7 @@
 		6D130B6A1EC8E55F00E9642A /* PreferencesWireframeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWireframeSpec.swift; sourceTree = "<group>"; };
 		6D130B6C1EC8E82B00E9642A /* ConfigurationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSpec.swift; sourceTree = "<group>"; };
 		6D130B6E1EC8EB2F00E9642A /* PreferencesDisplayInfoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesDisplayInfoSpec.swift; sourceTree = "<group>"; };
+		6D1C40751EFA628F00D4D5F1 /* Colors+AppleInterfaceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+AppleInterfaceMode.swift"; sourceTree = "<group>"; };
 		6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReader.swift; sourceTree = "<group>"; };
 		6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReaderSpec.swift; sourceTree = "<group>"; };
 		6D21E6711EAEACD300800B91 /* TestLog.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestLog.log; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 				6DA1BF961E7755110017D47B /* Colors.swift */,
 				6DA1BF971E7755110017D47B /* Storyboards.swift */,
 				6D3000381EBDE7ED005B6103 /* Fonts.swift */,
+				6D1C40751EFA628F00D4D5F1 /* Colors+AppleInterfaceMode.swift */,
 			);
 			path = SwiftGen;
 			sourceTree = "<group>";
@@ -1011,6 +1014,7 @@
 				6D5E1A0B1EF092DC0016A32C /* TestResultSplitView.swift in Sources */,
 				6D342CE01EBBDF80006EEBEC /* AppleInterfaceMode.swift in Sources */,
 				6D7D79021EB081F50001C1A0 /* ApplicationSnapshotTestResultListenerFactory.swift in Sources */,
+				6D1C40761EFA628F00D4D5F1 /* Colors+AppleInterfaceMode.swift in Sources */,
 				6D8362781E79422D000794AE /* AutoMockable.swift in Sources */,
 				6D789CE01EC3B74800EEF7EE /* AutoCases.generated.swift in Sources */,
 				6DDFBD8D1E63268300DFC0A4 /* FolderEvent.swift in Sources */,

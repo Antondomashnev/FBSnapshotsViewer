@@ -17,18 +17,8 @@ class TestResultsHeader: NSView, NSCollectionViewSectionHeaderView {
     // MARK: - Helpers
     
     private func configureTitleLabelsColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
-        let primaryTextColor: NSColor
-        let secondaryTextColor: NSColor
-        switch appleInterfaceMode {
-        case .dark:
-            primaryTextColor = NSColor(named: .primaryTextDarkMode)
-            secondaryTextColor = NSColor(named: .secondaryTextDarkMode)
-        case .light:
-            primaryTextColor = NSColor(named: .primaryTextLightMode)
-            secondaryTextColor = NSColor(named: .secondaryTextLightMode)
-        }
-        contextLabel.textColor = primaryTextColor
-        dateLabel.textColor = secondaryTextColor
+        contextLabel.textColor = Color.primaryText(for: appleInterfaceMode)
+        dateLabel.textColor = Color.secondaryText(for: appleInterfaceMode)
     }
     
     // MARK: - Interface

@@ -44,53 +44,24 @@ class TestResultCell: NSCollectionViewItem {
     // MARK: - Helpers
 
     private func configureSeparatorsColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
-        let dividerColor: NSColor
-        switch appleInterfaceMode {
-        case .dark:
-            dividerColor = NSColor(named: .dividerDarkMode)
-        case .light:
-            dividerColor = NSColor(named: .dividerLightMode)
-        }
+        let dividerColor = Color.divider(for: appleInterfaceMode)
         separatorView.wantsLayer = true
         separatorView.layer?.backgroundColor = dividerColor.cgColor
     }
 
     private func configureTitleLabelsColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
-        let primaryTextColor: NSColor
-        let secondaryTextColor: NSColor
-        switch appleInterfaceMode {
-        case .dark:
-            primaryTextColor = NSColor(named: .primaryTextDarkMode)
-            secondaryTextColor = NSColor(named: .secondaryTextDarkMode)
-        case .light:
-            primaryTextColor = NSColor(named: .primaryTextLightMode)
-            secondaryTextColor = NSColor(named: .secondaryTextLightMode)
-        }
-        testNameLabel.textColor = primaryTextColor
-        referenceImageTitleLabel.textColor = secondaryTextColor
-        failedImageTitleLabel.textColor = secondaryTextColor
+        testNameLabel.textColor = Color.primaryText(for: appleInterfaceMode)
+        referenceImageTitleLabel.textColor = Color.secondaryText(for: appleInterfaceMode)
+        failedImageTitleLabel.textColor = Color.secondaryText(for: appleInterfaceMode)
     }
     
     private func configureBordersColorScheme(for appleInterfaceMode: AppleInterfaceMode) {
-        let borderColor: NSColor
-        switch appleInterfaceMode {
-        case .dark:
-            borderColor = NSColor(named: .dividerDarkMode)
-        case .light:
-            borderColor = NSColor(named: .dividerLightMode)
+        let borderColor = Color.divider(for: appleInterfaceMode)
+        [failedImageView, referenceImageView, diffContainerView, splitContainerView].forEach {
+            $0?.wantsLayer = true
+            $0?.layer?.borderColor = borderColor.cgColor
+            $0?.layer?.borderWidth = 1
         }
-        failedImageView.wantsLayer = true
-        referenceImageView.wantsLayer = true
-        diffContainerView.wantsLayer = true
-        splitContainerView.wantsLayer = true
-        failedImageView.layer?.borderColor = borderColor.cgColor
-        referenceImageView.layer?.borderColor = borderColor.cgColor
-        diffContainerView.layer?.borderColor = borderColor.cgColor
-        splitContainerView.layer?.borderColor = borderColor.cgColor
-        referenceImageView.layer?.borderWidth = 1
-        failedImageView.layer?.borderWidth = 1
-        diffContainerView.layer?.borderWidth = 1
-        splitContainerView.layer?.borderWidth = 1
     }
     
     private func configureUI(for diffMode: TestResultsDiffMode) {
@@ -103,10 +74,14 @@ class TestResultCell: NSCollectionViewItem {
             splitContainerView.isHidden = false
         }
     }
-
-    // MARK: - Interface
-
-    func configure(with testResult: TestResultDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode(), diffMode: TestResultsDiffMode = .mouseOver) {
+    
+    private func configureUI(for appleInterfaceMode: AppleInterfaceMode) {
+        configureTitleLabelsColorScheme(for: appleInterfaceMode)
+        configureSeparatorsColorScheme(for: appleInterfaceMode)
+        configureBordersColorScheme(for: appleInterfaceMode)
+    }
+    
+    private func configureUI(with testResult: TestResultDisplayInfo) {
         if let referenceImage = NSImage(contentsOf: testResult.referenceImageURL) {
             referenceImageView.image = referenceImage
         }
@@ -118,9 +93,13 @@ class TestResultCell: NSCollectionViewItem {
         }
         viewInKaleidoscopeButton.isHidden = !testResult.canBeViewedInKaleidoscope
         testNameLabel.stringValue = testResult.testName
-        configureTitleLabelsColorScheme(for: appleInterfaceMode)
-        configureSeparatorsColorScheme(for: appleInterfaceMode)
-        configureBordersColorScheme(for: appleInterfaceMode)
+    }
+
+    // MARK: - Interface
+
+    func configure(with testResult: TestResultDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode(), diffMode: TestResultsDiffMode = .mouseOver) {
+        configureUI(with: testResult)
+        configureUI(for: appleInterfaceMode)
         configureUI(for: diffMode)
         splitContainerView.configure(with: testResult, appleInterfaceMode: appleInterfaceMode)
     }
