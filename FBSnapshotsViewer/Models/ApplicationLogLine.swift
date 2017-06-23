@@ -26,16 +26,19 @@ struct ApplicationLogLineIndicatorContainer {
             return "PROJECT_NAME="
         }
     }
+    
+    static func fbReferenceImageDirMessageIndicator(for configuration: Configuration = Configuration.default()) -> String {
+        return "FB_REFERENCE_IMAGE_DIR"
+    }
 }
 
 enum ApplicationLogLine: AutoEquatable, AutoHashable {
-    static let kaleidoscopeCommandMessageIndicatorSubstring = "ksdiff "
-    static let referenceImageSavedMessageIndicatorSubstring = "Reference image save at: "
-    static let applicationNameMessageIndicatorSubstring = "XCInjectBundleInto"
+    static let fbReferenceImageDirMessageIndicatorSubstring = "FB_REFERENCE_IMAGE_DIR"
 
     case kaleidoscopeCommandMessage(line: String)
     case referenceImageSavedMessage(line: String)
     case applicationNameMessage(line: String)
+    case fbReferenceImageDirMessage(line: String)
     case unknown
 
     init(line: String, configuration: Configuration = Configuration.default()) {
@@ -47,6 +50,9 @@ enum ApplicationLogLine: AutoEquatable, AutoHashable {
         }
         else if line.contains(ApplicationLogLineIndicatorContainer.applicationNameMessageIndicator(for: configuration)) {
             self = ApplicationLogLine.applicationNameMessage(line: line)
+        }
+        else if line.contains(ApplicationLogLineIndicatorContainer.fbReferenceImageDirMessageIndicator(for: configuration)) {
+            self = ApplicationLogLine.fbReferenceImageDirMessage(line: line)
         }
         else {
             self = ApplicationLogLine.unknown

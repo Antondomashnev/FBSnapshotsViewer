@@ -88,6 +88,8 @@ internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
         return lhs == rhs
     case (.applicationNameMessage(let lhs), .applicationNameMessage(let rhs)): 
         return lhs == rhs
+    case (.fbReferenceImageDirMessage(let lhs), .fbReferenceImageDirMessage(let rhs)): 
+        return lhs == rhs
     case (.unknown, .unknown): 
          return true 
     default: return false

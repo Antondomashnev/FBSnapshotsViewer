@@ -45,8 +45,10 @@ extension ApplicationLogLine: Hashable {
             return combineHashes([2, data.hashValue])
         case .applicationNameMessage(let data): 
             return combineHashes([3, data.hashValue])
+        case .fbReferenceImageDirMessage(let data): 
+            return combineHashes([4, data.hashValue])
          case .unknown: 
-            return 4.hashValue
+            return 5.hashValue
         }
     }
 }

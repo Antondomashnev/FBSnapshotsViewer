@@ -51,7 +51,7 @@ class SnapshotTestResultFactory {
     }
 
     private func createSnapshotTestResult(fromSavedReferenceImageLine line: String, build: Build) throws -> SnapshotTestResult {
-        let lineComponents = line.components(separatedBy: ApplicationLogLine.referenceImageSavedMessageIndicatorSubstring)
+        let lineComponents = line.components(separatedBy: ": ")
         guard lineComponents.count == 2 else {
             throw SnapshotTestResultFactoryError.unexpectedSavedReferenceImageLineFormat
         }
@@ -64,9 +64,9 @@ class SnapshotTestResultFactory {
 
     func createSnapshotTestResult(from logLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
         switch logLine {
-        case .unknown:
-            return nil
-        case .applicationNameMessage:
+        case .unknown,
+             .applicationNameMessage,
+             .fbReferenceImageDirMessage:
             return nil
         case let .kaleidoscopeCommandMessage(line):
             return try? self.createSnapshotTestResult(fromKaleidoscopeCommandLine: line, build: build)

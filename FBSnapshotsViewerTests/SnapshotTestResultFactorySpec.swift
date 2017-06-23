@@ -45,6 +45,18 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                     expect(createdTestResult).to(beNil())
                 }
             }
+            
+            context("when fb image reference dir log line") {
+                var createdTestResult: SnapshotTestResult?
+                
+                beforeEach {
+                    createdTestResult = factory.createSnapshotTestResult(from: .fbReferenceImageDirMessage(line: "MyApp"), build: build)
+                }
+                
+                it("doesnt create test result") {
+                    expect(createdTestResult).to(beNil())
+                }
+            }
 
             context("when reference image saved message log line") {
                 var createdTestResult: SnapshotTestResult!
