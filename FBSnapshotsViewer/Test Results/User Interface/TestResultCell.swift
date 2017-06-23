@@ -7,6 +7,7 @@
 //
 
 import AppKit
+import Nuke
 
 protocol TestResultCellDelegate: class, AutoMockable {
     func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)
@@ -82,22 +83,27 @@ class TestResultCell: NSCollectionViewItem {
     }
     
     private func configureUI(with testResult: TestResultDisplayInfo) {
-        if let referenceImage = NSImage(contentsOf: testResult.referenceImageURL) {
-            referenceImageView.image = referenceImage
+        Nuke.loadImage(with: testResult.referenceImageURL, into: referenceImageView)
+        if let diffImageURL = testResult.diffImageURL {
+            Nuke.loadImage(with: diffImageURL, into: diffImageView)
         }
-        if let diffImageURL = testResult.diffImageURL, let diffImage = NSImage(contentsOf: diffImageURL) {
-            diffImageView.image = diffImage
-        }
-        if let failedImageURL = testResult.failedImageURL, let failedImage = NSImage(contentsOf: failedImageURL) {
-            failedImageView.image = failedImage
+        if let failedImageURL = testResult.failedImageURL {
+            Nuke.loadImage(with: failedImageURL, into: failedImageView)
         }
         viewInKaleidoscopeButton.isHidden = !testResult.canBeViewedInKaleidoscope
         testNameLabel.stringValue = testResult.testName
     }
-
+    
+    private func resetUI() {
+        referenceImageView.image = nil
+        diffImageView.image = nil
+        failedImageView.image = nil
+    }
+    
     // MARK: - Interface
 
     func configure(with testResult: TestResultDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode(), diffMode: TestResultsDiffMode = .mouseOver) {
+        resetUI()
         configureUI(with: testResult)
         configureUI(for: appleInterfaceMode)
         configureUI(for: diffMode)
