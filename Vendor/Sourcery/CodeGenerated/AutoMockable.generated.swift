@@ -63,6 +63,22 @@ class ConfigurationStorageMock: ConfigurationStorage {
         saveReceivedConfiguration = configuration
     }
 }
+class FBReferenceImageDirectoryURLExtractorMock: FBReferenceImageDirectoryURLExtractor {
+
+
+    //MARK: - extractImageDirectoryURL
+
+    var extractImageDirectoryURLCalled = false
+    var extractImageDirectoryURLReceivedLogLine: ApplicationLogLine?
+    var extractImageDirectoryURLReturnValue: URL!
+
+    func extractImageDirectoryURL(from logLine: ApplicationLogLine) -> URL {
+
+        extractImageDirectoryURLCalled = true
+        extractImageDirectoryURLReceivedLogLine = logLine
+        return extractImageDirectoryURLReturnValue
+    }
+}
 class FolderEventsListenerMock: FolderEventsListener {
 
     var output: FolderEventsListenerOutput?
