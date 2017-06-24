@@ -26,6 +26,7 @@
 		6D14776D1EFED78D0070EFEC /* BuildCreatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D14776C1EFED78D0070EFEC /* BuildCreatorSpec.swift */; };
 		6D14776F1EFEDF5A0070EFEC /* ApplicationSnapshotTestResultFileWatcherUpdateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D14776E1EFEDF5A0070EFEC /* ApplicationSnapshotTestResultFileWatcherUpdateHandler.swift */; };
 		6D1477711EFEDFED0070EFEC /* FBReferenceImageDirectoryURLExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1477701EFEDFED0070EFEC /* FBReferenceImageDirectoryURLExtractor.swift */; };
+		6D1477731EFEE7D00070EFEC /* FBReferenceImageDirectoryURLExtractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1477721EFEE7D00070EFEC /* FBReferenceImageDirectoryURLExtractorSpec.swift */; };
 		6D1C40761EFA628F00D4D5F1 /* Colors+AppleInterfaceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C40751EFA628F00D4D5F1 /* Colors+AppleInterfaceMode.swift */; };
 		6D21E66D1EAE9E3600800B91 /* ApplicationLogReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */; };
 		6D21E66F1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */; };
@@ -183,6 +184,7 @@
 		6D14776C1EFED78D0070EFEC /* BuildCreatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildCreatorSpec.swift; sourceTree = "<group>"; };
 		6D14776E1EFEDF5A0070EFEC /* ApplicationSnapshotTestResultFileWatcherUpdateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSnapshotTestResultFileWatcherUpdateHandler.swift; sourceTree = "<group>"; };
 		6D1477701EFEDFED0070EFEC /* FBReferenceImageDirectoryURLExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBReferenceImageDirectoryURLExtractor.swift; sourceTree = "<group>"; };
+		6D1477721EFEE7D00070EFEC /* FBReferenceImageDirectoryURLExtractorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBReferenceImageDirectoryURLExtractorSpec.swift; sourceTree = "<group>"; };
 		6D1C40751EFA628F00D4D5F1 /* Colors+AppleInterfaceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+AppleInterfaceMode.swift"; sourceTree = "<group>"; };
 		6D21E66C1EAE9E3600800B91 /* ApplicationLogReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReader.swift; sourceTree = "<group>"; };
 		6D21E66E1EAEAA8A00800B91 /* ApplicationLogReaderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogReaderSpec.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				6D2814831EEDEE3C00C4E67C /* TestResultsDisplayInfosCollectorSpec.swift */,
 				6D5BC1D71EF6D1B70003D1CB /* TestResultsDisplayInfoSpec.swift */,
 				6D14776C1EFED78D0070EFEC /* BuildCreatorSpec.swift */,
+				6D1477721EFEE7D00070EFEC /* FBReferenceImageDirectoryURLExtractorSpec.swift */,
 			);
 			path = FBSnapshotsViewerTests;
 			sourceTree = "<group>";
@@ -1113,6 +1116,7 @@
 				6D3000331EBD2DB3005B6103 /* KaleidoscopeViewerSpec.swift in Sources */,
 				6D42C9401EB27B64003744BF /* SnapshotTestResultFactorySpec.swift in Sources */,
 				6DE3475E1E476F8A004147DF /* FolderEventSpec.swift in Sources */,
+				6D1477731EFEE7D00070EFEC /* FBReferenceImageDirectoryURLExtractorSpec.swift in Sources */,
 				6D130B6D1EC8E82B00E9642A /* ConfigurationSpec.swift in Sources */,
 				6D3BA5651E6E07AA00CAD4EE /* MenuPresenterSpec.swift in Sources */,
 				6D42C93E1EB275B6003744BF /* MenuWireframeSpec.swift in Sources */,

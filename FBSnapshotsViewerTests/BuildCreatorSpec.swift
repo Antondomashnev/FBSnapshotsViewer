@@ -42,7 +42,6 @@ class BuildCreatorSpec: QuickSpec {
             
             context("given not all properties") {
                 var date: Date!
-                var applicationName: String!
                 var fbReferenceImageDirectoryURL: URL!
                 
                 beforeEach {
