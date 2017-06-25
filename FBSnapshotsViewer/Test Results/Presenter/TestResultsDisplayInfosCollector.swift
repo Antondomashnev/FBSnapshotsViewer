@@ -31,12 +31,7 @@ class TestResultsDisplayInfosCollector {
         return groupedTestResults.map { TestResultsSectionDisplayInfo(title: $0.key, items: $0.value) }.sorted {
             let timeAgo1 = $0.0.titleInfo.timeAgoDate
             let timeAgo2 = $0.1.titleInfo.timeAgoDate
-            if timeAgo1 != timeAgo2 {
-                return timeAgo1 > timeAgo2
-            }
-            else {
-                return $0.0.titleInfo.title > $0.1.titleInfo.title
-            }
+            return timeAgo1 != timeAgo2 ? timeAgo1 >= timeAgo2 : $0.0.titleInfo.title > $0.1.titleInfo.title
         }
     }
     

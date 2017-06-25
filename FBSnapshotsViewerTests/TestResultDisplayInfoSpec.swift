@@ -52,7 +52,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
             describe("testName") {
                 context("when test name with undrscore") {
                     beforeEach {
-                        build = Build(date: Date(), applicationName: "FBSnapshotsViewer")
+                        build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
                         testResult = SnapshotTestResult.failed(testName: "TestClass_testName_has_replaced_all_underscore_with_spaces", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
 

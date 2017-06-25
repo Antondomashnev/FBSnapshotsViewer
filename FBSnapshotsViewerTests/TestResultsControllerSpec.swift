@@ -37,7 +37,7 @@ class TestResultsController_MockTestResultsCollectionViewOutlets: TestResultsCol
 
 class TestResultsControllerSpec: QuickSpec {
     override func spec() {
-        let build: Build = Build(date: Date(), applicationName: "FBSnapshotsViewer")
+        let build: Build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
         var collectionViewOutlets: TestResultsController_MockTestResultsCollectionViewOutlets!
         var collectionView: TestResultsController_MockNSCollectionView!
         var controller: TestResultsController!

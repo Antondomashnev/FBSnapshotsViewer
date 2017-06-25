@@ -46,7 +46,6 @@ class BuildCreatorSpec: QuickSpec {
                 
                 beforeEach {
                     fbReferenceImageDirectoryURL = URL(fileURLWithPath: "/Users/fedotiy/myproject/tests/")
-                    applicationName = "MyApplication"
                     date = Date()
                     buildCreator.fbReferenceImageDirectoryURL = fbReferenceImageDirectoryURL
                     buildCreator.date = date

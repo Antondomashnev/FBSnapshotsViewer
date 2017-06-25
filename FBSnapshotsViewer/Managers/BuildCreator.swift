@@ -15,7 +15,7 @@ class BuildCreator {
     
     func createBuild() -> Build? {
         guard let date = date, let applicationName = applicationName, let fbReferenceImageDirectoryURL = fbReferenceImageDirectoryURL else {
-            print("Can not create a build if not all require properties are initialized:\ndate: \(String(describing: self.date))\napplicationName: \(self.applicationName)\nfbReferenceImageDirectoryURL: \(self.fbReferenceImageDirectoryURL)")
+            print("Can not create a build if not all require properties are initialized:\ndate: \(String(describing: self.date))\napplicationName: \(String(describing: self.applicationName))\nfbReferenceImageDirectoryURL: \(self.fbReferenceImageDirectoryURL)")
             return nil
         }
         return Build(date: date, applicationName: applicationName, fbReferenceImageDirectoryURL: fbReferenceImageDirectoryURL)

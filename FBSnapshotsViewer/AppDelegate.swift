@@ -22,8 +22,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let wireframe = MenuWireframe()
         menuUserInterface = wireframe.instantinateMenu(in: NSStatusBar.system(), configuration: cofiguration)
     }
-
-    func setUpConfiguration() -> Configuration {
+    
+    // MARK: - Helpers
+    
+    private func setUpConfiguration() -> Configuration {
         let configurationStorage = UserDefaultsConfigurationStorage()
         if let configuration = configurationStorage.loadConfiguration() {
             print("App already has configuration stored")

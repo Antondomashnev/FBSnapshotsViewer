@@ -19,13 +19,13 @@ class TestResultsCollectionViewOutletsSpec: QuickSpec {
         var testResultsDisplayInfo: TestResultsDisplayInfo!
 
         beforeEach {
-            let build1 = Build(date: Date(), applicationName: "MyApp")
+            let build1 = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL:  URL(fileURLWithPath: "foo/bar", isDirectory: true))
             let snapshotTestResult1 = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build1)
             let testResult1 = TestResultDisplayInfo(testResult: snapshotTestResult1)
             let sectionTitle1 = TestResultsSectionTitleDisplayInfo(build: build1, testContext: "Context1")
             let section1 = TestResultsSectionDisplayInfo(title: sectionTitle1, items: [testResult1])
             
-            let build2 = Build(date: Date(), applicationName: "MyApp")
+            let build2 = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL:  URL(fileURLWithPath: "foo/bar", isDirectory: true))
             let snapshotTestResult2 = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build2)
             let testResult2 = TestResultDisplayInfo(testResult: snapshotTestResult2)
             let snapshotTestResult3 = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build2)

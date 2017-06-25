@@ -51,7 +51,8 @@ class MenuInteractorSpec: QuickSpec {
     override func spec() {
         let testResultsDate = Date()
         let applicationName = "FBSnapshotsViewer"
-        let build = Build(date: testResultsDate, applicationName: applicationName)
+        let fbReferenceImageDirURL = URL(fileURLWithPath: "foo/bar", isDirectory: true)
+        let build = Build(date: testResultsDate, applicationName: applicationName, fbReferenceImageDirectoryURL: fbReferenceImageDirURL)
         let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
         let testResult2 = SnapshotTestResult.failed(testName: "testName2", referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", build: build)
         let testResult3 = SnapshotTestResult.recorded(testName: "testName3", referenceImagePath: "referenceImagePath3", build: build)
@@ -68,7 +69,7 @@ class MenuInteractorSpec: QuickSpec {
             configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
             applicationNameExtractor = ApplicationNameExtractorMock()
             output = MenuInteractorOutputMock()
-            applicationSnapshotTestResultListener = MenuInteractor_MockApplicationSnapshotTestResultListener(fileWatcher: KZFileWatchers.FileWatcher.Local(path: "testpath"), applicationLogReader: ApplicationLogReader(), applicationNameExtractor: applicationNameExtractor)
+            applicationSnapshotTestResultListener = MenuInteractor_MockApplicationSnapshotTestResultListener(fileWatcher: KZFileWatchers.FileWatcher.Local(path: "testpath"), fileWatcherUpdateHandler: ApplicationSnapshotTestResultFileWatcherUpdateHandler())
             applicationSnapshotTestResultListenerFactory = MenuInteractor_MockApplicationSnapshotTestResultListenerFactory()
             applicationSnapshotTestResultListenerFactory.mockApplicationSnapshotTestResultListener = applicationSnapshotTestResultListener
             applicationTestLogFilesListener = MenuInteractor_MockApplicationTestLogFilesListener()
@@ -122,7 +123,7 @@ class MenuInteractorSpec: QuickSpec {
                     }
 
                     it("outputs it") {
-                        let build = Build(date: testResultsDate, applicationName: applicationName)
+                        let build = Build(date: testResultsDate, applicationName: applicationName, fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
                         let expectedTestResult = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
                         expect(output.didFindNewTestResultReceivedTestResult).to(equal(expectedTestResult))
                     }

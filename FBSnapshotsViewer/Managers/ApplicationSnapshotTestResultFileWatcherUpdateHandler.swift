@@ -18,8 +18,8 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     private var readLinesNumber: Int = 0
     
     init(applicationLogReader: ApplicationLogReader = ApplicationLogReader(),
-         applicationNameExtractor: ApplicationNameExtractor,
-         fbImageReferenceDirExtractor: FBReferenceImageDirectoryURLExtractor,
+         applicationNameExtractor: ApplicationNameExtractor = XcodeApplicationNameExtractor(),
+         fbImageReferenceDirExtractor: FBReferenceImageDirectoryURLExtractor = XcodeFBReferenceImageDirectoryURLExtractor(),
          snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory(),
          buildCreator: BuildCreator = BuildCreator()) {
         self.applicationLogReader = applicationLogReader
@@ -31,7 +31,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     
     // MARK: - Interface
     
-    func handleFileWatcherUpdate(result: KZFileWatchers.FileWatcher.RefreshResult) -> [SnapshotTestResult] {
+    @discardableResult func handleFileWatcherUpdate(result: KZFileWatchers.FileWatcher.RefreshResult) -> [SnapshotTestResult] {
         switch result {
         case .noChanges:
             return []
@@ -41,12 +41,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
                 return []
             }
             do {
-                if let testResults = try handleFileWatcherUpdate(text: text) {
-                    return testResults
-                }
-                else {
-                    return []
-                }
+                return try handleFileWatcherUpdate(text: text) ?? []
             }
             catch let error {
                 assertionFailure("\(error)")
@@ -64,6 +59,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
             case .unknown:
                 return nil
             case .fbReferenceImageDirMessage:
+                buildCreator.fbReferenceImageDirectoryURL = try fbImageReferenceDirExtractor.extractImageDirectoryURL(from: logLine)
                 return nil
             case .applicationNameMessage:
                 buildCreator.applicationName = try applicationNameExtractor.extractApplicationName(from: logLine)
