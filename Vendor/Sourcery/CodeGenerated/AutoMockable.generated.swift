@@ -382,6 +382,16 @@ class TestResultsInteractorInputMock: TestResultsInteractorInput {
         openInKaleidoscopeCalled = true
         openInKaleidoscopeReceivedTestResult = testResult
     }
+    //MARK: - swap
+
+    var swapCalled = false
+    var swapReceivedTestResult: SnapshotTestResult?
+
+    func swap(testResult: SnapshotTestResult) {
+
+        swapCalled = true
+        swapReceivedTestResult = testResult
+    }
 }
 class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
 

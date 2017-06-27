@@ -30,4 +30,8 @@ extension TestResultsInteractor: TestResultsInteractorInput {
         }
         kaleidoscopeViewer.view(snapshotTestResult: testResult, using: processLauncher)
     }
+    
+    func swap(testResult: SnapshotTestResult) {
+        
+    }
 }
