@@ -58,7 +58,6 @@ class MenuInteractorSpec: QuickSpec {
         let testResult3 = SnapshotTestResult.recorded(testName: "testName3", referenceImagePath: "referenceImagePath3", build: build)
         
         var configuration: FBSnapshotsViewer.Configuration!
-        var applicationNameExtractor: ApplicationNameExtractorMock!
         var output: MenuInteractorOutputMock!
         var interactor: MenuInteractor!
         var applicationSnapshotTestResultListener: MenuInteractor_MockApplicationSnapshotTestResultListener!
@@ -67,7 +66,6 @@ class MenuInteractorSpec: QuickSpec {
 
         beforeEach {
             configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
-            applicationNameExtractor = ApplicationNameExtractorMock()
             output = MenuInteractorOutputMock()
             applicationSnapshotTestResultListener = MenuInteractor_MockApplicationSnapshotTestResultListener(fileWatcher: KZFileWatchers.FileWatcher.Local(path: "testpath"), fileWatcherUpdateHandler: ApplicationSnapshotTestResultFileWatcherUpdateHandler())
             applicationSnapshotTestResultListenerFactory = MenuInteractor_MockApplicationSnapshotTestResultListenerFactory()

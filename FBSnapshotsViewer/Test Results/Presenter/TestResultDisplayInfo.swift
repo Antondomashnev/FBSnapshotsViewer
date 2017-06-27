@@ -31,7 +31,7 @@ struct TestResultDisplayInfo: AutoEquatable {
             self.failedImageURL = URL(fileURLWithPath: failedImagePath)
         }
         let testNameComponents = testResult.testName.replacingOccurrences(of: "_", with: " ").components(separatedBy: " ")
-        self.testContext = testNameComponents[0..<(testNameComponents.count - 1)].joined(separator: " ")
+        self.testContext = testResult.testClassName + " " + testNameComponents[0..<(testNameComponents.count - 1)].joined(separator: " ")
         self.testName = testNameComponents[testNameComponents.count - 1]
     }
 }

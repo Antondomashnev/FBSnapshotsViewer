@@ -31,6 +31,13 @@ internal func == (lhs: Build, rhs: Build) -> Bool {
     guard lhs.fbReferenceImageDirectoryURL == rhs.fbReferenceImageDirectoryURL else { return false }
     return true
 }
+// MARK: - SnapshotTestInformation AutoEquatable
+extension SnapshotTestInformation: Equatable {} 
+internal func == (lhs: SnapshotTestInformation, rhs: SnapshotTestInformation) -> Bool {
+    guard lhs.testClassName == rhs.testClassName else { return false }
+    guard lhs.testName == rhs.testName else { return false }
+    return true
+}
 // MARK: - TestResultDisplayInfo AutoEquatable
 extension TestResultDisplayInfo: Equatable {} 
 internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Bool {
@@ -144,12 +151,12 @@ extension SnapshotTestResult: Equatable {}
 internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
     switch (lhs, rhs) {
     case (.recorded(let lhs), .recorded(let rhs)): 
-        if lhs.testName != rhs.testName { return false }
+        if lhs.testInformation != rhs.testInformation { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
         if lhs.build != rhs.build { return false }
         return true
     case (.failed(let lhs), .failed(let rhs)): 
-        if lhs.testName != rhs.testName { return false }
+        if lhs.testInformation != rhs.testInformation { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
         if lhs.diffImagePath != rhs.diffImagePath { return false }
         if lhs.failedImagePath != rhs.failedImagePath { return false }

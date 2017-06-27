@@ -8,10 +8,51 @@
 
 import Foundation
 
+enum SnapshotTestResultSwapperError: Error {
+    case canNotBeSwapped(testResult: SnapshotTestResult)
+    case nonRetinaImages(testResult: SnapshotTestResult)
+    case canNotPerformFileManagerOperation(testResult: SnapshotTestResult, underlyingError: Error)
+}
+
 class SnapshotTestResultSwapper {
     private let fileManager: FileManager
     
     init(fileManager: FileManager = FileManager.default) {
         self.fileManager = fileManager
+    }
+    
+    // MARK: - Helpers
+    
+    private  func extractImageSuffix(from imagePath: String, of testResult: SnapshotTestResult) throws -> String {
+        guard let failedImageSizeSuffixRange = imagePath.range(of: "@\\d{1}x", options: .regularExpression) else {
+                throw SnapshotTestResultSwapperError.nonRetinaImages(testResult: testResult)
+        }
+        return imagePath.substring(with: failedImageSizeSuffixRange)
+    }
+    
+    // MARK: - Interface
+    
+    func canSwap(_ testResult: SnapshotTestResult) -> Bool {
+        if case SnapshotTestResult.failed(_, _, _, _, _) = testResult {
+            return true
+        }
+        return false
+    }
+    
+    func swap(_ testResult: SnapshotTestResult) throws {
+        guard case let SnapshotTestResult.failed(testInformation, _, _, failedImagePath, build) = testResult else {
+            throw SnapshotTestResultSwapperError.canNotBeSwapped(testResult: testResult)
+        }
+        let failedImageSizeSuffix = try extractImageSuffix(from: failedImagePath, of: testResult)
+        let recordedImagePath = [build.fbReferenceImageDirectoryURL.absoluteString, testInformation.testClassName, testInformation.testName].joined(separator: "/") + failedImageSizeSuffix + ",png"
+        let recordedImageURL = URL(fileURLWithPath: recordedImagePath, isDirectory: false)
+        let failedImageURL = URL(fileURLWithPath: failedImagePath, isDirectory: false)
+        do {
+            try fileManager.removeItem(at: recordedImageURL)
+            try fileManager.copyItem(at: failedImageURL, to: recordedImageURL)
+        }
+        catch let error {
+            throw SnapshotTestResultSwapperError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
+        }
     }
 }

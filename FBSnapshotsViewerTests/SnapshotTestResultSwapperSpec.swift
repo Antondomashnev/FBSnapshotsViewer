@@ -50,25 +50,37 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                     testResult = SnapshotTestResult.recorded(testName: "Foo", referenceImagePath: "Bar", build: build)
                 }
                 
-                it("throws assertion") {
-                    expect{ swapper.swap(testResult) }.to(throwAssertion())
+                it("throws error") {
+                    expect { swapper.swap(testResult) }.to(throwError())
                 }
             }
             
             context("given failed snapshot test result") {
-                beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "DetailsViewController testNormalState", referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState@2x.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@2x.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png", build: build)
+                context("with non-retina images") {
+                    beforeEach {
+                        testResult = SnapshotTestResult.failed(testName: "DetailsViewController testNormalState", referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@.png", build: build)
+                    }
+                    
+                    it("throws error") {
+                        expect { swapper.swap(testResult) }.to(throwError())
+                    }
                 }
                 
-                it("removes current reference images from directory") {
-                    expect(fileManager.removeItemCalled).to(beTrue())
-                    expect(fileManager.removeItemAtURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
-                }
-                
-                it("copies failed snapshot image to the fb reference images directory") {
-                    expect(fileManager.copyItemCalled).to(beTrue())
-                    expect(fileManager.copyItemFromSourceURL).to(equal(URL(fileURLWithPath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png")))
-                    expect(fileManager.copyItemToDestinationURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
+                context("with retina images") {
+                    beforeEach {
+                        testResult = SnapshotTestResult.failed(testName: "DetailsViewController testNormalState", referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState@2x.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@2x.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png", build: build)
+                    }
+                    
+                    it("removes current reference images from directory") {
+                        expect(fileManager.removeItemCalled).to(beTrue())
+                        expect(fileManager.removeItemAtURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
+                    }
+                    
+                    it("copies failed snapshot image to the fb reference images directory") {
+                        expect(fileManager.copyItemCalled).to(beTrue())
+                        expect(fileManager.copyItemFromSourceURL).to(equal(URL(fileURLWithPath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png")))
+                        expect(fileManager.copyItemToDestinationURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
+                    }
                 }
             }
         }
