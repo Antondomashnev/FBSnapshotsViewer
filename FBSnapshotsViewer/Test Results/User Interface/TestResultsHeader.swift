@@ -13,6 +13,7 @@ class TestResultsHeader: NSView, NSCollectionViewSectionHeaderView {
     
     @IBOutlet private weak var contextLabel: NSTextField!
     @IBOutlet private weak var dateLabel: NSTextField!
+    @IBOutlet private weak var swapSnapshotsButton: NSButton!
     
     // MARK: - Helpers
     

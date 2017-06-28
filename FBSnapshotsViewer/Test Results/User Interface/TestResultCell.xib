@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
@@ -180,8 +180,20 @@
                                 <action selector="viewInKaleidoscopeButtonClicked:" target="i7H-GG-lM3" id="39C-6q-BzH"/>
                             </connections>
                         </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dTc-pr-6Mk">
+                            <rect key="frame" x="96" y="0.0" width="43" height="17"/>
+                            <buttonCell key="cell" type="inline" title="Swap" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="erZ-Db-LCI">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="smallSystemBold"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="swapSnapshotsButtonClicked:" target="i7H-GG-lM3" id="sNe-PT-tvr"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="dTc-pr-6Mk" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="1J2-q4-hjM"/>
+                        <constraint firstItem="dTc-pr-6Mk" firstAttribute="leading" secondItem="T5h-WQ-msk" secondAttribute="trailing" constant="8" id="Ftj-0I-Hed"/>
                         <constraint firstAttribute="height" constant="17" id="S1P-8B-JMQ"/>
                         <constraint firstItem="T5h-WQ-msk" firstAttribute="leading" secondItem="AHf-ta-nvJ" secondAttribute="leading" id="SY7-dV-TUe"/>
                         <constraint firstItem="T5h-WQ-msk" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="Urw-Sr-q5G"/>
@@ -222,6 +234,7 @@
                 <outlet property="referenceImageView" destination="K85-1M-wcy" id="UtW-Gp-pOZ"/>
                 <outlet property="separatorView" destination="Xdr-DA-S5B" id="axP-xd-ghd"/>
                 <outlet property="splitContainerView" destination="oaS-Kh-fqd" id="ID4-fk-Axc"/>
+                <outlet property="swapSnapshotsButton" destination="dTc-pr-6Mk" id="rYx-Iv-mfX"/>
                 <outlet property="testInfoContainerView" destination="YEn-VX-jtO" id="RRJ-ht-Nth"/>
                 <outlet property="testNameLabel" destination="MCk-nZ-jTQ" id="4DF-7O-GL0"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="t7t-hF-Vsm"/>

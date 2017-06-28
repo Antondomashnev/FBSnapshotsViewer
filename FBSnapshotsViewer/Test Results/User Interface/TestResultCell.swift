@@ -11,6 +11,7 @@ import Nuke
 
 protocol TestResultCellDelegate: class, AutoMockable {
     func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)
+    func testResultCell(_ cell: TestResultCell, swapSnapshotsButtonClicked: NSButton)
 }
 
 class TestResultCell: NSCollectionViewItem {
@@ -20,6 +21,7 @@ class TestResultCell: NSCollectionViewItem {
     
     @IBOutlet private weak var actionsContainerView: NSView!
     @IBOutlet private weak var viewInKaleidoscopeButton: NSButton!
+    @IBOutlet private weak var swapSnapshotsButton: NSButton!
     
     @IBOutlet private weak var imagesContainerView: NSView!
     @IBOutlet private weak var failedImageView: NSImageView!
@@ -114,5 +116,9 @@ class TestResultCell: NSCollectionViewItem {
 
     @objc @IBAction func viewInKaleidoscopeButtonClicked(_ sender: NSButton) {
         delegate?.testResultCell(self, viewInKaleidoscopeButtonClicked: sender)
+    }
+    
+    @objc @IBAction func swapSnapshotsButtonClicked(_ sender: NSButton) {
+        delegate?.testResultCell(self, swapSnapshotsButtonClicked: sender)
     }
 }
