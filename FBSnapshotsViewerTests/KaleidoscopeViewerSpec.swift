@@ -60,7 +60,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
             context("for recorded snapshot test result") {
                 beforeEach {
                     build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                    testResult = SnapshotTestResult.recorded(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", build: build)
+                    testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "ExampleTestClass", testName: "testName"), referenceImagePath: "foo/bar/referenceImage.png", build: build)
                 }
 
                 it("returns false") {
@@ -71,7 +71,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
             context("for failed snapshot test result") {
                 beforeEach {
                     build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                    testResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", diffImagePath: "foo/bar/diffImage.png", failedImagePath: "foo/bar/failedImage.png", build: build)
+                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "ExampleTestClass", testName: "testName"), referenceImagePath: "foo/bar/referenceImage.png", diffImagePath: "foo/bar/diffImage.png", failedImagePath: "foo/bar/failedImage.png", build: build)
                 }
 
                 it("returns true") {
@@ -109,7 +109,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
             context("for recorded snapshot test result") {
                 beforeEach {
                     build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                    testResult = SnapshotTestResult.recorded(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", build: build)
+                    testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "ExampleTestClass", testName: "testName"), referenceImagePath: "foo/bar/referenceImage.png", build: build)
                 }
 
                 it("throws an assertion") {
@@ -120,7 +120,7 @@ class KaleidoscopeViewerSpec: QuickSpec {
             context("for failed snapshot test result") {
                 beforeEach {
                     build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                    testResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "foo/bar/referenceImage.png", diffImagePath: "foo/bar/diffImage.png", failedImagePath: "foo/bar/failedImage.png", build: build)
+                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "ExampleTestClass", testName: "testName"), referenceImagePath: "foo/bar/referenceImage.png", diffImagePath: "foo/bar/diffImage.png", failedImagePath: "foo/bar/failedImage.png", build: build)
                 }
 
                 it("launches correct process") {

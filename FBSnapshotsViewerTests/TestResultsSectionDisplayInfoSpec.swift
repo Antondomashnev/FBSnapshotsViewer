@@ -21,7 +21,7 @@ class TestResultsSectionDisplayInfoSpec: QuickSpec {
             
             beforeEach {
                 let build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                let testResult = SnapshotTestResult.recorded(testName: "TestName", referenceImagePath: "foo/bar.png", build: build)
+                let testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "foo/bar.png", build: build)
                 title = TestResultsSectionTitleDisplayInfo(build: build, testContext: "TestContext")
                 items = [TestResultDisplayInfo(testResult: testResult)]
                 displayInfo = TestResultsSectionDisplayInfo(title: title, items: items)

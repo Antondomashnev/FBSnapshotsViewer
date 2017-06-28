@@ -44,8 +44,7 @@ class SnapshotTestResultSwapper {
             throw SnapshotTestResultSwapperError.canNotBeSwapped(testResult: testResult)
         }
         let failedImageSizeSuffix = try extractImageSuffix(from: failedImagePath, of: testResult)
-        let recordedImagePath = [build.fbReferenceImageDirectoryURL.absoluteString, testInformation.testClassName, testInformation.testName].joined(separator: "/") + failedImageSizeSuffix + ",png"
-        let recordedImageURL = URL(fileURLWithPath: recordedImagePath, isDirectory: false)
+        let recordedImageURL = build.fbReferenceImageDirectoryURL.appendingPathComponent(testInformation.testClassName).appendingPathComponent("\(testInformation.testName)\(failedImageSizeSuffix)").appendingPathExtension("png")
         let failedImageURL = URL(fileURLWithPath: failedImagePath, isDirectory: false)
         do {
             try fileManager.removeItem(at: recordedImageURL)

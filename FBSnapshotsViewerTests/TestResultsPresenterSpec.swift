@@ -43,7 +43,7 @@ class TestResultsPresenterSpec: QuickSpec {
 
             beforeEach {
                 build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL:  URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                testResult = SnapshotTestResult.recorded(testName: "MyTest", referenceImagePath: "foo/bar.png", build: build)
+                testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "MyTest"), referenceImagePath: "foo/bar.png", build: build)
                 testResultDisplayInfo = TestResultDisplayInfo(testResult: testResult)
                 presenter.openInKaleidoscope(testResultDisplayInfo: testResultDisplayInfo)
             }
@@ -71,7 +71,7 @@ class TestResultsPresenterSpec: QuickSpec {
 
                 beforeEach {
                     let build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL:  URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                    let snapshotTestResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
+                    let snapshotTestResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
                     let titleInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "Context")
                     let sectionInfo = TestResultsSectionDisplayInfo(title: titleInfo, items: [TestResultDisplayInfo(testResult: snapshotTestResult)])
                     testResults = [snapshotTestResult]
@@ -100,7 +100,7 @@ class TestResultsPresenterSpec: QuickSpec {
             
             beforeEach {
                 let build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL:  URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                let snapshotTestResult = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
+                let snapshotTestResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
                 testResults = [snapshotTestResult]
                 interactor.testResults = testResults
                 presenter.selectDiffMode(TestResultsDiffMode.diff)

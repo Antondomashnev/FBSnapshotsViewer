@@ -20,15 +20,15 @@ class TestResultsCollectionViewOutletsSpec: QuickSpec {
 
         beforeEach {
             let build1 = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL:  URL(fileURLWithPath: "foo/bar", isDirectory: true))
-            let snapshotTestResult1 = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build1)
+            let snapshotTestResult1 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build1)
             let testResult1 = TestResultDisplayInfo(testResult: snapshotTestResult1)
             let sectionTitle1 = TestResultsSectionTitleDisplayInfo(build: build1, testContext: "Context1")
             let section1 = TestResultsSectionDisplayInfo(title: sectionTitle1, items: [testResult1])
             
             let build2 = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL:  URL(fileURLWithPath: "foo/bar", isDirectory: true))
-            let snapshotTestResult2 = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build2)
+            let snapshotTestResult2 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build2)
             let testResult2 = TestResultDisplayInfo(testResult: snapshotTestResult2)
-            let snapshotTestResult3 = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build2)
+            let snapshotTestResult3 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build2)
             let testResult3 = TestResultDisplayInfo(testResult: snapshotTestResult3)
             let sectionTitle2 = TestResultsSectionTitleDisplayInfo(build: build2, testContext: "Context2")
             let section2 = TestResultsSectionDisplayInfo(title: sectionTitle2, items: [testResult2, testResult3])

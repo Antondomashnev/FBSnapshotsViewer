@@ -86,7 +86,7 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
                 }
                 
                 beforeEach {
-                    updatesHandler.createdTestResults = [SnapshotTestResult.recorded(testName: "Foo", referenceImagePath: "path", build: build)]
+                    updatesHandler.createdTestResults = [SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "Foo"), referenceImagePath: "path", build: build)]
                     fileWatcher.startClosure?(.updated(data: update))
                 }
                 

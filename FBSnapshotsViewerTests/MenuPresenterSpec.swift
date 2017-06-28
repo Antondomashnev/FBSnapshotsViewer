@@ -115,7 +115,7 @@ class MenuPresenterSpec: QuickSpec {
 
         describe(".didFindNewTestResult") {
             beforeEach {
-                presenter.didFindNewTestResult(SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build))
+                presenter.didFindNewTestResult(SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build))
             }
 
             it("sets that new test results are available in user interface") {
@@ -129,7 +129,7 @@ class MenuPresenterSpec: QuickSpec {
                 var foundTestResults: [SnapshotTestResult] = []
 
                 beforeEach {
-                    foundTestResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)]
+                    foundTestResults = [SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)]
                     interactor.foundTestResults = foundTestResults
                     presenter.showTestResults()
                 }
@@ -140,7 +140,7 @@ class MenuPresenterSpec: QuickSpec {
                 }
 
                 it("shows test results") {
-                    let expectedPaameter = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
+                    let expectedPaameter = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
                     expect(wireframe.showTestResultsModuleCalled).to(beTrue())
                     expect(wireframe.showTestResultsModuleReceivedParameters[0]).to(equal(expectedPaameter))
                 }

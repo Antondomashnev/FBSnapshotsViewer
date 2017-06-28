@@ -92,8 +92,8 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec: QuickSpec {
             let kaleidoscopeCommandMesageLogLine = ApplicationLogLine.kaleidoscopeCommandMessage(line: "BlaBla")
             let referenceImageSavedMessageLogLine = ApplicationLogLine.referenceImageSavedMessage(line: "FooFoo")
             let fbReferenceImageDirMessageLogLine = ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")
-            let failedSnapshotTestResult = SnapshotTestResult.failed(testName: "failedTest", referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", build: build)
-            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testName: "recordedTest", referenceImagePath: "referenceTestImage.png", build: build)
+            let failedSnapshotTestResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "Foo", testName: "failedTest"), referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", build: build)
+            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "recordedTest"), referenceImagePath: "referenceTestImage.png", build: build)
             
             beforeEach {
                 applicationNameExtractor.extractApplicationNameReturnValue = "MyApp"
