@@ -12,10 +12,18 @@ import Nimble
 @testable import FBSnapshotsViewer
 
 class SnapshotTestResultSwapper_MockFileManager: FileManager {
+    enum SnapshotTestResultSwapper_MockFileManagerError: Error {
+        case sample
+    }
+    
     var copyItemCalled: Bool = false
     var copyItemFromSourceURL: URL?
     var copyItemToDestinationURL: URL?
+    var copyItemThrows: Bool = false
     override func copyItem(at srcURL: URL, to dstURL: URL) throws {
+        if copyItemThrows {
+            throw SnapshotTestResultSwapper_MockFileManagerError.sample
+        }
         copyItemCalled = true
         copyItemFromSourceURL = srcURL
         copyItemToDestinationURL = dstURL
@@ -23,7 +31,11 @@ class SnapshotTestResultSwapper_MockFileManager: FileManager {
     
     var removeItemCalled: Bool = false
     var removeItemAtURL: URL?
+    var removeItemThrows: Bool = false
     override func removeItem(at URL: URL) throws {
+        if removeItemThrows {
+            throw SnapshotTestResultSwapper_MockFileManagerError.sample
+        }
         removeItemCalled = true
         removeItemAtURL = URL
     }
@@ -47,6 +59,17 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
             context("given recorded snapshot test result") {
                 beforeEach {
                     testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "Foo"), referenceImagePath: "Bar", build: build)
+                }
+                
+                it("throws error") {
+                    expect { try swapper.swap(testResult) }.to(throwError())
+                }
+            }
+            
+            context("when file manager throws exception") {
+                beforeEach {
+                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState@2x.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@2x.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png", build: build)
+                    fileManager.removeItemThrows = true
                 }
                 
                 it("throws error") {
