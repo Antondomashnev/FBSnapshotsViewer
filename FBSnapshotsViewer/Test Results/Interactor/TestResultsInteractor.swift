@@ -11,12 +11,16 @@ import Foundation
 class TestResultsInteractor {
     fileprivate let kaleidoscopeViewer: ExternalViewer.Type
     fileprivate let processLauncher: ProcessLauncher
+    fileprivate let swapper: SnapshotTestResultSwapper
     let testResults: [SnapshotTestResult]
+    
+    weak var output: TestResultsInteractorOutput?
 
-    init(testResults: [SnapshotTestResult], kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, processLauncher: ProcessLauncher = ProcessLauncher()) {
+    init(testResults: [SnapshotTestResult], kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, processLauncher: ProcessLauncher = ProcessLauncher(), swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper(fileManager: FileManager.default)) {
         self.testResults = testResults
         self.kaleidoscopeViewer = kaleidoscopeViewer
         self.processLauncher = processLauncher
+        self.swapper = swapper
     }
 }
 
@@ -32,6 +36,14 @@ extension TestResultsInteractor: TestResultsInteractorInput {
     }
     
     func swap(testResult: SnapshotTestResult) {
-        
+        if !swapper.canSwap(testResult) {
+            return
+        }
+        do {
+            try? swapper.swap(testResult)
+        }
+        catch let error {
+            output?.didFailToSwap(testResult: testResult, with: error)
+        }
     }
 }

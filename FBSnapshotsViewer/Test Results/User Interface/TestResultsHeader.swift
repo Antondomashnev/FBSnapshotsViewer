@@ -8,8 +8,14 @@
 
 import AppKit
 
+protocol TestResultsHeaderDelegate: class, AutoMockable {
+    func testResultsHeader(_ header: TestResultsHeader, swapSnapshotsButtonClicked: NSButton)
+}
+
 class TestResultsHeader: NSView, NSCollectionViewSectionHeaderView {
     static let itemIdentifier = "TestResultsHeader"
+    
+    weak var delegate: TestResultsHeaderDelegate?
     
     @IBOutlet private weak var contextLabel: NSTextField!
     @IBOutlet private weak var dateLabel: NSTextField!
@@ -28,5 +34,11 @@ class TestResultsHeader: NSView, NSCollectionViewSectionHeaderView {
         contextLabel.stringValue = sectionTitleInfo.title
         dateLabel.stringValue = sectionTitleInfo.timeAgo
         configureTitleLabelsColorScheme(for: appleInterfaceMode)
+    }
+    
+    // MARK: - Actions
+    
+    @objc @IBAction func swapSnapshotsButtonClicked(_ sender: NSButton) {
+        delegate?.testResultsHeader(self, swapSnapshotsButtonClicked: sender)
     }
 }

@@ -37,4 +37,10 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         selectedDiffMode = diffMode
         updateUserInterface()
     }
+    
+    func swap(_ testResults: [TestResultDisplayInfo]) {
+        for testResultInfo in testResults {
+            interactor?.swap(testResult: testResultInfo.testResult)
+        }
+    }
 }

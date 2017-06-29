@@ -1,6 +1,9 @@
 // Generated using Sourcery 0.6.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
+// swiftlint:disable line_length
+// swiftlint:disable variable_name
+
 import Foundation
 #if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
@@ -14,13 +17,13 @@ class ApplicationMock: Application {
 
     //MARK: - terminate
 
-    var terminateCalled = false
-    var terminateReceivedSender: Any?
+    var terminate_Called = false
+    var terminate_ReceivedSender: Any?
 
     func terminate(_ sender: Any?) {
 
-        terminateCalled = true
-        terminateReceivedSender = sender
+        terminate_Called = true
+        terminate_ReceivedSender = sender
     }
 }
 class ApplicationNameExtractorMock: ApplicationNameExtractor {
@@ -28,15 +31,15 @@ class ApplicationNameExtractorMock: ApplicationNameExtractor {
 
     //MARK: - extractApplicationName
 
-    var extractApplicationNameCalled = false
-    var extractApplicationNameReceivedLogLine: ApplicationLogLine?
-    var extractApplicationNameReturnValue: String!
+    var extractApplicationNamefromCalled = false
+    var extractApplicationNamefromReceivedLogLine: ApplicationLogLine?
+    var extractApplicationNamefromReturnValue: String!
 
     func extractApplicationName(from logLine: ApplicationLogLine) -> String {
 
-        extractApplicationNameCalled = true
-        extractApplicationNameReceivedLogLine = logLine
-        return extractApplicationNameReturnValue
+        extractApplicationNamefromCalled = true
+        extractApplicationNamefromReceivedLogLine = logLine
+        return extractApplicationNamefromReturnValue
     }
 }
 class ConfigurationStorageMock: ConfigurationStorage {
@@ -54,13 +57,13 @@ class ConfigurationStorageMock: ConfigurationStorage {
     }
     //MARK: - save
 
-    var saveCalled = false
-    var saveReceivedConfiguration: Configuration?
+    var saveconfigurationCalled = false
+    var saveconfigurationReceivedConfiguration: Configuration?
 
     func save(configuration: Configuration) {
 
-        saveCalled = true
-        saveReceivedConfiguration = configuration
+        saveconfigurationCalled = true
+        saveconfigurationReceivedConfiguration = configuration
     }
 }
 class FBReferenceImageDirectoryURLExtractorMock: FBReferenceImageDirectoryURLExtractor {
@@ -68,15 +71,15 @@ class FBReferenceImageDirectoryURLExtractorMock: FBReferenceImageDirectoryURLExt
 
     //MARK: - extractImageDirectoryURL
 
-    var extractImageDirectoryURLCalled = false
-    var extractImageDirectoryURLReceivedLogLine: ApplicationLogLine?
-    var extractImageDirectoryURLReturnValue: URL!
+    var extractImageDirectoryURLfromCalled = false
+    var extractImageDirectoryURLfromReceivedLogLine: ApplicationLogLine?
+    var extractImageDirectoryURLfromReturnValue: URL!
 
     func extractImageDirectoryURL(from logLine: ApplicationLogLine) -> URL {
 
-        extractImageDirectoryURLCalled = true
-        extractImageDirectoryURLReceivedLogLine = logLine
-        return extractImageDirectoryURLReturnValue
+        extractImageDirectoryURLfromCalled = true
+        extractImageDirectoryURLfromReceivedLogLine = logLine
+        return extractImageDirectoryURLfromReturnValue
     }
 }
 class FolderEventsListenerMock: FolderEventsListener {
@@ -85,10 +88,10 @@ class FolderEventsListenerMock: FolderEventsListener {
 
     //MARK: - init
 
-    var initReceivedArguments: (folderPath: String, filter: FolderEventFilter?, fileWatcherFactory: FileWatcherFactory)?
+    var initfolderPathfilterfileWatcherFactoryReceivedArguments: (folderPath: String, filter: FolderEventFilter?, fileWatcherFactory: FileWatcherFactory)?
 
     required init(folderPath: String, filter: FolderEventFilter?, fileWatcherFactory: FileWatcherFactory) {
-        initReceivedArguments = (folderPath: folderPath, filter: filter, fileWatcherFactory: fileWatcherFactory)
+        initfolderPathfilterfileWatcherFactoryReceivedArguments = (folderPath: folderPath, filter: filter, fileWatcherFactory: fileWatcherFactory)
     }
     //MARK: - startListening
 
@@ -112,13 +115,13 @@ class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
 
     //MARK: - folderEventsListener
 
-    var folderEventsListenerCalled = false
-    var folderEventsListenerReceivedArguments: (listener: FolderEventsListener, event: FolderEvent)?
+    var folderEventsListener_didReceiveCalled = false
+    var folderEventsListener_didReceiveReceivedArguments: (listener: FolderEventsListener, event: FolderEvent)?
 
     func folderEventsListener(_ listener: FolderEventsListener, didReceive event: FolderEvent) {
 
-        folderEventsListenerCalled = true
-        folderEventsListenerReceivedArguments = (listener: listener, event: event)
+        folderEventsListener_didReceiveCalled = true
+        folderEventsListener_didReceiveReceivedArguments = (listener: listener, event: event)
     }
 }
 class MenuInteractorInputMock: MenuInteractorInput {
@@ -127,23 +130,23 @@ class MenuInteractorInputMock: MenuInteractorInput {
 
     //MARK: - startXcodeBuildsListening
 
-    var startXcodeBuildsListeningCalled = false
-    var startXcodeBuildsListeningReceivedDerivedDataFolder: DerivedDataFolder?
+    var startXcodeBuildsListeningderivedDataFolderCalled = false
+    var startXcodeBuildsListeningderivedDataFolderReceivedDerivedDataFolder: DerivedDataFolder?
 
     func startXcodeBuildsListening(derivedDataFolder: DerivedDataFolder) {
 
-        startXcodeBuildsListeningCalled = true
-        startXcodeBuildsListeningReceivedDerivedDataFolder = derivedDataFolder
+        startXcodeBuildsListeningderivedDataFolderCalled = true
+        startXcodeBuildsListeningderivedDataFolderReceivedDerivedDataFolder = derivedDataFolder
     }
     //MARK: - startSnapshotTestResultListening
 
-    var startSnapshotTestResultListeningCalled = false
-    var startSnapshotTestResultListeningReceivedPath: String?
+    var startSnapshotTestResultListeningfromLogFileAtCalled = false
+    var startSnapshotTestResultListeningfromLogFileAtReceivedPath: String?
 
     func startSnapshotTestResultListening(fromLogFileAt path: String) {
 
-        startSnapshotTestResultListeningCalled = true
-        startSnapshotTestResultListeningReceivedPath = path
+        startSnapshotTestResultListeningfromLogFileAtCalled = true
+        startSnapshotTestResultListeningfromLogFileAtReceivedPath = path
     }
 }
 class MenuInteractorOutputMock: MenuInteractorOutput {
@@ -151,23 +154,23 @@ class MenuInteractorOutputMock: MenuInteractorOutput {
 
     //MARK: - didFindNewTestResult
 
-    var didFindNewTestResultCalled = false
-    var didFindNewTestResultReceivedTestResult: SnapshotTestResult?
+    var didFindNewTestResult_Called = false
+    var didFindNewTestResult_ReceivedTestResult: SnapshotTestResult?
 
     func didFindNewTestResult(_ testResult: SnapshotTestResult) {
 
-        didFindNewTestResultCalled = true
-        didFindNewTestResultReceivedTestResult = testResult
+        didFindNewTestResult_Called = true
+        didFindNewTestResult_ReceivedTestResult = testResult
     }
     //MARK: - didFindNewTestLogFile
 
-    var didFindNewTestLogFileCalled = false
-    var didFindNewTestLogFileReceivedPath: String?
+    var didFindNewTestLogFileatCalled = false
+    var didFindNewTestLogFileatReceivedPath: String?
 
     func didFindNewTestLogFile(at path: String) {
 
-        didFindNewTestLogFileCalled = true
-        didFindNewTestLogFileReceivedPath = path
+        didFindNewTestLogFileatCalled = true
+        didFindNewTestLogFileatReceivedPath = path
     }
 }
 class MenuModuleInterfaceMock: MenuModuleInterface {
@@ -227,13 +230,13 @@ class MenuUserInterfaceMock: MenuUserInterface {
 
     //MARK: - setNewTestResults
 
-    var setNewTestResultsCalled = false
-    var setNewTestResultsReceivedAvailable: Bool?
+    var setNewTestResultsavailableCalled = false
+    var setNewTestResultsavailableReceivedAvailable: Bool?
 
     func setNewTestResults(available: Bool) {
 
-        setNewTestResultsCalled = true
-        setNewTestResultsReceivedAvailable = available
+        setNewTestResultsavailableCalled = true
+        setNewTestResultsavailableReceivedAvailable = available
     }
     //MARK: - popUpOptionsMenu
 
@@ -267,23 +270,23 @@ class PreferencesInteractorInputMock: PreferencesInteractorInput {
     }
     //MARK: - setNewDerivedDataFolderType
 
-    var setNewDerivedDataFolderTypeCalled = false
-    var setNewDerivedDataFolderTypeReceivedType: String?
+    var setNewDerivedDataFolderType_Called = false
+    var setNewDerivedDataFolderType_ReceivedType: String?
 
     func setNewDerivedDataFolderType(_ type: String) {
 
-        setNewDerivedDataFolderTypeCalled = true
-        setNewDerivedDataFolderTypeReceivedType = type
+        setNewDerivedDataFolderType_Called = true
+        setNewDerivedDataFolderType_ReceivedType = type
     }
     //MARK: - setNewDerivedDataFolderPath
 
-    var setNewDerivedDataFolderPathCalled = false
-    var setNewDerivedDataFolderPathReceivedPath: String?
+    var setNewDerivedDataFolderPath_Called = false
+    var setNewDerivedDataFolderPath_ReceivedPath: String?
 
     func setNewDerivedDataFolderPath(_ path: String) {
 
-        setNewDerivedDataFolderPathCalled = true
-        setNewDerivedDataFolderPathReceivedPath = path
+        setNewDerivedDataFolderPath_Called = true
+        setNewDerivedDataFolderPath_ReceivedPath = path
     }
 }
 class PreferencesModuleDelegateMock: PreferencesModuleDelegate {
@@ -291,13 +294,13 @@ class PreferencesModuleDelegateMock: PreferencesModuleDelegate {
 
     //MARK: - preferencesModuleWillClose
 
-    var preferencesModuleWillCloseCalled = false
-    var preferencesModuleWillCloseReceivedPreferencesModule: PreferencesModuleInterface?
+    var preferencesModuleWillClose_Called = false
+    var preferencesModuleWillClose_ReceivedPreferencesModule: PreferencesModuleInterface?
 
     func preferencesModuleWillClose(_ preferencesModule: PreferencesModuleInterface) {
 
-        preferencesModuleWillCloseCalled = true
-        preferencesModuleWillCloseReceivedPreferencesModule = preferencesModule
+        preferencesModuleWillClose_Called = true
+        preferencesModuleWillClose_ReceivedPreferencesModule = preferencesModule
     }
 }
 class PreferencesModuleInterfaceMock: PreferencesModuleInterface {
@@ -321,23 +324,23 @@ class PreferencesModuleInterfaceMock: PreferencesModuleInterface {
     }
     //MARK: - select
 
-    var selectCalled = false
-    var selectReceivedDerivedDataFolderType: String?
+    var selectderivedDataFolderTypeCalled = false
+    var selectderivedDataFolderTypeReceivedDerivedDataFolderType: String?
 
     func select(derivedDataFolderType: String) {
 
-        selectCalled = true
-        selectReceivedDerivedDataFolderType = derivedDataFolderType
+        selectderivedDataFolderTypeCalled = true
+        selectderivedDataFolderTypeReceivedDerivedDataFolderType = derivedDataFolderType
     }
     //MARK: - update
 
-    var updateCalled = false
-    var updateReceivedDerivedDataFolderPath: String?
+    var updatederivedDataFolderPathCalled = false
+    var updatederivedDataFolderPathReceivedDerivedDataFolderPath: String?
 
     func update(derivedDataFolderPath: String) {
 
-        updateCalled = true
-        updateReceivedDerivedDataFolderPath = derivedDataFolderPath
+        updatederivedDataFolderPathCalled = true
+        updatederivedDataFolderPathReceivedDerivedDataFolderPath = derivedDataFolderPath
     }
 }
 class PreferencesUserInterfaceMock: PreferencesUserInterface {
@@ -345,13 +348,13 @@ class PreferencesUserInterfaceMock: PreferencesUserInterface {
 
     //MARK: - show
 
-    var showCalled = false
-    var showReceivedPreferencesDisplayInfo: PreferencesDisplayInfo?
+    var showpreferencesDisplayInfoCalled = false
+    var showpreferencesDisplayInfoReceivedPreferencesDisplayInfo: PreferencesDisplayInfo?
 
     func show(preferencesDisplayInfo: PreferencesDisplayInfo) {
 
-        showCalled = true
-        showReceivedPreferencesDisplayInfo = preferencesDisplayInfo
+        showpreferencesDisplayInfoCalled = true
+        showpreferencesDisplayInfoReceivedPreferencesDisplayInfo = preferencesDisplayInfo
     }
 }
 class TestResultCellDelegateMock: TestResultCellDelegate {
@@ -359,13 +362,37 @@ class TestResultCellDelegateMock: TestResultCellDelegate {
 
     //MARK: - testResultCell
 
-    var testResultCellCalled = false
-    var testResultCellReceivedArguments: (cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)?
+    var testResultCell_viewInKaleidoscopeButtonClickedCalled = false
+    var testResultCell_viewInKaleidoscopeButtonClickedReceivedArguments: (cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)?
 
     func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton) {
 
-        testResultCellCalled = true
-        testResultCellReceivedArguments = (cell: cell, viewInKaleidoscopeButtonClicked: viewInKaleidoscopeButtonClicked)
+        testResultCell_viewInKaleidoscopeButtonClickedCalled = true
+        testResultCell_viewInKaleidoscopeButtonClickedReceivedArguments = (cell: cell, viewInKaleidoscopeButtonClicked: viewInKaleidoscopeButtonClicked)
+    }
+    //MARK: - testResultCell
+
+    var testResultCell_swapSnapshotsButtonClickedCalled = false
+    var testResultCell_swapSnapshotsButtonClickedReceivedArguments: (cell: TestResultCell, swapSnapshotsButtonClicked: NSButton)?
+
+    func testResultCell(_ cell: TestResultCell, swapSnapshotsButtonClicked: NSButton) {
+
+        testResultCell_swapSnapshotsButtonClickedCalled = true
+        testResultCell_swapSnapshotsButtonClickedReceivedArguments = (cell: cell, swapSnapshotsButtonClicked: swapSnapshotsButtonClicked)
+    }
+}
+class TestResultsHeaderDelegateMock: TestResultsHeaderDelegate {
+
+
+    //MARK: - testResultsHeader
+
+    var testResultsHeader_swapSnapshotsButtonClickedCalled = false
+    var testResultsHeader_swapSnapshotsButtonClickedReceivedArguments: (header: TestResultsHeader, swapSnapshotsButtonClicked: NSButton)?
+
+    func testResultsHeader(_ header: TestResultsHeader, swapSnapshotsButtonClicked: NSButton) {
+
+        testResultsHeader_swapSnapshotsButtonClickedCalled = true
+        testResultsHeader_swapSnapshotsButtonClickedReceivedArguments = (header: header, swapSnapshotsButtonClicked: swapSnapshotsButtonClicked)
     }
 }
 class TestResultsInteractorInputMock: TestResultsInteractorInput {
@@ -374,23 +401,37 @@ class TestResultsInteractorInputMock: TestResultsInteractorInput {
 
     //MARK: - openInKaleidoscope
 
-    var openInKaleidoscopeCalled = false
-    var openInKaleidoscopeReceivedTestResult: SnapshotTestResult?
+    var openInKaleidoscopetestResultCalled = false
+    var openInKaleidoscopetestResultReceivedTestResult: SnapshotTestResult?
 
     func openInKaleidoscope(testResult: SnapshotTestResult) {
 
-        openInKaleidoscopeCalled = true
-        openInKaleidoscopeReceivedTestResult = testResult
+        openInKaleidoscopetestResultCalled = true
+        openInKaleidoscopetestResultReceivedTestResult = testResult
     }
     //MARK: - swap
 
-    var swapCalled = false
-    var swapReceivedTestResult: SnapshotTestResult?
+    var swaptestResultCalled = false
+    var swaptestResultReceivedTestResult: SnapshotTestResult?
 
     func swap(testResult: SnapshotTestResult) {
 
-        swapCalled = true
-        swapReceivedTestResult = testResult
+        swaptestResultCalled = true
+        swaptestResultReceivedTestResult = testResult
+    }
+}
+class TestResultsInteractorOutputMock: TestResultsInteractorOutput {
+
+
+    //MARK: - didFailToSwap
+
+    var didFailToSwaptestResultwithCalled = false
+    var didFailToSwaptestResultwithReceivedArguments: (testResult: SnapshotTestResult, error: Error)?
+
+    func didFailToSwap(testResult: SnapshotTestResult, with error: Error) {
+
+        didFailToSwaptestResultwithCalled = true
+        didFailToSwaptestResultwithReceivedArguments = (testResult: testResult, error: error)
     }
 }
 class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
@@ -406,23 +447,33 @@ class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
     }
     //MARK: - openInKaleidoscope
 
-    var openInKaleidoscopeCalled = false
-    var openInKaleidoscopeReceivedTestResultDisplayInfo: TestResultDisplayInfo?
+    var openInKaleidoscopetestResultDisplayInfoCalled = false
+    var openInKaleidoscopetestResultDisplayInfoReceivedTestResultDisplayInfo: TestResultDisplayInfo?
 
     func openInKaleidoscope(testResultDisplayInfo: TestResultDisplayInfo) {
 
-        openInKaleidoscopeCalled = true
-        openInKaleidoscopeReceivedTestResultDisplayInfo = testResultDisplayInfo
+        openInKaleidoscopetestResultDisplayInfoCalled = true
+        openInKaleidoscopetestResultDisplayInfoReceivedTestResultDisplayInfo = testResultDisplayInfo
     }
     //MARK: - selectDiffMode
 
-    var selectDiffModeCalled = false
-    var selectDiffModeReceivedDiffMode: TestResultsDiffMode?
+    var selectDiffMode_Called = false
+    var selectDiffMode_ReceivedDiffMode: TestResultsDiffMode?
 
     func selectDiffMode(_ diffMode: TestResultsDiffMode) {
 
-        selectDiffModeCalled = true
-        selectDiffModeReceivedDiffMode = diffMode
+        selectDiffMode_Called = true
+        selectDiffMode_ReceivedDiffMode = diffMode
+    }
+    //MARK: - swap
+
+    var swap_Called = false
+    var swap_ReceivedTestResults: [TestResultDisplayInfo]?
+
+    func swap(_ testResults: [TestResultDisplayInfo]) {
+
+        swap_Called = true
+        swap_ReceivedTestResults = testResults
     }
 }
 class TestResultsUserInterfaceMock: TestResultsUserInterface {
@@ -430,13 +481,13 @@ class TestResultsUserInterfaceMock: TestResultsUserInterface {
 
     //MARK: - show
 
-    var showCalled = false
-    var showReceivedDisplayInfo: TestResultsDisplayInfo?
+    var showdisplayInfoCalled = false
+    var showdisplayInfoReceivedDisplayInfo: TestResultsDisplayInfo?
 
     func show(displayInfo: TestResultsDisplayInfo) {
 
-        showCalled = true
-        showReceivedDisplayInfo = displayInfo
+        showdisplayInfoCalled = true
+        showdisplayInfoReceivedDisplayInfo = displayInfo
     }
 }
 class UpdaterMock: Updater {

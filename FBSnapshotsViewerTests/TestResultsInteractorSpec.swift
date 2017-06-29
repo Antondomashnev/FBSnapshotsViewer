@@ -11,7 +11,7 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
-class TestResultsInteractor_Mock: ExternalViewer {
+class TestResultsInteractor_MockExternalViewer: ExternalViewer {
     static var name: String { return "" }
     static var bundleID: String { return "" }
 
@@ -37,10 +37,28 @@ class TestResultsInteractor_Mock: ExternalViewer {
     }
 }
 
+class TestResultsInteractor_MockSnapshotTestResultSwapper: SnapshotTestResultSwapper {
+    var swapThrows: Bool = false
+    var swapCalled: Bool = false
+    var swapTestResult: SnapshotTestResult?
+    override func swap(_ testResult: SnapshotTestResult) throws {
+        swapCalled = true
+        swapTestResult = testResult
+        if swapThrows {
+            throw SnapshotTestResultSwapperError.canNotBeSwapped(testResult: testResult)
+        }
+    }
+    
+    var canSwapReturnValue: Bool = false
+    override func canSwap(_ testResult: SnapshotTestResult) -> Bool {
+        return canSwapReturnValue
+    }
+}
+
 class TestResultsInteractorSpec: QuickSpec {
     override func spec() {
         let build: Build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
-        let kaleidoscopeViewer: TestResultsInteractor_Mock.Type = TestResultsInteractor_Mock.self
+        let kaleidoscopeViewer: TestResultsInteractor_MockExternalViewer.Type = TestResultsInteractor_MockExternalViewer.self
         var processLauncher: ProcessLauncher!
         var interactor: TestResultsInteractor!
         var testResults: [SnapshotTestResult] = []
@@ -55,6 +73,10 @@ class TestResultsInteractorSpec: QuickSpec {
 
         afterEach {
             kaleidoscopeViewer.reset()
+        }
+        
+        describe(".swap") {
+            
         }
 
         describe(".openInKaleidoscope") {
