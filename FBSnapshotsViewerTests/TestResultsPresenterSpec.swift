@@ -20,22 +20,50 @@ class TestResultsPresenter_MockTestResultsDisplayInfosCollector: TestResultsDisp
     }
 }
 
+class TestResultsPresenter_MockTestResultsInteractorInputMock: TestResultsInteractorInputMock {
+    var swapCalledCounter: Int = 0
+    override func swap(testResult: SnapshotTestResult) {
+        super.swap(testResult: testResult)
+        swapCalledCounter += 1
+    }
+}
+
 class TestResultsPresenterSpec: QuickSpec {
     override func spec() {
         var presenter: TestResultsPresenter!
-        var interactor: TestResultsInteractorInputMock!
+        var interactor: TestResultsPresenter_MockTestResultsInteractorInputMock!
         var userInterface: TestResultsUserInterfaceMock!
         var testResultsCollector: TestResultsPresenter_MockTestResultsDisplayInfosCollector!
 
         beforeEach {
             testResultsCollector = TestResultsPresenter_MockTestResultsDisplayInfosCollector()
-            interactor = TestResultsInteractorInputMock()
+            interactor = TestResultsPresenter_MockTestResultsInteractorInputMock()
             userInterface = TestResultsUserInterfaceMock()
             presenter = TestResultsPresenter(testResultsCollector: testResultsCollector)
             presenter.interactor = interactor
             presenter.userInterface = userInterface
         }
-
+        
+        describe(".swap") {
+            var testResults: [TestResultDisplayInfo] = []
+            
+            beforeEach {
+                let build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar"))
+                let testInformation1 = SnapshotTestInformation(testClassName: "testClassName", testName: "testName1")
+                let testResult1 = SnapshotTestResult.recorded(testInformation: testInformation1, referenceImagePath: "foo/bar/testName1.png", build: build)
+                let testResultDisplayInfo1 = TestResultDisplayInfo(testResult: testResult1)
+                let testInformation2 = SnapshotTestInformation(testClassName: "testClassName", testName: "testName2")
+                let testResult2 = SnapshotTestResult.recorded(testInformation: testInformation2, referenceImagePath: "foo/bar/testName2.png", build: build)
+                let testResultDisplayInfo2 = TestResultDisplayInfo(testResult: testResult2)
+                testResults = [testResultDisplayInfo1, testResultDisplayInfo2]
+                presenter.swap(testResults)
+            }
+            
+            it("swaps all given test results") {
+                expect(interactor.swapCalledCounter).to(equal(2))
+            }
+        }
+        
         describe(".openInKaleidoscope") {
             var testResult: SnapshotTestResult!
             var testResultDisplayInfo: TestResultDisplayInfo!
