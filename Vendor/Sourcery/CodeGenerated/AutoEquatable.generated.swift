@@ -47,6 +47,7 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard lhs.testName == rhs.testName else { return false }
     guard lhs.testContext == rhs.testContext else { return false }
     guard lhs.canBeViewedInKaleidoscope == rhs.canBeViewedInKaleidoscope else { return false }
+    guard lhs.canBeSwapped == rhs.canBeSwapped else { return false }
     guard lhs.testResult == rhs.testResult else { return false }
     return true
 }

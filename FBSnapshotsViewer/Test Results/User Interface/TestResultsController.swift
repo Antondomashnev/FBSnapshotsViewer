@@ -68,6 +68,7 @@ extension TestResultsController: TestResultCellDelegate {
             return
         }
         eventHandler.swap([testResultInfo])
+        collectionView.reloadData()
     }
 }
 
@@ -88,6 +89,7 @@ extension TestResultsController: TestResultsHeaderDelegate {
             return
         }
         eventHandler.swap(testResultsSectionInfo.itemInfos)
+        collectionView.reloadData()
     }
 }
 

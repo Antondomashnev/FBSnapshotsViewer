@@ -15,10 +15,12 @@ struct TestResultDisplayInfo: AutoEquatable {
     let testName: String
     let testContext: String
     let canBeViewedInKaleidoscope: Bool
+    let canBeSwapped: Bool
     let testResult: SnapshotTestResult
 
-    init(testResult: SnapshotTestResult, kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self) {
+    init(testResult: SnapshotTestResult, kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()) {
         self.testResult = testResult
+        self.canBeSwapped = swapper.canSwap(testResult)
         self.canBeViewedInKaleidoscope = kaleidoscopeViewer.isAvailable() && kaleidoscopeViewer.canView(snapshotTestResult: testResult)
         switch testResult {
         case let .recorded(_, referenceImagePath, _):

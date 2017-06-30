@@ -92,6 +92,7 @@ class TestResultCell: NSCollectionViewItem {
         if let failedImageURL = testResult.failedImageURL {
             Nuke.loadImage(with: failedImageURL, into: failedImageView)
         }
+        swapSnapshotsButton.isHidden = !testResult.canBeSwapped
         viewInKaleidoscopeButton.isHidden = !testResult.canBeViewedInKaleidoscope
         testNameLabel.stringValue = testResult.testName
     }
