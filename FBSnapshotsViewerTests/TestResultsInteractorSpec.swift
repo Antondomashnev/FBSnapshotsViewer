@@ -110,7 +110,7 @@ class TestResultsInteractorSpec: QuickSpec {
                     }
                     
                     it("outputs error") {
-                        expect(output.didFailToSwaptestResultwithCalled).to(beTrue())
+                        expect(output.didFailToSwap_testResult_with_Called).to(beTrue())
                     }
                 }
                 
@@ -122,7 +122,7 @@ class TestResultsInteractorSpec: QuickSpec {
                     
                     it("swaps") {
                         expect(swapper.swapCalled).to(beTrue())
-                        expect(output.didFailToSwaptestResultwithCalled).toNot(beTrue())
+                        expect(output.didFailToSwap_testResult_with_Called).toNot(beTrue())
                     }
                 }
             }

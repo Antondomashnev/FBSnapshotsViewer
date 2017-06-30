@@ -29,7 +29,7 @@ class PreferencesControllerSpec: QuickSpec {
             }
 
             it("updates user interface") {
-                expect(eventHandler.updateUserInterfaceCalled).to(beTrue())
+                expect(eventHandler.updateUserInterface_Called).to(beTrue())
             }
         }
 
@@ -39,7 +39,7 @@ class PreferencesControllerSpec: QuickSpec {
             }
 
             it("closes") {
-                expect(eventHandler.closeCalled).to(beTrue())
+                expect(eventHandler.close_Called).to(beTrue())
             }
         }
 
@@ -68,8 +68,8 @@ class PreferencesControllerSpec: QuickSpec {
             }
 
             it("updates derived data type") {
-                expect(eventHandler.selectderivedDataFolderTypeReceivedDerivedDataFolderType).to(equal("Bar"))
-                expect(eventHandler.selectderivedDataFolderTypeCalled).to(beTrue())
+                expect(eventHandler.select_derivedDataFolderType_ReceivedDerivedDataFolderType).to(equal("Bar"))
+                expect(eventHandler.select_derivedDataFolderType_Called).to(beTrue())
             }
         }
 
@@ -80,8 +80,8 @@ class PreferencesControllerSpec: QuickSpec {
             }
 
             it("updates derived data path") {
-                expect(eventHandler.updatederivedDataFolderPathReceivedDerivedDataFolderPath).to(equal("NewPath"))
-                expect(eventHandler.updatederivedDataFolderPathCalled).to(beTrue())
+                expect(eventHandler.update_derivedDataFolderPath_ReceivedDerivedDataFolderPath).to(equal("NewPath"))
+                expect(eventHandler.update_derivedDataFolderPath_Called).to(beTrue())
             }
         }
     }

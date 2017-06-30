@@ -95,8 +95,8 @@ class MenuInteractorSpec: QuickSpec {
                 }
 
                 it("outputs it") {
-                    expect(output.didFindNewTestLogFileatCalled).to(beTrue())
-                    expect(output.didFindNewTestLogFileatReceivedPath).to(equal("/Users/antondomashnev/Library/Bla/Bla.log"))
+                    expect(output.didFindNewTestLogFile_at_Called).to(beTrue())
+                    expect(output.didFindNewTestLogFile_at_ReceivedPath).to(equal("/Users/antondomashnev/Library/Bla/Bla.log"))
                 }
             }
         }
@@ -123,7 +123,7 @@ class MenuInteractorSpec: QuickSpec {
                     it("outputs it") {
                         let build = Build(date: testResultsDate, applicationName: applicationName, fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
                         let expectedTestResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClass1", testName: "testName1"), referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
-                        expect(output.didFindNewTestResult_ReceivedTestResult).to(equal(expectedTestResult))
+                        expect(output.didFindNewTestResult___ReceivedTestResult).to(equal(expectedTestResult))
                     }
                 }
 

@@ -49,8 +49,8 @@ class TestResultsPresenterSpec: QuickSpec {
             }
 
             it("passes the message to interactor with correct test result") {
-                expect(interactor.openInKaleidoscopetestResultCalled).to(beTrue())
-                expect(interactor.openInKaleidoscopetestResultReceivedTestResult).to(equal(testResult))
+                expect(interactor.openInKaleidoscope_testResult_Called).to(beTrue())
+                expect(interactor.openInKaleidoscope_testResult_ReceivedTestResult).to(equal(testResult))
             }
         }
 
@@ -61,7 +61,7 @@ class TestResultsPresenterSpec: QuickSpec {
                 }
 
                 it("doesn't show test results in user interface") {
-                    expect(userInterface.showdisplayInfoCalled).to(beFalse())
+                    expect(userInterface.show_displayInfo_Called).to(beFalse())
                 }
             }
 
@@ -82,11 +82,11 @@ class TestResultsPresenterSpec: QuickSpec {
                 }
 
                 it("shows test results in user interface") {
-                    expect(userInterface.showdisplayInfoCalled).to(beTrue())
+                    expect(userInterface.show_displayInfo_Called).to(beTrue())
                 }
 
                 it("shows correct test results in user interface") {
-                    expect(userInterface.showdisplayInfoReceivedDisplayInfo).to(equal(expectTestResultsDisplayInfo))
+                    expect(userInterface.show_displayInfo_ReceivedDisplayInfo).to(equal(expectTestResultsDisplayInfo))
                 }
                 
                 it("uses collector") {
@@ -107,8 +107,8 @@ class TestResultsPresenterSpec: QuickSpec {
             }
             
             it("updates user interface") {
-                expect(userInterface.showdisplayInfoCalled).to(beTrue())
-                expect(userInterface.showdisplayInfoReceivedDisplayInfo?.testResultsDiffMode).to(equal(TestResultsDiffMode.diff))
+                expect(userInterface.show_displayInfo_Called).to(beTrue())
+                expect(userInterface.show_displayInfo_ReceivedDisplayInfo?.testResultsDiffMode).to(equal(TestResultsDiffMode.diff))
             }
         }
     }

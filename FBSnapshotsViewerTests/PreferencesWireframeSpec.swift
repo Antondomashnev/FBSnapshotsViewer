@@ -25,7 +25,7 @@ class PreferencesWireframeSpec: QuickSpec {
 
         describe(".show") {
             beforeEach {
-                configurationStorage.loadConfigurationReturnValue = Configuration.default()
+                configurationStorage.loadConfiguration_ReturnValue = Configuration.default()
             }
 
             it("returns preferences module") {

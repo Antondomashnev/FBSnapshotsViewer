@@ -29,8 +29,8 @@ class TestResultCellSpec: QuickSpec {
             }
 
             it("calls delegate") {
-                expect(delegate.testResultCell_viewInKaleidoscopeButtonClickedCalled).to(beTrue())
-                expect(delegate.testResultCell_viewInKaleidoscopeButtonClickedReceivedArguments?.cell).to(equal(cell))
+                expect(delegate.testResultCell___viewInKaleidoscopeButtonClicked_Called).to(beTrue())
+                expect(delegate.testResultCell___viewInKaleidoscopeButtonClicked_ReceivedArguments?.cell).to(equal(cell))
             }
         }
         
@@ -40,8 +40,8 @@ class TestResultCellSpec: QuickSpec {
             }
             
             it("calls delegate") {
-                expect(delegate.testResultCell_swapSnapshotsButtonClickedCalled).to(beTrue())
-                expect(delegate.testResultCell_swapSnapshotsButtonClickedReceivedArguments?.cell).to(equal(cell))
+                expect(delegate.testResultCell___swapSnapshotsButtonClicked_Called).to(beTrue())
+                expect(delegate.testResultCell___swapSnapshotsButtonClicked_ReceivedArguments?.cell).to(equal(cell))
             }
         }
     }
