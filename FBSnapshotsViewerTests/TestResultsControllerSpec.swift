@@ -99,7 +99,7 @@ class TestResultsControllerSpec: QuickSpec {
             }
             
             it("selects diff mode") {
-                expect(eventHandler.selectDiffModeReceivedDiffMode).to(equal(TestResultsDiffMode.diff))
+                expect(eventHandler.selectDiffMode_ReceivedDiffMode).to(equal(TestResultsDiffMode.diff))
             }
         }
 
@@ -141,8 +141,8 @@ class TestResultsControllerSpec: QuickSpec {
                 }
 
                 it("opens test result in kaleidoscope") {
-                    expect(eventHandler.openInKaleidoscopeCalled).to(beTrue())
-                    expect(eventHandler.openInKaleidoscopeReceivedTestResultDisplayInfo).to(equal(testResults[0].itemInfos[0]))
+                    expect(eventHandler.openInKaleidoscopetestResultDisplayInfoCalled).to(beTrue())
+                    expect(eventHandler.openInKaleidoscopetestResultDisplayInfoReceivedTestResultDisplayInfo).to(equal(testResults[0].itemInfos[0]))
                 }
             }
         }

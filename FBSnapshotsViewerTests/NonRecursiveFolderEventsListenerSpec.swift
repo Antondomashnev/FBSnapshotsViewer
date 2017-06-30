@@ -93,12 +93,12 @@ class NonRecursiveFolderEventsListenerSpec: QuickSpec {
                     }
 
                     it("outputs folder event") {
-                        expect(output.folderEventsListenerCalled).to(beTrue())
+                        expect(output.folderEventsListener_didReceiveCalled).to(beTrue())
                     }
 
                     it("outputs correct folder event") {
                         let expectedFolderEvent = FolderEvent.created(path: "/path/to/event/file.txt", object: .file)
-                        expect(output.folderEventsListenerReceivedArguments?.1).to(equal(expectedFolderEvent))
+                        expect(output.folderEventsListener_didReceiveReceivedArguments?.1).to(equal(expectedFolderEvent))
                     }
                 }
 
@@ -115,12 +115,12 @@ class NonRecursiveFolderEventsListenerSpec: QuickSpec {
                         }
 
                         it("outputs folder event") {
-                            expect(output.folderEventsListenerCalled).to(beTrue())
+                            expect(output.folderEventsListener_didReceiveCalled).to(beTrue())
                         }
 
                         it("outputs correct folder event") {
                             let expectedFolderEvent = FolderEvent.created(path: "/path/to/event/file.txt", object: .file)
-                            expect(output.folderEventsListenerReceivedArguments?.1).to(equal(expectedFolderEvent))
+                            expect(output.folderEventsListener_didReceiveReceivedArguments?.1).to(equal(expectedFolderEvent))
                         }
                     }
 
@@ -136,7 +136,7 @@ class NonRecursiveFolderEventsListenerSpec: QuickSpec {
                         }
 
                         it("doesn't output folder event") {
-                            expect(output.folderEventsListenerCalled).to(beFalse())
+                            expect(output.folderEventsListener_didReceiveCalled).to(beFalse())
                         }
                     }
                 }

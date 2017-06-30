@@ -61,6 +61,8 @@ class TestResultsInteractorSpec: QuickSpec {
         let kaleidoscopeViewer: TestResultsInteractor_MockExternalViewer.Type = TestResultsInteractor_MockExternalViewer.self
         var processLauncher: ProcessLauncher!
         var interactor: TestResultsInteractor!
+        var output: TestResultsInteractorOutputMock!
+        var swapper: TestResultsInteractor_MockSnapshotTestResultSwapper!
         var testResults: [SnapshotTestResult] = []
 
         beforeEach {
@@ -68,7 +70,10 @@ class TestResultsInteractorSpec: QuickSpec {
             let testResult2 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName2"), referenceImagePath: "referenceImagePath2", build: build)
             testResults = [testResult1, testResult2]
             processLauncher = ProcessLauncher()
-            interactor = TestResultsInteractor(testResults: testResults, kaleidoscopeViewer: kaleidoscopeViewer, processLauncher: processLauncher)
+            swapper = TestResultsInteractor_MockSnapshotTestResultSwapper()
+            output = TestResultsInteractorOutputMock()
+            interactor = TestResultsInteractor(testResults: testResults, kaleidoscopeViewer: kaleidoscopeViewer, processLauncher: processLauncher, swapper: swapper)
+            interactor.output = output
         }
 
         afterEach {
@@ -76,7 +81,51 @@ class TestResultsInteractorSpec: QuickSpec {
         }
         
         describe(".swap") {
+            var testResult: SnapshotTestResult!
             
+            beforeEach {
+                testResult = testResults[0]
+            }
+            
+            context("when test result can not be swapped") {
+                beforeEach {
+                    swapper.canSwapReturnValue = false
+                    interactor.swap(testResult: testResult)
+                }
+                
+                it("does nothing") {
+                    expect(swapper.swapCalled).to(beFalse())
+                }
+            }
+            
+            context("when test result can be swapped") {
+                beforeEach {
+                    swapper.canSwapReturnValue = true
+                }
+                
+                context("when swap throws") {
+                    beforeEach {
+                        swapper.swapThrows = true
+                        interactor.swap(testResult: testResult)
+                    }
+                    
+                    it("outputs error") {
+                        expect(output.didFailToSwaptestResultwithCalled).to(beTrue())
+                    }
+                }
+                
+                context("when swap doesn't throw") {
+                    beforeEach {
+                        swapper.swapThrows = false
+                        interactor.swap(testResult: testResult)
+                    }
+                    
+                    it("swaps") {
+                        expect(swapper.swapCalled).to(beTrue())
+                        expect(output.didFailToSwaptestResultwithCalled).toNot(beTrue())
+                    }
+                }
+            }
         }
 
         describe(".openInKaleidoscope") {

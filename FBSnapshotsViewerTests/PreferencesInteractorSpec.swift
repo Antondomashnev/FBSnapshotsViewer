@@ -191,8 +191,8 @@ class PreferencesInteractorSpec: QuickSpec {
             }
 
             it("saves configuration") {
-                expect(configurationStorage.saveCalled).to(beTrue())
-                expect(configurationStorage.saveReceivedConfiguration).to(equal(configuration))
+                expect(configurationStorage.saveconfigurationCalled).to(beTrue())
+                expect(configurationStorage.saveconfigurationReceivedConfiguration).to(equal(configuration))
             }
         }
 

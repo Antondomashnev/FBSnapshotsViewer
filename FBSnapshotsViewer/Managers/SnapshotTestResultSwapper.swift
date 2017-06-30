@@ -40,7 +40,7 @@ class SnapshotTestResultSwapper {
     }
     
     func swap(_ testResult: SnapshotTestResult) throws {
-        guard case let SnapshotTestResult.failed(testInformation, _, _, failedImagePath, build) = testResult else {
+        guard case let SnapshotTestResult.failed(testInformation, _, _, failedImagePath, build) = testResult, canSwap(testResult) else {
             throw SnapshotTestResultSwapperError.canNotBeSwapped(testResult: testResult)
         }
         let failedImageSizeSuffix = try extractImageSuffix(from: failedImagePath, of: testResult)

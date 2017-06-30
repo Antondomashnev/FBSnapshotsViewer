@@ -49,8 +49,8 @@ class TestResultsPresenterSpec: QuickSpec {
             }
 
             it("passes the message to interactor with correct test result") {
-                expect(interactor.openInKaleidoscopeCalled).to(beTrue())
-                expect(interactor.openInKaleidoscopeReceivedTestResult).to(equal(testResult))
+                expect(interactor.openInKaleidoscopetestResultCalled).to(beTrue())
+                expect(interactor.openInKaleidoscopetestResultReceivedTestResult).to(equal(testResult))
             }
         }
 
@@ -61,7 +61,7 @@ class TestResultsPresenterSpec: QuickSpec {
                 }
 
                 it("doesn't show test results in user interface") {
-                    expect(userInterface.showCalled).to(beFalse())
+                    expect(userInterface.showdisplayInfoCalled).to(beFalse())
                 }
             }
 
@@ -82,11 +82,11 @@ class TestResultsPresenterSpec: QuickSpec {
                 }
 
                 it("shows test results in user interface") {
-                    expect(userInterface.showCalled).to(beTrue())
+                    expect(userInterface.showdisplayInfoCalled).to(beTrue())
                 }
 
                 it("shows correct test results in user interface") {
-                    expect(userInterface.showReceivedDisplayInfo).to(equal(expectTestResultsDisplayInfo))
+                    expect(userInterface.showdisplayInfoReceivedDisplayInfo).to(equal(expectTestResultsDisplayInfo))
                 }
                 
                 it("uses collector") {
@@ -107,8 +107,8 @@ class TestResultsPresenterSpec: QuickSpec {
             }
             
             it("updates user interface") {
-                expect(userInterface.showCalled).to(beTrue())
-                expect(userInterface.showReceivedDisplayInfo?.testResultsDiffMode).to(equal(TestResultsDiffMode.diff))
+                expect(userInterface.showdisplayInfoCalled).to(beTrue())
+                expect(userInterface.showdisplayInfoReceivedDisplayInfo?.testResultsDiffMode).to(equal(TestResultsDiffMode.diff))
             }
         }
     }

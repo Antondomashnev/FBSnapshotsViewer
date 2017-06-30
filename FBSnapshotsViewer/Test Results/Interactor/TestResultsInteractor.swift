@@ -16,7 +16,7 @@ class TestResultsInteractor {
     
     weak var output: TestResultsInteractorOutput?
 
-    init(testResults: [SnapshotTestResult], kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, processLauncher: ProcessLauncher = ProcessLauncher(), swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper(fileManager: FileManager.default)) {
+    init(testResults: [SnapshotTestResult], kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, processLauncher: ProcessLauncher = ProcessLauncher(), swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()) {
         self.testResults = testResults
         self.kaleidoscopeViewer = kaleidoscopeViewer
         self.processLauncher = processLauncher
@@ -40,7 +40,7 @@ extension TestResultsInteractor: TestResultsInteractorInput {
             return
         }
         do {
-            try? swapper.swap(testResult)
+            try swapper.swap(testResult)
         }
         catch let error {
             output?.didFailToSwap(testResult: testResult, with: error)

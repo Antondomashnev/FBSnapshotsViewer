@@ -68,8 +68,8 @@ class PreferencesControllerSpec: QuickSpec {
             }
 
             it("updates derived data type") {
-                expect(eventHandler.selectReceivedDerivedDataFolderType).to(equal("Bar"))
-                expect(eventHandler.selectCalled).to(beTrue())
+                expect(eventHandler.selectderivedDataFolderTypeReceivedDerivedDataFolderType).to(equal("Bar"))
+                expect(eventHandler.selectderivedDataFolderTypeCalled).to(beTrue())
             }
         }
 
@@ -80,8 +80,8 @@ class PreferencesControllerSpec: QuickSpec {
             }
 
             it("updates derived data path") {
-                expect(eventHandler.updateReceivedDerivedDataFolderPath).to(equal("NewPath"))
-                expect(eventHandler.updateCalled).to(beTrue())
+                expect(eventHandler.updatederivedDataFolderPathReceivedDerivedDataFolderPath).to(equal("NewPath"))
+                expect(eventHandler.updatederivedDataFolderPathCalled).to(beTrue())
             }
         }
     }

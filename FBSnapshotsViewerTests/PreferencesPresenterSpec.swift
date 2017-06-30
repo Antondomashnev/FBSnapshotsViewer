@@ -43,12 +43,12 @@ class PreferencesPresenterSpec: QuickSpec {
             }
 
             it("passes the message to interactor") {
-                expect(interactor.setNewDerivedDataFolderTypeCalled).to(beTrue())
-                expect(interactor.setNewDerivedDataFolderTypeReceivedType).to(equal("Type"))
+                expect(interactor.setNewDerivedDataFolderType_Called).to(beTrue())
+                expect(interactor.setNewDerivedDataFolderType_ReceivedType).to(equal("Type"))
             }
 
             it("updates user interface") {
-                expect(userInterface.showCalled).to(beTrue())
+                expect(userInterface.showpreferencesDisplayInfoCalled).to(beTrue())
             }
         }
 
@@ -60,8 +60,8 @@ class PreferencesPresenterSpec: QuickSpec {
             }
 
             it("passes the message to interactor") {
-                expect(interactor.setNewDerivedDataFolderPathCalled).to(beTrue())
-                expect(interactor.setNewDerivedDataFolderPathReceivedPath).to(equal("newPath"))
+                expect(interactor.setNewDerivedDataFolderPath_Called).to(beTrue())
+                expect(interactor.setNewDerivedDataFolderPath_ReceivedPath).to(equal("newPath"))
             }
         }
 
@@ -75,7 +75,7 @@ class PreferencesPresenterSpec: QuickSpec {
             }
 
             it("notifies the module delegate that module will close") {
-                expect(moduleDelegate.preferencesModuleWillCloseCalled).to(beTrue())
+                expect(moduleDelegate.preferencesModuleWillClose_Called).to(beTrue())
             }
         }
 
@@ -87,8 +87,8 @@ class PreferencesPresenterSpec: QuickSpec {
             }
 
             it("shows preferences display info in user interface") {
-                expect(userInterface.showReceivedPreferencesDisplayInfo?.derivedDataFolderPath).to(equal("myPath"))
-                expect(userInterface.showReceivedPreferencesDisplayInfo?.derivedDataFolderTypeName).to(equal(DerivedDataFolderType.xcodeCustom.rawValue))
+                expect(userInterface.showpreferencesDisplayInfoReceivedPreferencesDisplayInfo?.derivedDataFolderPath).to(equal("myPath"))
+                expect(userInterface.showpreferencesDisplayInfoReceivedPreferencesDisplayInfo?.derivedDataFolderTypeName).to(equal(DerivedDataFolderType.xcodeCustom.rawValue))
             }
         }
     }

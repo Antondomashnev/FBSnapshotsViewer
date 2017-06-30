@@ -78,7 +78,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("starts the Xcode builds listening") {
-                expect(interactor.startXcodeBuildsListeningReceivedDerivedDataFolder).to(equal(derivedDataFolder))
+                expect(interactor.startXcodeBuildsListeningderivedDataFolderReceivedDerivedDataFolder).to(equal(derivedDataFolder))
             }
         }
 
@@ -88,7 +88,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("terminates the app") {
-                expect(application.terminateCalled).to(beTrue())
+                expect(application.terminate_Called).to(beTrue())
             }
         }
 
@@ -108,8 +108,8 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("starts listening for snapshot tests results from the given test log") {
-                expect(interactor.startSnapshotTestResultListeningCalled).to(beTrue())
-                expect(interactor.startSnapshotTestResultListeningReceivedPath).to(equal("/Users/antondomashnev/Library/Xcode/Logs/MyLog.log"))
+                expect(interactor.startSnapshotTestResultListeningfromLogFileAtCalled).to(beTrue())
+                expect(interactor.startSnapshotTestResultListeningfromLogFileAtReceivedPath).to(equal("/Users/antondomashnev/Library/Xcode/Logs/MyLog.log"))
             }
         }
 
@@ -119,8 +119,8 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("sets that new test results are available in user interface") {
-                expect(userInterface.setNewTestResultsReceivedAvailable).to(beTrue())
-                expect(userInterface.setNewTestResultsCalled).to(beTrue())
+                expect(userInterface.setNewTestResultsavailableCalled).to(beTrue())
+                expect(userInterface.setNewTestResultsavailableReceivedAvailable).to(beTrue())
             }
         }
 
@@ -135,8 +135,8 @@ class MenuPresenterSpec: QuickSpec {
                 }
 
                 it("sets that there no new test results in user interface") {
-                    expect(userInterface.setNewTestResultsCalled).to(beTrue())
-                    expect(userInterface.setNewTestResultsReceivedAvailable).to(beFalse())
+                    expect(userInterface.setNewTestResultsavailableCalled).to(beTrue())
+                    expect(userInterface.setNewTestResultsavailableReceivedAvailable).to(beFalse())
                 }
 
                 it("shows test results") {
@@ -152,7 +152,7 @@ class MenuPresenterSpec: QuickSpec {
                 }
 
                 it("doesn't update user interface") {
-                    expect(userInterface.setNewTestResultsCalled).to(beFalse())
+                    expect(userInterface.setNewTestResultsavailableCalled).to(beFalse())
                 }
 
                 it("doesn't show test results") {
