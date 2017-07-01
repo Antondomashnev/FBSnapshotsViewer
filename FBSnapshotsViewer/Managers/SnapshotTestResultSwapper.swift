@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Nuke
 
 enum SnapshotTestResultSwapperError: Error {
     case canNotBeSwapped(testResult: SnapshotTestResult)
@@ -16,8 +17,10 @@ enum SnapshotTestResultSwapperError: Error {
 
 class SnapshotTestResultSwapper {
     private let fileManager: FileManager
+    private let imageCache: ImageCache
     
-    init(fileManager: FileManager = FileManager.default) {
+    init(fileManager: FileManager = FileManager.default, imageCache: ImageCache = Nuke.Cache.shared) {
+        self.imageCache = imageCache
         self.fileManager = fileManager
     }
     
@@ -49,6 +52,7 @@ class SnapshotTestResultSwapper {
         do {
             try fileManager.removeItem(at: recordedImageURL)
             try fileManager.copyItem(at: failedImageURL, to: recordedImageURL)
+            imageCache.invalidate()
         }
         catch let error {
             throw SnapshotTestResultSwapperError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)

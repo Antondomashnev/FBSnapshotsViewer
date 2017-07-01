@@ -135,6 +135,8 @@
 		6DBD99DB1E7AB3D400E1714E /* FileWatcherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD99DA1E7AB3D400E1714E /* FileWatcherFactory.swift */; };
 		6DCCEF0C1F02F60700523B47 /* SnapshotTestResultSwapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCEF0B1F02F60700523B47 /* SnapshotTestResultSwapper.swift */; };
 		6DCCEF0E1F02F64800523B47 /* SnapshotTestResultSwapperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCEF0D1F02F64800523B47 /* SnapshotTestResultSwapperSpec.swift */; };
+		6DD1AEA51F08093E002FCA82 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD1AEA41F08093E002FCA82 /* ImageCache.swift */; };
+		6DD1AEA71F080968002FCA82 /* Nuke+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD1AEA61F080968002FCA82 /* Nuke+ImageCache.swift */; };
 		6DDFBD8D1E63268300DFC0A4 /* FolderEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDFBD8C1E63268300DFC0A4 /* FolderEvent.swift */; };
 		6DDFBD911E638EE900DFC0A4 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDFBD901E638EE900DFC0A4 /* MenuPresenter.swift */; };
 		6DDFBDA41E64D14700DFC0A4 /* MenuModuleInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDFBDA31E64D14700DFC0A4 /* MenuModuleInterface.swift */; };
@@ -298,6 +300,8 @@
 		6DBD99DA1E7AB3D400E1714E /* FileWatcherFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileWatcherFactory.swift; sourceTree = "<group>"; };
 		6DCCEF0B1F02F60700523B47 /* SnapshotTestResultSwapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestResultSwapper.swift; sourceTree = "<group>"; };
 		6DCCEF0D1F02F64800523B47 /* SnapshotTestResultSwapperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestResultSwapperSpec.swift; sourceTree = "<group>"; };
+		6DD1AEA41F08093E002FCA82 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		6DD1AEA61F080968002FCA82 /* Nuke+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nuke+ImageCache.swift"; sourceTree = "<group>"; };
 		6DDFBD8C1E63268300DFC0A4 /* FolderEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderEvent.swift; sourceTree = "<group>"; };
 		6DDFBD901E638EE900DFC0A4 /* MenuPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
 		6DDFBDA31E64D14700DFC0A4 /* MenuModuleInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuModuleInterface.swift; sourceTree = "<group>"; };
@@ -612,6 +616,7 @@
 				6D8BD71E1EB13949004928F7 /* Application.swift */,
 				6D789CDD1EC3B6CC00EEF7EE /* AutoCases.swift */,
 				6D3003B11ED20B13000CCAC8 /* Updater.swift */,
+				6DD1AEA41F08093E002FCA82 /* ImageCache.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -630,6 +635,7 @@
 				6D8BF2BC1ED0B78700C368D1 /* String+HTML.swift */,
 				6D3003B31ED20B36000CCAC8 /* SUUpdater+Updater.swift */,
 				6D5183481EDF4FAF007EC15C /* DateComponentsFormatter+NaturalApproximation.swift */,
+				6DD1AEA61F080968002FCA82 /* Nuke+ImageCache.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1074,6 +1080,7 @@
 				6D848C611E68D7B80000FC1E /* TestResultsPresenter.swift in Sources */,
 				6DE347781E47D8E5004147DF /* MenuWireframe.swift in Sources */,
 				6D3BA5741E6E158100CAD4EE /* AutoMockable.generated.swift in Sources */,
+				6DD1AEA51F08093E002FCA82 /* ImageCache.swift in Sources */,
 				6D848C5B1E68D5720000FC1E /* TestResultsInteractorIO.swift in Sources */,
 				6D3000431EBFBE14005B6103 /* PreferencesController.swift in Sources */,
 				6D5F913C1E4F6D4700C6E5BF /* FolderEventsListenerFactory.swift in Sources */,
@@ -1101,6 +1108,7 @@
 				6D789CD81EC3B07A00EEF7EE /* PreferencesDisplayInfo.swift in Sources */,
 				6DF15B771E662CCC00DFA181 /* TestResultsUserInterface.swift in Sources */,
 				6D848C561E68D0C90000FC1E /* TestResultCell.swift in Sources */,
+				6DD1AEA71F080968002FCA82 /* Nuke+ImageCache.swift in Sources */,
 				6D30002B1EBD242E005B6103 /* ExternalViewer.swift in Sources */,
 				6D789CDE1EC3B6CC00EEF7EE /* AutoCases.swift in Sources */,
 			);

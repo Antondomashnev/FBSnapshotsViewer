@@ -11,8 +11,9 @@ import AppKit
 class TestResultsCollectionViewOutlets: NSObject {
     var testResultsDisplayInfo: TestResultsDisplayInfo = TestResultsDisplayInfo()
     fileprivate weak var testResultCellDelegate: TestResultCellDelegate?
+    fileprivate weak var testResultsHeaderDelegate: TestResultsHeaderDelegate?
 
-    init(collectionView: NSCollectionView, testResultCellDelegate: TestResultCellDelegate? = nil) {
+    init(collectionView: NSCollectionView, testResultCellDelegate: TestResultCellDelegate? = nil, testResultsHeaderDelegate: TestResultsHeaderDelegate? = nil) {
         guard let testResultCellNib = NSNib(nibNamed: TestResultCell.itemIdentifier, bundle: Bundle.main),
               let testResultHeaderNib = NSNib(nibNamed: TestResultsHeader.itemIdentifier, bundle: Bundle.main) else {
             fatalError("TestResultCell || TestResultsHeader is missing in bundle")
@@ -20,6 +21,7 @@ class TestResultsCollectionViewOutlets: NSObject {
         collectionView.register(testResultCellNib, forItemWithIdentifier: TestResultCell.itemIdentifier)
         collectionView.register(testResultHeaderNib, forSupplementaryViewOfKind: NSCollectionElementKindSectionHeader, withIdentifier: TestResultsHeader.itemIdentifier)
         self.testResultCellDelegate = testResultCellDelegate
+        self.testResultsHeaderDelegate = testResultsHeaderDelegate
         super.init()
     }
 }
@@ -61,6 +63,7 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
         }
         let titleInfo = testResultsDisplayInfo.sectionInfos[indexPath.section].titleInfo
         view.configure(with: titleInfo)
+        view.delegate = self.testResultsHeaderDelegate
         return view
     }
     

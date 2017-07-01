@@ -32,7 +32,7 @@ class XcodeFBReferenceImageDirectoryURLExtractorSpec: QuickSpec {
                 }
             }
             
-            context("when applicationNameMessage log line given") {
+            context("when fbReferenceImageDirMessage log line given") {
                 context("with unexpected format") {
                     it("throws an error") {
                         expect { try extractor.extractImageDirectoryURL(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "XCInjectBundleInto = ")) }.to(throwError())
@@ -42,7 +42,7 @@ class XcodeFBReferenceImageDirectoryURLExtractorSpec: QuickSpec {
                 context("with expected format") {
                     it("extracts correct application name") {
                         let applicationName = try? extractor.extractImageDirectoryURL(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "\"FB_REFERENCE_IMAGE_DIR\" = \"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\";"))
-                        let expectedURL = URL(fileURLWithPath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages", isDirectory: true)
+                        let expectedURL = URL(fileURLWithPath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64", isDirectory: true)
                         expect(applicationName).to(equal(expectedURL))
                     }
                 }
@@ -72,7 +72,7 @@ class AppCodeFBReferenceImageDirectoryURLExtractorSpec: QuickSpec {
                 }
             }
             
-            context("when applicationNameMessage log line given") {
+            context("when fbReferenceImageDirMessage log line given") {
                 context("with unexpected format") {
                     it("throws an error") {
                         expect { try extractor.extractImageDirectoryURL(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "XCInjectBundleInto = ")) }.to(throwError())
@@ -82,7 +82,7 @@ class AppCodeFBReferenceImageDirectoryURLExtractorSpec: QuickSpec {
                 context("with expected format") {
                     it("extracts correct application name") {
                         let applicationName = try? extractor.extractImageDirectoryURL(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "            <env name=\"FB_REFERENCE_IMAGE_DIR\" value=\"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\"/>"))
-                        let expectedURL = URL(fileURLWithPath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages", isDirectory: true)
+                        let expectedURL = URL(fileURLWithPath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64", isDirectory: true)
                         expect(applicationName).to(equal(expectedURL))
                     }
                 }

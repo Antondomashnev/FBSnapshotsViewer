@@ -44,13 +44,15 @@ class SnapshotTestResultSwapper_MockFileManager: FileManager {
 class SnapshotTestResultSwapperSpec: QuickSpec {
     override func spec() {
         var build: Build!
+        var imageCache: ImageCacheMock!
         var swapper: SnapshotTestResultSwapper!
         var fileManager: SnapshotTestResultSwapper_MockFileManager!
         
         beforeEach {
             build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "/foo/bar", isDirectory: true))
             fileManager = SnapshotTestResultSwapper_MockFileManager()
-            swapper = SnapshotTestResultSwapper(fileManager: fileManager)
+            imageCache = ImageCacheMock()
+            swapper = SnapshotTestResultSwapper(fileManager: fileManager, imageCache: imageCache)
         }
         
         describe(".swap") {
@@ -103,6 +105,10 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                         expect(fileManager.copyItemCalled).to(beTrue())
                         expect(fileManager.copyItemFromSourceURL).to(equal(URL(fileURLWithPath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png")))
                         expect(fileManager.copyItemToDestinationURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
+                    }
+                    
+                    it("invalidates cache") {
+                        expect(imageCache.invalidate_Called).to(beTrue())
                     }
                 }
             }

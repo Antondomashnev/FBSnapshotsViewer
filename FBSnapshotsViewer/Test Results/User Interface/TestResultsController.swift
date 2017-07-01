@@ -28,7 +28,7 @@ class TestResultsController: NSViewController {
     // MARK: - Helpers
     
     private func setupCollectionView() {
-        collectionViewOutlets = TestResultsCollectionViewOutlets(collectionView: collectionView, testResultCellDelegate: self)
+        collectionViewOutlets = TestResultsCollectionViewOutlets(collectionView: collectionView, testResultCellDelegate: self, testResultsHeaderDelegate: self)
         collectionView.delegate = collectionViewOutlets
         collectionView.dataSource = collectionViewOutlets
     }
@@ -75,8 +75,8 @@ extension TestResultsController: TestResultCellDelegate {
 extension TestResultsController: TestResultsHeaderDelegate {
     private func findTestResultsSectionDisplayInfo(for header: TestResultsHeader) -> TestResultsSectionDisplayInfo? {
         let sectionInfos = collectionViewOutlets.testResultsDisplayInfo.sectionInfos
-        let headerBounds = header.convert(header.bounds, to: collectionView)
-        guard let headerIndexPath = collectionView.indexPathForItem(at: CGPoint(x: headerBounds.midX, y: headerBounds.midY)),
+        let headerBounds = header.convert(header.frame, to: view)
+        guard let headerIndexPath = collectionView.indexPathForItem(at: NSPoint(x: headerBounds.midX, y: headerBounds.midY)),
             sectionInfos.count > headerIndexPath.section else {
                 return nil
         }

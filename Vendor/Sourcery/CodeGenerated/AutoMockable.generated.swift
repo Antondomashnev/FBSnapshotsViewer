@@ -124,6 +124,18 @@ class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
         folderEventsListener___didReceive_ReceivedArguments = (listener: listener, event: event)
     }
 }
+class ImageCacheMock: ImageCache {
+
+
+    //MARK: - invalidate
+
+    var invalidate_Called = false
+
+    func invalidate() {
+
+        invalidate_Called = true
+    }
+}
 class MenuInteractorInputMock: MenuInteractorInput {
 
     var foundTestResults: [SnapshotTestResult] = []

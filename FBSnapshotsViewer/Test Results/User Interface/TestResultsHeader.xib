@@ -36,6 +36,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="swapSnapshotsButtonClicked:" target="c22-O7-iKe" id="eLv-Xi-qAJ"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>

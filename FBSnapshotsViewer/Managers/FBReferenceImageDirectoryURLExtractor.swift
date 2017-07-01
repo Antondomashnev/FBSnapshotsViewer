@@ -38,7 +38,8 @@ class XcodeFBReferenceImageDirectoryURLExtractor: FBReferenceImageDirectoryURLEx
               components.count == 3 else {
                 throw FBReferenceImageDirectoryURLExtractorError.unexpectedLogLine(message: "Unexpected log line given: \(logLine). Expected the following format: \"FB_REFERENCE_IMAGE_DIR\" = \"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\";")
         }
-        return URL(fileURLWithPath: components[1], isDirectory: true)
+        // ios-snapshots adds a suffix for the reference dir depending on the acrhitecture. For now we support only 64 bit
+        return URL(fileURLWithPath: components[1] + "_64", isDirectory: true)
     }
 }
 
@@ -52,6 +53,7 @@ class AppCodeFBReferenceImageDirectoryURLExtractor: FBReferenceImageDirectoryURL
             components.count == 3 else {
                 throw FBReferenceImageDirectoryURLExtractorError.unexpectedLogLine(message: "Unexpected log line given: \(logLine). Expected the following format: <env name=\"FB_REFERENCE_IMAGE_DIR\" value=\"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\"/>")
         }
-        return URL(fileURLWithPath: components[1], isDirectory: true)
+        // ios-snapshots adds a suffix for the reference dir depending on the acrhitecture. For now we support only 64 bit
+        return URL(fileURLWithPath: components[1] + "_64", isDirectory: true)
     }
 }
