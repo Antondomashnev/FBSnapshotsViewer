@@ -43,7 +43,7 @@ extension TestResultsController: TestResultsUserInterface {
 }
 
 extension TestResultsController: TestResultCellDelegate {
-    private func findTestResultInfo(for cell: TestResultCell) -> TestResultDisplayInfo? {
+    private func findTestResultInfo(for cell: TestResultCell) -> (info: TestResultDisplayInfo, indexPath: IndexPath)? {
         let sectionInfos = collectionViewOutlets.testResultsDisplayInfo.sectionInfos
         guard let cellIndexPath = collectionView.indexPath(for: cell),
             sectionInfos.count > cellIndexPath.section,
@@ -51,7 +51,7 @@ extension TestResultsController: TestResultCellDelegate {
                 return nil
         }
         let testResultInfo = sectionInfos[cellIndexPath.section].itemInfos[cellIndexPath.item]
-        return testResultInfo
+        return (testResultInfo, cellIndexPath)
     }
     
     func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton) {
@@ -59,7 +59,7 @@ extension TestResultsController: TestResultCellDelegate {
             assertionFailure("Unexpected TestResultCellDelegate callback about Kaleidoscope button click")
             return
         }
-        eventHandler.openInKaleidoscope(testResultDisplayInfo: testResultInfo)
+        eventHandler.openInKaleidoscope(testResultDisplayInfo: testResultInfo.info)
     }
     
     func testResultCell(_ cell: TestResultCell, swapSnapshotsButtonClicked: NSButton) {
@@ -67,20 +67,20 @@ extension TestResultsController: TestResultCellDelegate {
             assertionFailure("Unexpected TestResultCellDelegate callback about swap snapshots button click")
             return
         }
-        eventHandler.swap([testResultInfo])
-        collectionView.reloadData()
+        eventHandler.swap([testResultInfo.info])
+        collectionView.reloadItems(at: [testResultInfo.indexPath])
     }
 }
 
 extension TestResultsController: TestResultsHeaderDelegate {
-    private func findTestResultsSectionDisplayInfo(for header: TestResultsHeader) -> TestResultsSectionDisplayInfo? {
+    private func findTestResultsSectionDisplayInfo(for header: TestResultsHeader) -> (info: TestResultsSectionDisplayInfo, indexPath: IndexPath)? {
         let sectionInfos = collectionViewOutlets.testResultsDisplayInfo.sectionInfos
         let headerBounds = header.convert(header.frame, to: view)
         guard let headerIndexPath = collectionView.indexPathForItem(at: NSPoint(x: headerBounds.midX, y: headerBounds.midY)),
             sectionInfos.count > headerIndexPath.section else {
                 return nil
         }
-        return sectionInfos[headerIndexPath.section]
+        return (sectionInfos[headerIndexPath.section], headerIndexPath)
     }
     
     func testResultsHeader(_ header: TestResultsHeader, swapSnapshotsButtonClicked: NSButton) {
@@ -88,8 +88,8 @@ extension TestResultsController: TestResultsHeaderDelegate {
             assertionFailure("Unexpected TestResultsHeaderDelegate callback about swap snapshots button click")
             return
         }
-        eventHandler.swap(testResultsSectionInfo.itemInfos)
-        collectionView.reloadData()
+        eventHandler.swap(testResultsSectionInfo.info.itemInfos)
+        collectionView.reloadSections(IndexSet(integer: testResultsSectionInfo.indexPath.section))
     }
 }
 
