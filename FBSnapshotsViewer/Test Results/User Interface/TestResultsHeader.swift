@@ -30,9 +30,10 @@ class TestResultsHeader: NSView, NSCollectionViewSectionHeaderView {
     
     // MARK: - Interface
     
-    func configure(with sectionTitleInfo: TestResultsSectionTitleDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode()) {
-        contextLabel.stringValue = sectionTitleInfo.title
-        dateLabel.stringValue = sectionTitleInfo.timeAgo
+    func configure(with sectionInfo: TestResultsSectionDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode()) {
+        contextLabel.stringValue = sectionInfo.titleInfo.title
+        dateLabel.stringValue = sectionInfo.titleInfo.timeAgo
+        swapSnapshotsButton.isHidden = !sectionInfo.hasItemsToSwap
         configureTitleLabelsColorScheme(for: appleInterfaceMode)
     }
     

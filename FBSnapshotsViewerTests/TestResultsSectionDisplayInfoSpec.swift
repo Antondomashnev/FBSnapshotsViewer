@@ -32,5 +32,50 @@ class TestResultsSectionDisplayInfoSpec: QuickSpec {
                 expect(displayInfo.titleInfo).to(equal(title))
             }
         }
+        
+        describe(".hasItemsToSwap") {
+            var build: Build!
+            var items: [TestResultDisplayInfo] = []
+            var title: TestResultsSectionTitleDisplayInfo!
+            var testInformation: SnapshotTestInformation!
+            
+            beforeEach {
+                testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "testName")
+                build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                title = TestResultsSectionTitleDisplayInfo(build: build, testContext: "TestContext")
+            }
+            
+            context("when there is display info that can be swapped") {
+                beforeEach {
+                    let testResult1 = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo1/foo1.png", build: build)
+                    let testResult2 = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "foo/bar.png", diffImagePath: "foo/foo.png", failedImagePath: "bar/bar.png", build: build)
+                    let testResult3 = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo1/foo3.png", build: build)
+                    items = [TestResultDisplayInfo(testResult: testResult1),
+                             TestResultDisplayInfo(testResult: testResult2),
+                             TestResultDisplayInfo(testResult: testResult3)]
+                    displayInfo = TestResultsSectionDisplayInfo(title: title, items: items)
+                }
+                
+                it("returns true") {
+                    expect(displayInfo.hasItemsToSwap).to(beTrue())
+                }
+            }
+            
+            context("when there is no display info that can be swapped") {
+                beforeEach {
+                    let testResult1 = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo1/foo1.png", build: build)
+                    let testResult2 = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo1/foo2.png", build: build)
+                    let testResult3 = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo1/foo3.png", build: build)
+                    items = [TestResultDisplayInfo(testResult: testResult1),
+                             TestResultDisplayInfo(testResult: testResult2),
+                             TestResultDisplayInfo(testResult: testResult3)]
+                    displayInfo = TestResultsSectionDisplayInfo(title: title, items: items)
+                }
+                
+                it("returns false") {
+                    expect(displayInfo.hasItemsToSwap).to(beFalse())
+                }
+            }
+        }
     }
 }

@@ -61,8 +61,8 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
         guard let view = collectionView.makeSupplementaryView(ofKind: NSCollectionElementKindSectionHeader, withIdentifier: TestResultsHeader.itemIdentifier, for: indexPath) as? TestResultsHeader else {
             fatalError("TestResultsHeader is not registered in collection view")
         }
-        let titleInfo = testResultsDisplayInfo.sectionInfos[indexPath.section].titleInfo
-        view.configure(with: titleInfo)
+        let sectionInfo = testResultsDisplayInfo.sectionInfos[indexPath.section]
+        view.configure(with: sectionInfo)
         view.delegate = self.testResultsHeaderDelegate
         return view
     }

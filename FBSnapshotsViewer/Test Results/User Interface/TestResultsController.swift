@@ -68,7 +68,7 @@ extension TestResultsController: TestResultCellDelegate {
             return
         }
         eventHandler.swap([testResultInfo.info])
-        collectionView.reloadItems(at: [testResultInfo.indexPath])
+        collectionView.reloadSections(IndexSet(integer: testResultInfo.indexPath.section))
     }
 }
 
