@@ -6,6 +6,7 @@
 * [#41](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/41): Add additional information for tests - [@antondomashnev](https://github.com/antondomashnev).
 * [#44](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/44): Compact view redesign - [@antondomashnev](https://github.com/antondomashnev).
 * [#45](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/45): Use Nuke for image loading - [@antondomashnev](https://github.com/antondomashnev).
+* [47](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/47): Swap snapshots - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.5.0 (26.05.2017)
 
