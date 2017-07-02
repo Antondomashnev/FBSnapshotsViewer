@@ -75,7 +75,13 @@ class TestResultsInteractorSpec: QuickSpec {
             swapper = TestResultsInteractor_MockSnapshotTestResultSwapper()
             swapper.swappedTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName1"), referenceImagePath: "referenceImagePath1", build: build)
             output = TestResultsInteractorOutputMock()
-            interactor = TestResultsInteractor(testResults: testResults, kaleidoscopeViewer: kaleidoscopeViewer, processLauncher: processLauncher, swapper: swapper)
+            let builder = TestResultsInteractorBuilder {
+                $0.testResults = testResults
+                $0.kaleidoscopeViewer = kaleidoscopeViewer
+                $0.processLauncher = processLauncher
+                $0.swapper = swapper
+            }
+            interactor = TestResultsInteractor(builder: builder)
             interactor.output = output
         }
 

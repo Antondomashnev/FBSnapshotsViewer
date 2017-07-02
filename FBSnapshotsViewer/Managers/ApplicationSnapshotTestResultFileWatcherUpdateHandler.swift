@@ -62,27 +62,34 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     
     // MARK: - Helpers
     
-    private func handleFileWatcherUpdate(text: String) throws -> [SnapshotTestResult]? {
-        let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
-        let snapshotTestResults = try logLines.flatMap { logLine -> SnapshotTestResult? in
+    private func logLinesFlatMap() -> (ApplicationLogLine) throws -> SnapshotTestResult? {
+        return { [weak self] logLine -> SnapshotTestResult? in
+            guard let strongSelf = self else {
+                return nil
+            }
             switch logLine {
             case .unknown:
                 return nil
             case .fbReferenceImageDirMessage:
-                buildCreator.fbReferenceImageDirectoryURL = try fbImageReferenceDirExtractor.extractImageDirectoryURL(from: logLine)
+                strongSelf.buildCreator.fbReferenceImageDirectoryURL = try strongSelf.fbImageReferenceDirExtractor.extractImageDirectoryURL(from: logLine)
                 return nil
             case .applicationNameMessage:
-                buildCreator.applicationName = try applicationNameExtractor.extractApplicationName(from: logLine)
-                buildCreator.date = Date()
+                strongSelf.buildCreator.applicationName = try strongSelf.applicationNameExtractor.extractApplicationName(from: logLine)
+                strongSelf.buildCreator.date = Date()
                 return nil
             default:
-                guard let build = buildCreator.createBuild() else {
+                guard let build = strongSelf.buildCreator.createBuild() else {
                     assertionFailure("Unexpected snapshot test result line \(logLine) before build information line")
                     return nil
                 }
-                return snapshotTestResultFactory.createSnapshotTestResult(from: logLine, build: build)
+                return strongSelf.snapshotTestResultFactory.createSnapshotTestResult(from: logLine, build: build)
             }
         }
+    }
+    
+    private func handleFileWatcherUpdate(text: String) throws -> [SnapshotTestResult]? {
+        let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
+        let snapshotTestResults = try logLines.flatMap(logLinesFlatMap())
         readLinesNumber += logLines.count
         return snapshotTestResults
     }

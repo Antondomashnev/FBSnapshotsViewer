@@ -12,7 +12,7 @@ final class TestResultsWireframe {
 
     func show(relativeTo rect: NSRect, of view: NSView, with testResults: [SnapshotTestResult]) {
         let userInterface = StoryboardScene.Main.instantiateTestResultsController()
-        let interactor = TestResultsInteractor(testResults: testResults)
+        let interactor = TestResultsInteractor(builder: TestResultsInteractorBuilder(clojure: {_ in}))
         let presenter = TestResultsPresenter()
         let popover = NSPopover()
         popover.behavior = .transient

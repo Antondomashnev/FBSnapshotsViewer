@@ -12,6 +12,19 @@ enum TestResultsInteractorError: Error {
     case canNotSwapNotExistedTestResult
 }
 
+class TestResultsInteractorBuilder {
+    var kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self
+    var processLauncher: ProcessLauncher = ProcessLauncher()
+    var swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()
+    var testResults: [SnapshotTestResult] = []
+    
+    typealias BuiderClojure = (TestResultsInteractorBuilder) -> Void
+    
+    init(clojure: BuiderClojure) {
+        clojure(self)
+    }
+}
+
 class TestResultsInteractor {
     fileprivate let kaleidoscopeViewer: ExternalViewer.Type
     fileprivate let processLauncher: ProcessLauncher
@@ -20,11 +33,11 @@ class TestResultsInteractor {
     
     weak var output: TestResultsInteractorOutput?
 
-    init(testResults: [SnapshotTestResult], kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, processLauncher: ProcessLauncher = ProcessLauncher(), swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()) {
-        self.testResults = testResults
-        self.kaleidoscopeViewer = kaleidoscopeViewer
-        self.processLauncher = processLauncher
-        self.swapper = swapper
+    init(builder: TestResultsInteractorBuilder) {
+        self.testResults = builder.testResults
+        self.kaleidoscopeViewer = builder.kaleidoscopeViewer
+        self.processLauncher = builder.processLauncher
+        self.swapper = builder.swapper
     }
 }
 
