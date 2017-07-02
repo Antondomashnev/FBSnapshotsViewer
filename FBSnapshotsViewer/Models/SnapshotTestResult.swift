@@ -20,23 +20,22 @@ struct SnapshotTestInformation: AutoEquatable {
 
 enum SnapshotTestResult: AutoEquatable {
     var testClassName: String {
-        switch self {
-        case let .recorded(testInformation, _, _):
-            return testInformation.testClassName
-        case let .failed(testInformation, _, _, _, _):
-            return testInformation.testClassName
-        }
+        return testInformation.testClassName
     }
     
     var testName: String {
+        return testInformation.testName
+    }
+    
+    var testInformation: SnapshotTestInformation {
         switch self {
         case let .recorded(testInformation, _, _):
-            return testInformation.testName
+            return testInformation
         case let .failed(testInformation, _, _, _, _):
-            return testInformation.testName
+            return testInformation
         }
     }
-
+    
     var build: Build {
         switch self {
         case let .recorded(_, _, build):

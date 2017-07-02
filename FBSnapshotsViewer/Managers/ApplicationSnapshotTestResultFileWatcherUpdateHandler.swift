@@ -9,6 +9,20 @@
 import Foundation
 import KZFileWatchers
 
+class ApplicationSnapshotTestResultFileWatcherUpdateHandlerBuilder {
+    var applicationLogReader: ApplicationLogReader = ApplicationLogReader()
+    var snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory()
+    var applicationNameExtractor: ApplicationNameExtractor = XcodeApplicationNameExtractor()
+    var fbImageReferenceDirExtractor: FBReferenceImageDirectoryURLExtractor = XcodeFBReferenceImageDirectoryURLExtractor()
+    var buildCreator: BuildCreator = BuildCreator()
+    
+    typealias BuilderClojure = (ApplicationSnapshotTestResultFileWatcherUpdateHandlerBuilder) -> Void
+    
+    init(clojure: BuilderClojure) {
+        clojure(self)
+    }
+}
+
 class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     private let applicationLogReader: ApplicationLogReader
     private let snapshotTestResultFactory: SnapshotTestResultFactory
@@ -17,16 +31,12 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     private let buildCreator: BuildCreator
     private var readLinesNumber: Int = 0
     
-    init(applicationLogReader: ApplicationLogReader = ApplicationLogReader(),
-         applicationNameExtractor: ApplicationNameExtractor = XcodeApplicationNameExtractor(),
-         fbImageReferenceDirExtractor: FBReferenceImageDirectoryURLExtractor = XcodeFBReferenceImageDirectoryURLExtractor(),
-         snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory(),
-         buildCreator: BuildCreator = BuildCreator()) {
-        self.applicationLogReader = applicationLogReader
-        self.snapshotTestResultFactory = snapshotTestResultFactory
-        self.applicationNameExtractor = applicationNameExtractor
-        self.buildCreator = buildCreator
-        self.fbImageReferenceDirExtractor = fbImageReferenceDirExtractor
+    init(builder: ApplicationSnapshotTestResultFileWatcherUpdateHandlerBuilder = ApplicationSnapshotTestResultFileWatcherUpdateHandlerBuilder(clojure: { _ in })) {
+        self.applicationLogReader = builder.applicationLogReader
+        self.snapshotTestResultFactory = builder.snapshotTestResultFactory
+        self.applicationNameExtractor = builder.applicationNameExtractor
+        self.buildCreator = builder.buildCreator
+        self.fbImageReferenceDirExtractor = builder.fbImageReferenceDirExtractor
     }
     
     // MARK: - Interface

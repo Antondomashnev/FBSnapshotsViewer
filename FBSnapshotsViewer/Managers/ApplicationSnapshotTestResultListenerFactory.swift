@@ -25,7 +25,12 @@ class ApplicationSnapshotTestResultListenerFactory {
         let reader = ApplicationLogReader(configuration: configuration)
         let applicationNameExtractor = applicationNameExtractorFactory.applicationNameExtractor(for: configuration)
         let imageDirectoryExtractor = fbReferenceImageDirExtractorFactory.fbReferenceImageDirectoryURLExtractor(for: configuration)
-        let applicationSnapshotTestResultFileWatcherUpdateHandler = ApplicationSnapshotTestResultFileWatcherUpdateHandler(applicationLogReader: reader, applicationNameExtractor: applicationNameExtractor, fbImageReferenceDirExtractor: imageDirectoryExtractor)
+        let builder = ApplicationSnapshotTestResultFileWatcherUpdateHandlerBuilder {
+            $0.applicationLogReader = reader
+            $0.applicationNameExtractor = applicationNameExtractor
+            $0.fbImageReferenceDirExtractor = imageDirectoryExtractor
+        }
+        let applicationSnapshotTestResultFileWatcherUpdateHandler = ApplicationSnapshotTestResultFileWatcherUpdateHandler(builder: builder)
         return ApplicationSnapshotTestResultListener(fileWatcher: fileWatcher, fileWatcherUpdateHandler: applicationSnapshotTestResultFileWatcherUpdateHandler)
     }
 }

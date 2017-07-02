@@ -28,32 +28,39 @@ class FBReferenceImageDirectoryURLExtractorFactory {
     }
 }
 
-class XcodeFBReferenceImageDirectoryURLExtractor: FBReferenceImageDirectoryURLExtractor {
-    func extractImageDirectoryURL(from logLine: ApplicationLogLine) throws -> URL {
-        guard case let .fbReferenceImageDirMessage(line) = logLine else {
+class BaseFBReferenceImageDirectoryURLExtractor {
+    fileprivate func extractLine(from logLine: ApplicationLogLine) throws -> String {
+        guard case let .fbReferenceImageDirMessage(line) = logLine,
+              line.contains("/") else {
             throw FBReferenceImageDirectoryURLExtractorError.unexpectedLogLine(message: "Unexpected log line given: \(logLine). Expected .fbReferenceImageDirMessage")
         }
-        guard line.contains("/"),
-              let components = line.components(separatedBy: " = ").last?.components(separatedBy: "\""),
-              components.count == 3 else {
-                throw FBReferenceImageDirectoryURLExtractorError.unexpectedLogLine(message: "Unexpected log line given: \(logLine). Expected the following format: \"FB_REFERENCE_IMAGE_DIR\" = \"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\";")
-        }
+        return line
+    }
+    
+    fileprivate func buildReferenceImagePathURL(with path: String) -> URL {
         // ios-snapshots adds a suffix for the reference dir depending on the acrhitecture. For now we support only 64 bit
-        return URL(fileURLWithPath: components[1] + "_64", isDirectory: true)
+        return URL(fileURLWithPath: path + "_64", isDirectory: true)
     }
 }
 
-class AppCodeFBReferenceImageDirectoryURLExtractor: FBReferenceImageDirectoryURLExtractor {
+class XcodeFBReferenceImageDirectoryURLExtractor: BaseFBReferenceImageDirectoryURLExtractor, FBReferenceImageDirectoryURLExtractor {
     func extractImageDirectoryURL(from logLine: ApplicationLogLine) throws -> URL {
-        guard case let .fbReferenceImageDirMessage(line) = logLine else {
-            throw FBReferenceImageDirectoryURLExtractorError.unexpectedLogLine(message: "Unexpected log line given: \(logLine). Expected .fbReferenceImageDirMessage")
+        let line = try extractLine(from: logLine)
+        guard let components = line.components(separatedBy: " = ").last?.components(separatedBy: "\""),
+              components.count == 3 else {
+                throw FBReferenceImageDirectoryURLExtractorError.unexpectedLogLine(message: "Unexpected log line given: \(logLine). Expected the following format: \"FB_REFERENCE_IMAGE_DIR\" = \"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\";")
         }
-        guard line.contains("/"),
-            let components = line.components(separatedBy: "value=").last?.components(separatedBy: "\""),
-            components.count == 3 else {
+        return buildReferenceImagePathURL(with: components[1])
+    }
+}
+
+class AppCodeFBReferenceImageDirectoryURLExtractor: BaseFBReferenceImageDirectoryURLExtractor, FBReferenceImageDirectoryURLExtractor {
+    func extractImageDirectoryURL(from logLine: ApplicationLogLine) throws -> URL {
+        let line = try extractLine(from: logLine)
+        guard let components = line.components(separatedBy: "value=").last?.components(separatedBy: "\""),
+              components.count == 3 else {
                 throw FBReferenceImageDirectoryURLExtractorError.unexpectedLogLine(message: "Unexpected log line given: \(logLine). Expected the following format: <env name=\"FB_REFERENCE_IMAGE_DIR\" value=\"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\"/>")
         }
-        // ios-snapshots adds a suffix for the reference dir depending on the acrhitecture. For now we support only 64 bit
-        return URL(fileURLWithPath: components[1] + "_64", isDirectory: true)
+        return buildReferenceImagePathURL(with: components[1])
     }
 }

@@ -82,7 +82,14 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec: QuickSpec {
             snapshotTestResultFactory = ApplicationSnapshotTestResultFileWatcherUpdateHandler_MockSnapshotTestResultFactory()
             buildCreator = ApplicationSnapshotTestResultFileWatcherUpdateHandler_MockBuildCreator()
             fbImageReferenceDirExtractor = ApplicationSnapshotTestResultFileWatcherUpdateHandler__MockFBReferenceImageDirectoryURLExtractor()
-            updateHandler = ApplicationSnapshotTestResultFileWatcherUpdateHandler(applicationLogReader: logReader, applicationNameExtractor: applicationNameExtractor, fbImageReferenceDirExtractor: fbImageReferenceDirExtractor, snapshotTestResultFactory: snapshotTestResultFactory, buildCreator: buildCreator)
+            let builder = ApplicationSnapshotTestResultFileWatcherUpdateHandlerBuilder {
+                $0.applicationNameExtractor = applicationNameExtractor
+                $0.fbImageReferenceDirExtractor = fbImageReferenceDirExtractor
+                $0.snapshotTestResultFactory = snapshotTestResultFactory
+                $0.buildCreator = buildCreator
+                $0.applicationLogReader = logReader
+            }
+            updateHandler = ApplicationSnapshotTestResultFileWatcherUpdateHandler(builder: builder)
         }
         
         describe(".handleFileWatcherUpdate") {
