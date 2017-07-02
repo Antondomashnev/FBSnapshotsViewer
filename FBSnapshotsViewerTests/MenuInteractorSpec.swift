@@ -51,13 +51,13 @@ class MenuInteractorSpec: QuickSpec {
     override func spec() {
         let testResultsDate = Date()
         let applicationName = "FBSnapshotsViewer"
-        let build = Build(date: testResultsDate, applicationName: applicationName)
-        let testResult1 = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
-        let testResult2 = SnapshotTestResult.failed(testName: "testName2", referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", build: build)
-        let testResult3 = SnapshotTestResult.recorded(testName: "testName3", referenceImagePath: "referenceImagePath3", build: build)
+        let fbReferenceImageDirURL = URL(fileURLWithPath: "foo/bar", isDirectory: true)
+        let build = Build(date: testResultsDate, applicationName: applicationName, fbReferenceImageDirectoryURL: fbReferenceImageDirURL)
+        let testResult1 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClass1", testName: "testName1"), referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
+        let testResult2 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClass2", testName: "testName2"), referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", build: build)
+        let testResult3 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClass3", testName: "testName3"), referenceImagePath: "referenceImagePath3", build: build)
         
         var configuration: FBSnapshotsViewer.Configuration!
-        var applicationNameExtractor: ApplicationNameExtractorMock!
         var output: MenuInteractorOutputMock!
         var interactor: MenuInteractor!
         var applicationSnapshotTestResultListener: MenuInteractor_MockApplicationSnapshotTestResultListener!
@@ -66,9 +66,8 @@ class MenuInteractorSpec: QuickSpec {
 
         beforeEach {
             configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
-            applicationNameExtractor = ApplicationNameExtractorMock()
             output = MenuInteractorOutputMock()
-            applicationSnapshotTestResultListener = MenuInteractor_MockApplicationSnapshotTestResultListener(fileWatcher: KZFileWatchers.FileWatcher.Local(path: "testpath"), applicationLogReader: ApplicationLogReader(), applicationNameExtractor: applicationNameExtractor)
+            applicationSnapshotTestResultListener = MenuInteractor_MockApplicationSnapshotTestResultListener(fileWatcher: KZFileWatchers.FileWatcher.Local(path: "testpath"), fileWatcherUpdateHandler: ApplicationSnapshotTestResultFileWatcherUpdateHandler())
             applicationSnapshotTestResultListenerFactory = MenuInteractor_MockApplicationSnapshotTestResultListenerFactory()
             applicationSnapshotTestResultListenerFactory.mockApplicationSnapshotTestResultListener = applicationSnapshotTestResultListener
             applicationTestLogFilesListener = MenuInteractor_MockApplicationTestLogFilesListener()
@@ -96,8 +95,8 @@ class MenuInteractorSpec: QuickSpec {
                 }
 
                 it("outputs it") {
-                    expect(output.didFindNewTestLogFileCalled).to(beTrue())
-                    expect(output.didFindNewTestLogFileReceivedPath).to(equal("/Users/antondomashnev/Library/Bla/Bla.log"))
+                    expect(output.didFindNewTestLogFile_at_Called).to(beTrue())
+                    expect(output.didFindNewTestLogFile_at_ReceivedPath).to(equal("/Users/antondomashnev/Library/Bla/Bla.log"))
                 }
             }
         }
@@ -122,9 +121,9 @@ class MenuInteractorSpec: QuickSpec {
                     }
 
                     it("outputs it") {
-                        let build = Build(date: testResultsDate, applicationName: applicationName)
-                        let expectedTestResult = SnapshotTestResult.failed(testName: "testName1", referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
-                        expect(output.didFindNewTestResultReceivedTestResult).to(equal(expectedTestResult))
+                        let build = Build(date: testResultsDate, applicationName: applicationName, fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                        let expectedTestResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClass1", testName: "testName1"), referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
+                        expect(output.didFindNewTestResult___ReceivedTestResult).to(equal(expectedTestResult))
                     }
                 }
 

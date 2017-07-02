@@ -12,4 +12,5 @@ protocol TestResultsModuleInterface: class, AutoMockable {
     func updateUserInterface()
     func openInKaleidoscope(testResultDisplayInfo: TestResultDisplayInfo)
     func selectDiffMode(_ diffMode: TestResultsDiffMode)
+    func swap(_ testResults: [TestResultDisplayInfo])
 }

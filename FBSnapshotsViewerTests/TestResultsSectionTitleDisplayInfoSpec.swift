@@ -25,7 +25,7 @@ class TestResultsSectionTitleDisplayInfoSpec: QuickSpec {
         var displayInfo: TestResultsSectionTitleDisplayInfo!
         
         beforeEach {
-            build = Build(date: Date(), applicationName: "FBSnapshotsViewer")
+            build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
             dateFormatter = TestResultsSectionTitleDisplayInfo_MockDateComponentsFormatter()
         }
         

@@ -38,7 +38,7 @@ class MenuPresenterSpec: QuickSpec {
         var updater: UpdaterMock!
 
         beforeEach {
-            build = Build(date: Date(), applicationName: "FBSnapshotsViewer")
+            build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
             updater = UpdaterMock()
             derivedDataFolder = DerivedDataFolder.xcodeCustom(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
             configuration = FBSnapshotsViewer.Configuration(derivedDataFolder: derivedDataFolder)
@@ -58,7 +58,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("checks for updaters") {
-                expect(updater.checkForUpdatesCalled).to(beTrue())
+                expect(updater.checkForUpdates_Called).to(beTrue())
             }
         }
 
@@ -78,7 +78,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("starts the Xcode builds listening") {
-                expect(interactor.startXcodeBuildsListeningReceivedDerivedDataFolder).to(equal(derivedDataFolder))
+                expect(interactor.startXcodeBuildsListening_derivedDataFolder_ReceivedDerivedDataFolder).to(equal(derivedDataFolder))
             }
         }
 
@@ -88,7 +88,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("terminates the app") {
-                expect(application.terminateCalled).to(beTrue())
+                expect(application.terminate___Called).to(beTrue())
             }
         }
 
@@ -98,7 +98,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("pop ups the menu in user interface") {
-                expect(userInterface.popUpOptionsMenuCalled).to(beTrue())
+                expect(userInterface.popUpOptionsMenu_Called).to(beTrue())
             }
         }
 
@@ -108,19 +108,19 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("starts listening for snapshot tests results from the given test log") {
-                expect(interactor.startSnapshotTestResultListeningCalled).to(beTrue())
-                expect(interactor.startSnapshotTestResultListeningReceivedPath).to(equal("/Users/antondomashnev/Library/Xcode/Logs/MyLog.log"))
+                expect(interactor.startSnapshotTestResultListening_fromLogFileAt_Called).to(beTrue())
+                expect(interactor.startSnapshotTestResultListening_fromLogFileAt_ReceivedPath).to(equal("/Users/antondomashnev/Library/Xcode/Logs/MyLog.log"))
             }
         }
 
         describe(".didFindNewTestResult") {
             beforeEach {
-                presenter.didFindNewTestResult(SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build))
+                presenter.didFindNewTestResult(SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build))
             }
 
             it("sets that new test results are available in user interface") {
-                expect(userInterface.setNewTestResultsReceivedAvailable).to(beTrue())
-                expect(userInterface.setNewTestResultsCalled).to(beTrue())
+                expect(userInterface.setNewTestResults_available_Called).to(beTrue())
+                expect(userInterface.setNewTestResults_available_ReceivedAvailable).to(beTrue())
             }
         }
 
@@ -129,18 +129,18 @@ class MenuPresenterSpec: QuickSpec {
                 var foundTestResults: [SnapshotTestResult] = []
 
                 beforeEach {
-                    foundTestResults = [SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)]
+                    foundTestResults = [SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)]
                     interactor.foundTestResults = foundTestResults
                     presenter.showTestResults()
                 }
 
                 it("sets that there no new test results in user interface") {
-                    expect(userInterface.setNewTestResultsCalled).to(beTrue())
-                    expect(userInterface.setNewTestResultsReceivedAvailable).to(beFalse())
+                    expect(userInterface.setNewTestResults_available_Called).to(beTrue())
+                    expect(userInterface.setNewTestResults_available_ReceivedAvailable).to(beFalse())
                 }
 
                 it("shows test results") {
-                    let expectedPaameter = SnapshotTestResult.failed(testName: "testName", referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
+                    let expectedPaameter = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
                     expect(wireframe.showTestResultsModuleCalled).to(beTrue())
                     expect(wireframe.showTestResultsModuleReceivedParameters[0]).to(equal(expectedPaameter))
                 }
@@ -152,7 +152,7 @@ class MenuPresenterSpec: QuickSpec {
                 }
 
                 it("doesn't update user interface") {
-                    expect(userInterface.setNewTestResultsCalled).to(beFalse())
+                    expect(userInterface.setNewTestResults_available_Called).to(beFalse())
                 }
 
                 it("doesn't show test results") {

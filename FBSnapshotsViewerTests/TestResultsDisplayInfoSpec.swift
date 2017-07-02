@@ -18,13 +18,13 @@ class TestResultsDisplayInfoSpec: QuickSpec {
         
         describe(".init") {
             beforeEach {
-                let build1 = Build(applicationName: "FBSnapshotsViewer")
-                let build2 = Build(applicationName: "AmazingWeather")
-                let build3 = Build(applicationName: "FBSnapshotsViewer")
-                let testResultInfo1 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "foo_name", referenceImagePath: "foo/bar.png", build: build1))
-                let testResultInfo2 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "foo_name", referenceImagePath: "foo/bar.png", build: build2))
-                let testResultInfo3 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "foo_name", referenceImagePath: "foo/bar.png", build: build3))
-                let testResultInfo4 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "foo_name", referenceImagePath: "foo/bar.png", build: build3))
+                let build1 = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                let build2 = Build(date: Date(), applicationName: "AmazingWeather", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/foo", isDirectory: true))
+                let build3 = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                let testResultInfo1 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "foo_name"), referenceImagePath: "foo/bar.png", build: build1))
+                let testResultInfo2 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "foo_name"), referenceImagePath: "foo/bar.png", build: build2))
+                let testResultInfo3 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "foo_name"), referenceImagePath: "foo/bar.png", build: build3))
+                let testResultInfo4 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "foo_name"), referenceImagePath: "foo/bar.png", build: build3))
                 let sectionTitleInfo1 = TestResultsSectionTitleDisplayInfo(build: build1, testContext: "context1")
                 let sectionInfo1 = TestResultsSectionDisplayInfo(title: sectionTitleInfo1, items: [testResultInfo1])
                 let sectionTitleInfo2 = TestResultsSectionTitleDisplayInfo(build: build2, testContext: "context2")

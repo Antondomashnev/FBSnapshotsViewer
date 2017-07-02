@@ -29,8 +29,19 @@ class TestResultCellSpec: QuickSpec {
             }
 
             it("calls delegate") {
-                expect(delegate.testResultCellCalled).to(beTrue())
-                expect(delegate.testResultCellReceivedArguments?.cell).to(equal(cell))
+                expect(delegate.testResultCell___viewInKaleidoscopeButtonClicked_Called).to(beTrue())
+                expect(delegate.testResultCell___viewInKaleidoscopeButtonClicked_ReceivedArguments?.cell).to(equal(cell))
+            }
+        }
+        
+        describe(".swapSnapshotsButtonClicked") {
+            beforeEach {
+                cell.swapSnapshotsButtonClicked(NSButton(frame: NSRect.zero))
+            }
+            
+            it("calls delegate") {
+                expect(delegate.testResultCell___swapSnapshotsButtonClicked_Called).to(beTrue())
+                expect(delegate.testResultCell___swapSnapshotsButtonClicked_ReceivedArguments?.cell).to(equal(cell))
             }
         }
     }

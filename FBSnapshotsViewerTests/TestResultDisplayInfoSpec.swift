@@ -38,22 +38,34 @@ class TestResultDisplayInfo_MockKaleidoscopeViewer: ExternalViewer {
     }
 }
 
+class TestResultDisplayInfo_MockSnapshotTestResultSwapper: SnapshotTestResultSwapper {
+    var canSwapReturnValue: Bool = false
+    override func canSwap(_ testResult: SnapshotTestResult) -> Bool {
+        return canSwapReturnValue
+    }
+}
+
 class TestResultDisplayInfoSpec: QuickSpec {
     override func spec() {
         describe(".initWithTestInfo") {
             var build: Build!
             var testResult: SnapshotTestResult!
+            var swapper: TestResultDisplayInfo_MockSnapshotTestResultSwapper!
             let kaleidoscopeViewer: TestResultDisplayInfo_MockKaleidoscopeViewer.Type = TestResultDisplayInfo_MockKaleidoscopeViewer.self
 
             afterEach {
                 kaleidoscopeViewer.reset()
             }
-
+            
+            beforeEach {
+                swapper = TestResultDisplayInfo_MockSnapshotTestResultSwapper()
+            }
+            
             describe("testName") {
                 context("when test name with undrscore") {
                     beforeEach {
-                        build = Build(date: Date(), applicationName: "FBSnapshotsViewer")
-                        testResult = SnapshotTestResult.failed(testName: "TestClass_testName_has_replaced_all_underscore_with_spaces", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                        build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                        testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testName_has_replaced_all_underscore_with_spaces"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
 
                     it("has correct test name") {
@@ -69,7 +81,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
                 context("when test name without undrscore") {
                     beforeEach {
-                        testResult = SnapshotTestResult.failed(testName: "TestClass testName", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                        testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testName"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
 
                     it("has correct test name") {
@@ -83,10 +95,40 @@ class TestResultDisplayInfoSpec: QuickSpec {
                     }
                 }
             }
-
+            
+            describe("canBeSwapped") {
+                var displayInfo: TestResultDisplayInfo!
+                
+                beforeEach {
+                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                }
+                
+                context("when swapper can swap given test result") {
+                    beforeEach {
+                        swapper.canSwapReturnValue = true
+                        displayInfo = TestResultDisplayInfo(testResult: testResult, swapper: swapper)
+                    }
+                    
+                    it("can be swapped") {
+                        expect(displayInfo.canBeSwapped).to(beTrue())
+                    }
+                }
+                
+                context("when swapper can not swap given test result") {
+                    beforeEach {
+                        swapper.canSwapReturnValue = false
+                        displayInfo = TestResultDisplayInfo(testResult: testResult, swapper: swapper)
+                    }
+                    
+                    it("can not be swapped") {
+                        expect(displayInfo.canBeSwapped).to(beFalse())
+                    }
+                }
+            }
+            
             describe("canBeViewedInKaleidoscope") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                 }
 
                 context("when kaleidoscope viewer is available") {
@@ -131,7 +173,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when failed test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testName: "TestClass testFailed", referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                 }
 
                 it("initializes object correctly") {
@@ -147,7 +189,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when recorded test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testName: "ExampleTestClass testRecord", referenceImagePath: "referenceImagePath.png", build: build)
+                    testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "ExampleTestClass", testName: "testRecord"), referenceImagePath: "referenceImagePath.png", build: build)
                 }
 
                 it("initializes object correctly") {

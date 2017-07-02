@@ -8,16 +8,34 @@
 
 import Cocoa
 
+struct SnapshotTestInformation: AutoEquatable {
+    let testClassName: String
+    let testName: String
+    
+    init(testClassName: String, testName: String) {
+        self.testClassName = testClassName
+        self.testName = testName
+    }
+}
+
 enum SnapshotTestResult: AutoEquatable {
+    var testClassName: String {
+        return testInformation.testClassName
+    }
+    
     var testName: String {
+        return testInformation.testName
+    }
+    
+    var testInformation: SnapshotTestInformation {
         switch self {
-        case let .recorded(testName, _, _):
-            return testName
-        case let .failed(testName, _, _, _, _):
-            return testName
+        case let .recorded(testInformation, _, _):
+            return testInformation
+        case let .failed(testInformation, _, _, _, _):
+            return testInformation
         }
     }
-
+    
     var build: Build {
         switch self {
         case let .recorded(_, _, build):
@@ -27,11 +45,11 @@ enum SnapshotTestResult: AutoEquatable {
         }
     }
 
-    case recorded(testName: String,
+    case recorded(testInformation: SnapshotTestInformation,
                   referenceImagePath: String,
                   build: Build)
 
-    case failed(testName: String,
+    case failed(testInformation: SnapshotTestInformation,
                 referenceImagePath: String,
                 diffImagePath: String,
                 failedImagePath: String,

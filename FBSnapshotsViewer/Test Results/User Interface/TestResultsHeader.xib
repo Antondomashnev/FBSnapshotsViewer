@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
@@ -25,14 +25,26 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A8U-0D-fPv">
                     <rect key="frame" x="451" y="7" width="84" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2 minutes ago" id="kf0-1z-mKg">
-                        <font key="font" metaFont="system" size="12"/>
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s7w-tW-bNz">
+                    <rect key="frame" x="681" y="6" width="43" height="17"/>
+                    <buttonCell key="cell" type="inline" title="Swap" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="wIK-4A-ekf">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="swapSnapshotsButtonClicked:" target="c22-O7-iKe" id="eLv-Xi-qAJ"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vTy-Nb-VrP" secondAttribute="trailing" constant="8" id="KwK-GO-LeN"/>
+                <constraint firstItem="s7w-tW-bNz" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="Qw5-PX-H7k"/>
+                <constraint firstAttribute="trailing" secondItem="s7w-tW-bNz" secondAttribute="trailing" constant="8" id="WBO-Nn-BE8"/>
                 <constraint firstItem="A8U-0D-fPv" firstAttribute="leading" secondItem="vTy-Nb-VrP" secondAttribute="trailing" constant="8" id="cwV-ls-x7g"/>
                 <constraint firstItem="vTy-Nb-VrP" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="8" id="jdX-lN-aEn"/>
                 <constraint firstItem="vTy-Nb-VrP" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="ldJ-Sk-L8D"/>
@@ -41,6 +53,7 @@
             <connections>
                 <outlet property="contextLabel" destination="vTy-Nb-VrP" id="icZ-F5-nGC"/>
                 <outlet property="dateLabel" destination="A8U-0D-fPv" id="njE-Ug-odu"/>
+                <outlet property="swapSnapshotsButton" destination="s7w-tW-bNz" id="saF-o0-jsz"/>
             </connections>
         </customView>
     </objects>

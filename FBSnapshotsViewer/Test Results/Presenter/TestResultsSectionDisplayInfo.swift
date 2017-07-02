@@ -35,6 +35,10 @@ struct TestResultsSectionDisplayInfo: AutoEquatable {
     let titleInfo: TestResultsSectionTitleDisplayInfo
     let itemInfos: [TestResultDisplayInfo]
     
+    var hasItemsToSwap: Bool {
+        return itemInfos.index { $0.canBeSwapped } != nil ? true : false
+    }
+    
     init(title: TestResultsSectionTitleDisplayInfo, items: [TestResultDisplayInfo] = []) {
         self.titleInfo = title
         self.itemInfos = items

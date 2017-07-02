@@ -147,12 +147,12 @@ class RecursiveFolderEventsListenerSpec: QuickSpec {
                     }
 
                     it("outputs folder event") {
-                        expect(output.folderEventsListenerCalled).to(beTrue())
+                        expect(output.folderEventsListener___didReceive_Called).to(beTrue())
                     }
 
                     it("outputs correct folder event") {
                         let expectedFolderEvent = FolderEvent.created(path: "/path/to/event/file.txt", object: .file)
-                        expect(output.folderEventsListenerReceivedArguments?.1).to(equal(expectedFolderEvent))
+                        expect(output.folderEventsListener___didReceive_ReceivedArguments?.1).to(equal(expectedFolderEvent))
                     }
 
                     it("doesn't create a new dependent listener") {
@@ -177,12 +177,12 @@ class RecursiveFolderEventsListenerSpec: QuickSpec {
                         }
 
                         it("outputs folder event") {
-                            expect(output.folderEventsListenerCalled).to(beTrue())
+                            expect(output.folderEventsListener___didReceive_Called).to(beTrue())
                         }
 
                         it("outputs correct folder event") {
                             let expectedFolderEvent = FolderEvent.created(path: "/path/to/event/file.txt", object: .file)
-                            expect(output.folderEventsListenerReceivedArguments?.1).to(equal(expectedFolderEvent))
+                            expect(output.folderEventsListener___didReceive_ReceivedArguments?.1).to(equal(expectedFolderEvent))
                         }
                     }
 
@@ -202,7 +202,7 @@ class RecursiveFolderEventsListenerSpec: QuickSpec {
                         }
 
                         it("doesn't output folder event") {
-                            expect(output.folderEventsListenerCalled).to(beFalse())
+                            expect(output.folderEventsListener___didReceive_Called).to(beFalse())
                         }
                     }
                 }

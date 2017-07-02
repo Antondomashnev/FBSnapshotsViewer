@@ -8,11 +8,18 @@
 
 import AppKit
 
+protocol TestResultsHeaderDelegate: class, AutoMockable {
+    func testResultsHeader(_ header: TestResultsHeader, swapSnapshotsButtonClicked: NSButton)
+}
+
 class TestResultsHeader: NSView, NSCollectionViewSectionHeaderView {
     static let itemIdentifier = "TestResultsHeader"
     
+    weak var delegate: TestResultsHeaderDelegate?
+    
     @IBOutlet private weak var contextLabel: NSTextField!
     @IBOutlet private weak var dateLabel: NSTextField!
+    @IBOutlet private weak var swapSnapshotsButton: NSButton!
     
     // MARK: - Helpers
     
@@ -23,9 +30,16 @@ class TestResultsHeader: NSView, NSCollectionViewSectionHeaderView {
     
     // MARK: - Interface
     
-    func configure(with sectionTitleInfo: TestResultsSectionTitleDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode()) {
-        contextLabel.stringValue = sectionTitleInfo.title
-        dateLabel.stringValue = sectionTitleInfo.timeAgo
+    func configure(with sectionInfo: TestResultsSectionDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode()) {
+        contextLabel.stringValue = sectionInfo.titleInfo.title
+        dateLabel.stringValue = sectionInfo.titleInfo.timeAgo
+        swapSnapshotsButton.isHidden = !sectionInfo.hasItemsToSwap
         configureTitleLabelsColorScheme(for: appleInterfaceMode)
+    }
+    
+    // MARK: - Actions
+    
+    @objc @IBAction func swapSnapshotsButtonClicked(_ sender: NSButton) {
+        delegate?.testResultsHeader(self, swapSnapshotsButtonClicked: sender)
     }
 }

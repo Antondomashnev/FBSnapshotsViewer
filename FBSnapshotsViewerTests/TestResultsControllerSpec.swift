@@ -37,12 +37,13 @@ class TestResultsController_MockTestResultsCollectionViewOutlets: TestResultsCol
 
 class TestResultsControllerSpec: QuickSpec {
     override func spec() {
-        let build: Build = Build(date: Date(), applicationName: "FBSnapshotsViewer")
+        let build: Build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
         var collectionViewOutlets: TestResultsController_MockTestResultsCollectionViewOutlets!
         var collectionView: TestResultsController_MockNSCollectionView!
         var controller: TestResultsController!
         var eventHandler: TestResultsModuleInterfaceMock!
         var testResults: [TestResultsSectionDisplayInfo] = []
+        var testResultDisplayInfo: TestResultDisplayInfo!
         var topView: TestResultsController_MockTestResultsTopView!
         var displayInfo: TestResultsDisplayInfo!
 
@@ -57,7 +58,7 @@ class TestResultsControllerSpec: QuickSpec {
             controller.collectionView = collectionView
             controller.topView = topView
             
-            let testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testName: "Bla", referenceImagePath: "foo/bar.png", build: build))
+            testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "Bla"), referenceImagePath: "foo/bar.png", build: build))
             let titleInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "Foo")
             let sectionInfo = TestResultsSectionDisplayInfo(title: titleInfo, items: [testResultDisplayInfo])
             testResults = [sectionInfo]
@@ -89,7 +90,7 @@ class TestResultsControllerSpec: QuickSpec {
             }
 
             it("updates user interface") {
-                expect(eventHandler.updateUserInterfaceCalled).to(beTrue())
+                expect(eventHandler.updateUserInterface_Called).to(beTrue())
             }
         }
         
@@ -99,7 +100,51 @@ class TestResultsControllerSpec: QuickSpec {
             }
             
             it("selects diff mode") {
-                expect(eventHandler.selectDiffModeReceivedDiffMode).to(equal(TestResultsDiffMode.diff))
+                expect(eventHandler.selectDiffMode___ReceivedDiffMode).to(equal(TestResultsDiffMode.diff))
+            }
+        }
+        
+        describe(".testResultCell:swapSnapshotsButtonClicked") {
+            var cell: TestResultCell!
+            var swapSnapshotsButton: NSButton!
+            
+            beforeEach {
+                swapSnapshotsButton = NSButton(frame: NSRect.zero)
+                cell = TestResultCell(nibName: nil, bundle: nil)
+            }
+            
+            context("when cell is not visible") {
+                beforeEach {
+                    collectionView.indexPathForItemReturnValue = nil
+                }
+                
+                it("asserts") {
+                    expect { controller.testResultCell(cell, swapSnapshotsButtonClicked: swapSnapshotsButton) }.to(throwAssertion())
+                }
+            }
+            
+            context("when test result is not presented in controller") {
+                beforeEach {
+                    collectionViewOutlets.testResultsDisplayInfo = displayInfo
+                    collectionView.indexPathForItemReturnValue = IndexPath(item: 1, section: 0)
+                }
+                
+                it("asserts") {
+                    expect { controller.testResultCell(cell, swapSnapshotsButtonClicked: swapSnapshotsButton) }.to(throwAssertion())
+                }
+            }
+            
+            context("when test result is presented and cell is visible") {
+                beforeEach {
+                    collectionViewOutlets.testResultsDisplayInfo = displayInfo
+                    collectionView.indexPathForItemReturnValue = IndexPath(item: 0, section: 0)
+                    controller.testResultCell(cell, swapSnapshotsButtonClicked: swapSnapshotsButton)
+                }
+                
+                it("swaps test result") {
+                    expect(eventHandler.swap___Called).to(beTrue())
+                    expect(eventHandler.swap___ReceivedTestResults).to(equal([testResultDisplayInfo]))
+                }
             }
         }
 
@@ -141,8 +186,8 @@ class TestResultsControllerSpec: QuickSpec {
                 }
 
                 it("opens test result in kaleidoscope") {
-                    expect(eventHandler.openInKaleidoscopeCalled).to(beTrue())
-                    expect(eventHandler.openInKaleidoscopeReceivedTestResultDisplayInfo).to(equal(testResults[0].itemInfos[0]))
+                    expect(eventHandler.openInKaleidoscope_testResultDisplayInfo_Called).to(beTrue())
+                    expect(eventHandler.openInKaleidoscope_testResultDisplayInfo_ReceivedTestResultDisplayInfo).to(equal(testResults[0].itemInfos[0]))
                 }
             }
         }

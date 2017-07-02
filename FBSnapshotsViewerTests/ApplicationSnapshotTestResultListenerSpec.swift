@@ -30,52 +30,24 @@ class ApplicationSnapshotTestResultListener_MockFileWatcherProtocol: KZFileWatch
     }
 }
 
-class ApplicationSnapshotTestResultListener_MockApplicationLogReader: ApplicationLogReader {
-    var readLines: [ApplicationLogLine] = []
-    override func readline(of logText: String, startingFrom lineNumber: Int) -> [ApplicationLogLine] {
-        return readLines
-    }
-}
-
-class ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory: SnapshotTestResultFactory {
-    var createdSnapshotTestResultForLogLine: [ApplicationLogLine: SnapshotTestResult] = [:]
-    var givenBuild: Build!
-    override func createSnapshotTestResult(from logLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
-        givenBuild = build
-        return createdSnapshotTestResultForLogLine[logLine]
-    }
-}
-
-class ApplicationSnapshotTestResultListener_MockApplicationNameExtractor: ApplicationNameExtractor {
-    var extractApplicationNameCalled = false
-    var extractApplicationNameThrows = false
-    var extractApplicationNameReceivedLogLine: ApplicationLogLine?
-    var extractApplicationNameReturnValue: String!
+class ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestResultFileWatcherUpdateHandler: ApplicationSnapshotTestResultFileWatcherUpdateHandler {
+    var createdTestResults: [SnapshotTestResult] = []
     
-    func extractApplicationName(from logLine: ApplicationLogLine) throws -> String {
-        if extractApplicationNameThrows {
-            throw NSError(domain: "", code: 0, userInfo: nil)
-        }
-        extractApplicationNameCalled = true
-        extractApplicationNameReceivedLogLine = logLine
-        return extractApplicationNameReturnValue
+    override func handleFileWatcherUpdate(result: KZFileWatchers.FileWatcher.RefreshResult) -> [SnapshotTestResult] {
+        return createdTestResults
     }
 }
 
 class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
     override func spec() {
+        var updatesHandler: ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestResultFileWatcherUpdateHandler!
         var fileWatcher: ApplicationSnapshotTestResultListener_MockFileWatcherProtocol!
-        var logReader: ApplicationSnapshotTestResultListener_MockApplicationLogReader!
-        var snapshotTestResultFactory: ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory!
-        var applicationNameExtractor: ApplicationSnapshotTestResultListener_MockApplicationNameExtractor!
         var listener: ApplicationSnapshotTestResultListener!
 
         beforeEach {
-            applicationNameExtractor = ApplicationSnapshotTestResultListener_MockApplicationNameExtractor()
-            snapshotTestResultFactory = ApplicationSnapshotTestResultListener_MockSnapshotTestResultFactory()
+            updatesHandler = ApplicationSnapshotTestResultListener_MockApplicationSnapshotTestResultFileWatcherUpdateHandler()
             fileWatcher = ApplicationSnapshotTestResultListener_MockFileWatcherProtocol()
-            logReader = ApplicationSnapshotTestResultListener_MockApplicationLogReader()
-            listener = ApplicationSnapshotTestResultListener(fileWatcher: fileWatcher, applicationLogReader: logReader, applicationNameExtractor: applicationNameExtractor, snapshotTestResultFactory: snapshotTestResultFactory)
+            listener = ApplicationSnapshotTestResultListener(fileWatcher: fileWatcher, fileWatcherUpdateHandler: updatesHandler)
         }
 
         describe(".stopListening") {
@@ -86,82 +58,40 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
         }
 
         describe(".receiving new file watch event") {
+            let update: Data! = "new updated text".data(using: .utf8, allowLossyConversion: false)
             var receivedSnapshotTestResults: [SnapshotTestResult] = []
-            let build = Build(date: Date(), applicationName: "MyApp")
-            let unknownLogLine = ApplicationLogLine.unknown
-            let applicationNameMessageLogLine = ApplicationLogLine.applicationNameMessage(line: "MyApp")
-            let kaleidoscopeCommandMesageLogLine = ApplicationLogLine.kaleidoscopeCommandMessage(line: "BlaBla")
-            let referenceImageSavedMessageLogLine = ApplicationLogLine.referenceImageSavedMessage(line: "FooFoo")
-            let failedSnapshotTestResult = SnapshotTestResult.failed(testName: "failedTest", referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", build: build)
-            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testName: "recordedTest", referenceImagePath: "referenceTestImage.png", build: build)
-
+            
             beforeEach {
-                applicationNameExtractor.extractApplicationNameReturnValue = "MyApp"
-                snapshotTestResultFactory.createdSnapshotTestResultForLogLine[kaleidoscopeCommandMesageLogLine] = failedSnapshotTestResult
-                snapshotTestResultFactory.createdSnapshotTestResultForLogLine[referenceImageSavedMessageLogLine] = recordedSnapshotTestResult
                 listener.startListening { result in
                     receivedSnapshotTestResults += [result]
                 }
             }
 
-            context("with no changes") {
+            context("when updates handler returns empty array") {
                 beforeEach {
-                    fileWatcher.startClosure?(.noChanges)
+                    updatesHandler.createdTestResults = []
+                    fileWatcher.startClosure?(.updated(data: update))
                 }
-
-                it("doesnt output anything") {
-                    expect(receivedSnapshotTestResults.isEmpty).to(beTrue())
-                }
-            }
-
-            context("with invalid updates") {
-                it("thows assertion") {
-                    expect { fileWatcher.startClosure?(.updated(data: Data())) }.to(throwAssertion())
+                
+                it("doesn't call listening callback") {
+                    expect(receivedSnapshotTestResults).to(equal([]))
                 }
             }
             
-            context("with valid updates") {
-                let update: Data! = "new updated text".data(using: .utf8, allowLossyConversion: false)
+            context("when updates handler returns some results") {
+                var build: Build!
                 
-                context("when application name is unknown at the moment of reading snapshot test result log line") {
-                    beforeEach {
-                        logReader.readLines = [unknownLogLine, kaleidoscopeCommandMesageLogLine, applicationNameMessageLogLine, referenceImageSavedMessageLogLine]
-                    }
-                    
-                    it("thows assertion") {
-                        expect { fileWatcher.startClosure?(.updated(data: update)) }.to(throwAssertion())
-                    }
+                beforeEach {
+                    build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
                 }
                 
-                context("when application name is known at the moment of reading snapshot test result log line") {
-                    beforeEach {
-                        logReader.readLines = [applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, unknownLogLine, referenceImageSavedMessageLogLine]
-                    }
-                    
-                    context("when can not parse application name") {
-                        beforeEach {
-                            applicationNameExtractor.extractApplicationNameThrows = true
-                        }
-                        
-                        it("outputs expected snapshot test resilts") {
-                            expect { fileWatcher.startClosure?(.updated(data: update)) }.to(throwAssertion())
-                        }
-                    }
-                    
-                    context("when can parse applicaion name") {
-                        beforeEach {
-                            fileWatcher.startClosure?(.updated(data: update))
-                        }
-                        
-                        it("outputs expected snapshot test resilts") {
-                            expect(receivedSnapshotTestResults).to(equal([failedSnapshotTestResult, recordedSnapshotTestResult]))
-                        }
-                        
-                        it("creates test results with correct build") {
-                            expect(snapshotTestResultFactory.givenBuild.applicationName) == applicationNameExtractor.extractApplicationNameReturnValue
-                            expect(snapshotTestResultFactory.givenBuild.date.timeIntervalSince1970).to(beCloseTo(Date().timeIntervalSince1970, within: 0.01))
-                        }
-                    }
+                beforeEach {
+                    updatesHandler.createdTestResults = [SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "Foo"), referenceImagePath: "path", build: build)]
+                    fileWatcher.startClosure?(.updated(data: update))
+                }
+                
+                it("calls listening callback") {
+                    expect(receivedSnapshotTestResults).to(equal(updatesHandler.createdTestResults))
                 }
             }
         }

@@ -38,30 +38,30 @@ class PreferencesPresenterSpec: QuickSpec {
         describe(".selectDerivedDataFolderType") {
             beforeEach {
                 let configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
-                interactor.currentConfigurationReturnValue = configuration
+                interactor.currentConfiguration_ReturnValue = configuration
                 presenter.select(derivedDataFolderType: "Type")
             }
 
             it("passes the message to interactor") {
-                expect(interactor.setNewDerivedDataFolderTypeCalled).to(beTrue())
-                expect(interactor.setNewDerivedDataFolderTypeReceivedType).to(equal("Type"))
+                expect(interactor.setNewDerivedDataFolderType___Called).to(beTrue())
+                expect(interactor.setNewDerivedDataFolderType___ReceivedType).to(equal("Type"))
             }
 
             it("updates user interface") {
-                expect(userInterface.showCalled).to(beTrue())
+                expect(userInterface.show_preferencesDisplayInfo_Called).to(beTrue())
             }
         }
 
         describe(".updateDerivedDataFolderPath") {
             beforeEach {
                 let configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
-                interactor.currentConfigurationReturnValue = configuration
+                interactor.currentConfiguration_ReturnValue = configuration
                 presenter.update(derivedDataFolderPath: "newPath")
             }
 
             it("passes the message to interactor") {
-                expect(interactor.setNewDerivedDataFolderPathCalled).to(beTrue())
-                expect(interactor.setNewDerivedDataFolderPathReceivedPath).to(equal("newPath"))
+                expect(interactor.setNewDerivedDataFolderPath___Called).to(beTrue())
+                expect(interactor.setNewDerivedDataFolderPath___ReceivedPath).to(equal("newPath"))
             }
         }
 
@@ -71,24 +71,24 @@ class PreferencesPresenterSpec: QuickSpec {
             }
 
             it("saves") {
-                expect(interactor.saveCalled).to(beTrue())
+                expect(interactor.save_Called).to(beTrue())
             }
 
             it("notifies the module delegate that module will close") {
-                expect(moduleDelegate.preferencesModuleWillCloseCalled).to(beTrue())
+                expect(moduleDelegate.preferencesModuleWillClose___Called).to(beTrue())
             }
         }
 
         describe(".updateUserInterface") {
             beforeEach {
                 let configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
-                interactor.currentConfigurationReturnValue = configuration
+                interactor.currentConfiguration_ReturnValue = configuration
                 presenter.updateUserInterface()
             }
 
             it("shows preferences display info in user interface") {
-                expect(userInterface.showReceivedPreferencesDisplayInfo?.derivedDataFolderPath).to(equal("myPath"))
-                expect(userInterface.showReceivedPreferencesDisplayInfo?.derivedDataFolderTypeName).to(equal(DerivedDataFolderType.xcodeCustom.rawValue))
+                expect(userInterface.show_preferencesDisplayInfo_ReceivedPreferencesDisplayInfo?.derivedDataFolderPath).to(equal("myPath"))
+                expect(userInterface.show_preferencesDisplayInfo_ReceivedPreferencesDisplayInfo?.derivedDataFolderTypeName).to(equal(DerivedDataFolderType.xcodeCustom.rawValue))
             }
         }
     }

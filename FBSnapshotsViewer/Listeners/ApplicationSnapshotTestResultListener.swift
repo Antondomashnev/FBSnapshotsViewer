@@ -12,19 +12,14 @@ import KZFileWatchers
 typealias ApplicationSnapshotTestResultListenerOutput = (SnapshotTestResult) -> Void
 
 class ApplicationSnapshotTestResultListener {
-    private var build: Build?
-    private var readLinesNumber: Int = 0
     private var listeningOutput: ApplicationSnapshotTestResultListenerOutput?
     private let fileWatcher: KZFileWatchers.FileWatcherProtocol
-    private let applicationLogReader: ApplicationLogReader
-    private let snapshotTestResultFactory: SnapshotTestResultFactory
-    private let applicationNameExtractor: ApplicationNameExtractor
+    private let fileWatcherUpdateHandler: ApplicationSnapshotTestResultFileWatcherUpdateHandler
     
-    init(fileWatcher: KZFileWatchers.FileWatcherProtocol, applicationLogReader: ApplicationLogReader, applicationNameExtractor: ApplicationNameExtractor, snapshotTestResultFactory: SnapshotTestResultFactory = SnapshotTestResultFactory()) {
+    init(fileWatcher: KZFileWatchers.FileWatcherProtocol,
+         fileWatcherUpdateHandler: ApplicationSnapshotTestResultFileWatcherUpdateHandler) {
         self.fileWatcher = fileWatcher
-        self.applicationLogReader = applicationLogReader
-        self.snapshotTestResultFactory = snapshotTestResultFactory
-        self.applicationNameExtractor = applicationNameExtractor
+        self.fileWatcherUpdateHandler = fileWatcherUpdateHandler
     }
 
     deinit {
@@ -36,7 +31,12 @@ class ApplicationSnapshotTestResultListener {
         listeningOutput = completion
         do {
             try fileWatcher.start { [weak self] result in
-                self?.handleFileWatcherUpdate(result: result)
+                guard let listeningOutput = self?.listeningOutput,
+                      let testResults = self?.fileWatcherUpdateHandler.handleFileWatcherUpdate(result: result),
+                      !testResults.isEmpty else {
+                    return
+                }
+                testResults.forEach { listeningOutput($0) }
             }
         }
         catch let error {
@@ -55,54 +55,8 @@ class ApplicationSnapshotTestResultListener {
         reset()
     }
 
-    // MARK: - Helpers
-
-    private func handleFileWatcherUpdate(result: KZFileWatchers.FileWatcher.RefreshResult) {
-        switch result {
-        case .noChanges:
-            return
-        case let .updated(data):
-            guard let text = String(data: data, encoding: .utf8), !text.isEmpty else {
-                assertionFailure("Invalid data reported by KZFileWatchers.FileWatcher.Local")
-                return
-            }
-            do {
-                try handleFileWatcherUpdate(text: text)
-            }
-            catch let error {
-                assertionFailure("\(error)")
-            }
-        }
-    }
-
-    private func handleFileWatcherUpdate(text: String) throws {
-        guard let listeningOutput = listeningOutput else {
-            return
-        }
-        let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
-        let snapshotTestResults = try logLines.flatMap { logLine -> SnapshotTestResult? in
-            switch logLine {
-            case .unknown:
-                return nil
-            case .applicationNameMessage:
-                build = Build(applicationName: try applicationNameExtractor.extractApplicationName(from: logLine))
-                return nil
-            default:
-                guard let build = build else {
-                    assertionFailure("Unexpected snapshot test result line \(logLine) before build information line")
-                    return nil
-                }
-                return snapshotTestResultFactory.createSnapshotTestResult(from: logLine, build: build)
-            }
-        }
-        snapshotTestResults.forEach { listeningOutput($0) }
-        readLinesNumber += logLines.count
-    }
-
     private func reset() {
-        readLinesNumber = 0
         listeningOutput = nil
-        build = nil
         try? fileWatcher.stop()
     }
 }

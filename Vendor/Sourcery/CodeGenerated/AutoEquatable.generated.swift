@@ -28,6 +28,14 @@ extension Build: Equatable {}
 internal func == (lhs: Build, rhs: Build) -> Bool {
     guard lhs.date == rhs.date else { return false }
     guard lhs.applicationName == rhs.applicationName else { return false }
+    guard lhs.fbReferenceImageDirectoryURL == rhs.fbReferenceImageDirectoryURL else { return false }
+    return true
+}
+// MARK: - SnapshotTestInformation AutoEquatable
+extension SnapshotTestInformation: Equatable {} 
+internal func == (lhs: SnapshotTestInformation, rhs: SnapshotTestInformation) -> Bool {
+    guard lhs.testClassName == rhs.testClassName else { return false }
+    guard lhs.testName == rhs.testName else { return false }
     return true
 }
 // MARK: - TestResultDisplayInfo AutoEquatable
@@ -39,6 +47,7 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard lhs.testName == rhs.testName else { return false }
     guard lhs.testContext == rhs.testContext else { return false }
     guard lhs.canBeViewedInKaleidoscope == rhs.canBeViewedInKaleidoscope else { return false }
+    guard lhs.canBeSwapped == rhs.canBeSwapped else { return false }
     guard lhs.testResult == rhs.testResult else { return false }
     return true
 }
@@ -87,6 +96,8 @@ internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
     case (.referenceImageSavedMessage(let lhs), .referenceImageSavedMessage(let rhs)): 
         return lhs == rhs
     case (.applicationNameMessage(let lhs), .applicationNameMessage(let rhs)): 
+        return lhs == rhs
+    case (.fbReferenceImageDirMessage(let lhs), .fbReferenceImageDirMessage(let rhs)): 
         return lhs == rhs
     case (.unknown, .unknown): 
          return true 
@@ -141,12 +152,12 @@ extension SnapshotTestResult: Equatable {}
 internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
     switch (lhs, rhs) {
     case (.recorded(let lhs), .recorded(let rhs)): 
-        if lhs.testName != rhs.testName { return false }
+        if lhs.testInformation != rhs.testInformation { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
         if lhs.build != rhs.build { return false }
         return true
     case (.failed(let lhs), .failed(let rhs)): 
-        if lhs.testName != rhs.testName { return false }
+        if lhs.testInformation != rhs.testInformation { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
         if lhs.diffImagePath != rhs.diffImagePath { return false }
         if lhs.failedImagePath != rhs.failedImagePath { return false }

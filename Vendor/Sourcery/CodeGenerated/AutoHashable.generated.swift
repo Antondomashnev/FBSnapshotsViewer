@@ -23,7 +23,7 @@ fileprivate func combineHashValues(_ initial: Int, _ other: Int) -> Int {
 // MARK: - Build AutoHashable
 extension Build: Hashable {
     internal var hashValue: Int {
-        return combineHashes([date.hashValue, applicationName.hashValue, 0])
+        return combineHashes([date.hashValue, applicationName.hashValue, fbReferenceImageDirectoryURL.hashValue, 0])
     }
 }
 // MARK: - TestResultsSectionTitleDisplayInfo AutoHashable
@@ -45,8 +45,10 @@ extension ApplicationLogLine: Hashable {
             return combineHashes([2, data.hashValue])
         case .applicationNameMessage(let data): 
             return combineHashes([3, data.hashValue])
+        case .fbReferenceImageDirMessage(let data): 
+            return combineHashes([4, data.hashValue])
          case .unknown: 
-            return 4.hashValue
+            return 5.hashValue
         }
     }
 }
