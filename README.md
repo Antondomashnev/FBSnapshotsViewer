@@ -14,6 +14,9 @@ There are some benefits using it:
 * Real-time feedback about failed snapshot test.
 * Real-time feedback about recorded snapshot test.
 * Clear output with reference | diff | failed image
+* Split and diff mode to see exact differences
+* One click to use failed image as a recorded
+* Xcode and AppCode support
 
 ![Example](Resources/Example.png)
 
@@ -29,11 +32,18 @@ The idea behind the job is quite tricky, but the overall concept is straightforw
 ### FBSnapshotsViewer application
 
 At the moment there is only one option to install the app:
-Navigate to [releases](https://github.com/Antondomashnev/FBSnapshotsViewer/releases) and download the latest `FBSnapshotsViewer-xyz.app.zip` release.
+Navigate to [releases](https://github.com/Antondomashnev/FBSnapshotsViewer/releases) and download the latest `FBSnapshotsViewer-xyz.app.zip` release.  
+
+We encourage you to turn automatic update on, so you'll be always up to date 🚀
 
 ## Usage
 
 As simple as just run the app and run tests in your app 🎉
+
+### App Code
+
+For the AppCode support the app needs to know where is a folder with generated test logs:
+Open `FBSnapshotsViewer` -> `Right click` -> `Preferences` -> Set derived data folder path as a path like `~/Library/Caches/AppCodeXYZ` where `XYZ` is an AppCode version. Usually you'll have only one such folder under the `Caches` directory.
 
 ## Contribution
 
