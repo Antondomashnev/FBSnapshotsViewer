@@ -1,8 +1,7 @@
 ## Changelog
 
-### 0.6.0 (Next)
+### 0.6.0 (03.07.2017)
 
-* Your contribution here.
 * [#41](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/41): Add additional information for tests - [@antondomashnev](https://github.com/antondomashnev).
 * [#44](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/44): Compact view redesign - [@antondomashnev](https://github.com/antondomashnev).
 * [#45](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/45): Use Nuke for image loading - [@antondomashnev](https://github.com/antondomashnev).

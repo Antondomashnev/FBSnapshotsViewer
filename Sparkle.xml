@@ -1,4 +1,4 @@
-<?xml version='1.0' standalone='yes'?>
+<?xml version='1.0' standalone='yes'?> 
 <rss xmlns:sparkle='http://www.andymatuschak.org/xml-namespaces/sparkle' version='2.0'>
   <channel>
     <title>FBSnapshotsViewer</title>
@@ -12,11 +12,21 @@
       <title>0.5.0</title>
       <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
       <description>
-        &lt;ul&gt; &lt;li&gt; &lt;p&gt;&lt;a
-        href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/39&quot;&gt;#39&lt;/a&gt;: Update RELEASING process with some new cool automation - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/37&quot;&gt;#37&lt;/a&gt;: Initial Sparkle setup for autoupdates - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
+         &lt;ul&gt; &lt;li&gt; &lt;p&gt;&lt;a
+        href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/39&quot;&gt;#39&lt;/a&gt;: Update RELEASING process with some new cool automation - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/37&quot;&gt;#37&lt;/a&gt;: Initial Sparkle setup for autoupdates - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt;
       </description>
       <pubDate>Fri, 26 May 2017 12:14:05 +0200</pubDate>
       <enclosure type='application/octet-stream' sparkle:version='3' sparkle:shortVersionString='0.5.0' length='6918844' url='https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/0.5.0/FBSnapshotsViewer-0.5.0.app.zip'/>
+    </item>
+    <item>
+      <title>0.6.0</title>
+      <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
+      <description>
+        &lt;ul&gt; &lt;li&gt; &lt;p&gt;&lt;a
+        href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/41&quot;&gt;#41&lt;/a&gt;: Add additional information for tests - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/44&quot;&gt;#44&lt;/a&gt;: Compact view redesign - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/45&quot;&gt;#45&lt;/a&gt;: Use Nuke for image loading - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/47&quot;&gt;47&lt;/a&gt;: Swap snapshots - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt;
+      </description>
+      <pubDate>Mon, 03 Jul 2017 00:07:58 +0200</pubDate>
+      <enclosure type='application/octet-stream' sparkle:version='6' sparkle:shortVersionString='0.6.0' length='8001635' url='https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/0.6.0/FBSnapshotsViewer-0.6.0.app.zip'/>
     </item>
   </channel>
 </rss>
