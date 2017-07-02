@@ -42,7 +42,7 @@ class SnapshotTestResultSwapper {
         return false
     }
     
-    func swap(_ testResult: SnapshotTestResult) throws {
+    func swap(_ testResult: SnapshotTestResult) throws -> SnapshotTestResult {
         guard case let SnapshotTestResult.failed(testInformation, _, _, failedImagePath, build) = testResult, canSwap(testResult) else {
             throw SnapshotTestResultSwapperError.canNotBeSwapped(testResult: testResult)
         }
@@ -53,6 +53,7 @@ class SnapshotTestResultSwapper {
             try fileManager.removeItem(at: recordedImageURL)
             try fileManager.copyItem(at: failedImageURL, to: recordedImageURL)
             imageCache.invalidate()
+            return SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: recordedImageURL.path, build: build)
         }
         catch let error {
             throw SnapshotTestResultSwapperError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)

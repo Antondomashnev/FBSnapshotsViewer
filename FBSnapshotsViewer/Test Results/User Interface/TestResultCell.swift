@@ -101,6 +101,7 @@ class TestResultCell: NSCollectionViewItem {
         referenceImageView.image = nil
         diffImageView.image = nil
         failedImageView.image = nil
+        splitContainerView.resetUI()
     }
     
     // MARK: - Interface

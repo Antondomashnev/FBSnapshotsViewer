@@ -72,6 +72,7 @@ class TestResultSplitView: NSView {
     // MARK: - Interface
     
     func configure(with testResult: TestResultDisplayInfo, appleInterfaceMode: AppleInterfaceMode = AppleInterfaceMode()) {
+        resetUI()
         if let referenceImage = NSImage(contentsOf: testResult.referenceImageURL) {
             splitReferenceImageView.image = referenceImage
         }
@@ -79,6 +80,11 @@ class TestResultSplitView: NSView {
             splitFailedImageView.image = failedImage
         }
         configureBordersColorScheme(for: appleInterfaceMode)
+    }
+    
+    func resetUI() {
+        splitReferenceImageView.image = nil
+        splitFailedImageView.image = nil
     }
     
     // MARK: - TrackingEvents

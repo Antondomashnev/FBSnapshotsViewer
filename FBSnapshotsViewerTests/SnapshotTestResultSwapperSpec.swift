@@ -91,9 +91,11 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                 }
                 
                 context("with retina images") {
+                    var returnedTestResult: SnapshotTestResult!
+                    
                     beforeEach {
                         testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState@2x.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@2x.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png", build: build)
-                        try? swapper.swap(testResult)
+                         returnedTestResult = try? swapper.swap(testResult)
                     }
                     
                     it("removes current reference images from directory") {
@@ -109,6 +111,11 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                     
                     it("invalidates cache") {
                         expect(imageCache.invalidate_Called).to(beTrue())
+                    }
+                    
+                    it("returns swapped test result") {
+                        let expectedTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/foo/bar/DetailsViewController/testNormalState@2x.png", build: build)
+                        expect(returnedTestResult).to(equal(expectedTestResult))
                     }
                 }
             }

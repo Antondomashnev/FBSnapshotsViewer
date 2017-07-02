@@ -42,5 +42,6 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         for testResultInfo in testResults {
             interactor?.swap(testResult: testResultInfo.testResult)
         }
+        updateUserInterface()
     }
 }

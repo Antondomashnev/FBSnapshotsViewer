@@ -41,12 +41,14 @@ class TestResultsInteractor_MockSnapshotTestResultSwapper: SnapshotTestResultSwa
     var swapThrows: Bool = false
     var swapCalled: Bool = false
     var swapTestResult: SnapshotTestResult?
-    override func swap(_ testResult: SnapshotTestResult) throws {
+    var swappedTestResult: SnapshotTestResult!
+    override func swap(_ testResult: SnapshotTestResult) throws -> SnapshotTestResult {
         swapCalled = true
         swapTestResult = testResult
         if swapThrows {
             throw SnapshotTestResultSwapperError.canNotBeSwapped(testResult: testResult)
         }
+        return swappedTestResult
     }
     
     var canSwapReturnValue: Bool = false
@@ -71,6 +73,7 @@ class TestResultsInteractorSpec: QuickSpec {
             testResults = [testResult1, testResult2]
             processLauncher = ProcessLauncher()
             swapper = TestResultsInteractor_MockSnapshotTestResultSwapper()
+            swapper.swappedTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName1"), referenceImagePath: "referenceImagePath1", build: build)
             output = TestResultsInteractorOutputMock()
             interactor = TestResultsInteractor(testResults: testResults, kaleidoscopeViewer: kaleidoscopeViewer, processLauncher: processLauncher, swapper: swapper)
             interactor.output = output
@@ -117,12 +120,35 @@ class TestResultsInteractorSpec: QuickSpec {
                 context("when swap doesn't throw") {
                     beforeEach {
                         swapper.swapThrows = false
-                        interactor.swap(testResult: testResult)
                     }
                     
-                    it("swaps") {
-                        expect(swapper.swapCalled).to(beTrue())
-                        expect(output.didFailToSwap_testResult_with_Called).toNot(beTrue())
+                    context("given presented test result") {
+                        beforeEach {
+                            interactor.swap(testResult: testResult)
+                        }
+                        
+                        it("swaps") {
+                            expect(swapper.swapCalled).to(beTrue())
+                            expect(output.didFailToSwap_testResult_with_Called).toNot(beTrue())
+                        }
+                        
+                        it("replaces failed test result with recorded") {
+                            let testInformation = SnapshotTestInformation(testClassName: testResult.testClassName, testName: testResult.testName)
+                            let expectedRecordedTestResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "referenceImagePath1", build: build)
+                            expect(interactor.testResults[0]).to(equal(expectedRecordedTestResult))
+                        }
+                    }
+                    
+                    context("given not presented test result") {
+                        beforeEach {
+                            let testInformation = SnapshotTestInformation(testClassName: "Foo", testName: "Bar")
+                            let notPresentedTestResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "foo/bar@2x.png", diffImagePath: "foo/bar@2x.png", failedImagePath: "foo/bar@2x.png", build: build)
+                            interactor.swap(testResult: notPresentedTestResult)
+                        }
+                        
+                        it("outputs error") {
+                            expect(output.didFailToSwap_testResult_with_Called).to(beTrue())
+                        }
                     }
                 }
             }

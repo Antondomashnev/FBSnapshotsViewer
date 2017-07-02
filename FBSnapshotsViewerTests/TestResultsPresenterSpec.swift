@@ -56,11 +56,16 @@ class TestResultsPresenterSpec: QuickSpec {
                 let testResult2 = SnapshotTestResult.recorded(testInformation: testInformation2, referenceImagePath: "foo/bar/testName2.png", build: build)
                 let testResultDisplayInfo2 = TestResultDisplayInfo(testResult: testResult2)
                 testResults = [testResultDisplayInfo1, testResultDisplayInfo2]
+                interactor.testResults = [testResult1, testResult2]
                 presenter.swap(testResults)
             }
             
             it("swaps all given test results") {
                 expect(interactor.swapCalledCounter).to(equal(2))
+            }
+            
+            it("updates user interface") {
+                expect(userInterface.show_displayInfo_Called).to(beTrue())
             }
         }
         

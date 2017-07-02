@@ -8,11 +8,15 @@
 
 import Foundation
 
+enum TestResultsInteractorError: Error {
+    case canNotSwapNotExistedTestResult
+}
+
 class TestResultsInteractor {
     fileprivate let kaleidoscopeViewer: ExternalViewer.Type
     fileprivate let processLauncher: ProcessLauncher
     fileprivate let swapper: SnapshotTestResultSwapper
-    let testResults: [SnapshotTestResult]
+    var testResults: [SnapshotTestResult]
     
     weak var output: TestResultsInteractorOutput?
 
@@ -25,6 +29,15 @@ class TestResultsInteractor {
 }
 
 extension TestResultsInteractor: TestResultsInteractorInput {
+    // MARK: - Helpers
+    
+    private func replace(testResult: SnapshotTestResult, with newTestResult: SnapshotTestResult) throws {
+        guard let indexOfTestResult = testResults.index(of: testResult) else {
+            throw TestResultsInteractorError.canNotSwapNotExistedTestResult
+        }
+        testResults[indexOfTestResult] = newTestResult
+    }
+    
     // MARK: - TestResultsInteractorInput
 
     func openInKaleidoscope(testResult: SnapshotTestResult) {
@@ -40,7 +53,8 @@ extension TestResultsInteractor: TestResultsInteractorInput {
             return
         }
         do {
-            try swapper.swap(testResult)
+            let swappedTestResult = try swapper.swap(testResult)
+            try replace(testResult: testResult, with: swappedTestResult)
         }
         catch let error {
             output?.didFailToSwap(testResult: testResult, with: error)
