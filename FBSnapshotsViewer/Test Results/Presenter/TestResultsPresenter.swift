@@ -45,3 +45,13 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         updateUserInterface()
     }
 }
+
+extension TestResultsPresenter: TestResultsInteractorOutput {
+    func didFailToSwap(testResult: SnapshotTestResult, with error: Error) {
+        let failToSwapAlert = NSAlert()
+        failToSwapAlert.addButton(withTitle: "Ok")
+        failToSwapAlert.alertStyle = .critical
+        failToSwapAlert.messageText = "Ops, swap can not be done. \(error.localizedDescription). Please report an issue https://github.com/Antondomashnev/FBSnapshotsViewer/issues/new"
+        failToSwapAlert.runModal()
+    }
+}
