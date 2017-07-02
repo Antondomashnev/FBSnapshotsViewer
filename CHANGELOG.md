@@ -1,5 +1,10 @@
 ## Changelog
 
+
+### 0.6.1 (Next)
+
+* Your contribution here.
+
 ### 0.6.0 (03.07.2017)
 
 * [#41](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/41): Add additional information for tests - [@antondomashnev](https://github.com/antondomashnev).
