@@ -1,6 +1,10 @@
 ## Changelog
 
 
+### 0.6.2 (Next)
+
+* Your contribution here.
+
 ### 0.6.1 (02.08.2017)
 
 * [#52](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/52): Add Xcode 9 Beta 4 support - [@antondomashnev](https://github.com/antondomashnev).
