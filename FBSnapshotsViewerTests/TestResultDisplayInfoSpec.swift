@@ -62,24 +62,24 @@ class TestResultDisplayInfoSpec: QuickSpec {
             }
             
             describe("testName") {
-                context("when test name with undrscore") {
+                context("given test name from Quick") {
                     beforeEach {
                         build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                        testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testName_has_replaced_all_underscore_with_spaces"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                        testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "_view__looks_good_iPhone9_3_375x667"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
 
                     it("has correct test name") {
                         let displayInfo = TestResultDisplayInfo(testResult: testResult)
-                        expect(displayInfo.testName).to(equal("spaces"))
+                        expect(displayInfo.testName).to(equal("looks good iPhone9 3 375x667"))
                     }
 
                     it("has correct test context") {
                         let displayInfo = TestResultDisplayInfo(testResult: testResult)
-                        expect(displayInfo.testContext).to(equal("TestClass testName has replaced all underscore with"))
+                        expect(displayInfo.testContext).to(equal("TestClass view"))
                     }
                 }
 
-                context("when test name without undrscore") {
+                context("given text name from XCTest") {
                     beforeEach {
                         testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testName"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
