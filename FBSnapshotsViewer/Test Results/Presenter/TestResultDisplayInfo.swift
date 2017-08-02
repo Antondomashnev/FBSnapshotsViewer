@@ -32,7 +32,9 @@ struct TestResultDisplayInfo: AutoEquatable {
             self.diffImageURL = URL(fileURLWithPath: diffImagePath)
             self.failedImageURL = URL(fileURLWithPath: failedImagePath)
         }
-        let testNameComponents = testResult.testName.replacingOccurrences(of: "_", with: " ").components(separatedBy: " ")
+        let testNameComponents = testResult.testName.replacingOccurrences(of: "__", with: " ").components(separatedBy: " ").map {
+            $0.replacingOccurrences(of: "_", with: " ").stripping()
+        }
         self.testContext = testNameComponents.count > 1 ? testResult.testClassName + " " + testNameComponents[0..<(testNameComponents.count - 1)].joined(separator: " ") : testResult.testClassName
         self.testName = testNameComponents[testNameComponents.count - 1]
     }
