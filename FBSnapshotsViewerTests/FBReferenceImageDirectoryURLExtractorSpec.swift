@@ -11,6 +11,50 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
+class FBReferenceImageDirectoryURLExtractorFactorySpec: QuickSpec {
+    override func spec() {
+        var factory: FBReferenceImageDirectoryURLExtractorFactory!
+        
+        beforeEach {
+            factory = FBReferenceImageDirectoryURLExtractorFactory()
+        }
+        
+        describe(".fbReferenceImageDirectoryURLExtractor") {
+            var extractor: FBReferenceImageDirectoryURLExtractor!
+            
+            context("given xcode configuration") {
+                beforeEach {
+                    extractor = factory.fbReferenceImageDirectoryURLExtractor(for: FBSnapshotsViewer.Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "foo/bar")))
+                }
+                
+                it("returns correct extractor") {
+                    expect(extractor).to(beAKindOf(XcodeFBReferenceImageDirectoryURLExtractor.self))
+                }
+            }
+            
+            context("given xcode default configuration") {
+                beforeEach {
+                    extractor = factory.fbReferenceImageDirectoryURLExtractor(for: FBSnapshotsViewer.Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault))
+                }
+                
+                it("returns correct extractor") {
+                    expect(extractor).to(beAKindOf(XcodeFBReferenceImageDirectoryURLExtractor.self))
+                }
+            }
+            
+            context("given appcode configuration") {
+                beforeEach {
+                    extractor = factory.fbReferenceImageDirectoryURLExtractor(for: FBSnapshotsViewer.Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: "foo/bar")))
+                }
+                
+                it("returns correct extractor") {
+                    expect(extractor).to(beAKindOf(AppCodeFBReferenceImageDirectoryURLExtractor.self))
+                }
+            }
+        }
+    }
+}
+
 class XcodeFBReferenceImageDirectoryURLExtractorSpec: QuickSpec {
     override func spec() {
         var extractor: XcodeFBReferenceImageDirectoryURLExtractor!
@@ -36,6 +80,7 @@ class XcodeFBReferenceImageDirectoryURLExtractorSpec: QuickSpec {
                 context("with unexpected format") {
                     it("throws an error") {
                         expect { try extractor.extractImageDirectoryURLs(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "XCInjectBundleInto = ")) }.to(throwError())
+                        expect { try extractor.extractImageDirectoryURLs(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "XCInjectBundleInto = /")) }.to(throwError())
                     }
                 }
                 
@@ -76,6 +121,7 @@ class AppCodeFBReferenceImageDirectoryURLExtractorSpec: QuickSpec {
                 context("with unexpected format") {
                     it("throws an error") {
                         expect { try extractor.extractImageDirectoryURLs(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "XCInjectBundleInto = ")) }.to(throwError())
+                        expect { try extractor.extractImageDirectoryURLs(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "XCInjectBundleInto /= ")) }.to(throwError())
                     }
                 }
                 
