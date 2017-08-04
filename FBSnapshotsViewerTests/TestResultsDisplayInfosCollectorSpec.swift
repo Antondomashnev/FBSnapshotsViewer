@@ -15,9 +15,9 @@ class TestResultsDisplayInfosCollectorSpec: QuickSpec {
     override func spec() {
         var subject: TestResultsDisplayInfosCollector!
         var testResults: [SnapshotTestResult] = []
-        let build1 = Build(date: Date(timeIntervalSinceNow: -300), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
-        let build2 = Build(date: Date(timeIntervalSinceNow: -500), applicationName: "AmazingWeather", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/foo", isDirectory: true))
-        let build3 = Build(date: Date(timeIntervalSinceNow: -700), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+        let build1 = Build(date: Date(timeIntervalSinceNow: -300), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+        let build2 = Build(date: Date(timeIntervalSinceNow: -500), applicationName: "AmazingWeather", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/foo", isDirectory: true)])
+        let build3 = Build(date: Date(timeIntervalSinceNow: -700), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
         
         beforeEach {
             subject = TestResultsDisplayInfosCollector()

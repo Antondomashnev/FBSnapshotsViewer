@@ -17,7 +17,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
         var factory: SnapshotTestResultFactory!
 
         beforeEach {
-            build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+            build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
             factory = SnapshotTestResultFactory()
         }
 

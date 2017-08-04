@@ -20,7 +20,7 @@ class TestResultsSectionDisplayInfoSpec: QuickSpec {
             var title: TestResultsSectionTitleDisplayInfo!
             
             beforeEach {
-                let build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                let build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                 let testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "foo/bar.png", build: build)
                 title = TestResultsSectionTitleDisplayInfo(build: build, testContext: "TestContext")
                 items = [TestResultDisplayInfo(testResult: testResult)]
@@ -41,7 +41,7 @@ class TestResultsSectionDisplayInfoSpec: QuickSpec {
             
             beforeEach {
                 testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "testName")
-                build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                 title = TestResultsSectionTitleDisplayInfo(build: build, testContext: "TestContext")
             }
             

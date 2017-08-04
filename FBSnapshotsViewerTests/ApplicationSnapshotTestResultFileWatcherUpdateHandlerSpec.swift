@@ -55,9 +55,9 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler__MockFBReferenceImag
     var extractImageDirectoryURLCalled = false
     var extractImageDirectoryURLThrows = false
     var extractImageDirectoryURLReceivedLogLine: ApplicationLogLine?
-    var extractImageDirectoryURLReturnValue: URL!
+    var extractImageDirectoryURLReturnValue: [URL] = []
     
-    func extractImageDirectoryURL(from logLine: ApplicationLogLine) throws -> URL {
+    func extractImageDirectoryURLs(from logLine: ApplicationLogLine) throws -> [URL] {
         if extractImageDirectoryURLThrows {
             throw NSError(domain: "", code: 0, userInfo: nil)
         }
@@ -93,7 +93,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec: QuickSpec {
         }
         
         describe(".handleFileWatcherUpdate") {
-            let build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+            let build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
             let unknownLogLine = ApplicationLogLine.unknown
             let applicationNameMessageLogLine = ApplicationLogLine.applicationNameMessage(line: "MyApp")
             let kaleidoscopeCommandMesageLogLine = ApplicationLogLine.kaleidoscopeCommandMessage(line: "BlaBla")
@@ -104,7 +104,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec: QuickSpec {
             
             beforeEach {
                 applicationNameExtractor.extractApplicationNameReturnValue = "MyApp"
-                fbImageReferenceDirExtractor.extractImageDirectoryURLReturnValue = URL(fileURLWithPath: "foo/bar", isDirectory: true)
+                fbImageReferenceDirExtractor.extractImageDirectoryURLReturnValue = [URL(fileURLWithPath: "foo/bar", isDirectory: true)]
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[kaleidoscopeCommandMesageLogLine] = failedSnapshotTestResult
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[referenceImageSavedMessageLogLine] = recordedSnapshotTestResult
                 logReader.readLines = [unknownLogLine, fbReferenceImageDirMessageLogLine, applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, referenceImageSavedMessageLogLine]
@@ -132,7 +132,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec: QuickSpec {
                     
                     expect(buildCreator.date).toNot(beNil())
                     expect(buildCreator.applicationName).to(equal(applicationNameExtractor.extractApplicationNameReturnValue))
-                    expect(buildCreator.fbReferenceImageDirectoryURL).to(equal(fbImageReferenceDirExtractor.extractImageDirectoryURLReturnValue))
+                    expect(buildCreator.fbReferenceImageDirectoryURLs).to(equal(fbImageReferenceDirExtractor.extractImageDirectoryURLReturnValue))
                 }
                 
                 context("when build can not be created") {

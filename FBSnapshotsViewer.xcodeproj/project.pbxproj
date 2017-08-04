@@ -173,6 +173,7 @@
 		4CDDF30470ECABA40C67FCA8 /* Pods_FBSnapshotsViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FBSnapshotsViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F49A2211365156DDBDC7331 /* Pods-FBSnapshotsViewerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotsViewerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotsViewerTests/Pods-FBSnapshotsViewerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6AB66AD06A529A00E998FD8B /* Pods_FBSnapshotsViewerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FBSnapshotsViewerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D0725B41F34B8A20021BC98 /* AutoHashable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashable.stencil; sourceTree = "<group>"; };
 		6D076B6C1E7CA1B9001FDA14 /* RecursiveFolderEventsListenerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecursiveFolderEventsListenerSpec.swift; sourceTree = "<group>"; };
 		6D076B701E7EAC94001FDA14 /* FolderEventsListenerFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderEventsListenerFactorySpec.swift; sourceTree = "<group>"; };
 		6D076B761E7EBD15001FDA14 /* TestResultDisplayInfoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultDisplayInfoSpec.swift; sourceTree = "<group>"; };
@@ -436,6 +437,7 @@
 		6D3BA5671E6E0B6300CAD4EE /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				6D0725B41F34B8A20021BC98 /* AutoHashable.stencil */,
 				6D789CDB1EC3B6AB00EEF7EE /* AutoCases.stencil */,
 				6D92E1CC1E73102C00DB73C7 /* AutoEquatable.stencil */,
 				6D3BA56B1E6E0D2200CAD4EE /* AutoMockable.stencil */,

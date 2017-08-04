@@ -13,7 +13,7 @@ enum FBReferenceImageDirectoryURLExtractorError: Error {
 }
 
 protocol FBReferenceImageDirectoryURLExtractor: AutoMockable {
-    func extractImageDirectoryURL(from logLine: ApplicationLogLine) throws -> URL
+    func extractImageDirectoryURLs(from logLine: ApplicationLogLine) throws -> [URL]
 }
 
 class FBReferenceImageDirectoryURLExtractorFactory {
@@ -29,12 +29,15 @@ class FBReferenceImageDirectoryURLExtractorFactory {
 }
 
 class FBReferenceImageDirectoryURLExtractorHelper {
-    static func buildReferenceImagePathURL(with path: String) -> URL {
-        // ios-snapshots adds a suffix for the reference dir depending on the acrhitecture. For now we support only 64 bit
-        return URL(fileURLWithPath: path + "_64", isDirectory: true)
+    private static func buildReferenceImagePathURLs(with path: String) -> [URL] {
+        // There are two possible directories for one ENV variable:
+        // path + "_64" suffix if it's generated with FBSnapshotTestCase
+        // path without suffix if it's generated with Nimble-Snapshots
+        return [URL(fileURLWithPath: path + "_64", isDirectory: true),
+                URL(fileURLWithPath: path, isDirectory: true)]
     }
     
-    static func extractLine(from logLine: ApplicationLogLine) throws -> String {
+    private static func extractLine(from logLine: ApplicationLogLine) throws -> String {
         guard case let .fbReferenceImageDirMessage(line) = logLine,
             line.contains("/") else {
                 throw FBReferenceImageDirectoryURLExtractorError.unexpectedLogLine(message: "Unexpected log line given: \(logLine). Expected .fbReferenceImageDirMessage")
@@ -42,25 +45,25 @@ class FBReferenceImageDirectoryURLExtractorHelper {
         return line
     }
     
-    static func extractImageDirectoryURL(from logLine: ApplicationLogLine, componentsBuilder: (String) -> [String]?, expectedLogLineExample: String) throws -> URL {
+    static func extractImageDirectoryURLs(from logLine: ApplicationLogLine, componentsBuilder: (String) -> [String]?, expectedLogLineExample: String) throws -> [URL] {
         let line = try extractLine(from: logLine)
         guard let components = componentsBuilder(line), components.count == 3 else {
             throw FBReferenceImageDirectoryURLExtractorError.unexpectedLogLine(message: "Unexpected log line given: \(logLine). Expected the following format: \(expectedLogLineExample)")
         }
-        return buildReferenceImagePathURL(with: components[1])
+        return buildReferenceImagePathURLs(with: components[1])
     }
 }
 
 class XcodeFBReferenceImageDirectoryURLExtractor: FBReferenceImageDirectoryURLExtractor {
-    func extractImageDirectoryURL(from logLine: ApplicationLogLine) throws -> URL {
+    func extractImageDirectoryURLs(from logLine: ApplicationLogLine) throws -> [URL] {
         let componentsBuilder: (String) -> [String]? = { $0.components(separatedBy: " = ").last?.components(separatedBy: "\"") }
-        return try FBReferenceImageDirectoryURLExtractorHelper.extractImageDirectoryURL(from: logLine, componentsBuilder: componentsBuilder, expectedLogLineExample: "\"FB_REFERENCE_IMAGE_DIR\" = \"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\";")
+        return try FBReferenceImageDirectoryURLExtractorHelper.extractImageDirectoryURLs(from: logLine, componentsBuilder: componentsBuilder, expectedLogLineExample: "\"FB_REFERENCE_IMAGE_DIR\" = \"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\";")
     }
 }
 
 class AppCodeFBReferenceImageDirectoryURLExtractor: FBReferenceImageDirectoryURLExtractor {
-    func extractImageDirectoryURL(from logLine: ApplicationLogLine) throws -> URL {
+    func extractImageDirectoryURLs(from logLine: ApplicationLogLine) throws -> [URL] {
         let componentsBuilder: (String) -> [String]? = { $0.components(separatedBy: "value=").last?.components(separatedBy: "\"") }
-        return try FBReferenceImageDirectoryURLExtractorHelper.extractImageDirectoryURL(from: logLine, componentsBuilder: componentsBuilder, expectedLogLineExample: "<env name=\"FB_REFERENCE_IMAGE_DIR\" value=\"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\"/>")
+        return try FBReferenceImageDirectoryURLExtractorHelper.extractImageDirectoryURLs(from: logLine, componentsBuilder: componentsBuilder, expectedLogLineExample: "<env name=\"FB_REFERENCE_IMAGE_DIR\" value=\"/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages\"/>")
     }
 }

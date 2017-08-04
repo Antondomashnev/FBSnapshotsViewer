@@ -71,7 +71,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
             case .unknown:
                 return nil
             case .fbReferenceImageDirMessage:
-                strongSelf.buildCreator.fbReferenceImageDirectoryURL = try strongSelf.fbImageReferenceDirExtractor.extractImageDirectoryURL(from: logLine)
+                strongSelf.buildCreator.fbReferenceImageDirectoryURLs = try strongSelf.fbImageReferenceDirExtractor.extractImageDirectoryURLs(from: logLine)
                 return nil
             case .applicationNameMessage:
                 strongSelf.buildCreator.applicationName = try strongSelf.applicationNameExtractor.extractApplicationName(from: logLine)

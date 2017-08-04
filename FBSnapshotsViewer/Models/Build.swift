@@ -11,11 +11,11 @@ import Foundation
 struct Build: AutoHashable, AutoEquatable {
     let date: Date
     let applicationName: String
-    let fbReferenceImageDirectoryURL: URL
+    let fbReferenceImageDirectoryURLs: [URL]
     
-    init(date: Date, applicationName: String, fbReferenceImageDirectoryURL: URL) {
+    init(date: Date, applicationName: String, fbReferenceImageDirectoryURLs: [URL]) {
         self.applicationName = applicationName
         self.date = date
-        self.fbReferenceImageDirectoryURL = fbReferenceImageDirectoryURL
+        self.fbReferenceImageDirectoryURLs = fbReferenceImageDirectoryURLs
     }
 }

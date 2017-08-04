@@ -39,6 +39,13 @@ class SnapshotTestResultSwapper_MockFileManager: FileManager {
         removeItemCalled = true
         removeItemAtURL = URL
     }
+    
+    var fileExistsCalled: Bool = false
+    var fileExistsReturnValue: Bool = false
+    override func fileExists(atPath path: String) -> Bool {
+        fileExistsCalled = true
+        return fileExistsReturnValue
+    }
 }
 
 class SnapshotTestResultSwapperSpec: QuickSpec {
@@ -49,7 +56,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
         var fileManager: SnapshotTestResultSwapper_MockFileManager!
         
         beforeEach {
-            build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "/foo/bar", isDirectory: true))
+            build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "/foo/bar", isDirectory: true)])
             fileManager = SnapshotTestResultSwapper_MockFileManager()
             imageCache = ImageCacheMock()
             swapper = SnapshotTestResultSwapper(fileManager: fileManager, imageCache: imageCache)
@@ -95,27 +102,43 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                     
                     beforeEach {
                         testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState@2x.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@2x.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png", build: build)
-                         returnedTestResult = try? swapper.swap(testResult)
                     }
                     
-                    it("removes current reference images from directory") {
-                        expect(fileManager.removeItemCalled).to(beTrue())
-                        expect(fileManager.removeItemAtURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
+                    context("that doesn't exist") {
+                        beforeEach {
+                            fileManager.fileExistsReturnValue = false
+                        }
+                        
+                        it("throws error") {
+                            expect { try swapper.swap(testResult) }.to(throwError())
+                        }
                     }
                     
-                    it("copies failed snapshot image to the fb reference images directory") {
-                        expect(fileManager.copyItemCalled).to(beTrue())
-                        expect(fileManager.copyItemFromSourceURL).to(equal(URL(fileURLWithPath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png")))
-                        expect(fileManager.copyItemToDestinationURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
-                    }
-                    
-                    it("invalidates cache") {
-                        expect(imageCache.invalidate_Called).to(beTrue())
-                    }
-                    
-                    it("returns swapped test result") {
-                        let expectedTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/foo/bar/DetailsViewController/testNormalState@2x.png", build: build)
-                        expect(returnedTestResult).to(equal(expectedTestResult))
+                    context("that exists") {
+                        beforeEach {
+                            fileManager.fileExistsReturnValue = true
+                            returnedTestResult = try? swapper.swap(testResult)
+                        }
+                        
+                        it("removes current reference images from directory") {
+                            expect(fileManager.removeItemCalled).to(beTrue())
+                            expect(fileManager.removeItemAtURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
+                        }
+                        
+                        it("copies failed snapshot image to the fb reference images directory") {
+                            expect(fileManager.copyItemCalled).to(beTrue())
+                            expect(fileManager.copyItemFromSourceURL).to(equal(URL(fileURLWithPath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png")))
+                            expect(fileManager.copyItemToDestinationURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
+                        }
+                        
+                        it("invalidates cache") {
+                            expect(imageCache.invalidate_Called).to(beTrue())
+                        }
+                        
+                        it("returns swapped test result") {
+                            let expectedTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/foo/bar/DetailsViewController/testNormalState@2x.png", build: build)
+                            expect(returnedTestResult).to(equal(expectedTestResult))
+                        }
                     }
                 }
             }

@@ -52,7 +52,7 @@ class MenuInteractorSpec: QuickSpec {
         let testResultsDate = Date()
         let applicationName = "FBSnapshotsViewer"
         let fbReferenceImageDirURL = URL(fileURLWithPath: "foo/bar", isDirectory: true)
-        let build = Build(date: testResultsDate, applicationName: applicationName, fbReferenceImageDirectoryURL: fbReferenceImageDirURL)
+        let build = Build(date: testResultsDate, applicationName: applicationName, fbReferenceImageDirectoryURLs: [fbReferenceImageDirURL])
         let testResult1 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClass1", testName: "testName1"), referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
         let testResult2 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClass2", testName: "testName2"), referenceImagePath: "referenceImagePath2", diffImagePath: "diffImagePath2", failedImagePath: "failedImagePath2", build: build)
         let testResult3 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClass3", testName: "testName3"), referenceImagePath: "referenceImagePath3", build: build)
@@ -121,7 +121,7 @@ class MenuInteractorSpec: QuickSpec {
                     }
 
                     it("outputs it") {
-                        let build = Build(date: testResultsDate, applicationName: applicationName, fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                        let build = Build(date: testResultsDate, applicationName: applicationName, fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                         let expectedTestResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClass1", testName: "testName1"), referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
                         expect(output.didFindNewTestResult___ReceivedTestResult).to(equal(expectedTestResult))
                     }
