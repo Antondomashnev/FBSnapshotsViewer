@@ -32,11 +32,11 @@ class SnapshotTestResultSwapper {
                 throw SnapshotTestResultSwapperError.nonRetinaImages(testResult: testResult)
         }
         let failedImageSizeSuffix = imagePath.substring(with: failedImageSizeSuffixRange)
-        let recordedImageURL = testResult.build.fbReferenceImageDirectoryURLs.flatMap { fbReferenceImageDirectoryURL -> URL? in
+        let recordedImageURLs = testResult.build.fbReferenceImageDirectoryURLs.flatMap { fbReferenceImageDirectoryURL -> URL? in
             let url = fbReferenceImageDirectoryURL.appendingPathComponent(testResult.testClassName).appendingPathComponent("\(testResult.testName)\(failedImageSizeSuffix)").appendingPathExtension("png")
-            return fileManager.fileExists(atPath: url.absoluteString) ? url : nil
-        }.first
-        guard let url = recordedImageURL else {
+            return fileManager.fileExists(atPath: url.path) ? url : nil
+        }
+        guard let url = recordedImageURLs.first else {
             throw SnapshotTestResultSwapperError.notExistedRecordedImage(testResult: testResult)
         }
         return url
