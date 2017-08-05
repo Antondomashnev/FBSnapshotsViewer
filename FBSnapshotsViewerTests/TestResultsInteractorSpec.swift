@@ -59,7 +59,7 @@ class TestResultsInteractor_MockSnapshotTestResultSwapper: SnapshotTestResultSwa
 
 class TestResultsInteractorSpec: QuickSpec {
     override func spec() {
-        let build: Build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+        let build: Build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
         let kaleidoscopeViewer: TestResultsInteractor_MockExternalViewer.Type = TestResultsInteractor_MockExternalViewer.self
         var processLauncher: ProcessLauncher!
         var interactor: TestResultsInteractor!

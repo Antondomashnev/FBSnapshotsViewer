@@ -69,17 +69,17 @@ class ConfigurationStorageMock: ConfigurationStorage {
 class FBReferenceImageDirectoryURLExtractorMock: FBReferenceImageDirectoryURLExtractor {
 
 
-    //MARK: - extractImageDirectoryURL
+    //MARK: - extractImageDirectoryURLs
 
-    var extractImageDirectoryURL_from_Called = false
-    var extractImageDirectoryURL_from_ReceivedLogLine: ApplicationLogLine?
-    var extractImageDirectoryURL_from_ReturnValue: URL!
+    var extractImageDirectoryURLs_from_Called = false
+    var extractImageDirectoryURLs_from_ReceivedLogLine: ApplicationLogLine?
+    var extractImageDirectoryURLs_from_ReturnValue: [URL]!
 
-    func extractImageDirectoryURL(from logLine: ApplicationLogLine) -> URL {
+    func extractImageDirectoryURLs(from logLine: ApplicationLogLine) -> [URL] {
 
-        extractImageDirectoryURL_from_Called = true
-        extractImageDirectoryURL_from_ReceivedLogLine = logLine
-        return extractImageDirectoryURL_from_ReturnValue
+        extractImageDirectoryURLs_from_Called = true
+        extractImageDirectoryURLs_from_ReceivedLogLine = logLine
+        return extractImageDirectoryURLs_from_ReturnValue
     }
 }
 class FolderEventsListenerMock: FolderEventsListener {

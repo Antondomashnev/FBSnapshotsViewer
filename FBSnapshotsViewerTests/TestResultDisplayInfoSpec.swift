@@ -64,7 +64,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
             describe("testName") {
                 context("given test name from Quick") {
                     beforeEach {
-                        build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                        build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                         testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "_view__looks_good_iPhone9_3_375x667"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
 

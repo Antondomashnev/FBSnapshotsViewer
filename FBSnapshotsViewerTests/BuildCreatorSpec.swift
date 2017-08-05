@@ -30,12 +30,12 @@ class BuildCreatorSpec: QuickSpec {
                     applicationName = "MyApplication"
                     date = Date()
                     buildCreator.applicationName = applicationName
-                    buildCreator.fbReferenceImageDirectoryURL = fbReferenceImageDirectoryURL
+                    buildCreator.fbReferenceImageDirectoryURLs = [fbReferenceImageDirectoryURL]
                     buildCreator.date = date
                 }
                 
                 it("returns build") {
-                    let expectedBuild = Build(date: date, applicationName: applicationName, fbReferenceImageDirectoryURL: fbReferenceImageDirectoryURL)
+                    let expectedBuild = Build(date: date, applicationName: applicationName, fbReferenceImageDirectoryURLs: [fbReferenceImageDirectoryURL])
                     expect(buildCreator.createBuild()).to(equal(expectedBuild))
                 }
             }
@@ -47,7 +47,7 @@ class BuildCreatorSpec: QuickSpec {
                 beforeEach {
                     fbReferenceImageDirectoryURL = URL(fileURLWithPath: "/Users/fedotiy/myproject/tests/")
                     date = Date()
-                    buildCreator.fbReferenceImageDirectoryURL = fbReferenceImageDirectoryURL
+                    buildCreator.fbReferenceImageDirectoryURLs = [fbReferenceImageDirectoryURL]
                     buildCreator.date = date
                 }
                 

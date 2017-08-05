@@ -2,6 +2,7 @@
 // DO NOT EDIT
 
 // swiftlint:disable file_length
+// swiftlint:disable line_length
 
 fileprivate func combineHashes(_ hashes: [Int]) -> Int {
     return hashes.reduce(0, combineHashValues)
@@ -19,17 +20,47 @@ fileprivate func combineHashValues(_ initial: Int, _ other: Int) -> Int {
     return Int(bitPattern: lhs)
 }
 
+
+fileprivate func hashArray<T: Hashable>(_ array: [T]?) -> Int {
+    guard let array = array else {
+        return 0
+    }
+    return array.reduce(5381) {
+        ($0 << 5) &+ $0 &+ $1.hashValue
+    }
+}
+
+fileprivate func hashDictionary<T, U: Hashable>(_ dictionary: [T: U]?) -> Int {
+    guard let dictionary = dictionary else {
+        return 0
+    }
+    return dictionary.reduce(5381) {
+        combineHashValues($0, combineHashValues($1.key.hashValue, $1.value.hashValue))
+    }
+}
+
+
+
+
 // MARK: - AutoHashable for classes, protocols, structs
 // MARK: - Build AutoHashable
 extension Build: Hashable {
     internal var hashValue: Int {
-        return combineHashes([date.hashValue, applicationName.hashValue, fbReferenceImageDirectoryURL.hashValue, 0])
+        return combineHashes([
+            date.hashValue,
+            applicationName.hashValue,
+            hashArray(fbReferenceImageDirectoryURLs),
+            0])
     }
 }
 // MARK: - TestResultsSectionTitleDisplayInfo AutoHashable
 extension TestResultsSectionTitleDisplayInfo: Hashable {
     internal var hashValue: Int {
-        return combineHashes([title.hashValue, timeAgo.hashValue, timeAgoDate.hashValue, 0])
+        return combineHashes([
+            title.hashValue,
+            timeAgo.hashValue,
+            timeAgoDate.hashValue,
+            0])
     }
 }
 
@@ -39,18 +70,17 @@ extension TestResultsSectionTitleDisplayInfo: Hashable {
 extension ApplicationLogLine: Hashable {
     internal var hashValue: Int {
         switch self {
-        case .kaleidoscopeCommandMessage(let data): 
+        case .kaleidoscopeCommandMessage(let data):
             return combineHashes([1, data.hashValue])
-        case .referenceImageSavedMessage(let data): 
+        case .referenceImageSavedMessage(let data):
             return combineHashes([2, data.hashValue])
-        case .applicationNameMessage(let data): 
+        case .applicationNameMessage(let data):
             return combineHashes([3, data.hashValue])
-        case .fbReferenceImageDirMessage(let data): 
+        case .fbReferenceImageDirMessage(let data):
             return combineHashes([4, data.hashValue])
-         case .unknown: 
+        case .unknown:
             return 5.hashValue
         }
     }
 }
 
-// MARK: -

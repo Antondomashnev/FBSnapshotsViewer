@@ -12,6 +12,7 @@ import Nuke
 enum SnapshotTestResultSwapperError: Error {
     case canNotBeSwapped(testResult: SnapshotTestResult)
     case nonRetinaImages(testResult: SnapshotTestResult)
+    case notExistedRecordedImage(testResult: SnapshotTestResult)
     case canNotPerformFileManagerOperation(testResult: SnapshotTestResult, underlyingError: Error)
 }
 
@@ -31,8 +32,14 @@ class SnapshotTestResultSwapper {
                 throw SnapshotTestResultSwapperError.nonRetinaImages(testResult: testResult)
         }
         let failedImageSizeSuffix = imagePath.substring(with: failedImageSizeSuffixRange)
-        let recordedImageURL = testResult.build.fbReferenceImageDirectoryURL.appendingPathComponent(testResult.testClassName).appendingPathComponent("\(testResult.testName)\(failedImageSizeSuffix)").appendingPathExtension("png")
-        return recordedImageURL
+        let recordedImageURLs = testResult.build.fbReferenceImageDirectoryURLs.flatMap { fbReferenceImageDirectoryURL -> URL? in
+            let url = fbReferenceImageDirectoryURL.appendingPathComponent(testResult.testClassName).appendingPathComponent("\(testResult.testName)\(failedImageSizeSuffix)").appendingPathExtension("png")
+            return fileManager.fileExists(atPath: url.path) ? url : nil
+        }
+        guard let url = recordedImageURLs.first else {
+            throw SnapshotTestResultSwapperError.notExistedRecordedImage(testResult: testResult)
+        }
+        return url
     }
     
     // MARK: - Interface

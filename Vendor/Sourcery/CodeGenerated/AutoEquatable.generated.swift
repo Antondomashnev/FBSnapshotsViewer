@@ -28,7 +28,7 @@ extension Build: Equatable {}
 internal func == (lhs: Build, rhs: Build) -> Bool {
     guard lhs.date == rhs.date else { return false }
     guard lhs.applicationName == rhs.applicationName else { return false }
-    guard lhs.fbReferenceImageDirectoryURL == rhs.fbReferenceImageDirectoryURL else { return false }
+    guard lhs.fbReferenceImageDirectoryURLs == rhs.fbReferenceImageDirectoryURLs else { return false }
     return true
 }
 // MARK: - SnapshotTestInformation AutoEquatable

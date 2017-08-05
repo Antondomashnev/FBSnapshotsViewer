@@ -82,7 +82,7 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
                 var build: Build!
                 
                 beforeEach {
-                    build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                    build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                 }
                 
                 beforeEach {

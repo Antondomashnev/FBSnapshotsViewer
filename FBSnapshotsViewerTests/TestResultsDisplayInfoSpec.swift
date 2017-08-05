@@ -18,9 +18,9 @@ class TestResultsDisplayInfoSpec: QuickSpec {
         
         describe(".init") {
             beforeEach {
-                let build1 = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
-                let build2 = Build(date: Date(), applicationName: "AmazingWeather", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/foo", isDirectory: true))
-                let build3 = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURL: URL(fileURLWithPath: "foo/bar", isDirectory: true))
+                let build1 = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+                let build2 = Build(date: Date(), applicationName: "AmazingWeather", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/foo", isDirectory: true)])
+                let build3 = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                 let testResultInfo1 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "foo_name"), referenceImagePath: "foo/bar.png", build: build1))
                 let testResultInfo2 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "foo_name"), referenceImagePath: "foo/bar.png", build: build2))
                 let testResultInfo3 = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "foo_name"), referenceImagePath: "foo/bar.png", build: build3))
