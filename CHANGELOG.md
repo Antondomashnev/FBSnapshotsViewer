@@ -1,10 +1,10 @@
 ## Changelog
 
 
-### 0.6.2 (Next)
+### 0.6.2 (09.08.2017)
 
-* Your contribution here.
 * [#56](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/56): Fix swap snapshots recorded with Nimble-Snapshots - [@antondomashnev](https://github.com/antondomashnev).
+* [#58](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/58): Fix Sparkle updater - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.6.1 (02.08.2017)
 

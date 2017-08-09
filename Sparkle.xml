@@ -32,11 +32,21 @@
       <title>0.6.1</title>
       <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
       <description>
-        &lt;ul&gt; &lt;li&gt; &lt;p&gt;&lt;a
+         &lt;ul&gt; &lt;li&gt; &lt;p&gt;&lt;a
         href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/52&quot;&gt;#52&lt;/a&gt;: Add Xcode 9 Beta 4 support - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/53&quot;&gt;#53&lt;/a&gt;: Better test display name - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
       </description>
       <pubDate>Wed, 02 Aug 2017 22:06:29 +0200</pubDate>
       <enclosure type='application/octet-stream' sparkle:version='7' sparkle:shortVersionString='0.6.1' length='8026771' url='https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/0.6.1/FBSnapshotsViewer-0.6.1.app.zip'/>
+    </item>
+    <item>
+      <title>0.6.2</title>
+      <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
+      <description>
+        &lt;ul&gt; &lt;li&gt; &lt;p&gt;&lt;a
+        href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/56&quot;&gt;#56&lt;/a&gt;: Fix swap snapshots recorded with Nimble-Snapshots - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/58&quot;&gt;#58&lt;/a&gt;: Fix Sparkle updater - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
+      </description>
+      <pubDate>Wed, 09 Aug 2017 23:17:11 +0200</pubDate>
+      <enclosure type='application/octet-stream' sparkle:version='8' sparkle:shortVersionString='0.6.2' length='8025840' url='https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/0.6.2/FBSnapshotsViewer-0.6.2.app.zip'/>
     </item>
   </channel>
 </rss>
