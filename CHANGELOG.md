@@ -1,6 +1,10 @@
 ## Changelog
 
 
+### 0.6.3 (Next)
+
+* Your contribution here.
+
 ### 0.6.2 (09.08.2017)
 
 * [#56](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/56): Fix swap snapshots recorded with Nimble-Snapshots - [@antondomashnev](https://github.com/antondomashnev).
