@@ -105,9 +105,7 @@ internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
         return lhs == rhs
     case (.fbReferenceImageDirMessage(let lhs), .fbReferenceImageDirMessage(let rhs)): 
         return lhs == rhs
-    case (.failedSnapshotTestErrorMessage(let lhs), .failedSnapshotTestErrorMessage(let rhs)): 
-        return lhs == rhs
-    case (.recordedSnapshotTestErrorMessage(let lhs), .recordedSnapshotTestErrorMessage(let rhs)): 
+    case (.snapshotTestErrorMessage(let lhs), .snapshotTestErrorMessage(let rhs)): 
         return lhs == rhs
     case (.unknown, .unknown): 
          return true 

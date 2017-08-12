@@ -67,8 +67,7 @@ class SnapshotTestResultFactory {
         case .unknown,
              .applicationNameMessage,
              .fbReferenceImageDirMessage,
-             .recordedSnapshotTestErrorMessage,
-             .failedSnapshotTestErrorMessage:
+             .snapshotTestErrorMessage:
             return nil
         case let .kaleidoscopeCommandMessage(line):
             return try? self.createSnapshotTestResult(fromKaleidoscopeCommandLine: line, build: build)

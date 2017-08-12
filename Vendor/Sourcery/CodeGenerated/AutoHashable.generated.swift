@@ -78,12 +78,10 @@ extension ApplicationLogLine: Hashable {
             return combineHashes([3, data.hashValue])
         case .fbReferenceImageDirMessage(let data):
             return combineHashes([4, data.hashValue])
-        case .failedSnapshotTestErrorMessage(let data):
+        case .snapshotTestErrorMessage(let data):
             return combineHashes([5, data.hashValue])
-        case .recordedSnapshotTestErrorMessage(let data):
-            return combineHashes([6, data.hashValue])
         case .unknown:
-            return 7.hashValue
+            return 6.hashValue
         }
     }
 }

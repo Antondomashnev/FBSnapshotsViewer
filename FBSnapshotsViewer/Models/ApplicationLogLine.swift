@@ -31,12 +31,8 @@ struct ApplicationLogLineIndicatorContainer {
         return "FB_REFERENCE_IMAGE_DIR"
     }
 
-    static func failedSnapshotTestErrorMessageIndicator(for configuration: Configuration) -> String {
-        return "((noErrors) is true) failed - Snapshot comparison failed: Error Domain=FBSnapshotTestControllerErrorDomain Code=4"
-    }
-
-    static func recordedSnapshotTestErrorMessageIndicator(for configuration: Configuration) -> String {
-        return "((noErrors) is true) failed - Snapshot comparison failed: (null)"
+    static func snapshotTestErrorMessageIndicator(for configuration: Configuration) -> String {
+        return "((noErrors) is true) failed - Snapshot comparison failed"
     }
 }
 
@@ -47,8 +43,7 @@ enum ApplicationLogLine: AutoEquatable, AutoHashable {
     case referenceImageSavedMessage(line: String)
     case applicationNameMessage(line: String)
     case fbReferenceImageDirMessage(line: String)
-    case failedSnapshotTestErrorMessage(line: String)
-    case recordedSnapshotTestErrorMessage(line: String)
+    case snapshotTestErrorMessage(line: String)
     case unknown
 
     init(line: String, configuration: Configuration = Configuration.default()) {
@@ -64,11 +59,8 @@ enum ApplicationLogLine: AutoEquatable, AutoHashable {
         else if line.contains(ApplicationLogLineIndicatorContainer.fbReferenceImageDirMessageIndicator(for: configuration)) {
             self = ApplicationLogLine.fbReferenceImageDirMessage(line: line)
         }
-        else if line.contains(ApplicationLogLineIndicatorContainer.recordedSnapshotTestErrorMessageIndicator(for: configuration)) {
-            self = ApplicationLogLine.recordedSnapshotTestErrorMessage(line: line)
-        }
-        else if line.contains(ApplicationLogLineIndicatorContainer.failedSnapshotTestErrorMessageIndicator(for: configuration)) {
-            self = ApplicationLogLine.failedSnapshotTestErrorMessage(line: line)
+        else if line.contains(ApplicationLogLineIndicatorContainer.snapshotTestErrorMessageIndicator(for: configuration)) {
+            self = ApplicationLogLine.snapshotTestErrorMessage(line: line)
         }
         else {
             self = ApplicationLogLine.unknown

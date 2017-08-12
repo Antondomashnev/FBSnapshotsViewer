@@ -49,16 +49,16 @@ class ApplicationLogLineSpec: QuickSpec {
             context("when line with failed snapshot test error") {
                 let line = "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m:27: error: -[FBSnapshotsViewerExampleTests testFail] : ((noErrors) is true) failed - Snapshot comparison failed: Error Domain=FBSnapshotTestControllerErrorDomain Code=4 &amp;quot;Images different&amp;quot; UserInfo={NSLocalizedFailureReason=image pixels differed by more than 0.00% from the reference image, FBDiffedImageKey=&amp;lt;UIImage: 0x6000000876c0&amp;gt;, {375, 667}, FBReferenceImageKey=&amp;lt;UIImage: 0x60000048e510&amp;gt;, {375, 667}, FBCapturedImageKey=&amp;lt;UIImage: 0x600000085d20&amp;gt;, {375, 667}, NSLocalizedDescription=Images different}"
                 
-                it("returns failedSnapshotTestErrorMessage log line") {
-                    expect(ApplicationLogLine(line: line)).to(equal(ApplicationLogLine.failedSnapshotTestErrorMessage(line: line)))
+                it("returns snapshotTestErrorMessage log line") {
+                    expect(ApplicationLogLine(line: line)).to(equal(ApplicationLogLine.snapshotTestErrorMessage(line: line)))
                 }
             }
             
             context("when line with recorded snapshot test error") {
                 let line = "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m:38: error: -[FBSnapshotsViewerExampleTests testRecord] : ((noErrors) is true) failed - Snapshot comparison failed: (null)"
                 
-                it("returns recordedSnapshotTestErrorMessage log line") {
-                    expect(ApplicationLogLine(line: line)).to(equal(ApplicationLogLine.recordedSnapshotTestErrorMessage(line: line)))
+                it("returns snapshotTestErrorMessage log line") {
+                    expect(ApplicationLogLine(line: line)).to(equal(ApplicationLogLine.snapshotTestErrorMessage(line: line)))
                 }
             }
 
