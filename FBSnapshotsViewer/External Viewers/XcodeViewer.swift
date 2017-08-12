@@ -26,7 +26,7 @@ class XcodeViewer: ExternalViewer {
     
     static func view(snapshotTestResult: SnapshotTestResult, using processLauncher: ProcessLauncher = ProcessLauncher()) {
         guard case let SnapshotTestResult.failed(_, referenceImagePath, _, failedImagePath, _) = snapshotTestResult else {
-            assertionFailure("Trying to open Kaleidoscope viewer for test result without diff")
+            assertionFailure("Trying to open Xcode viewer for test result without diff")
             return
         }
         processLauncher.launchProcess(at: "/usr/local/bin/ksdiff", with: [referenceImagePath, failedImagePath])
