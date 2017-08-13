@@ -385,6 +385,22 @@ class TestClassPathExtractorMock: TestClassPathExtractor {
         return extractTestClassPath_from_ReturnValue
     }
 }
+class TestLineNumberExtractorMock: TestLineNumberExtractor {
+
+
+    //MARK: - extractTestLineNumber
+
+    var extractTestLineNumber_from_Called = false
+    var extractTestLineNumber_from_ReceivedLogLine: ApplicationLogLine?
+    var extractTestLineNumber_from_ReturnValue: Int!
+
+    func extractTestLineNumber(from logLine: ApplicationLogLine) -> Int {
+
+        extractTestLineNumber_from_Called = true
+        extractTestLineNumber_from_ReceivedLogLine = logLine
+        return extractTestLineNumber_from_ReturnValue
+    }
+}
 class TestResultCellDelegateMock: TestResultCellDelegate {
 
 

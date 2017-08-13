@@ -1,5 +1,5 @@
 //
-//  TestClassPathExtractorSpec.swift
+//  TestLineNumberExtractorSpec.swift
 //  FBSnapshotsViewerTests
 //
 //  Created by Anton Domashnev on 13.08.17.
@@ -11,11 +11,11 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
-class TestClassPathExtractorSpec: QuickSpec {
+class TestLineNumberExtractorSpec: QuickSpec {
     override func spec() {
-        var subject: DefaultTestClassPathExtractor!
+        var subject: DefaultTestLineNumberExtractor!
         
-        describe(".extractTestClassPath") {
+        describe(".extractTestLineNumber") {
             var logLine: ApplicationLogLine!
             
             context("given kaleidoscopeCommandMessage") {
@@ -24,7 +24,7 @@ class TestClassPathExtractorSpec: QuickSpec {
                 }
                 
                 it("throws") {
-                    expect { try subject.extractTestClassPath(from: logLine) }.to(throwError())
+                    expect { try subject.extractTestLineNumber(from: logLine) }.to(throwError())
                 }
             }
             
@@ -34,7 +34,7 @@ class TestClassPathExtractorSpec: QuickSpec {
                 }
                 
                 it("throws") {
-                    expect { try subject.extractTestClassPath(from: logLine) }.to(throwError())
+                    expect { try subject.extractTestLineNumber(from: logLine) }.to(throwError())
                 }
             }
             
@@ -44,7 +44,7 @@ class TestClassPathExtractorSpec: QuickSpec {
                 }
                 
                 it("throws") {
-                    expect { try subject.extractTestClassPath(from: logLine) }.to(throwError())
+                    expect { try subject.extractTestLineNumber(from: logLine) }.to(throwError())
                 }
             }
             
@@ -54,7 +54,7 @@ class TestClassPathExtractorSpec: QuickSpec {
                 }
                 
                 it("throws") {
-                    expect { try subject.extractTestClassPath(from: logLine) }.to(throwError())
+                    expect { try subject.extractTestLineNumber(from: logLine) }.to(throwError())
                 }
             }
             
@@ -64,9 +64,9 @@ class TestClassPathExtractorSpec: QuickSpec {
                         logLine = ApplicationLogLine.snapshotTestErrorMessage(line: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m:38: error: -[FBSnapshotsViewerExampleTests testRecord] : ((noErrors) is true) failed - Snapshot comparison failed: (null)")
                     }
                     
-                    it("returns valid test class path") {
-                        let testClassPath = try? subject.extractTestClassPath(from: logLine)
-                        expect(testClassPath).to(equal("/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m"))
+                    it("returns valid test line number") {
+                        let testLineNumber = try? subject.extractTestLineNumber(from: logLine)
+                        expect(testClassPath).to(equal(38))
                     }
                 }
                 
@@ -76,7 +76,7 @@ class TestClassPathExtractorSpec: QuickSpec {
                     }
                     
                     it("throws") {
-                        expect { try subject.extractTestClassPath(from: logLine) }.to(throwError())
+                        expect { try subject.extractTestLineNumber(from: logLine) }.to(throwError())
                     }
                 }
             }
@@ -87,7 +87,7 @@ class TestClassPathExtractorSpec: QuickSpec {
                 }
                 
                 it("throws") {
-                    expect { try subject.extractTestClassPath(from: logLine) }.to(throwError())
+                    expect { try subject.extractTestLineNumber(from: logLine) }.to(throwError())
                 }
             }
         }
