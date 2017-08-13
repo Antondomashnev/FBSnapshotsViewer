@@ -62,6 +62,39 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     
     // MARK: - Helpers
     
+    private func processLogLine(_ logLine: ApplicationLogLine) throws {
+        switch logLine {
+        case .fbReferenceImageDirMessage:
+            buildCreator.fbReferenceImageDirectoryURLs = try fbImageReferenceDirExtractor.extractImageDirectoryURLs(from: logLine)
+        case .applicationNameMessage:
+            buildCreator.applicationName = try applicationNameExtractor.extractApplicationName(from: logLine)
+            buildCreator.date = Date()
+        default:
+            return
+        }
+    }
+    
+    private func reduceToSnapshotTestResult(with build: Build) -> ([SnapshotTestResult], ApplicationLogLine) throws -> [SnapshotTestResult] {
+        return { [weak self] results, logLine in
+            guard let strongSelf = self else {
+                return results
+            }
+            var mutableResults = results
+            switch logLine {
+            case .kaleidoscopeCommandMessage, .referenceImageSavedMessage:
+                guard let testResult = strongSelf.snapshotTestResultFactory.createSnapshotTestResult(from: logLine, build: build) else {
+                    return results
+                }
+                mutableResults.append(testResult)
+                return mutableResults
+            case .snapshotTestErrorMessage:
+                return results
+            default:
+                return results
+            }
+        }
+    }
+    
     private func logLinesFlatMap() -> (ApplicationLogLine) throws -> SnapshotTestResult? {
         return { [weak self] logLine -> SnapshotTestResult? in
             guard let strongSelf = self else {
@@ -89,6 +122,12 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     
     private func handleFileWatcherUpdate(text: String) throws -> [SnapshotTestResult]? {
         let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
+        if let build = buildCreator.createBuild() {
+
+        }
+        else {
+            try logLines.forEach(processLogLine)
+        }
         let snapshotTestResults = try logLines.flatMap(logLinesFlatMap())
         readLinesNumber += logLines.count
         return snapshotTestResults

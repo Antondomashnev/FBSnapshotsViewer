@@ -11,10 +11,14 @@ import Cocoa
 struct SnapshotTestInformation: AutoEquatable {
     let testClassName: String
     let testName: String
+    let testClassPath: String?
+    let testLineNumber: Int?
     
-    init(testClassName: String, testName: String) {
+    init(testClassName: String, testName: String, testClassPath: String? = nil, testLineNumber: Int? = nil) {
         self.testClassName = testClassName
         self.testName = testName
+        self.testClassPath = testClassPath
+        self.testLineNumber = testLineNumber
     }
 }
 

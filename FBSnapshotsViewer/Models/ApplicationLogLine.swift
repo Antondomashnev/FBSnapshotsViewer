@@ -32,7 +32,7 @@ struct ApplicationLogLineIndicatorContainer {
     }
 
     static func snapshotTestErrorMessageIndicator(for configuration: Configuration) -> String {
-        return "((noErrors) is true) failed - Snapshot comparison failed"
+        return " : ((noErrors) is true) failed - Snapshot comparison failed"
     }
 }
 
