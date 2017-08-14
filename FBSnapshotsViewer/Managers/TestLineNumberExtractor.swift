@@ -12,7 +12,7 @@ enum TestLineNumberExtractorError: Error {
     case unexpectedLogLine(message: String)
 }
 
-protocol TestLineNumberExtractor: AutoMockable {
+protocol TestLineNumberExtractor {
     func extractTestLineNumber(from logLine: ApplicationLogLine) throws -> Int
 }
 

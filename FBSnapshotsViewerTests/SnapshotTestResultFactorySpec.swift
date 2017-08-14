@@ -11,6 +11,38 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
+fileprivate class TestFilePathExtractorMock: TestFilePathExtractor {
+    var extractTestClassPath_from_Throws = false
+    var extractTestClassPath_from_Called = false
+    var extractTestClassPath_from_ReceivedLogLine: ApplicationLogLine?
+    var extractTestClassPath_from_ReturnValue: String!
+    
+    func extractTestClassPath(from logLine: ApplicationLogLine) throws -> String {
+        if extractTestClassPath_from_Throws {
+            throw NSError(domain: "", code: 0, userInfo: nil)
+        }
+        extractTestClassPath_from_Called = true
+        extractTestClassPath_from_ReceivedLogLine = logLine
+        return extractTestClassPath_from_ReturnValue
+    }
+}
+
+fileprivate class TestLineNumberExtractorMock: TestLineNumberExtractor {
+    var extractTestLineNumber_from_Throws = false
+    var extractTestLineNumber_from_Called = false
+    var extractTestLineNumber_from_ReceivedLogLine: ApplicationLogLine?
+    var extractTestLineNumber_from_ReturnValue: Int!
+    
+    func extractTestLineNumber(from logLine: ApplicationLogLine) throws -> Int {
+        if extractTestLineNumber_from_Throws {
+            throw NSError(domain: "", code: 0, userInfo: nil)
+        }
+        extractTestLineNumber_from_Called = true
+        extractTestLineNumber_from_ReceivedLogLine = logLine
+        return extractTestLineNumber_from_ReturnValue
+    }
+}
+
 class SnapshotTestResultFactorySpec: QuickSpec {
     override func spec() {
         var build: Build!
@@ -31,12 +63,32 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                 var referenceImageSavedLines: SnapshotTestResultLogLines!
 
                 context("when invalid error message") {
+                    var resultMessage: ApplicationLogLine!
+                    
+                    beforeEach {
+                        resultMessage = ApplicationLogLine.referenceImageSavedMessage(line: "2017-04-25 21:15:37.107 FBSnapshotsViewerExample[56034:787919] Reference image save at: /Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord@2x.png")
+                    }
+                    
                     context("when line number cannot be extracted") {
+                        beforeEach {
+                            testLineNumberExtractor.extractTestLineNumber_from_Throws = true
+                            referenceImageSavedLines = SnapshotTestResultLogLines.recordedSnapshotTestResultLines(resultMessage: resultMessage, errorMessage: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar"))
+                        }
                         
+                        it("returns nil") {
+                            expect(factory.createSnapshotTestResult(from: referenceImageSavedLines, build: build)).to(beNil())
+                        }
                     }
                     
                     context("when test file path cannot be extracted") {
+                        beforeEach {
+                            testFilePathExtractor.extractTestClassPath_from_Throws = true
+                            referenceImageSavedLines = SnapshotTestResultLogLines.recordedSnapshotTestResultLines(resultMessage: resultMessage, errorMessage: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar"))
+                        }
                         
+                        it("returns nil") {
+                            expect(factory.createSnapshotTestResult(from: referenceImageSavedLines, build: build)).to(beNil())
+                        }
                     }
                 }
                 

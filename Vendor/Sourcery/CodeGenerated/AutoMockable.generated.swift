@@ -369,38 +369,6 @@ class PreferencesUserInterfaceMock: PreferencesUserInterface {
         show_preferencesDisplayInfo_ReceivedPreferencesDisplayInfo = preferencesDisplayInfo
     }
 }
-class TestFilePathExtractorMock: TestFilePathExtractor {
-
-
-    //MARK: - extractTestClassPath
-
-    var extractTestClassPath_from_Called = false
-    var extractTestClassPath_from_ReceivedLogLine: ApplicationLogLine?
-    var extractTestClassPath_from_ReturnValue: String!
-
-    func extractTestClassPath(from logLine: ApplicationLogLine) -> String {
-
-        extractTestClassPath_from_Called = true
-        extractTestClassPath_from_ReceivedLogLine = logLine
-        return extractTestClassPath_from_ReturnValue
-    }
-}
-class TestLineNumberExtractorMock: TestLineNumberExtractor {
-
-
-    //MARK: - extractTestLineNumber
-
-    var extractTestLineNumber_from_Called = false
-    var extractTestLineNumber_from_ReceivedLogLine: ApplicationLogLine?
-    var extractTestLineNumber_from_ReturnValue: Int!
-
-    func extractTestLineNumber(from logLine: ApplicationLogLine) -> Int {
-
-        extractTestLineNumber_from_Called = true
-        extractTestLineNumber_from_ReceivedLogLine = logLine
-        return extractTestLineNumber_from_ReturnValue
-    }
-}
 class TestResultCellDelegateMock: TestResultCellDelegate {
 
 

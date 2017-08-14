@@ -12,7 +12,7 @@ enum TestFilePathExtractorError: Error {
     case unexpectedLogLine(message: String)
 }
 
-protocol TestFilePathExtractor: AutoMockable {
+protocol TestFilePathExtractor {
     func extractTestClassPath(from logLine: ApplicationLogLine) throws -> String
 }
 
