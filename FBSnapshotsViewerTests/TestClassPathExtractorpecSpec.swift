@@ -1,5 +1,5 @@
 //
-//  TestClassPathExtractorSpec.swift
+//  TestFilePathExtractorSpec.swift
 //  FBSnapshotsViewerTests
 //
 //  Created by Anton Domashnev on 13.08.17.
@@ -11,9 +11,9 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
-class TestClassPathExtractorSpec: QuickSpec {
+class TestFilePathExtractorSpec: QuickSpec {
     override func spec() {
-        var subject: DefaultTestClassPathExtractor!
+        var subject: DefaultTestFilePathExtractor!
         
         describe(".extractTestClassPath") {
             var logLine: ApplicationLogLine!

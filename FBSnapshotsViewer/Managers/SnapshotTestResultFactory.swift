@@ -14,7 +14,13 @@ enum SnapshotTestResultFactoryError: Error {
 }
 
 class SnapshotTestResultFactory {
-    private let
+    private let testFilePathExtractor: TestFilePathExtractor
+    private let testLineNumberExtractor: TestLineNumberExtractor
+    
+    init(testFilePathExtractor: TestFilePathExtractor = TestFilePathExtractor(), testLineNumberExtractor: TestLineNumberExtractor = TestLineNumberExtractor()) {
+        self.testFilePathExtractor = testFilePathExtractor
+        self.testLineNumberExtractor = testLineNumberExtractor
+    }
     
     // MARK: - Helpers
 
@@ -64,7 +70,7 @@ class SnapshotTestResultFactory {
 
     // MARK: - Interface
 
-    func createSnapshotTestResult(from logLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
+    func createSnapshotTestResult(from logLines: SnapshotTestResultLogLines, build: Build) -> SnapshotTestResult? {
         switch logLine {
         case .unknown,
              .applicationNameMessage,

@@ -15,67 +15,51 @@ class SnapshotTestResultFactorySpec: QuickSpec {
     override func spec() {
         var build: Build!
         var factory: SnapshotTestResultFactory!
+        var testLineNumberExtractor: TestLineNumberExtractorMock!
+        var testFilePathExtractor: TestFilePathExtractorMock!
 
         beforeEach {
             build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
-            factory = SnapshotTestResultFactory()
+            testLineNumberExtractor = TestLineNumberExtractorMock()
+            testFilePathExtractor = TestFilePathExtractorMock()
+            factory = SnapshotTestResultFactory(testFilePathExtractor: testFilePathExtractor, testLineNumberExtractor: testLineNumberExtractor)
         }
 
         describe(".createSnapshotTestResult(from:)") {
-            context("when unknown log line") {
-                var createdTestResult: SnapshotTestResult?
-
-                beforeEach {
-                    createdTestResult = factory.createSnapshotTestResult(from: .unknown, build: build)
-                }
-
-                it("doesnt create test result") {
-                    expect(createdTestResult).to(beNil())
-                }
-            }
-            
-            context("when application name log line") {
-                var createdTestResult: SnapshotTestResult?
-                
-                beforeEach {
-                    createdTestResult = factory.createSnapshotTestResult(from: .applicationNameMessage(line: "MyApp"), build: build)
-                }
-                
-                it("doesnt create test result") {
-                    expect(createdTestResult).to(beNil())
-                }
-            }
-            
-            context("when fb image reference dir log line") {
-                var createdTestResult: SnapshotTestResult?
-                
-                beforeEach {
-                    createdTestResult = factory.createSnapshotTestResult(from: .fbReferenceImageDirMessage(line: "MyApp"), build: build)
-                }
-                
-                it("doesnt create test result") {
-                    expect(createdTestResult).to(beNil())
-                }
-            }
-
-            context("when reference image saved message log line") {
+            context("when recordedSnapshotTestResultLines") {
                 var createdTestResult: SnapshotTestResult!
-                var referenceImageSavedMessage: ApplicationLogLine!
+                var referenceImageSavedLines: SnapshotTestResultLogLines!
 
-                context("when invalid") {
+                context("when invalid error message") {
+                    context("when line number cannot be extracted") {
+                        
+                    }
+                    
+                    context("when test file path cannot be extracted") {
+                        
+                    }
+                }
+                
+                context("when invalid result message") {
+                    var errorMessage: String!
+                    
+                    beforeEach {
+                        errorMessage = "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m:38: error: -[FBSnapshotsViewerExampleTests testRecord] : ((noErrors) is true) failed - Snapshot comparison failed: (null)"
+                    }
+                    
                     context("when without expected FBSnapshotTests message") {
                         beforeEach {
-                            referenceImageSavedMessage = ApplicationLogLine.referenceImageSavedMessage(line: "Reference image was saved /Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord@2x.png")
+                            referenceImageSavedLines = SnapshotTestResultLogLines.recordedSnapshotTestResultLines(resultMessage: "Reference image was saved /Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord@2x.png", errorMessage: errorMessage)
                         }
 
                         it("returns nil") {
-                            expect(factory.createSnapshotTestResult(from: referenceImageSavedMessage, build: build)).to(beNil())
+                            expect(factory.createSnapshotTestResult(from: referenceImageSavedLines, build: build)).to(beNil())
                         }
                     }
 
                     context("when without expected image path suffix") {
                         beforeEach {
-                            referenceImageSavedMessage = ApplicationLogLine.referenceImageSavedMessage(line: "Reference image save at: /Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord.png")
+                            referenceImageSavedLines = SnapshotTestResultLogLines.recordedSnapshotTestResultLines(resultMessage: "Reference image save at: /Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord.png", errorMessage: errorMessage)
                         }
 
                         it("returns nil") {

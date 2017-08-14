@@ -369,7 +369,7 @@ class PreferencesUserInterfaceMock: PreferencesUserInterface {
         show_preferencesDisplayInfo_ReceivedPreferencesDisplayInfo = preferencesDisplayInfo
     }
 }
-class TestClassPathExtractorMock: TestClassPathExtractor {
+class TestFilePathExtractorMock: TestFilePathExtractor {
 
 
     //MARK: - extractTestClassPath
