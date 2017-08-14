@@ -62,7 +62,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     
     // MARK: - Helpers
     
-    private func processLogLine(_ logLine: ApplicationLogLine) throws {
+    private func collectBuildInformation(from lofLines: [ApplicationLogLine]) -> Build?  {
         switch logLine {
         case .fbReferenceImageDirMessage:
             buildCreator.fbReferenceImageDirectoryURLs = try fbImageReferenceDirExtractor.extractImageDirectoryURLs(from: logLine)
@@ -96,6 +96,8 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     }
     
     private func logLinesFlatMap() -> (ApplicationLogLine) throws -> SnapshotTestResult? {
+        
+        
         return { [weak self] logLine -> SnapshotTestResult? in
             guard let strongSelf = self else {
                 return nil
@@ -122,12 +124,6 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     
     private func handleFileWatcherUpdate(text: String) throws -> [SnapshotTestResult]? {
         let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
-        if let build = buildCreator.createBuild() {
-
-        }
-        else {
-            try logLines.forEach(processLogLine)
-        }
         let snapshotTestResults = try logLines.flatMap(logLinesFlatMap())
         readLinesNumber += logLines.count
         return snapshotTestResults

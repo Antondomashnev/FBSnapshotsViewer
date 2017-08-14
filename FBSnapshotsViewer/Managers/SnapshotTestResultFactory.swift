@@ -14,6 +14,8 @@ enum SnapshotTestResultFactoryError: Error {
 }
 
 class SnapshotTestResultFactory {
+    private let
+    
     // MARK: - Helpers
 
     private func extractTestInformation(fromFailedImage path: String) throws -> SnapshotTestInformation {
