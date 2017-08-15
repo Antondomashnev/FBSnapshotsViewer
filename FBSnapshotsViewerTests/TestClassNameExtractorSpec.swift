@@ -134,4 +134,3 @@ class RecordedTestClassNameExtractorSpec: QuickSpec {
         }
     }
 }
-

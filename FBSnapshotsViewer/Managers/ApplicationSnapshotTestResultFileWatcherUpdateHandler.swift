@@ -62,69 +62,30 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     
     // MARK: - Helpers
     
-    private func collectBuildInformation(from lofLines: [ApplicationLogLine]) -> Build?  {
+    private func createSnapshotTestResult(logLine: ApplicationLogLine) throws -> SnapshotTestResult? {
         switch logLine {
+        case .unknown:
+            return nil
         case .fbReferenceImageDirMessage:
             buildCreator.fbReferenceImageDirectoryURLs = try fbImageReferenceDirExtractor.extractImageDirectoryURLs(from: logLine)
+            return nil
         case .applicationNameMessage:
             buildCreator.applicationName = try applicationNameExtractor.extractApplicationName(from: logLine)
             buildCreator.date = Date()
+            return nil
         default:
-            return
-        }
-    }
-    
-    private func reduceToSnapshotTestResult(with build: Build) -> ([SnapshotTestResult], ApplicationLogLine) throws -> [SnapshotTestResult] {
-        return { [weak self] results, logLine in
-            guard let strongSelf = self else {
-                return results
-            }
-            var mutableResults = results
-            switch logLine {
-            case .kaleidoscopeCommandMessage, .referenceImageSavedMessage:
-                guard let testResult = strongSelf.snapshotTestResultFactory.createSnapshotTestResult(from: logLine, build: build) else {
-                    return results
-                }
-                mutableResults.append(testResult)
-                return mutableResults
-            case .snapshotTestErrorMessage:
-                return results
-            default:
-                return results
-            }
-        }
-    }
-    
-    private func logLinesFlatMap() -> (ApplicationLogLine) throws -> SnapshotTestResult? {
-        
-        
-        return { [weak self] logLine -> SnapshotTestResult? in
-            guard let strongSelf = self else {
+            guard let build = buildCreator.createBuild() else {
+                assertionFailure("Unexpected snapshot test result line \(logLine) before build information line")
                 return nil
             }
-            switch logLine {
-            case .unknown:
-                return nil
-            case .fbReferenceImageDirMessage:
-                strongSelf.buildCreator.fbReferenceImageDirectoryURLs = try strongSelf.fbImageReferenceDirExtractor.extractImageDirectoryURLs(from: logLine)
-                return nil
-            case .applicationNameMessage:
-                strongSelf.buildCreator.applicationName = try strongSelf.applicationNameExtractor.extractApplicationName(from: logLine)
-                strongSelf.buildCreator.date = Date()
-                return nil
-            default:
-                guard let build = strongSelf.buildCreator.createBuild() else {
-                    assertionFailure("Unexpected snapshot test result line \(logLine) before build information line")
-                    return nil
-                }
-                return strongSelf.snapshotTestResultFactory.createSnapshotTestResult(from: logLine, build: build)
-            }
+            return nil
+//            return snapshotTestResultFactory.createSnapshotTestResult(from: logLine, errorLine: , build: build)
         }
     }
     
     private func handleFileWatcherUpdate(text: String) throws -> [SnapshotTestResult]? {
         let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
-        let snapshotTestResults = try logLines.flatMap(logLinesFlatMap())
+        let snapshotTestResults = try logLines.flatMap(createSnapshotTestResult)
         readLinesNumber += logLines.count
         return snapshotTestResults
     }

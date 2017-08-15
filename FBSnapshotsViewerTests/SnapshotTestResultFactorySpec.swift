@@ -11,35 +11,35 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
-fileprivate class TestFilePathExtractorMock: TestFilePathExtractor {
-    var extractTestClassPath_from_Throws = false
-    var extractTestClassPath_from_Called = false
-    var extractTestClassPath_from_ReceivedLogLine: ApplicationLogLine?
-    var extractTestClassPath_from_ReturnValue: String!
+private class TestFilePathExtractorMock: TestFilePathExtractor {
+    var extractTestClassPathFromThrows = false
+    var extractTestClassPathFromCalled = false
+    var extractTestClassPathFromReceivedLogLine: ApplicationLogLine?
+    var extractTestClassPathFromReturnValue: String!
     
     func extractTestClassPath(from logLine: ApplicationLogLine) throws -> String {
-        if extractTestClassPath_from_Throws {
+        if extractTestClassPathFromThrows {
             throw NSError(domain: "", code: 0, userInfo: nil)
         }
-        extractTestClassPath_from_Called = true
-        extractTestClassPath_from_ReceivedLogLine = logLine
-        return extractTestClassPath_from_ReturnValue
+        extractTestClassPathFromCalled = true
+        extractTestClassPathFromReceivedLogLine = logLine
+        return extractTestClassPathFromReturnValue
     }
 }
 
-fileprivate class TestLineNumberExtractorMock: TestLineNumberExtractor {
-    var extractTestLineNumber_from_Throws = false
-    var extractTestLineNumber_from_Called = false
-    var extractTestLineNumber_from_ReceivedLogLine: ApplicationLogLine?
-    var extractTestLineNumber_from_ReturnValue: Int!
+private class TestLineNumberExtractorMock: TestLineNumberExtractor {
+    var extractTestLineNumberFromThrows = false
+    var extractTestLineNumberFromCalled = false
+    var extractTestLineNumberFromReceivedLogLine: ApplicationLogLine?
+    var extractTestLineNumberFromReturnValue: Int!
     
     func extractTestLineNumber(from logLine: ApplicationLogLine) throws -> Int {
-        if extractTestLineNumber_from_Throws {
+        if extractTestLineNumberFromThrows {
             throw NSError(domain: "", code: 0, userInfo: nil)
         }
-        extractTestLineNumber_from_Called = true
-        extractTestLineNumber_from_ReceivedLogLine = logLine
-        return extractTestLineNumber_from_ReturnValue
+        extractTestLineNumberFromCalled = true
+        extractTestLineNumberFromReceivedLogLine = logLine
+        return extractTestLineNumberFromReturnValue
     }
 }
 
@@ -82,7 +82,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                     
                     context("when test file path cannot be extracted") {
                         beforeEach {
-                            testFilePathExtractor.extractTestClassPath_from_Throws = true
+                            testFilePathExtractor.extractTestClassPathFromThrows = true
                             referenceImageSavedLines = SnapshotTestResultLogLines.recordedSnapshotTestResultLines(resultMessage: resultMessage, errorMessage: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar"))
                         }
                         

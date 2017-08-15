@@ -17,7 +17,7 @@ protocol TestNameExtractor: AutoMockable {
 }
 
 class TestNameExtractorFactory {
-    func testNameExtractor(for logLine: ApplicationLogLine) -> TestNameExtractor? {
+    func extractor(for logLine: ApplicationLogLine) -> TestNameExtractor? {
         switch logLine {
         case .kaleidoscopeCommandMessage:
             return FailedTestNameExtractor()
@@ -29,7 +29,7 @@ class TestNameExtractorFactory {
     }
 }
 
-fileprivate class TestNameExtractorHelper {
+class TestNameExtractorHelper {
     static func extractTestName(from imagePath: String) -> String? {
         return imagePath.components(separatedBy: "/").last?.components(separatedBy: "@").first
     }

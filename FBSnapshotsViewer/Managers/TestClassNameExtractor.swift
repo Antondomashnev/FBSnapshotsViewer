@@ -17,7 +17,7 @@ protocol TestClassNameExtractor: AutoMockable {
 }
 
 class TestClassNameExtractorFactory {
-    func TestClassNameExtractor(for logLine: ApplicationLogLine) -> TestClassNameExtractor? {
+    func extractor(for logLine: ApplicationLogLine) -> TestClassNameExtractor? {
         switch logLine {
         case .kaleidoscopeCommandMessage:
             return FailedTestClassNameExtractor()
@@ -29,7 +29,7 @@ class TestClassNameExtractorFactory {
     }
 }
 
-fileprivate class TestClassNameExtractorHelper {
+private class TestClassNameExtractorHelper {
     static func extractTestClassName(from imagePath: String) -> String? {
         let pathComponents = imagePath.components(separatedBy: "/")
         return pathComponents.count >= 2 ? pathComponents[pathComponents.count - 1] : nil
