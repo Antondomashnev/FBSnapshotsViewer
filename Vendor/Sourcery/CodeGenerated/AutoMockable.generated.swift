@@ -369,6 +369,38 @@ class PreferencesUserInterfaceMock: PreferencesUserInterface {
         show_preferencesDisplayInfo_ReceivedPreferencesDisplayInfo = preferencesDisplayInfo
     }
 }
+class TestClassNameExtractorMock: TestClassNameExtractor {
+
+
+    //MARK: - extractTestClassName
+
+    var extractTestClassName_from_Called = false
+    var extractTestClassName_from_ReceivedLogLine: ApplicationLogLine?
+    var extractTestClassName_from_ReturnValue: String!
+
+    func extractTestClassName(from logLine: ApplicationLogLine) -> String {
+
+        extractTestClassName_from_Called = true
+        extractTestClassName_from_ReceivedLogLine = logLine
+        return extractTestClassName_from_ReturnValue
+    }
+}
+class TestNameExtractorMock: TestNameExtractor {
+
+
+    //MARK: - extractTestName
+
+    var extractTestName_from_Called = false
+    var extractTestName_from_ReceivedLogLine: ApplicationLogLine?
+    var extractTestName_from_ReturnValue: String!
+
+    func extractTestName(from logLine: ApplicationLogLine) -> String {
+
+        extractTestName_from_Called = true
+        extractTestName_from_ReceivedLogLine = logLine
+        return extractTestName_from_ReturnValue
+    }
+}
 class TestResultCellDelegateMock: TestResultCellDelegate {
 
 
