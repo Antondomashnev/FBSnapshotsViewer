@@ -24,7 +24,7 @@ class SnapshotTestResultFactory {
     
     // MARK: - Helpers
 
-    private func extractTestInformation(fromFailedImage path: String) throws -> SnapshotTestInformation {
+    private func extractTestInformation(from imagePath: String) throws -> SnapshotTestInformation {
         let pathComponents = path.components(separatedBy: "/")
         guard pathComponents.count >= 2,
               let testName = pathComponents.last?.components(separatedBy: "failed_").last?.components(separatedBy: "@").first,
@@ -70,7 +70,12 @@ class SnapshotTestResultFactory {
 
     // MARK: - Interface
 
-    func createSnapshotTestResult(from logLines: SnapshotTestResultLogLines, build: Build) -> SnapshotTestResult? {
+    func createSnapshotTestResult(from logLine: ApplicationLogLine, errorLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
+        guard let testFilePath = try? testFilePathExtractor.extractTestClassPath(from: errorLine),
+              let testLineNumber = try? testLineNumberExtractor.extractTestLineNumber(from: errorLine) else {
+            return nil
+        }
+        
         switch logLine {
         case .unknown,
              .applicationNameMessage,
