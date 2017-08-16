@@ -23,13 +23,34 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerBuilder {
     }
 }
 
+struct ApplicationSnapshotTestResultFileWatcherUpdateHandlerReadInfo {
+    /// Number of lines already read
+    var readLinesNumber: Int = 0
+    
+    /// By 'result' application log line meant either:
+    /// .kaleidoscopeCommandMessage or .referenceImageSavedMessage
+    var lastReadResultApplicationLogLine: ApplicationLogLine? {
+        didSet {
+            guard let newValue = lastReadResultApplicationLogLine else {
+                return
+            }
+            switch newValue {
+            case .applicationNameMessage, .fbReferenceImageDirMessage, .snapshotTestErrorMessage, .unknown:
+                assertionFailure("Invalid value \(newValue) for `lastReadResultApplicationLogLine`. Expected either kaleidoscopeCommandMessage or referenceImageSavedMessage")
+            default:
+                return
+            }
+        }
+    }
+}
+
 class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     private let applicationLogReader: ApplicationLogReader
     private let snapshotTestResultFactory: SnapshotTestResultFactory
     private let applicationNameExtractor: ApplicationNameExtractor
     private let fbImageReferenceDirExtractor: FBReferenceImageDirectoryURLExtractor
     private let buildCreator: BuildCreator
-    private var readLinesNumber: Int = 0
+    private var readInfo: ApplicationSnapshotTestResultFileWatcherUpdateHandlerReadInfo
     
     init(builder: ApplicationSnapshotTestResultFileWatcherUpdateHandlerBuilder = ApplicationSnapshotTestResultFileWatcherUpdateHandlerBuilder(clojure: { _ in })) {
         self.applicationLogReader = builder.applicationLogReader
@@ -37,6 +58,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
         self.applicationNameExtractor = builder.applicationNameExtractor
         self.buildCreator = builder.buildCreator
         self.fbImageReferenceDirExtractor = builder.fbImageReferenceDirExtractor
+        self.readInfo = ApplicationSnapshotTestResultFileWatcherUpdateHandlerReadInfo()
     }
     
     // MARK: - Interface
@@ -62,31 +84,38 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     
     // MARK: - Helpers
     
-    private func createSnapshotTestResult(logLine: ApplicationLogLine) throws -> SnapshotTestResult? {
+    private func collectSnapshotTestResults(result: [SnapshotTestResult], logLine: ApplicationLogLine) throws -> [SnapshotTestResult] {
+        var nextResult = result
         switch logLine {
-        case .unknown:
-            return nil
         case .fbReferenceImageDirMessage:
             buildCreator.fbReferenceImageDirectoryURLs = try fbImageReferenceDirExtractor.extractImageDirectoryURLs(from: logLine)
-            return nil
         case .applicationNameMessage:
             buildCreator.applicationName = try applicationNameExtractor.extractApplicationName(from: logLine)
             buildCreator.date = Date()
-            return nil
-        default:
-            guard let build = buildCreator.createBuild() else {
-                assertionFailure("Unexpected snapshot test result line \(logLine) before build information line")
-                return nil
+        case .kaleidoscopeCommandMessage:
+            readInfo.lastReadResultApplicationLogLine = logLine
+        case .referenceImageSavedMessage:
+            readInfo.lastReadResultApplicationLogLine = logLine
+        case .snapshotTestErrorMessage:
+            guard let build = buildCreator.createBuild(),
+                  let resultLogLine = readInfo.lastReadResultApplicationLogLine else {
+                assertionFailure("Unexpected snapshot test result line \(logLine) before build information line or without referenceImageSavedMessage or kaleidoscopeCommandMessage line")
+                return nextResult
             }
-            return nil
-//            return snapshotTestResultFactory.createSnapshotTestResult(from: logLine, errorLine: , build: build)
+            guard let snapshotTestResult = snapshotTestResultFactory.createSnapshotTestResult(from: resultLogLine, errorLine: logLine, build: build) else {
+                assertionFailure("Internal conditions are not valid to create snapshot test result")
+                return nextResult
+            }
+            nextResult.append(snapshotTestResult)
+        default: break
         }
+        return nextResult
     }
     
     private func handleFileWatcherUpdate(text: String) throws -> [SnapshotTestResult]? {
-        let logLines = applicationLogReader.readline(of: text, startingFrom: readLinesNumber)
-        let snapshotTestResults = try logLines.flatMap(createSnapshotTestResult)
-        readLinesNumber += logLines.count
+        let logLines = applicationLogReader.readline(of: text, startingFrom: readInfo.readLinesNumber)
+        let snapshotTestResults = try logLines.reduce([], collectSnapshotTestResults)
+        readInfo.readLinesNumber += logLines.count
         return snapshotTestResults
     }
 }
