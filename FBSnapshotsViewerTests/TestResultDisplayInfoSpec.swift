@@ -12,7 +12,7 @@ import Foundation
 
 @testable import FBSnapshotsViewer
 
-class TestResultDisplayInfo_MockKaleidoscopeViewer: ExternalViewer {
+class TestResultDisplayInfo_MockXcodeViewer: ExternalViewer {
     static var name: String = ""
     static var bundleID: String = ""
 
@@ -38,6 +38,32 @@ class TestResultDisplayInfo_MockKaleidoscopeViewer: ExternalViewer {
     }
 }
 
+class TestResultDisplayInfo_MockKaleidoscopeViewer: ExternalViewer {
+    static var name: String = ""
+    static var bundleID: String = ""
+    
+    static var canViewReturnValue: Bool = false
+    static func canView(snapshotTestResult: SnapshotTestResult) -> Bool {
+        return canViewReturnValue
+    }
+    
+    static func view(snapshotTestResult: SnapshotTestResult, using processLauncher: ProcessLauncher = ProcessLauncher()) {
+        // Do nothing
+    }
+    
+    static var isAvailableReturnValue: Bool = false
+    static func isAvailable(osxApplicationFinder: OSXApplicationFinder) -> Bool {
+        return isAvailableReturnValue
+    }
+    
+    static func reset() {
+        isAvailableReturnValue = false
+        canViewReturnValue = false
+        name = ""
+        bundleID = ""
+    }
+}
+
 class TestResultDisplayInfo_MockSnapshotTestResultSwapper: SnapshotTestResultSwapper {
     var canSwapReturnValue: Bool = false
     override func canSwap(_ testResult: SnapshotTestResult) -> Bool {
@@ -53,6 +79,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
             var testResult: SnapshotTestResult!
             var swapper: TestResultDisplayInfo_MockSnapshotTestResultSwapper!
             let kaleidoscopeViewer: TestResultDisplayInfo_MockKaleidoscopeViewer.Type = TestResultDisplayInfo_MockKaleidoscopeViewer.self
+            let xcodeViewer: TestResultDisplayInfo_MockXcodeViewer.Type = TestResultDisplayInfo_MockXcodeViewer.self
 
             afterEach {
                 kaleidoscopeViewer.reset()
@@ -172,6 +199,52 @@ class TestResultDisplayInfoSpec: QuickSpec {
                     it("can not be viewed in kaleidoscope") {
                         let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
                         expect(displayInfo.canBeViewedInKaleidoscope).to(beFalse())
+                    }
+                }
+            }
+            
+            describe("canBeViewedInXcode") {
+                beforeEach {
+                    testInformation = SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed", testFilePath: "foo/TestClass.m", testLineNumber: 1)
+                    testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                }
+                
+                context("when xcode viewer is available") {
+                    beforeEach {
+                        xcodeViewer.isAvailableReturnValue = true
+                    }
+                    
+                    context("and can show test result") {
+                        beforeEach {
+                            xcodeViewer.canViewReturnValue = true
+                        }
+                        
+                        it("can be viewed in xcode") {
+                            let displayInfo = TestResultDisplayInfo(testResult: testResult, xcodeViewer: xcodeViewer)
+                            expect(displayInfo.canBeViewedInXcode).to(beTrue())
+                        }
+                    }
+                    
+                    context("and can not show test result") {
+                        beforeEach {
+                            xcodeViewer.canViewReturnValue = false
+                        }
+                        
+                        it("can not be viewed in xcode") {
+                            let displayInfo = TestResultDisplayInfo(testResult: testResult, xcodeViewer: xcodeViewer)
+                            expect(displayInfo.canBeViewedInXcode).to(beFalse())
+                        }
+                    }
+                }
+                
+                context("when xcode viewer is not available") {
+                    beforeEach {
+                        xcodeViewer.isAvailableReturnValue = false
+                    }
+                    
+                    it("can not be viewed in xcode") {
+                        let displayInfo = TestResultDisplayInfo(testResult: testResult, xcodeViewer: xcodeViewer)
+                        expect(displayInfo.canBeViewedInXcode).to(beFalse())
                     }
                 }
             }

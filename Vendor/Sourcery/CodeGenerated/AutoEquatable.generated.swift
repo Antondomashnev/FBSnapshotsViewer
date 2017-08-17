@@ -46,8 +46,7 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard lhs.referenceImageURL == rhs.referenceImageURL else { return false }
     guard compareOptionals(lhs: lhs.diffImageURL, rhs: rhs.diffImageURL, compare: ==) else { return false }
     guard compareOptionals(lhs: lhs.failedImageURL, rhs: rhs.failedImageURL, compare: ==) else { return false }
-    guard lhs.canBeViewedInKaleidoscope == rhs.canBeViewedInKaleidoscope else { return false }
-    guard lhs.canBeSwapped == rhs.canBeSwapped else { return false }
+    guard lhs.options == rhs.options else { return false }
     guard lhs.testInformation == rhs.testInformation else { return false }
     guard lhs.testResult == rhs.testResult else { return false }
     return true
