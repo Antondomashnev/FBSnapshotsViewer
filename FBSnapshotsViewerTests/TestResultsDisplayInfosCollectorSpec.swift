@@ -45,7 +45,7 @@ class TestResultsDisplayInfosCollectorSpec: QuickSpec {
                 let testResult8 = SnapshotTestResult.failed(testInformation: testInformation8, referenceImagePath: "foo/bar/error_state.png", diffImagePath: "foo/bar/diff_error_state.png", failedImagePath: "foo/bar/failed_error_state.png", build: build2)
                 let testInformation9 = SnapshotTestInformation(testClassName: "MainScreen", testName: "basicState", testFilePath: "foo/MainScreen", testLineNumber: 4)
                 let testResult9 = SnapshotTestResult.recorded(testInformation: testInformation9, referenceImagePath: "foo/bar/basic_state.png", build: build3)
-                let testInformation10 = SnapshotTestInformation(testClassName: "MainScreen", testName: "basicState", testFilePath: "foo/MainScreen", testLineNumber: 4)
+                let testInformation10 = SnapshotTestInformation(testClassName: "DetailScreen", testName: "basicState", testFilePath: "foo/DetailScreen", testLineNumber: 4)
                 let testResult10 = SnapshotTestResult.recorded(testInformation: testInformation10, referenceImagePath: "foo/bar/detail_state.png", build: build3)
                 testResults = [testResult1, testResult2, testResult3, testResult4, testResult5, testResult6, testResult7, testResult8, testResult9, testResult10]
                 collectedInfos = subject.collect(testResults: testResults)

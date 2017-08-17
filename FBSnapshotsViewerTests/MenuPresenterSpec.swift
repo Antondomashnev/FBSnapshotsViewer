@@ -28,6 +28,7 @@ class MenuPresenter_MockMenuWireframe: MenuWireframe {
 class MenuPresenterSpec: QuickSpec {
     override func spec() {
         var build: Build!
+        var testInformation: SnapshotTestInformation!
         var configuration: FBSnapshotsViewer.Configuration!
         var derivedDataFolder: DerivedDataFolder!
         var application: ApplicationMock!
@@ -39,6 +40,7 @@ class MenuPresenterSpec: QuickSpec {
 
         beforeEach {
             build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+            testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "testName", testFilePath: "testFilePath", testLineNumber: 1)
             updater = UpdaterMock()
             derivedDataFolder = DerivedDataFolder.xcodeCustom(path: "Users/antondomashnev/Library/Xcode/temporaryFolder")
             configuration = FBSnapshotsViewer.Configuration(derivedDataFolder: derivedDataFolder)
@@ -115,7 +117,7 @@ class MenuPresenterSpec: QuickSpec {
 
         describe(".didFindNewTestResult") {
             beforeEach {
-                presenter.didFindNewTestResult(SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build))
+                presenter.didFindNewTestResult(SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build))
             }
 
             it("sets that new test results are available in user interface") {
@@ -129,7 +131,7 @@ class MenuPresenterSpec: QuickSpec {
                 var foundTestResults: [SnapshotTestResult] = []
 
                 beforeEach {
-                    foundTestResults = [SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)]
+                    foundTestResults = [SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)]
                     interactor.foundTestResults = foundTestResults
                     presenter.showTestResults()
                 }
@@ -140,7 +142,7 @@ class MenuPresenterSpec: QuickSpec {
                 }
 
                 it("shows test results") {
-                    let expectedPaameter = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName"), referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
+                    let expectedPaameter = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
                     expect(wireframe.showTestResultsModuleCalled).to(beTrue())
                     expect(wireframe.showTestResultsModuleReceivedParameters[0]).to(equal(expectedPaameter))
                 }

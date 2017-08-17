@@ -29,44 +29,44 @@ class FailedTestNameExtractorSpec: QuickSpec {
                     }
                     
                     it("extracts test name") {
-                        expect(subject.extractTestName(from: logLine)).to(equal("testFail"))
+                        expect(try? subject.extractTestName(from: logLine)).to(equal("testFail"))
                     }
                 }
                 
                 context("with invalid line") {
                     it("throws exception") {
-                        expect { subject.extractTestName(from: ApplicationLogLine.kaleidoscopeCommandMessage(line: "foo/bar")) }.to(throwError())
+                        expect { try subject.extractTestName(from: ApplicationLogLine.kaleidoscopeCommandMessage(line: "foo/bar")) }.to(throwError())
                     }
                 }
             }
             
             context("given applicationNameMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.applicationNameMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.applicationNameMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given fbReferenceImageDirMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given snapshotTestErrorMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given unknown") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.unknown) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.unknown) }.to(throwError())
                 }
             }
             
             context("given referenceImageSavedMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.referenceImageSavedMessage(line: "bar/bar")) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.referenceImageSavedMessage(line: "bar/bar")) }.to(throwError())
                 }
             }
         }
@@ -84,31 +84,31 @@ class RecordedTestNameExtractorSpec: QuickSpec {
         describe(".extractTestName") {
             context("given kaleidoscopeCommandMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.kaleidoscopeCommandMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.kaleidoscopeCommandMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given applicationNameMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.applicationNameMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.applicationNameMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given fbReferenceImageDirMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given snapshotTestErrorMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given unknown") {
                 it("throws exception") {
-                    expect { subject.extractTestName(from: ApplicationLogLine.unknown) }.to(throwError())
+                    expect { try subject.extractTestName(from: ApplicationLogLine.unknown) }.to(throwError())
                 }
             }
             
@@ -121,13 +121,13 @@ class RecordedTestNameExtractorSpec: QuickSpec {
                     }
                     
                     it("extracts test name") {
-                        expect(subject.extractTestName(from: logLine)).to(equal("testRecord"))
+                        expect(try? subject.extractTestName(from: logLine)).to(equal("testRecord"))
                     }
                 }
                 
                 context("with invalid line") {
                     it("throws exception") {
-                        expect { subject.extractTestName(from: ApplicationLogLine.referenceImageSavedMessage(line: "bar/bar")) }.to(throwError())
+                        expect { try subject.extractTestName(from: ApplicationLogLine.referenceImageSavedMessage(line: "bar/bar")) }.to(throwError())
                     }
                 }
             }

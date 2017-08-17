@@ -32,7 +32,7 @@ class TestClassNameExtractorFactory {
 private class TestClassNameExtractorHelper {
     static func extractTestClassName(from imagePath: String) -> String? {
         let pathComponents = imagePath.components(separatedBy: "/")
-        return pathComponents.count >= 2 ? pathComponents[pathComponents.count - 1] : nil
+        return pathComponents.count >= 2 ? pathComponents[pathComponents.count - 2] : nil
     }
 }
 

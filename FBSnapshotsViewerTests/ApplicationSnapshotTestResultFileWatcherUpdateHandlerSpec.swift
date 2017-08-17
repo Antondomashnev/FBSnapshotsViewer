@@ -99,7 +99,9 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec: QuickSpec {
             let unknownLogLine = ApplicationLogLine.unknown
             let applicationNameMessageLogLine = ApplicationLogLine.applicationNameMessage(line: "MyApp")
             let kaleidoscopeCommandMesageLogLine = ApplicationLogLine.kaleidoscopeCommandMessage(line: "BlaBla")
+            let kaleidoscopeCommandErrorLogLine = ApplicationLogLine.snapshotTestErrorMessage(line: "FooBaz")
             let referenceImageSavedMessageLogLine = ApplicationLogLine.referenceImageSavedMessage(line: "FooFoo")
+            let referenceImageSavedErrorLogLine = ApplicationLogLine.snapshotTestErrorMessage(line: "Bazbaz")
             let fbReferenceImageDirMessageLogLine = ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")
             let failedSnapshotTestInformation = SnapshotTestInformation(testClassName: "Foo", testName: "failedTest", testFilePath: "testFilePath", testLineNumber: 1)
             let failedSnapshotTestResult = SnapshotTestResult.failed(testInformation: failedSnapshotTestInformation, referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", build: build)
@@ -111,7 +113,7 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec: QuickSpec {
                 fbImageReferenceDirExtractor.extractImageDirectoryURLReturnValue = [URL(fileURLWithPath: "foo/bar", isDirectory: true)]
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[kaleidoscopeCommandMesageLogLine] = failedSnapshotTestResult
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[referenceImageSavedMessageLogLine] = recordedSnapshotTestResult
-                logReader.readLines = [unknownLogLine, fbReferenceImageDirMessageLogLine, applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, referenceImageSavedMessageLogLine]
+                logReader.readLines = [unknownLogLine, fbReferenceImageDirMessageLogLine, applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, kaleidoscopeCommandErrorLogLine, referenceImageSavedMessageLogLine, referenceImageSavedErrorLogLine]
             }
             
             context("with no changes") {

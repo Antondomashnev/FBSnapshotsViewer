@@ -28,7 +28,7 @@ enum SnapshotTestResult: AutoEquatable {
         return testInformation.testFilePath
     }
     
-    var testLineNumber: String {
+    var testLineNumber: Int {
         return testInformation.testLineNumber
     }
     

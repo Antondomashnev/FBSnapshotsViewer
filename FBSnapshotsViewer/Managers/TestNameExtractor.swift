@@ -31,6 +31,9 @@ class TestNameExtractorFactory {
 
 class TestNameExtractorHelper {
     static func extractTestName(from imagePath: String) -> String? {
+        guard imagePath.contains("@") else {
+            return nil
+        }
         return imagePath.components(separatedBy: "/").last?.components(separatedBy: "@").first
     }
 }

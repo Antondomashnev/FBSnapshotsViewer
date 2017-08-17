@@ -15,6 +15,10 @@ class TestLineNumberExtractorSpec: QuickSpec {
     override func spec() {
         var subject: DefaultTestLineNumberExtractor!
         
+        beforeEach {
+            subject = DefaultTestLineNumberExtractor()
+        }
+        
         describe(".extractTestLineNumber") {
             var logLine: ApplicationLogLine!
             

@@ -29,44 +29,44 @@ class FailedTestClassNameExtractorSpec: QuickSpec {
                     }
                     
                     it("extracts test name") {
-                        expect(subject.extractTestClassName(from: logLine)).to(equal("FBSnapshotsViewerExampleTests"))
+                        expect(try? subject.extractTestClassName(from: logLine)).to(equal("FBSnapshotsViewerExampleTests"))
                     }
                 }
                 
                 context("with invalid line") {
                     it("throws exception") {
-                        expect { subject.extractTestClassName(from: ApplicationLogLine.kaleidoscopeCommandMessage(line: "foo/bar")) }.to(throwError())
+                        expect { try subject.extractTestClassName(from: ApplicationLogLine.kaleidoscopeCommandMessage(line: "foo/bar")) }.to(throwError())
                     }
                 }
             }
             
             context("given applicationNameMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.applicationNameMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.applicationNameMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given fbReferenceImageDirMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given snapshotTestErrorMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given unknown") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.unknown) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.unknown) }.to(throwError())
                 }
             }
             
             context("given referenceImageSavedMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.referenceImageSavedMessage(line: "bar/bar")) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.referenceImageSavedMessage(line: "bar/bar")) }.to(throwError())
                 }
             }
         }
@@ -84,31 +84,31 @@ class RecordedTestClassNameExtractorSpec: QuickSpec {
         describe(".extractTestClassName") {
             context("given kaleidoscopeCommandMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.kaleidoscopeCommandMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.kaleidoscopeCommandMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given applicationNameMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.applicationNameMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.applicationNameMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given fbReferenceImageDirMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given snapshotTestErrorMessage") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar")) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.snapshotTestErrorMessage(line: "foo/bar")) }.to(throwError())
                 }
             }
             
             context("given unknown") {
                 it("throws exception") {
-                    expect { subject.extractTestClassName(from: ApplicationLogLine.unknown) }.to(throwError())
+                    expect { try subject.extractTestClassName(from: ApplicationLogLine.unknown) }.to(throwError())
                 }
             }
             
@@ -121,13 +121,13 @@ class RecordedTestClassNameExtractorSpec: QuickSpec {
                     }
                     
                     it("extracts test name") {
-                        expect(subject.extractTestClassName(from: logLine)).to(equal("FBSnapshotsViewerExampleTests"))
+                        expect(try? subject.extractTestClassName(from: logLine)).to(equal("FBSnapshotsViewerExampleTests"))
                     }
                 }
                 
                 context("with invalid line") {
                     it("throws exception") {
-                        expect { subject.extractTestClassName(from: ApplicationLogLine.referenceImageSavedMessage(line: "bar/bar")) }.to(throwError())
+                        expect { try subject.extractTestClassName(from: ApplicationLogLine.referenceImageSavedMessage(line: "bar/bar")) }.to(throwError())
                     }
                 }
             }

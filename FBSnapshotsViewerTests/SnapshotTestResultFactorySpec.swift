@@ -16,8 +16,6 @@ class SnapshotTestResultFactorySpec: QuickSpec {
         var build: Build!
         var errorLogLine: ApplicationLogLine!
         var factory: SnapshotTestResultFactory!
-        var testLineNumberExtractor: TestLineNumberExtractorMock!
-        var testFilePathExtractor: TestFilePathExtractorMock!
 
         beforeEach {
             build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
@@ -113,7 +111,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                         }
                         
                         it("creates recorded test result") {
-                            let exoectedTestInformation = SnapshotTestInformation(testClassName: "FBSnapshotsViewerExampleTests", testName: "testRecord", testFilePath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m", testLineNumber: 38)
+                            let expectedTestInformation = SnapshotTestInformation(testClassName: "FBSnapshotsViewerExampleTests", testName: "testRecord", testFilePath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m", testLineNumber: 38)
                             let expectedTestResult = SnapshotTestResult.recorded(testInformation: expectedTestInformation, referenceImagePath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord@2x.png", build: build)
                             expect(createdTestResult).to(equal(expectedTestResult))
                         }
