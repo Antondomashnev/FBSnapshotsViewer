@@ -66,7 +66,7 @@ class TestLineNumberExtractorSpec: QuickSpec {
                     
                     it("returns valid test line number") {
                         let testLineNumber = try? subject.extractTestLineNumber(from: logLine)
-                        expect(testClassPath).to(equal(38))
+                        expect(testLineNumber).to(equal(38))
                     }
                 }
                 

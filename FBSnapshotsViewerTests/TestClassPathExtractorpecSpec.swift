@@ -15,6 +15,10 @@ class TestFilePathExtractorSpec: QuickSpec {
     override func spec() {
         var subject: DefaultTestFilePathExtractor!
         
+        beforeEach {
+            subject = DefaultTestFilePathExtractor()
+        }
+        
         describe(".extractTestClassPath") {
             var logLine: ApplicationLogLine!
             
@@ -65,8 +69,8 @@ class TestFilePathExtractorSpec: QuickSpec {
                     }
                     
                     it("returns valid test class path") {
-                        let testClassPath = try? subject.extractTestClassPath(from: logLine)
-                        expect(testClassPath).to(equal("/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m"))
+                        let testFilePath = try? subject.extractTestClassPath(from: logLine)
+                        expect(testFilePath).to(equal("/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m"))
                     }
                 }
                 

@@ -21,8 +21,10 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler_MockApplicationLogRe
 class ApplicationSnapshotTestResultFileWatcherUpdateHandler_MockSnapshotTestResultFactory: SnapshotTestResultFactory {
     var createdSnapshotTestResultForLogLine: [ApplicationLogLine: SnapshotTestResult] = [:]
     var givenBuild: Build!
-    override func createSnapshotTestResult(from logLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
+    var givenErrorLine: ApplicationLogLine!
+    override func createSnapshotTestResult(from logLine: ApplicationLogLine, errorLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
         givenBuild = build
+        givenErrorLine = errorLine
         return createdSnapshotTestResultForLogLine[logLine]
     }
 }
@@ -99,8 +101,10 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec: QuickSpec {
             let kaleidoscopeCommandMesageLogLine = ApplicationLogLine.kaleidoscopeCommandMessage(line: "BlaBla")
             let referenceImageSavedMessageLogLine = ApplicationLogLine.referenceImageSavedMessage(line: "FooFoo")
             let fbReferenceImageDirMessageLogLine = ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")
-            let failedSnapshotTestResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "Foo", testName: "failedTest"), referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", build: build)
-            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "recordedTest"), referenceImagePath: "referenceTestImage.png", build: build)
+            let failedSnapshotTestInformation = SnapshotTestInformation(testClassName: "Foo", testName: "failedTest", testFilePath: "testFilePath", testLineNumber: 1)
+            let failedSnapshotTestResult = SnapshotTestResult.failed(testInformation: failedSnapshotTestInformation, referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", build: build)
+            let recordedSnapshotTestInformation = SnapshotTestInformation(testClassName: "Bar", testName: "recordedTest", testFilePath: "testFilePath", testLineNumber: 10)
+            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testInformation: recordedSnapshotTestInformation, referenceImagePath: "referenceTestImage.png", build: build)
             
             beforeEach {
                 applicationNameExtractor.extractApplicationNameReturnValue = "MyApp"

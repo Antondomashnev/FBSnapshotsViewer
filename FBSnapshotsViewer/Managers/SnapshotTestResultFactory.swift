@@ -36,7 +36,7 @@ class SnapshotTestResultFactory {
             let testClassName = try? testClassNameExtractor.extractTestClassName(from: logLine) else {
                 return nil
         }
-        return SnapshotTestInformation(testClassName: testClassName, testName: testName, testClassPath: testFilePath, testLineNumber: testLineNumber)
+        return SnapshotTestInformation(testClassName: testClassName, testName: testName, testFilePath: testFilePath, testLineNumber: testLineNumber)
     }
     
     private func createSnapshotTestResult(fromSavedReferenceImageLine line: String, testInformation: SnapshotTestInformation, build: Build) throws -> SnapshotTestResult {

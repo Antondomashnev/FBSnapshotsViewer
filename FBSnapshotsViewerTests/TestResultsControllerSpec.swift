@@ -58,7 +58,7 @@ class TestResultsControllerSpec: QuickSpec {
             controller.collectionView = collectionView
             controller.topView = topView
             
-            testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "Bla"), referenceImagePath: "foo/bar.png", build: build))
+            testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "Bla", testFilePath: "foo/bar", testLineNumber: 1), referenceImagePath: "foo/bar.png", build: build))
             let titleInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "Foo")
             let sectionInfo = TestResultsSectionDisplayInfo(title: titleInfo, items: [testResultDisplayInfo])
             testResults = [sectionInfo]

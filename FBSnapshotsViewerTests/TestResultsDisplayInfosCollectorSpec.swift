@@ -27,13 +27,20 @@ class TestResultsDisplayInfosCollectorSpec: QuickSpec {
             var collectedInfos: [TestResultsSectionDisplayInfo] = []
             
             beforeEach {
+                let testInformation1 = SnapshotTestInformation(testClassName: "MainScreen", testName: "basicState", testFilePath: "foo/MainScreen", testLineNumber: 1)
+                let testResult1 = SnapshotTestResult.recorded(testInformation: testInformation1, referenceImagePath: "foo/bar/basic_state.png", build: build1)
+                let testInformation2 = SnapshotTestInformation(testClassName: "DetailScreen", testName: "basicState", testFilePath: "foo/DetailScreen", testLineNumber: 1)
+                let testResult2 = SnapshotTestResult.recorded(testInformation: testInformation2, referenceImagePath: "foo/bar/detail_state.png", build: build1)
+                let testInformation3 = SnapshotTestInformation(testClassName: "DetailScreen", testName: "emptyState", testFilePath: "foo/DetailScreen", testLineNumber: 2)
+                let testResult3 = SnapshotTestResult.failed(testInformation: testInformation3, referenceImagePath: "foo/bar/empty_state.png", diffImagePath: "foo/bar/diff_empty_state.png", failedImagePath: "foo/bar/failed_empty_state.png", build: build1)
+                let testInformation4 = SnapshotTestInformation(testClassName: "DetailScreen", testName: "errorState", testFilePath: "foo/DetailScreen", testLineNumber: 3)
+                let testResult4 = SnapshotTestResult.recorded(testInformation: testInformation4, referenceImagePath: "foo/bar/error_state.png", build: build1)
+                let testInformation5 = SnapshotTestInformation(testClassName: "MainScreen", testName: "errorState", testFilePath: "foo/MainScreen", testLineNumber: 2)
+                let testResult5 = SnapshotTestResult.failed(testInformation: testInformation5, referenceImagePath: "foo/bar/error_state.png", diffImagePath: "foo/bar/diff_error_state.png", failedImagePath: "foo/bar/failed_error_state.png", build: build1)
+                let testInformation6 = SnapshotTestInformation(testClassName: "HomeScreen", testName: "emptyState", testFilePath: "foo/HomeScreen", testLineNumber: 1)
+                let testResult6 = SnapshotTestResult.failed(testInformation: testInformation6, referenceImagePath: "foo/bar/empty_state.png", diffImagePath: "foo/bar/diff_empty_state.png", failedImagePath: "foo/bar/failed_empty_state.png", build: build2)
                 
-                let testResult1 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "MainScreen", testName: "basicState"), referenceImagePath: "foo/bar/basic_state.png", build: build1)
-                let testResult2 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "DetailScreen", testName: "basicState"), referenceImagePath: "foo/bar/detail_state.png", build: build1)
-                let testResult3 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "DetailScreen", testName: "emptyState"), referenceImagePath: "foo/bar/empty_state.png", diffImagePath: "foo/bar/diff_empty_state.png", failedImagePath: "foo/bar/failed_empty_state.png", build: build1)
-                let testResult4 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "DetailScreen", testName: "errorState"), referenceImagePath: "foo/bar/error_state.png", build: build1)
-                let testResult5 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "MainScreen", testName: "errorState"), referenceImagePath: "foo/bar/error_state.png", diffImagePath: "foo/bar/diff_error_state.png", failedImagePath: "foo/bar/failed_error_state.png", build: build1)
-                let testResult6 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "HomeScreen", testName: "emptyState"), referenceImagePath: "foo/bar/empty_state.png", diffImagePath: "foo/bar/diff_empty_state.png", failedImagePath: "foo/bar/failed_empty_state.png", build: build2)
+                let testInformation6 = SnapshotTestInformation(testClassName: "HomeScreen", testName: "emptyState", testFilePath: "foo/HomeScreen", testLineNumber: 1)
                 let testResult7 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "HomeScreen", testName: "errorState"), referenceImagePath: "foo/bar/error_state.png", build: build2)
                 let testResult8 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "SettingsScreen", testName: "errorState"), referenceImagePath: "foo/bar/error_state.png", diffImagePath: "foo/bar/diff_error_state.png", failedImagePath: "foo/bar/failed_error_state.png", build: build2)
                 let testResult9 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "MainScreen", testName: "basicState"), referenceImagePath: "foo/bar/basic_state.png", build: build3)

@@ -11,7 +11,7 @@ import Cocoa
 struct SnapshotTestInformation: AutoEquatable {
     let testClassName: String
     let testName: String
-    let testClassPath: String
+    let testFilePath: String
     let testLineNumber: Int
 }
 

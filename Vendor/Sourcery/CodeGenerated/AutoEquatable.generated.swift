@@ -36,7 +36,7 @@ extension SnapshotTestInformation: Equatable {}
 internal func == (lhs: SnapshotTestInformation, rhs: SnapshotTestInformation) -> Bool {
     guard lhs.testClassName == rhs.testClassName else { return false }
     guard lhs.testName == rhs.testName else { return false }
-    guard lhs.testClassPath == rhs.testClassPath else { return false }
+    guard lhs.testFilePath == rhs.testFilePath else { return false }
     guard lhs.testLineNumber == rhs.testLineNumber else { return false }
     return true
 }
