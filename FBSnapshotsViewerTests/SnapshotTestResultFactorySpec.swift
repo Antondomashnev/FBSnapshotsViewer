@@ -11,38 +11,6 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
-private class TestFilePathExtractorMock: TestFilePathExtractor {
-    var extractTestClassPathFromThrows = false
-    var extractTestClassPathFromCalled = false
-    var extractTestClassPathFromReceivedLogLine: ApplicationLogLine?
-    var extractTestClassPathFromReturnValue: String!
-    
-    func extractTestClassPath(from logLine: ApplicationLogLine) throws -> String {
-        if extractTestClassPathFromThrows {
-            throw NSError(domain: "", code: 0, userInfo: nil)
-        }
-        extractTestClassPathFromCalled = true
-        extractTestClassPathFromReceivedLogLine = logLine
-        return extractTestClassPathFromReturnValue
-    }
-}
-
-private class TestLineNumberExtractorMock: TestLineNumberExtractor {
-    var extractTestLineNumberFromThrows = false
-    var extractTestLineNumberFromCalled = false
-    var extractTestLineNumberFromReceivedLogLine: ApplicationLogLine?
-    var extractTestLineNumberFromReturnValue: Int!
-    
-    func extractTestLineNumber(from logLine: ApplicationLogLine) throws -> Int {
-        if extractTestLineNumberFromThrows {
-            throw NSError(domain: "", code: 0, userInfo: nil)
-        }
-        extractTestLineNumberFromCalled = true
-        extractTestLineNumberFromReceivedLogLine = logLine
-        return extractTestLineNumberFromReturnValue
-    }
-}
-
 class SnapshotTestResultFactorySpec: QuickSpec {
     override func spec() {
         var build: Build!
@@ -53,9 +21,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
 
         beforeEach {
             build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
-            testLineNumberExtractor = TestLineNumberExtractorMock()
-            testFilePathExtractor = TestFilePathExtractorMock()
-            factory = SnapshotTestResultFactory(testFilePathExtractor: testFilePathExtractor, testLineNumberExtractor: testLineNumberExtractor)
+            factory = SnapshotTestResultFactory()
         }
 
         describe(".createSnapshotTestResult(from:)") {
@@ -147,7 +113,7 @@ class SnapshotTestResultFactorySpec: QuickSpec {
                         }
                         
                         it("creates recorded test result") {
-                            let exoectedTestIformation = SnapshotTestInformation(testClassName: "FBSnapshotsViewerExampleTests", testName: "testRecord", testFilePath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m", testLineNumber: 38)
+                            let exoectedTestInformation = SnapshotTestInformation(testClassName: "FBSnapshotsViewerExampleTests", testName: "testRecord", testFilePath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m", testLineNumber: 38)
                             let expectedTestResult = SnapshotTestResult.recorded(testInformation: expectedTestInformation, referenceImagePath: "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/ReferenceImages_64/FBSnapshotsViewerExampleTests/testRecord@2x.png", build: build)
                             expect(createdTestResult).to(equal(expectedTestResult))
                         }

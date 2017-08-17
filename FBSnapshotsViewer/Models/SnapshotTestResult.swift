@@ -24,6 +24,14 @@ enum SnapshotTestResult: AutoEquatable {
         return testInformation.testName
     }
     
+    var testFilePath: String {
+        return testInformation.testFilePath
+    }
+    
+    var testLineNumber: String {
+        return testInformation.testLineNumber
+    }
+    
     var testInformation: SnapshotTestInformation {
         switch self {
         case let .recorded(testInformation, _, _):

@@ -39,12 +39,14 @@ class TestResultsDisplayInfosCollectorSpec: QuickSpec {
                 let testResult5 = SnapshotTestResult.failed(testInformation: testInformation5, referenceImagePath: "foo/bar/error_state.png", diffImagePath: "foo/bar/diff_error_state.png", failedImagePath: "foo/bar/failed_error_state.png", build: build1)
                 let testInformation6 = SnapshotTestInformation(testClassName: "HomeScreen", testName: "emptyState", testFilePath: "foo/HomeScreen", testLineNumber: 1)
                 let testResult6 = SnapshotTestResult.failed(testInformation: testInformation6, referenceImagePath: "foo/bar/empty_state.png", diffImagePath: "foo/bar/diff_empty_state.png", failedImagePath: "foo/bar/failed_empty_state.png", build: build2)
-                
-                let testInformation6 = SnapshotTestInformation(testClassName: "HomeScreen", testName: "emptyState", testFilePath: "foo/HomeScreen", testLineNumber: 1)
-                let testResult7 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "HomeScreen", testName: "errorState"), referenceImagePath: "foo/bar/error_state.png", build: build2)
-                let testResult8 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "SettingsScreen", testName: "errorState"), referenceImagePath: "foo/bar/error_state.png", diffImagePath: "foo/bar/diff_error_state.png", failedImagePath: "foo/bar/failed_error_state.png", build: build2)
-                let testResult9 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "MainScreen", testName: "basicState"), referenceImagePath: "foo/bar/basic_state.png", build: build3)
-                let testResult10 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "DetailScreen", testName: "basicState"), referenceImagePath: "foo/bar/detail_state.png", build: build3)
+                let testInformation7 = SnapshotTestInformation(testClassName: "HomeScreen", testName: "errorState", testFilePath: "foo/HomeScreen", testLineNumber: 2)
+                let testResult7 = SnapshotTestResult.recorded(testInformation: testInformation7, referenceImagePath: "foo/bar/error_state.png", build: build2)
+                let testInformation8 = SnapshotTestInformation(testClassName: "SettingsScreen", testName: "errorState", testFilePath: "foo/SettingsScreen", testLineNumber: 2)
+                let testResult8 = SnapshotTestResult.failed(testInformation: testInformation8, referenceImagePath: "foo/bar/error_state.png", diffImagePath: "foo/bar/diff_error_state.png", failedImagePath: "foo/bar/failed_error_state.png", build: build2)
+                let testInformation9 = SnapshotTestInformation(testClassName: "MainScreen", testName: "basicState", testFilePath: "foo/MainScreen", testLineNumber: 4)
+                let testResult9 = SnapshotTestResult.recorded(testInformation: testInformation9, referenceImagePath: "foo/bar/basic_state.png", build: build3)
+                let testInformation10 = SnapshotTestInformation(testClassName: "MainScreen", testName: "basicState", testFilePath: "foo/MainScreen", testLineNumber: 4)
+                let testResult10 = SnapshotTestResult.recorded(testInformation: testInformation10, referenceImagePath: "foo/bar/detail_state.png", build: build3)
                 testResults = [testResult1, testResult2, testResult3, testResult4, testResult5, testResult6, testResult7, testResult8, testResult9, testResult10]
                 collectedInfos = subject.collect(testResults: testResults)
             }

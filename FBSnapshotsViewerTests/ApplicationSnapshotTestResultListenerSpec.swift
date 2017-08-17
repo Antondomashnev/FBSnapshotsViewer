@@ -80,13 +80,15 @@ class ApplicationSnapshotTestResultListenerSpec: QuickSpec {
             
             context("when updates handler returns some results") {
                 var build: Build!
+                var testInformation: SnapshotTestInformation!
                 
                 beforeEach {
                     build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+                    testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "Foo", testFilePath: "/foo/testClassName.m", testLineNumber: 1)
                 }
                 
                 beforeEach {
-                    updatesHandler.createdTestResults = [SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "Foo"), referenceImagePath: "path", build: build)]
+                    updatesHandler.createdTestResults = [SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "path", build: build)]
                     fileWatcher.startClosure?(.updated(data: update))
                 }
                 

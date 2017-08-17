@@ -49,6 +49,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
     override func spec() {
         describe(".initWithTestInfo") {
             var build: Build!
+            var testInformation: SnapshotTestInformation!
             var testResult: SnapshotTestResult!
             var swapper: TestResultDisplayInfo_MockSnapshotTestResultSwapper!
             let kaleidoscopeViewer: TestResultDisplayInfo_MockKaleidoscopeViewer.Type = TestResultDisplayInfo_MockKaleidoscopeViewer.self
@@ -59,13 +60,14 @@ class TestResultDisplayInfoSpec: QuickSpec {
             
             beforeEach {
                 swapper = TestResultDisplayInfo_MockSnapshotTestResultSwapper()
+                build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
             }
             
             describe("testName") {
                 context("given test name from Quick") {
                     beforeEach {
-                        build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
-                        testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "_view__looks_good_iPhone9_3_375x667"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                        testInformation = SnapshotTestInformation(testClassName: "TestClass", testName: "_view__looks_good_iPhone9_3_375x667", testFilePath: "foo/TestClass.m", testLineNumber: 1)
+                        testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
 
                     it("has correct test name") {
@@ -81,7 +83,8 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
                 context("given text name from XCTest") {
                     beforeEach {
-                        testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testName"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                        testInformation = SnapshotTestInformation(testClassName: "TestClass", testName: "testName", testFilePath: "foo/TestClass.m", testLineNumber: 1)
+                        testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                     }
 
                     it("has correct test name") {
@@ -100,7 +103,8 @@ class TestResultDisplayInfoSpec: QuickSpec {
                 var displayInfo: TestResultDisplayInfo!
                 
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                    testInformation = SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed", testFilePath: "foo/TestClass.m", testLineNumber: 1)
+                    testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                 }
                 
                 context("when swapper can swap given test result") {
@@ -128,7 +132,8 @@ class TestResultDisplayInfoSpec: QuickSpec {
             
             describe("canBeViewedInKaleidoscope") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                    testInformation = SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed", testFilePath: "foo/TestClass.m", testLineNumber: 1)
+                    testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                 }
 
                 context("when kaleidoscope viewer is available") {
@@ -173,7 +178,8 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when failed test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed"), referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                    testInformation = SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed", testFilePath: "foo/TestClass.m", testLineNumber: 1)
+                    testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                 }
 
                 it("initializes object correctly") {
@@ -189,7 +195,8 @@ class TestResultDisplayInfoSpec: QuickSpec {
 
             context("when recorded test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "ExampleTestClass", testName: "testRecord"), referenceImagePath: "referenceImagePath.png", build: build)
+                    testInformation = SnapshotTestInformation(testClassName: "ExampleTestClass", testName: "testRecord", testFilePath: "foo/ExampleTestClass.m", testLineNumber: 1)
+                    testResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "referenceImagePath.png", build: build)
                 }
 
                 it("initializes object correctly") {
