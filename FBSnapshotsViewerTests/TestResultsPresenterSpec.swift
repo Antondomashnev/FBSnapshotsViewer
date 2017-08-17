@@ -88,6 +88,26 @@ class TestResultsPresenterSpec: QuickSpec {
                 expect(interactor.openInKaleidoscope_testResult_ReceivedTestResult).to(equal(testResult))
             }
         }
+        
+        describe(".openInXcode") {
+            var testResult: SnapshotTestResult!
+            var testResultDisplayInfo: TestResultDisplayInfo!
+            var build: Build!
+            var testInformation: SnapshotTestInformation!
+            
+            beforeEach {
+                build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs:  [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+                testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "MyTest", testFilePath: "testFilePath", testLineNumber: 1)
+                testResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo/bar.png", build: build)
+                testResultDisplayInfo = TestResultDisplayInfo(testResult: testResult)
+                presenter.openInXcode(testResultDisplayInfo: testResultDisplayInfo)
+            }
+            
+            it("passes the message to interactor with correct test result") {
+                expect(interactor.openInXcode_testResult_Called).to(beTrue())
+                expect(interactor.openInXcode_testResult_ReceivedTestResult).to(equal(testResult))
+            }
+        }
 
         describe(".updateUserInterface") {
             context("when interactor doesn't have test results") {

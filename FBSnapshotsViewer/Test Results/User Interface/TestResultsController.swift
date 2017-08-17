@@ -70,6 +70,14 @@ extension TestResultsController: TestResultCellDelegate {
         eventHandler.swap([testResultInfo.info])
         collectionView.reloadSections(IndexSet(integer: testResultInfo.indexPath.section))
     }
+    
+    func testResultCell(_ cell: TestResultCell, viewInXcodeButtonClicked: NSButton) {
+        guard let testResultInfo = findTestResultInfo(for: cell) else {
+            assertionFailure("Unexpected TestResultCellDelegate callback about Kaleidoscope button click")
+            return
+        }
+        eventHandler.openInXcode(testResultDisplayInfo: testResultInfo.info)
+    }
 }
 
 extension TestResultsController: TestResultsHeaderDelegate {

@@ -406,6 +406,16 @@ class TestResultCellDelegateMock: TestResultCellDelegate {
 
     //MARK: - testResultCell
 
+    var testResultCell___viewInXcodeButtonClicked_Called = false
+    var testResultCell___viewInXcodeButtonClicked_ReceivedArguments: (cell: TestResultCell, viewInXcodeButtonClicked: NSButton)?
+
+    func testResultCell(_ cell: TestResultCell, viewInXcodeButtonClicked: NSButton) {
+
+        testResultCell___viewInXcodeButtonClicked_Called = true
+        testResultCell___viewInXcodeButtonClicked_ReceivedArguments = (cell: cell, viewInXcodeButtonClicked: viewInXcodeButtonClicked)
+    }
+    //MARK: - testResultCell
+
     var testResultCell___viewInKaleidoscopeButtonClicked_Called = false
     var testResultCell___viewInKaleidoscopeButtonClicked_ReceivedArguments: (cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)?
 
@@ -453,6 +463,16 @@ class TestResultsInteractorInputMock: TestResultsInteractorInput {
         openInKaleidoscope_testResult_Called = true
         openInKaleidoscope_testResult_ReceivedTestResult = testResult
     }
+    //MARK: - openInXcode
+
+    var openInXcode_testResult_Called = false
+    var openInXcode_testResult_ReceivedTestResult: SnapshotTestResult?
+
+    func openInXcode(testResult: SnapshotTestResult) {
+
+        openInXcode_testResult_Called = true
+        openInXcode_testResult_ReceivedTestResult = testResult
+    }
     //MARK: - swap
 
     var swap_testResult_Called = false
@@ -498,6 +518,16 @@ class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
 
         openInKaleidoscope_testResultDisplayInfo_Called = true
         openInKaleidoscope_testResultDisplayInfo_ReceivedTestResultDisplayInfo = testResultDisplayInfo
+    }
+    //MARK: - openInXcode
+
+    var openInXcode_testResultDisplayInfo_Called = false
+    var openInXcode_testResultDisplayInfo_ReceivedTestResultDisplayInfo: TestResultDisplayInfo?
+
+    func openInXcode(testResultDisplayInfo: TestResultDisplayInfo) {
+
+        openInXcode_testResultDisplayInfo_Called = true
+        openInXcode_testResultDisplayInfo_ReceivedTestResultDisplayInfo = testResultDisplayInfo
     }
     //MARK: - selectDiffMode
 

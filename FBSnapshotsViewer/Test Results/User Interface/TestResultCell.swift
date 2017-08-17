@@ -10,6 +10,7 @@ import AppKit
 import Nuke
 
 protocol TestResultCellDelegate: class, AutoMockable {
+    func testResultCell(_ cell: TestResultCell, viewInXcodeButtonClicked: NSButton)
     func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)
     func testResultCell(_ cell: TestResultCell, swapSnapshotsButtonClicked: NSButton)
 }
@@ -21,6 +22,7 @@ class TestResultCell: NSCollectionViewItem {
     
     @IBOutlet private weak var actionsContainerView: NSView!
     @IBOutlet private weak var viewInKaleidoscopeButton: NSButton!
+    @IBOutlet private weak var viewInXcodeButton: NSButton!
     @IBOutlet private weak var swapSnapshotsButton: NSButton!
     
     @IBOutlet private weak var imagesContainerView: NSView!
@@ -97,6 +99,7 @@ class TestResultCell: NSCollectionViewItem {
         }
         swapSnapshotsButton.isHidden = !testResult.canBeSwapped
         viewInKaleidoscopeButton.isHidden = !testResult.canBeViewedInKaleidoscope
+        viewInXcodeButton.isHidden = !testResult.canBeViewedInXcode
         testNameLabel.stringValue = testResult.testName
     }
     
@@ -119,6 +122,10 @@ class TestResultCell: NSCollectionViewItem {
 
     // MARK: - Actions
 
+    @objc @IBAction func viewInXcodeButtonClicked(_ sender: NSButton) {
+        delegate?.testResultCell(self, viewInXcodeButtonClicked: sender)
+    }
+    
     @objc @IBAction func viewInKaleidoscopeButtonClicked(_ sender: NSButton) {
         delegate?.testResultCell(self, viewInKaleidoscopeButtonClicked: sender)
     }

@@ -61,6 +61,7 @@ class TestResultsInteractorSpec: QuickSpec {
     override func spec() {
         let build: Build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
         let kaleidoscopeViewer: TestResultsInteractor_MockExternalViewer.Type = TestResultsInteractor_MockExternalViewer.self
+        let xcodeViewer: TestResultsInteractor_MockExternalViewer.Type = TestResultsInteractor_MockExternalViewer.self
         var processLauncher: ProcessLauncher!
         var interactor: TestResultsInteractor!
         var output: TestResultsInteractorOutputMock!
@@ -80,6 +81,7 @@ class TestResultsInteractorSpec: QuickSpec {
             let builder = TestResultsInteractorBuilder {
                 $0.testResults = testResults
                 $0.kaleidoscopeViewer = kaleidoscopeViewer
+                $0.xcodeViewer = xcodeViewer
                 $0.processLauncher = processLauncher
                 $0.swapper = swapper
             }
@@ -189,14 +191,43 @@ class TestResultsInteractorSpec: QuickSpec {
                     }
                 }
             }
-
-            context("when kaleidoscope viewer is not available") {
+        }
+        
+        describe(".openInXcode") {
+            context("when xcode viewer is available") {
                 beforeEach {
-                    kaleidoscopeViewer.isAvailableReturnValue = false
+                    xcodeViewer.isAvailableReturnValue = true
                 }
-
+                
+                context("and can view the test resukt") {
+                    beforeEach {
+                        xcodeViewer.canViewReturnValue = true
+                    }
+                    
+                    it("views the test result") {
+                        interactor.openInXcode(testResult: testResults[0])
+                        expect(xcodeViewer.viewParameters?.snapshotTestResult).to(equal(testResults[0]))
+                    }
+                }
+                
+                context("and can not view the test resukt") {
+                    beforeEach {
+                        xcodeViewer.canViewReturnValue = false
+                    }
+                    
+                    it("asserts") {
+                        expect { interactor.openInXcode(testResult: testResults[0]) }.to(throwAssertion())
+                    }
+                }
+            }
+            
+            context("when xcode viewer is not available") {
+                beforeEach {
+                    xcodeViewer.isAvailableReturnValue = false
+                }
+                
                 it("asserts") {
-                    expect { interactor.openInKaleidoscope(testResult: testResults[0]) }.to(throwAssertion())
+                    expect { interactor.openInXcode(testResult: testResults[0]) }.to(throwAssertion())
                 }
             }
         }
