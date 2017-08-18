@@ -1,5 +1,8 @@
 ## Changelog
 
+### 0.7.1 (Next)
+
+* Your contribution here.
 
 ### 0.7.0 (18.08.2017)
 

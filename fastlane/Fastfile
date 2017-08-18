@@ -61,7 +61,7 @@ platform :mac do
   desc "Before doing so don't forget to follow all steps in RELEASING.md"
   lane :release do
     ensure_git_status_clean
-    # build_app
+    build_app
 
     release_human_version = project_get_human_version
     release_machine_version = project_get_machine_version
