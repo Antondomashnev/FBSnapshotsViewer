@@ -6,11 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="TestResultCell" customModule="FBSnapshotsViewer" customModuleProvider="target">
-            <connections>
-                <outlet property="viewInXcodeButton" destination="82c-wB-1dx" id="V9i-Ad-5JB"/>
-            </connections>
-        </customObject>
+        <customObject id="-2" userLabel="File's Owner" customClass="TestResultCell" customModule="FBSnapshotsViewer" customModuleProvider="target"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView identifier="TestResultCell" id="Hz6-mo-xeY">
@@ -174,18 +170,18 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="AHf-ta-nvJ">
                     <rect key="frame" x="8" y="332" width="324" height="17"/>
                     <subviews>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T5h-WQ-msk">
-                            <rect key="frame" x="0.0" y="0.0" width="88" height="17"/>
-                            <buttonCell key="cell" type="inline" title="Kaleidoscope" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="vfP-WI-LhL">
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="82c-wB-1dx">
+                            <rect key="frame" x="0.0" y="-1" width="47" height="17"/>
+                            <buttonCell key="cell" type="inline" title="Xcode" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="TCZ-O5-aNa">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystemBold"/>
                             </buttonCell>
                             <connections>
-                                <action selector="viewInKaleidoscopeButtonClicked:" target="i7H-GG-lM3" id="39C-6q-BzH"/>
+                                <action selector="viewInXcodeButtonClicked:" target="i7H-GG-lM3" id="Cng-5d-SBQ"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dTc-pr-6Mk">
-                            <rect key="frame" x="96" y="0.0" width="43" height="17"/>
+                            <rect key="frame" x="151" y="0.0" width="43" height="17"/>
                             <buttonCell key="cell" type="inline" title="Swap" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="erZ-Db-LCI">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystemBold"/>
@@ -194,25 +190,25 @@
                                 <action selector="swapSnapshotsButtonClicked:" target="i7H-GG-lM3" id="sNe-PT-tvr"/>
                             </connections>
                         </button>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="82c-wB-1dx">
-                            <rect key="frame" x="147" y="0.0" width="47" height="17"/>
-                            <buttonCell key="cell" type="inline" title="Xcode" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="TCZ-O5-aNa">
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T5h-WQ-msk">
+                            <rect key="frame" x="55" y="-1" width="88" height="17"/>
+                            <buttonCell key="cell" type="inline" title="Kaleidoscope" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="vfP-WI-LhL">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystemBold"/>
                             </buttonCell>
                             <connections>
-                                <action selector="viewInXcodeButtonClicked:" target="-2" id="cEt-nG-4Kh"/>
+                                <action selector="viewInKaleidoscopeButtonClicked:" target="i7H-GG-lM3" id="39C-6q-BzH"/>
                             </connections>
                         </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="dTc-pr-6Mk" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="1J2-q4-hjM"/>
-                        <constraint firstItem="dTc-pr-6Mk" firstAttribute="leading" secondItem="T5h-WQ-msk" secondAttribute="trailing" constant="8" id="Ftj-0I-Hed"/>
+                        <constraint firstItem="dTc-pr-6Mk" firstAttribute="leading" secondItem="T5h-WQ-msk" secondAttribute="trailing" constant="8" id="2UL-3w-aAn"/>
+                        <constraint firstItem="T5h-WQ-msk" firstAttribute="leading" secondItem="82c-wB-1dx" secondAttribute="trailing" constant="8" id="ENj-Hb-uwX"/>
+                        <constraint firstItem="82c-wB-1dx" firstAttribute="leading" secondItem="AHf-ta-nvJ" secondAttribute="leading" id="EzJ-le-usU"/>
                         <constraint firstAttribute="height" constant="17" id="S1P-8B-JMQ"/>
-                        <constraint firstItem="T5h-WQ-msk" firstAttribute="leading" secondItem="AHf-ta-nvJ" secondAttribute="leading" id="SY7-dV-TUe"/>
-                        <constraint firstItem="T5h-WQ-msk" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="Urw-Sr-q5G"/>
+                        <constraint firstItem="T5h-WQ-msk" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="a3W-2X-DLg"/>
                         <constraint firstItem="82c-wB-1dx" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="akK-SP-WOg"/>
-                        <constraint firstItem="82c-wB-1dx" firstAttribute="leading" secondItem="dTc-pr-6Mk" secondAttribute="trailing" constant="8" id="opY-Ik-POg"/>
                     </constraints>
                 </customView>
             </subviews>
@@ -255,6 +251,7 @@
                 <outlet property="testNameLabel" destination="MCk-nZ-jTQ" id="4DF-7O-GL0"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="t7t-hF-Vsm"/>
                 <outlet property="viewInKaleidoscopeButton" destination="T5h-WQ-msk" id="Mof-un-dsq"/>
+                <outlet property="viewInXcodeButton" destination="82c-wB-1dx" id="RY3-VY-Int"/>
             </connections>
         </collectionViewItem>
     </objects>
