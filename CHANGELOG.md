@@ -1,9 +1,8 @@
 ## Changelog
 
 
-### 0.7.0 (Next)
+### 0.7.0 (18.08.2017)
 
-* Your contribution here.
 * [#60](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/60): Add open in Xcode button - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.6.2 (09.08.2017)
