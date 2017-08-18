@@ -29,11 +29,11 @@ class SnapshotTestResultFactory {
 
     private func createSnapshotTestInformation(from logLine: ApplicationLogLine, errorLine: ApplicationLogLine) -> SnapshotTestInformation? {
         guard let testNameExtractor = TestNameExtractorFactory().extractor(for: logLine),
-            let testClassNameExtractor = TestClassNameExtractorFactory().extractor(for: logLine),
-            let testFilePath = try? DefaultTestFilePathExtractor().extractTestClassPath(from: errorLine),
-            let testLineNumber = try? DefaultTestLineNumberExtractor().extractTestLineNumber(from: errorLine),
-            let testName = try? testNameExtractor.extractTestName(from: logLine),
-            let testClassName = try? testClassNameExtractor.extractTestClassName(from: logLine) else {
+              let testClassNameExtractor = TestClassNameExtractorFactory().extractor(for: logLine),
+              let testFilePath = try? DefaultTestFilePathExtractor().extractTestClassPath(from: errorLine),
+              let testLineNumber = try? DefaultTestLineNumberExtractor().extractTestLineNumber(from: errorLine),
+              let testName = try? testNameExtractor.extractTestName(from: logLine),
+              let testClassName = try? testClassNameExtractor.extractTestClassName(from: logLine) else {
                 return nil
         }
         return SnapshotTestInformation(testClassName: testClassName, testName: testName, testFilePath: testFilePath, testLineNumber: testLineNumber)

@@ -13,8 +13,7 @@ enum TestResultsInteractorError: Error {
 }
 
 class TestResultsInteractorBuilder {
-    var xcodeViewer: ExternalViewer.Type = XcodeViewer.self
-    var kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self
+    var externalViewers: ExternalViewers = ExternalViewers()
     var processLauncher: ProcessLauncher = ProcessLauncher()
     var swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()
     var testResults: [SnapshotTestResult] = []
@@ -37,8 +36,8 @@ class TestResultsInteractor {
 
     init(builder: TestResultsInteractorBuilder) {
         self.testResults = builder.testResults
-        self.kaleidoscopeViewer = builder.kaleidoscopeViewer
-        self.xcodeViewer = builder.xcodeViewer
+        self.kaleidoscopeViewer = builder.externalViewers.kaleidoscope
+        self.xcodeViewer = builder.externalViewers.xcode
         self.processLauncher = builder.processLauncher
         self.swapper = builder.swapper
     }

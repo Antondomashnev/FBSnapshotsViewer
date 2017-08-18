@@ -80,8 +80,7 @@ class TestResultsInteractorSpec: QuickSpec {
             output = TestResultsInteractorOutputMock()
             let builder = TestResultsInteractorBuilder {
                 $0.testResults = testResults
-                $0.kaleidoscopeViewer = kaleidoscopeViewer
-                $0.xcodeViewer = xcodeViewer
+                $0.externalViewers = ExternalViewers(xcodeViewer: xcodeViewer, kaleidoscopeViewer: kaleidoscopeViewer)
                 $0.processLauncher = processLauncher
                 $0.swapper = swapper
             }

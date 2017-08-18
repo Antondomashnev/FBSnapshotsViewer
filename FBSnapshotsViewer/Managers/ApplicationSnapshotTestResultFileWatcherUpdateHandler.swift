@@ -42,6 +42,30 @@ struct ApplicationSnapshotTestResultFileWatcherUpdateHandlerReadInfo {
             }
         }
     }
+    
+    /// By 'error' application log line meant .snapshotTestErrorMessage
+    var lastReadErrorApplicationLogLine: ApplicationLogLine? {
+        didSet {
+            guard let newValue = lastReadErrorApplicationLogLine else {
+                return
+            }
+            switch newValue {
+            case .applicationNameMessage,
+                 .fbReferenceImageDirMessage,
+                 .kaleidoscopeCommandMessage,
+                 .referenceImageSavedMessage,
+                 .unknown:
+                assertionFailure("Invalid value \(newValue) for `lastReadErrorApplicationLogLine`. Expected either snapshotTestErrorMessage")
+            default:
+                return
+            }
+        }
+    }
+    
+    mutating func resetReadLines() {
+        lastReadErrorApplicationLogLine = nil
+        lastReadResultApplicationLogLine = nil
+    }
 }
 
 class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
@@ -84,6 +108,16 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
     
     // MARK: - Helpers
     
+    private func createSnapshotTestResult(from readInfo: ApplicationSnapshotTestResultFileWatcherUpdateHandlerReadInfo, using buildCreator: BuildCreator) -> SnapshotTestResult? {
+        guard let build = buildCreator.createBuild(),
+              let resultLogLine = readInfo.lastReadResultApplicationLogLine,
+              let errorLogLine = readInfo.lastReadErrorApplicationLogLine else {
+                assertionFailure("Can not even try to create snapshot test result without completed readInfo and available `Build`")
+                return nil
+        }
+        return snapshotTestResultFactory.createSnapshotTestResult(from: resultLogLine, errorLine: errorLogLine, build: build)
+    }
+    
     private func collectSnapshotTestResults(result: [SnapshotTestResult], logLine: ApplicationLogLine) throws -> [SnapshotTestResult] {
         var nextResult = result
         switch logLine {
@@ -92,21 +126,16 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler {
         case .applicationNameMessage:
             buildCreator.applicationName = try applicationNameExtractor.extractApplicationName(from: logLine)
             buildCreator.date = Date()
-        case .kaleidoscopeCommandMessage:
-            readInfo.lastReadResultApplicationLogLine = logLine
-        case .referenceImageSavedMessage:
+        case .kaleidoscopeCommandMessage, .referenceImageSavedMessage:
             readInfo.lastReadResultApplicationLogLine = logLine
         case .snapshotTestErrorMessage:
-            guard let build = buildCreator.createBuild(),
-                  let resultLogLine = readInfo.lastReadResultApplicationLogLine else {
-                assertionFailure("Unexpected snapshot test result line \(logLine) before build information line or without referenceImageSavedMessage or kaleidoscopeCommandMessage line")
-                return nextResult
-            }
-            guard let snapshotTestResult = snapshotTestResultFactory.createSnapshotTestResult(from: resultLogLine, errorLine: logLine, build: build) else {
+            readInfo.lastReadErrorApplicationLogLine = logLine
+            guard let snapshotTestResult = createSnapshotTestResult(from: readInfo, using: buildCreator) else {
                 assertionFailure("Internal conditions are not valid to create snapshot test result")
                 return nextResult
             }
             nextResult.append(snapshotTestResult)
+            readInfo.resetReadLines()
         default: break
         }
         return nextResult

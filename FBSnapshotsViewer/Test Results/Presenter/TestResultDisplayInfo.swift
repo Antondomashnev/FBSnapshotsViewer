@@ -29,11 +29,11 @@ struct TestResultDisplayInfoOptions: OptionSet {
 }
 
 extension TestResultDisplayInfoOptions {
-    static func availableOptions(for testResult: SnapshotTestResult, kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper(), xcodeViewer: ExternalViewer.Type = XcodeViewer.self) -> TestResultDisplayInfoOptions {
+    static func availableOptions(for testResult: SnapshotTestResult, externalViewers: ExternalViewers = ExternalViewers(), swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()) -> TestResultDisplayInfoOptions {
         var availableOptions: TestResultDisplayInfoOptions = []
         if swapper.canSwap(testResult) { availableOptions = availableOptions.union(.canBeSwapped) }
-        if xcodeViewer.isAvailable() && xcodeViewer.canView(snapshotTestResult: testResult) { availableOptions = availableOptions.union(.canBeViewedInXcode) }
-        if kaleidoscopeViewer.isAvailable() && kaleidoscopeViewer.canView(snapshotTestResult: testResult) { availableOptions = availableOptions.union(.canBeViewedInKaleidoscope) }
+        if externalViewers.xcode.isAvailable() && externalViewers.xcode.canView(snapshotTestResult: testResult) { availableOptions = availableOptions.union(.canBeViewedInXcode) }
+        if externalViewers.kaleidoscope.isAvailable() && externalViewers.kaleidoscope.canView(snapshotTestResult: testResult) { availableOptions = availableOptions.union(.canBeViewedInKaleidoscope) }
         return availableOptions
     }
 }
@@ -66,10 +66,10 @@ struct TestResultDisplayInfo: AutoEquatable {
         return options.contains(.canBeViewedInXcode)
     }
 
-    init(testResult: SnapshotTestResult, kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self, swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper(), xcodeViewer: ExternalViewer.Type = XcodeViewer.self) {
+    init(testResult: SnapshotTestResult, swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper(), externalViewers: ExternalViewers = ExternalViewers()) {
         self.testResult = testResult
         self.testInformation = TestResultInformationDisplayInfo(testResultInformation: testResult.testInformation)
-        self.options = TestResultDisplayInfoOptions.availableOptions(for: testResult, kaleidoscopeViewer: kaleidoscopeViewer, swapper: swapper, xcodeViewer: xcodeViewer)
+        self.options = TestResultDisplayInfoOptions.availableOptions(for: testResult, externalViewers: externalViewers, swapper: swapper)
         switch testResult {
         case let .recorded(_, referenceImagePath, _):
             self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)

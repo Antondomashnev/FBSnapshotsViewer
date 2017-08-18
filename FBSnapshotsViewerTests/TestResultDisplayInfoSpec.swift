@@ -78,6 +78,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
             var testInformation: SnapshotTestInformation!
             var testResult: SnapshotTestResult!
             var swapper: TestResultDisplayInfo_MockSnapshotTestResultSwapper!
+            var externalViewers: ExternalViewers!
             let kaleidoscopeViewer: TestResultDisplayInfo_MockKaleidoscopeViewer.Type = TestResultDisplayInfo_MockKaleidoscopeViewer.self
             let xcodeViewer: TestResultDisplayInfo_MockXcodeViewer.Type = TestResultDisplayInfo_MockXcodeViewer.self
 
@@ -86,6 +87,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
             }
             
             beforeEach {
+                externalViewers = ExternalViewers(xcodeViewer: xcodeViewer, kaleidoscopeViewer: kaleidoscopeViewer)
                 swapper = TestResultDisplayInfo_MockSnapshotTestResultSwapper()
                 build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
             }
@@ -174,7 +176,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                         }
 
                         it("can be viewed in kaleidoscope") {
-                            let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
+                            let displayInfo = TestResultDisplayInfo(testResult: testResult, externalViewers: externalViewers)
                             expect(displayInfo.canBeViewedInKaleidoscope).to(beTrue())
                         }
                     }
@@ -185,7 +187,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                         }
 
                         it("can not be viewed in kaleidoscope") {
-                            let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
+                            let displayInfo = TestResultDisplayInfo(testResult: testResult, externalViewers: externalViewers)
                             expect(displayInfo.canBeViewedInKaleidoscope).to(beFalse())
                         }
                     }
@@ -197,7 +199,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                     }
 
                     it("can not be viewed in kaleidoscope") {
-                        let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
+                        let displayInfo = TestResultDisplayInfo(testResult: testResult, externalViewers: externalViewers)
                         expect(displayInfo.canBeViewedInKaleidoscope).to(beFalse())
                     }
                 }
@@ -220,7 +222,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                         }
                         
                         it("can be viewed in xcode") {
-                            let displayInfo = TestResultDisplayInfo(testResult: testResult, xcodeViewer: xcodeViewer)
+                            let displayInfo = TestResultDisplayInfo(testResult: testResult, externalViewers: externalViewers)
                             expect(displayInfo.canBeViewedInXcode).to(beTrue())
                         }
                     }
@@ -231,7 +233,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                         }
                         
                         it("can not be viewed in xcode") {
-                            let displayInfo = TestResultDisplayInfo(testResult: testResult, xcodeViewer: xcodeViewer)
+                            let displayInfo = TestResultDisplayInfo(testResult: testResult, externalViewers: externalViewers)
                             expect(displayInfo.canBeViewedInXcode).to(beFalse())
                         }
                     }
@@ -243,7 +245,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                     }
                     
                     it("can not be viewed in xcode") {
-                        let displayInfo = TestResultDisplayInfo(testResult: testResult, xcodeViewer: xcodeViewer)
+                        let displayInfo = TestResultDisplayInfo(testResult: testResult, externalViewers: externalViewers)
                         expect(displayInfo.canBeViewedInXcode).to(beFalse())
                     }
                 }
@@ -256,7 +258,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                 }
 
                 it("initializes object correctly") {
-                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult, externalViewers: externalViewers)
                     expect(displayInfo.diffImageURL).to(equal(URL(fileURLWithPath: "diffImagePath.png")))
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.failedImageURL).to(equal(URL(fileURLWithPath: "failedImagePath.png")))
@@ -273,7 +275,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                 }
 
                 it("initializes object correctly") {
-                    let displayInfo = TestResultDisplayInfo(testResult: testResult, kaleidoscopeViewer: kaleidoscopeViewer)
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult, externalViewers: externalViewers)
                     expect(displayInfo.referenceImageURL).to(equal(URL(fileURLWithPath: "referenceImagePath.png")))
                     expect(displayInfo.testName).to(equal("testRecord"))
                     expect(displayInfo.testContext).to(equal("ExampleTestClass"))

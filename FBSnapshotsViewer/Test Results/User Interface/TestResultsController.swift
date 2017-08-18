@@ -73,7 +73,7 @@ extension TestResultsController: TestResultCellDelegate {
     
     func testResultCell(_ cell: TestResultCell, viewInXcodeButtonClicked: NSButton) {
         guard let testResultInfo = findTestResultInfo(for: cell) else {
-            assertionFailure("Unexpected TestResultCellDelegate callback about Kaleidoscope button click")
+            assertionFailure("Unexpected TestResultCellDelegate callback about Xcode button click")
             return
         }
         eventHandler.openInXcode(testResultDisplayInfo: testResultInfo.info)
