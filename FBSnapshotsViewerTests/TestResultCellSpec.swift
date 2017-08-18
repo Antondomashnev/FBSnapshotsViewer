@@ -34,6 +34,17 @@ class TestResultCellSpec: QuickSpec {
             }
         }
         
+        describe(".viewInXcodeButtonClicked") {
+            beforeEach {
+                cell.viewInXcodeButtonClicked(NSButton(frame: NSRect.zero))
+            }
+            
+            it("calls delegate") {
+                expect(delegate.testResultCell___viewInXcodeButtonClicked_Called).to(beTrue())
+                expect(delegate.testResultCell___viewInXcodeButtonClicked_ReceivedArguments?.cell).to(equal(cell))
+            }
+        }
+        
         describe(".swapSnapshotsButtonClicked") {
             beforeEach {
                 cell.swapSnapshotsButtonClicked(NSButton(frame: NSRect.zero))

@@ -21,8 +21,10 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandler_MockApplicationLogRe
 class ApplicationSnapshotTestResultFileWatcherUpdateHandler_MockSnapshotTestResultFactory: SnapshotTestResultFactory {
     var createdSnapshotTestResultForLogLine: [ApplicationLogLine: SnapshotTestResult] = [:]
     var givenBuild: Build!
-    override func createSnapshotTestResult(from logLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
+    var givenErrorLine: ApplicationLogLine!
+    override func createSnapshotTestResult(from logLine: ApplicationLogLine, errorLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
         givenBuild = build
+        givenErrorLine = errorLine
         return createdSnapshotTestResultForLogLine[logLine]
     }
 }
@@ -97,17 +99,21 @@ class ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec: QuickSpec {
             let unknownLogLine = ApplicationLogLine.unknown
             let applicationNameMessageLogLine = ApplicationLogLine.applicationNameMessage(line: "MyApp")
             let kaleidoscopeCommandMesageLogLine = ApplicationLogLine.kaleidoscopeCommandMessage(line: "BlaBla")
+            let kaleidoscopeCommandErrorLogLine = ApplicationLogLine.snapshotTestErrorMessage(line: "FooBaz")
             let referenceImageSavedMessageLogLine = ApplicationLogLine.referenceImageSavedMessage(line: "FooFoo")
+            let referenceImageSavedErrorLogLine = ApplicationLogLine.snapshotTestErrorMessage(line: "Bazbaz")
             let fbReferenceImageDirMessageLogLine = ApplicationLogLine.fbReferenceImageDirMessage(line: "foo/bar")
-            let failedSnapshotTestResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "Foo", testName: "failedTest"), referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", build: build)
-            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "recordedTest"), referenceImagePath: "referenceTestImage.png", build: build)
+            let failedSnapshotTestInformation = SnapshotTestInformation(testClassName: "Foo", testName: "failedTest", testFilePath: "testFilePath", testLineNumber: 1)
+            let failedSnapshotTestResult = SnapshotTestResult.failed(testInformation: failedSnapshotTestInformation, referenceImagePath: "referenceTestImage.png", diffImagePath: "diffTestImage.png", failedImagePath: "failedTestImage.png", build: build)
+            let recordedSnapshotTestInformation = SnapshotTestInformation(testClassName: "Bar", testName: "recordedTest", testFilePath: "testFilePath", testLineNumber: 10)
+            let recordedSnapshotTestResult = SnapshotTestResult.recorded(testInformation: recordedSnapshotTestInformation, referenceImagePath: "referenceTestImage.png", build: build)
             
             beforeEach {
                 applicationNameExtractor.extractApplicationNameReturnValue = "MyApp"
                 fbImageReferenceDirExtractor.extractImageDirectoryURLReturnValue = [URL(fileURLWithPath: "foo/bar", isDirectory: true)]
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[kaleidoscopeCommandMesageLogLine] = failedSnapshotTestResult
                 snapshotTestResultFactory.createdSnapshotTestResultForLogLine[referenceImageSavedMessageLogLine] = recordedSnapshotTestResult
-                logReader.readLines = [unknownLogLine, fbReferenceImageDirMessageLogLine, applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, referenceImageSavedMessageLogLine]
+                logReader.readLines = [unknownLogLine, fbReferenceImageDirMessageLogLine, applicationNameMessageLogLine, kaleidoscopeCommandMesageLogLine, kaleidoscopeCommandErrorLogLine, referenceImageSavedMessageLogLine, referenceImageSavedErrorLogLine]
             }
             
             context("with no changes") {

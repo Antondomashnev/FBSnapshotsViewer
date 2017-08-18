@@ -61,6 +61,7 @@ class TestResultsInteractorSpec: QuickSpec {
     override func spec() {
         let build: Build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
         let kaleidoscopeViewer: TestResultsInteractor_MockExternalViewer.Type = TestResultsInteractor_MockExternalViewer.self
+        let xcodeViewer: TestResultsInteractor_MockExternalViewer.Type = TestResultsInteractor_MockExternalViewer.self
         var processLauncher: ProcessLauncher!
         var interactor: TestResultsInteractor!
         var output: TestResultsInteractorOutputMock!
@@ -68,16 +69,18 @@ class TestResultsInteractorSpec: QuickSpec {
         var testResults: [SnapshotTestResult] = []
 
         beforeEach {
-            let testResult1 = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName1"), referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
-            let testResult2 = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName2"), referenceImagePath: "referenceImagePath2", build: build)
+            let testInformation1 = SnapshotTestInformation(testClassName: "testClassName", testName: "testName1", testFilePath: "/foo/testClassName.m", testLineNumber: 1)
+            let testResult1 = SnapshotTestResult.failed(testInformation: testInformation1, referenceImagePath: "referenceImagePath1", diffImagePath: "diffImagePath1", failedImagePath: "failedImagePath1", build: build)
+            let testInformation2 = SnapshotTestInformation(testClassName: "testClassName", testName: "testName2", testFilePath: "/foo/testClassName.m", testLineNumber: 10)
+            let testResult2 = SnapshotTestResult.recorded(testInformation: testInformation2, referenceImagePath: "referenceImagePath2", build: build)
             testResults = [testResult1, testResult2]
             processLauncher = ProcessLauncher()
             swapper = TestResultsInteractor_MockSnapshotTestResultSwapper()
-            swapper.swappedTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "testClassName", testName: "testName1"), referenceImagePath: "referenceImagePath1", build: build)
+            swapper.swappedTestResult = SnapshotTestResult.recorded(testInformation: testInformation1, referenceImagePath: "referenceImagePath1", build: build)
             output = TestResultsInteractorOutputMock()
             let builder = TestResultsInteractorBuilder {
                 $0.testResults = testResults
-                $0.kaleidoscopeViewer = kaleidoscopeViewer
+                $0.externalViewers = ExternalViewers(xcodeViewer: xcodeViewer, kaleidoscopeViewer: kaleidoscopeViewer)
                 $0.processLauncher = processLauncher
                 $0.swapper = swapper
             }
@@ -139,7 +142,7 @@ class TestResultsInteractorSpec: QuickSpec {
                         }
                         
                         it("replaces failed test result with recorded") {
-                            let testInformation = SnapshotTestInformation(testClassName: testResult.testClassName, testName: testResult.testName)
+                            let testInformation = SnapshotTestInformation(testClassName: testResult.testClassName, testName: testResult.testName, testFilePath: testResult.testFilePath, testLineNumber: testResult.testLineNumber)
                             let expectedRecordedTestResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "referenceImagePath1", build: build)
                             expect(interactor.testResults[0]).to(equal(expectedRecordedTestResult))
                         }
@@ -147,7 +150,7 @@ class TestResultsInteractorSpec: QuickSpec {
                     
                     context("given not presented test result") {
                         beforeEach {
-                            let testInformation = SnapshotTestInformation(testClassName: "Foo", testName: "Bar")
+                            let testInformation = SnapshotTestInformation(testClassName: "Foo", testName: "Bar", testFilePath: "/Baz/Foo.m", testLineNumber: 1)
                             let notPresentedTestResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "foo/bar@2x.png", diffImagePath: "foo/bar@2x.png", failedImagePath: "foo/bar@2x.png", build: build)
                             interactor.swap(testResult: notPresentedTestResult)
                         }
@@ -187,14 +190,43 @@ class TestResultsInteractorSpec: QuickSpec {
                     }
                 }
             }
-
-            context("when kaleidoscope viewer is not available") {
+        }
+        
+        describe(".openInXcode") {
+            context("when xcode viewer is available") {
                 beforeEach {
-                    kaleidoscopeViewer.isAvailableReturnValue = false
+                    xcodeViewer.isAvailableReturnValue = true
                 }
-
+                
+                context("and can view the test resukt") {
+                    beforeEach {
+                        xcodeViewer.canViewReturnValue = true
+                    }
+                    
+                    it("views the test result") {
+                        interactor.openInXcode(testResult: testResults[0])
+                        expect(xcodeViewer.viewParameters?.snapshotTestResult).to(equal(testResults[0]))
+                    }
+                }
+                
+                context("and can not view the test resukt") {
+                    beforeEach {
+                        xcodeViewer.canViewReturnValue = false
+                    }
+                    
+                    it("asserts") {
+                        expect { interactor.openInXcode(testResult: testResults[0]) }.to(throwAssertion())
+                    }
+                }
+            }
+            
+            context("when xcode viewer is not available") {
+                beforeEach {
+                    xcodeViewer.isAvailableReturnValue = false
+                }
+                
                 it("asserts") {
-                    expect { interactor.openInKaleidoscope(testResult: testResults[0]) }.to(throwAssertion())
+                    expect { interactor.openInXcode(testResult: testResults[0]) }.to(throwAssertion())
                 }
             }
         }

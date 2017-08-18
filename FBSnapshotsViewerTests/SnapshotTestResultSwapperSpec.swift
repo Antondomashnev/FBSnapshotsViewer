@@ -51,12 +51,14 @@ class SnapshotTestResultSwapper_MockFileManager: FileManager {
 class SnapshotTestResultSwapperSpec: QuickSpec {
     override func spec() {
         var build: Build!
+        var testInformation: SnapshotTestInformation!
         var imageCache: ImageCacheMock!
         var swapper: SnapshotTestResultSwapper!
         var fileManager: SnapshotTestResultSwapper_MockFileManager!
         
         beforeEach {
             build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "/foo/bar", isDirectory: true)])
+            testInformation = SnapshotTestInformation(testClassName: "Bar", testName: "Foo", testFilePath: "Bar/Foo.m", testLineNumber: 1)
             fileManager = SnapshotTestResultSwapper_MockFileManager()
             imageCache = ImageCacheMock()
             swapper = SnapshotTestResultSwapper(fileManager: fileManager, imageCache: imageCache)
@@ -67,7 +69,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
             
             context("given recorded snapshot test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "Foo"), referenceImagePath: "Bar", build: build)
+                    testResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "Bar", build: build)
                 }
                 
                 it("throws error") {
@@ -77,7 +79,8 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
             
             context("when file manager throws exception") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState@2x.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@2x.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png", build: build)
+                    testInformation = SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState", testFilePath: "foo/DetailsViewController.m", testLineNumber: 1)
+                    testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState@2x.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@2x.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png", build: build)
                     fileManager.removeItemThrows = true
                 }
                 
@@ -89,7 +92,8 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
             context("given failed snapshot test result") {
                 context("with non-retina images") {
                     beforeEach {
-                        testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@.png", build: build)
+                        testInformation = SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState", testFilePath: "foo/DetailsViewController.m", testLineNumber: 1)
+                        testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@.png", build: build)
                     }
                     
                     it("throws error") {
@@ -101,7 +105,8 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                     var returnedTestResult: SnapshotTestResult!
                     
                     beforeEach {
-                        testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState@2x.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@2x.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png", build: build)
+                        testInformation = SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState", testFilePath: "foo/DetailsViewController.m", testLineNumber: 1)
+                        testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/reference_testNormalState@2x.png", diffImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/difftestNormalState@2x.png", failedImagePath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png", build: build)
                     }
                     
                     context("that doesn't exist") {
@@ -136,7 +141,8 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                         }
                         
                         it("returns swapped test result") {
-                            let expectedTestResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState"), referenceImagePath: "/foo/bar/DetailsViewController/testNormalState@2x.png", build: build)
+                            let expectedTestInformation = SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState", testFilePath: "foo/DetailsViewController.m", testLineNumber: 1)
+                            let expectedTestResult = SnapshotTestResult.recorded(testInformation: expectedTestInformation, referenceImagePath: "/foo/bar/DetailsViewController/testNormalState@2x.png", build: build)
                             expect(returnedTestResult).to(equal(expectedTestResult))
                         }
                     }
@@ -149,7 +155,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
             
             context("given recorded snapshot test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "Foo"), referenceImagePath: "Bar", build: build)
+                    testResult = SnapshotTestResult.recorded(testInformation:testInformation, referenceImagePath: "Bar", build: build)
                 }
                 
                 it("returns false") {
@@ -159,7 +165,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
             
             context("given failed snapshot test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.failed(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "Foo"), referenceImagePath: "Reference", diffImagePath: "Diff", failedImagePath: "Failed", build: build)
+                    testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "Reference", diffImagePath: "Diff", failedImagePath: "Failed", build: build)
                 }
                 
                 it("returns true") {

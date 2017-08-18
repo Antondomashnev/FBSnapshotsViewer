@@ -36,6 +36,8 @@ extension SnapshotTestInformation: Equatable {}
 internal func == (lhs: SnapshotTestInformation, rhs: SnapshotTestInformation) -> Bool {
     guard lhs.testClassName == rhs.testClassName else { return false }
     guard lhs.testName == rhs.testName else { return false }
+    guard lhs.testFilePath == rhs.testFilePath else { return false }
+    guard lhs.testLineNumber == rhs.testLineNumber else { return false }
     return true
 }
 // MARK: - TestResultDisplayInfo AutoEquatable
@@ -44,8 +46,7 @@ internal func == (lhs: TestResultDisplayInfo, rhs: TestResultDisplayInfo) -> Boo
     guard lhs.referenceImageURL == rhs.referenceImageURL else { return false }
     guard compareOptionals(lhs: lhs.diffImageURL, rhs: rhs.diffImageURL, compare: ==) else { return false }
     guard compareOptionals(lhs: lhs.failedImageURL, rhs: rhs.failedImageURL, compare: ==) else { return false }
-    guard lhs.canBeViewedInKaleidoscope == rhs.canBeViewedInKaleidoscope else { return false }
-    guard lhs.canBeSwapped == rhs.canBeSwapped else { return false }
+    guard lhs.options == rhs.options else { return false }
     guard lhs.testInformation == rhs.testInformation else { return false }
     guard lhs.testResult == rhs.testResult else { return false }
     return true
@@ -104,6 +105,8 @@ internal func == (lhs: ApplicationLogLine, rhs: ApplicationLogLine) -> Bool {
     case (.applicationNameMessage(let lhs), .applicationNameMessage(let rhs)): 
         return lhs == rhs
     case (.fbReferenceImageDirMessage(let lhs), .fbReferenceImageDirMessage(let rhs)): 
+        return lhs == rhs
+    case (.snapshotTestErrorMessage(let lhs), .snapshotTestErrorMessage(let rhs)): 
         return lhs == rhs
     case (.unknown, .unknown): 
          return true 

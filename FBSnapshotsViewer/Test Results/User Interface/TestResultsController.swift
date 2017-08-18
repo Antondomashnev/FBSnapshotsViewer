@@ -54,12 +54,16 @@ extension TestResultsController: TestResultCellDelegate {
         return (testResultInfo, cellIndexPath)
     }
     
-    func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton) {
+    private func openIn(_ eventHandlerFunction: (TestResultDisplayInfo) -> Void, from cell: TestResultCell) {
         guard let testResultInfo = findTestResultInfo(for: cell) else {
-            assertionFailure("Unexpected TestResultCellDelegate callback about Kaleidoscope button click")
+            assertionFailure("Unexpected TestResultCellDelegate callback about Xcode button click")
             return
         }
-        eventHandler.openInKaleidoscope(testResultDisplayInfo: testResultInfo.info)
+        eventHandlerFunction(testResultInfo.info)
+    }
+    
+    func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton) {
+        openIn(eventHandler.openInKaleidoscope, from: cell)
     }
     
     func testResultCell(_ cell: TestResultCell, swapSnapshotsButtonClicked: NSButton) {
@@ -69,6 +73,10 @@ extension TestResultsController: TestResultCellDelegate {
         }
         eventHandler.swap([testResultInfo.info])
         collectionView.reloadSections(IndexSet(integer: testResultInfo.indexPath.section))
+    }
+    
+    func testResultCell(_ cell: TestResultCell, viewInXcodeButtonClicked: NSButton) {
+        openIn(eventHandler.openInXcode, from: cell)
     }
 }
 

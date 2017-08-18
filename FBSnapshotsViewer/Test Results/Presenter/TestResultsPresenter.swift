@@ -33,6 +33,10 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         interactor?.openInKaleidoscope(testResult: testResultDisplayInfo.testResult)
     }
     
+    func openInXcode(testResultDisplayInfo: TestResultDisplayInfo) {
+        interactor?.openInXcode(testResult: testResultDisplayInfo.testResult)
+    }
+    
     func selectDiffMode(_ diffMode: TestResultsDiffMode) {
         selectedDiffMode = diffMode
         updateUserInterface()

@@ -11,11 +11,8 @@ import Cocoa
 struct SnapshotTestInformation: AutoEquatable {
     let testClassName: String
     let testName: String
-    
-    init(testClassName: String, testName: String) {
-        self.testClassName = testClassName
-        self.testName = testName
-    }
+    let testFilePath: String
+    let testLineNumber: Int
 }
 
 enum SnapshotTestResult: AutoEquatable {
@@ -25,6 +22,14 @@ enum SnapshotTestResult: AutoEquatable {
     
     var testName: String {
         return testInformation.testName
+    }
+    
+    var testFilePath: String {
+        return testInformation.testFilePath
+    }
+    
+    var testLineNumber: Int {
+        return testInformation.testLineNumber
     }
     
     var testInformation: SnapshotTestInformation {

@@ -13,7 +13,7 @@ enum TestResultsInteractorError: Error {
 }
 
 class TestResultsInteractorBuilder {
-    var kaleidoscopeViewer: ExternalViewer.Type = KaleidoscopeViewer.self
+    var externalViewers: ExternalViewers = ExternalViewers()
     var processLauncher: ProcessLauncher = ProcessLauncher()
     var swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()
     var testResults: [SnapshotTestResult] = []
@@ -26,6 +26,7 @@ class TestResultsInteractorBuilder {
 }
 
 class TestResultsInteractor {
+    fileprivate let xcodeViewer: ExternalViewer.Type
     fileprivate let kaleidoscopeViewer: ExternalViewer.Type
     fileprivate let processLauncher: ProcessLauncher
     fileprivate let swapper: SnapshotTestResultSwapper
@@ -35,7 +36,8 @@ class TestResultsInteractor {
 
     init(builder: TestResultsInteractorBuilder) {
         self.testResults = builder.testResults
-        self.kaleidoscopeViewer = builder.kaleidoscopeViewer
+        self.kaleidoscopeViewer = builder.externalViewers.kaleidoscope
+        self.xcodeViewer = builder.externalViewers.xcode
         self.processLauncher = builder.processLauncher
         self.swapper = builder.swapper
     }
@@ -59,6 +61,14 @@ extension TestResultsInteractor: TestResultsInteractorInput {
             return
         }
         kaleidoscopeViewer.view(snapshotTestResult: testResult, using: processLauncher)
+    }
+    
+    func openInXcode(testResult: SnapshotTestResult) {
+        guard xcodeViewer.isAvailable(), xcodeViewer.canView(snapshotTestResult: testResult) else {
+            assertionFailure("Test result: \(testResult) can not be open in xcode viewer")
+            return
+        }
+        xcodeViewer.view(snapshotTestResult: testResult, using: processLauncher)
     }
     
     func swap(testResult: SnapshotTestResult) {

@@ -58,7 +58,7 @@ class TestResultsControllerSpec: QuickSpec {
             controller.collectionView = collectionView
             controller.topView = topView
             
-            testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "Bla"), referenceImagePath: "foo/bar.png", build: build))
+            testResultDisplayInfo = TestResultDisplayInfo(testResult: SnapshotTestResult.recorded(testInformation: SnapshotTestInformation(testClassName: "Bar", testName: "Bla", testFilePath: "foo/bar", testLineNumber: 1), referenceImagePath: "foo/bar.png", build: build))
             let titleInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "Foo")
             let sectionInfo = TestResultsSectionDisplayInfo(title: titleInfo, items: [testResultDisplayInfo])
             testResults = [sectionInfo]
@@ -188,6 +188,50 @@ class TestResultsControllerSpec: QuickSpec {
                 it("opens test result in kaleidoscope") {
                     expect(eventHandler.openInKaleidoscope_testResultDisplayInfo_Called).to(beTrue())
                     expect(eventHandler.openInKaleidoscope_testResultDisplayInfo_ReceivedTestResultDisplayInfo).to(equal(testResults[0].itemInfos[0]))
+                }
+            }
+        }
+        
+        describe(".testResultCell:viewInXcodeButtonClicked") {
+            var cell: TestResultCell!
+            var viewInXcodeButton: NSButton!
+            
+            beforeEach {
+                viewInXcodeButton = NSButton(frame: NSRect.zero)
+                cell = TestResultCell(nibName: nil, bundle: nil)
+            }
+            
+            context("when cell is not visible") {
+                beforeEach {
+                    collectionView.indexPathForItemReturnValue = nil
+                }
+                
+                it("asserts") {
+                    expect { controller.testResultCell(cell, viewInXcodeButtonClicked: viewInXcodeButton) }.to(throwAssertion())
+                }
+            }
+            
+            context("when test result is not presented in controller") {
+                beforeEach {
+                    collectionViewOutlets.testResultsDisplayInfo = displayInfo
+                    collectionView.indexPathForItemReturnValue = IndexPath(item: 1, section: 0)
+                }
+                
+                it("asserts") {
+                    expect { controller.testResultCell(cell, viewInXcodeButtonClicked: viewInXcodeButton) }.to(throwAssertion())
+                }
+            }
+            
+            context("when test result is presented and cell is visible") {
+                beforeEach {
+                    collectionViewOutlets.testResultsDisplayInfo = displayInfo
+                    collectionView.indexPathForItemReturnValue = IndexPath(item: 0, section: 0)
+                    controller.testResultCell(cell, viewInXcodeButtonClicked: viewInXcodeButton)
+                }
+                
+                it("opens test result in xcode") {
+                    expect(eventHandler.openInXcode_testResultDisplayInfo_Called).to(beTrue())
+                    expect(eventHandler.openInXcode_testResultDisplayInfo_ReceivedTestResultDisplayInfo).to(equal(testResults[0].itemInfos[0]))
                 }
             }
         }
