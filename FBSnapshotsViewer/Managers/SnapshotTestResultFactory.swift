@@ -27,10 +27,8 @@ class SnapshotTestResultFactory {
         return SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: referenceImagePath, diffImagePath: diffImagePath, failedImagePath: failedImagePath, build: build)
     }
 
-    private func createSnapshotTestInformation(from logLine: ApplicationLogLine, errorLine: ApplicationLogLine) -> SnapshotTestInformation? {
-        guard let testNameExtractor = TestNameExtractorFactory().extractor(for: logLine),
-              let testClassNameExtractor = TestClassNameExtractorFactory().extractor(for: logLine),
-              let testFilePath = try? DefaultTestFilePathExtractor().extractTestClassPath(from: errorLine),
+    private func createSnapshotTestInformation(from logLine: ApplicationLogLine, errorLine: ApplicationLogLine, with testNameExtractor: TestNameExtractor, testClassNameExtractor: TestClassNameExtractor) -> SnapshotTestInformation? {
+        guard let testFilePath = try? DefaultTestFilePathExtractor().extractTestClassPath(from: errorLine),
               let testLineNumber = try? DefaultTestLineNumberExtractor().extractTestLineNumber(from: errorLine),
               let testName = try? testNameExtractor.extractTestName(from: logLine),
               let testClassName = try? testClassNameExtractor.extractTestClassName(from: logLine) else {
@@ -51,19 +49,17 @@ class SnapshotTestResultFactory {
     // MARK: - Interface
 
     func createSnapshotTestResult(from logLine: ApplicationLogLine, errorLine: ApplicationLogLine, build: Build) -> SnapshotTestResult? {
-        guard let testInformation = createSnapshotTestInformation(from: logLine, errorLine: errorLine) else {
+        guard let testClassNameExtractor = TestClassNameExtractorFactory().extractor(for: logLine),
+              let testNameExtractor = TestNameExtractorFactory().extractor(for: logLine),
+              let testInformation = createSnapshotTestInformation(from: logLine, errorLine: errorLine, with: testNameExtractor, testClassNameExtractor: testClassNameExtractor) else {
             return nil
         }
         switch logLine {
-        case .unknown,
-             .applicationNameMessage,
-             .fbReferenceImageDirMessage,
-             .snapshotTestErrorMessage:
-            return nil
         case let .kaleidoscopeCommandMessage(line):
             return try? self.createSnapshotTestResult(fromKaleidoscopeCommandLine: line, testInformation: testInformation, build: build)
         case let .referenceImageSavedMessage(line):
             return try? self.createSnapshotTestResult(fromSavedReferenceImageLine: line, testInformation: testInformation, build: build)
+        default: return nil
         }
     }
 }
