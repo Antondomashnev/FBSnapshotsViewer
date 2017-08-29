@@ -22,6 +22,17 @@ class TestResultCellSpec: QuickSpec {
             cell = TestResultCell(nibName: "TestResultCell", bundle: Bundle.main)
             cell.delegate = delegate
         }
+        
+        describe(".copySnapshotButtonClicked") {
+            beforeEach {
+                cell.copySnapshotButtonClicked(NSButton(frame: NSRect.zero))
+            }
+            
+            it("calls delegate") {
+                expect(delegate.testResultCell___copySnapshotButtonClicked_Called).to(beTrue())
+                expect(delegate.testResultCell___copySnapshotButtonClicked_ReceivedArguments?.cell).to(equal(cell))
+            }
+        }
 
         describe(".viewInKaleidoscopeButtonClicked") {
             beforeEach {

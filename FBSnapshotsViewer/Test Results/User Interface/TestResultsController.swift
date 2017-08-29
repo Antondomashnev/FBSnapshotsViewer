@@ -78,6 +78,9 @@ extension TestResultsController: TestResultCellDelegate {
     func testResultCell(_ cell: TestResultCell, viewInXcodeButtonClicked: NSButton) {
         openIn(eventHandler.openInXcode, from: cell)
     }
+    
+    func testResultCell(_ cell: TestResultCell, copySnapshotButtonClicked: NSButton) {
+    }
 }
 
 extension TestResultsController: TestResultsHeaderDelegate {

@@ -434,6 +434,16 @@ class TestResultCellDelegateMock: TestResultCellDelegate {
         testResultCell___swapSnapshotsButtonClicked_Called = true
         testResultCell___swapSnapshotsButtonClicked_ReceivedArguments = (cell: cell, swapSnapshotsButtonClicked: swapSnapshotsButtonClicked)
     }
+    //MARK: - testResultCell
+
+    var testResultCell___copySnapshotButtonClicked_Called = false
+    var testResultCell___copySnapshotButtonClicked_ReceivedArguments: (cell: TestResultCell, copySnapshotButtonClicked: NSButton)?
+
+    func testResultCell(_ cell: TestResultCell, copySnapshotButtonClicked: NSButton) {
+
+        testResultCell___copySnapshotButtonClicked_Called = true
+        testResultCell___copySnapshotButtonClicked_ReceivedArguments = (cell: cell, copySnapshotButtonClicked: copySnapshotButtonClicked)
+    }
 }
 class TestResultsHeaderDelegateMock: TestResultsHeaderDelegate {
 
