@@ -26,11 +26,12 @@ struct TestResultDisplayInfoOptions: OptionSet {
     static let canBeSwapped = TestResultDisplayInfoOptions(rawValue: 1 << 0)
     static let canBeViewedInKaleidoscope = TestResultDisplayInfoOptions(rawValue: 1 << 1)
     static let canBeViewedInXcode = TestResultDisplayInfoOptions(rawValue: 1 << 2)
+    static let canBeCopied = TestResultDisplayInfoOptions(rawValue: 1 << 3)
 }
 
 extension TestResultDisplayInfoOptions {
     static func availableOptions(for testResult: SnapshotTestResult, externalViewers: ExternalViewers = ExternalViewers(), swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()) -> TestResultDisplayInfoOptions {
-        var availableOptions: TestResultDisplayInfoOptions = []
+        var availableOptions: TestResultDisplayInfoOptions = [TestResultDisplayInfoOptions.canBeCopied]
         if swapper.canSwap(testResult) { availableOptions = availableOptions.union(.canBeSwapped) }
         if externalViewers.xcode.isAvailable() && externalViewers.xcode.canView(snapshotTestResult: testResult) { availableOptions = availableOptions.union(.canBeViewedInXcode) }
         if externalViewers.kaleidoscope.isAvailable() && externalViewers.kaleidoscope.canView(snapshotTestResult: testResult) { availableOptions = availableOptions.union(.canBeViewedInKaleidoscope) }
@@ -64,6 +65,10 @@ struct TestResultDisplayInfo: AutoEquatable {
     
     var canBeViewedInXcode: Bool {
         return options.contains(.canBeViewedInXcode)
+    }
+    
+    var canBeCopied: Bool {
+        return options.contains(.canBeCopied)
     }
 
     init(testResult: SnapshotTestResult, swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper(), externalViewers: ExternalViewers = ExternalViewers()) {

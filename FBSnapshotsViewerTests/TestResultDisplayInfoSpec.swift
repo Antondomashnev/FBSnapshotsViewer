@@ -205,6 +205,18 @@ class TestResultDisplayInfoSpec: QuickSpec {
                 }
             }
             
+            describe("canBeCopied") {
+                beforeEach {
+                    testInformation = SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed", testFilePath: "foo/TestClass.m", testLineNumber: 1)
+                    testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
+                }
+                
+                it("can be") {
+                    let displayInfo = TestResultDisplayInfo(testResult: testResult, externalViewers: externalViewers)
+                    expect(displayInfo.canBeCopied).to(beTrue())
+                }
+            }
+            
             describe("canBeViewedInXcode") {
                 beforeEach {
                     testInformation = SnapshotTestInformation(testClassName: "TestClass", testName: "testFailed", testFilePath: "foo/TestClass.m", testLineNumber: 1)
