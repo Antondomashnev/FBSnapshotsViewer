@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 enum TestResultsInteractorError: Error {
     case canNotSwapNotExistedTestResult
@@ -16,6 +17,7 @@ class TestResultsInteractorBuilder {
     var externalViewers: ExternalViewers = ExternalViewers()
     var processLauncher: ProcessLauncher = ProcessLauncher()
     var swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()
+    var pasteboard: Pasteboard = NSPasteboard.general()
     var testResults: [SnapshotTestResult] = []
     
     typealias BuiderClojure = (TestResultsInteractorBuilder) -> Void
@@ -30,6 +32,7 @@ class TestResultsInteractor {
     fileprivate let kaleidoscopeViewer: ExternalViewer.Type
     fileprivate let processLauncher: ProcessLauncher
     fileprivate let swapper: SnapshotTestResultSwapper
+    fileprivate let pasteboard: Pasteboard
     var testResults: [SnapshotTestResult]
     
     weak var output: TestResultsInteractorOutput?
@@ -40,6 +43,7 @@ class TestResultsInteractor {
         self.xcodeViewer = builder.externalViewers.xcode
         self.processLauncher = builder.processLauncher
         self.swapper = builder.swapper
+        self.pasteboard = builder.pasteboard
     }
 }
 
@@ -82,5 +86,16 @@ extension TestResultsInteractor: TestResultsInteractorInput {
         catch let error {
             output?.didFailToSwap(testResult: testResult, with: error)
         }
+    }
+    
+    func copy(testResult: SnapshotTestResult) {
+        var url: URL
+        switch testResult {
+        case let .failed(_, _, _, failedImagePath, _):
+            url = URL(fileURLWithPath: failedImagePath)
+        case let .recorded(_, referenceImagePath, _):
+            url = URL(fileURLWithPath: referenceImagePath)
+        }
+        pasteboard.copyImage(at: url)
     }
 }

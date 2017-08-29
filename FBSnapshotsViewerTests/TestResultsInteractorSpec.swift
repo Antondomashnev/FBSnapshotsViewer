@@ -64,6 +64,7 @@ class TestResultsInteractorSpec: QuickSpec {
         let xcodeViewer: TestResultsInteractor_MockExternalViewer.Type = TestResultsInteractor_MockExternalViewer.self
         var processLauncher: ProcessLauncher!
         var interactor: TestResultsInteractor!
+        var pasteboard: PasteboardMock!
         var output: TestResultsInteractorOutputMock!
         var swapper: TestResultsInteractor_MockSnapshotTestResultSwapper!
         var testResults: [SnapshotTestResult] = []
@@ -75,6 +76,7 @@ class TestResultsInteractorSpec: QuickSpec {
             let testResult2 = SnapshotTestResult.recorded(testInformation: testInformation2, referenceImagePath: "referenceImagePath2", build: build)
             testResults = [testResult1, testResult2]
             processLauncher = ProcessLauncher()
+            pasteboard = PasteboardMock()
             swapper = TestResultsInteractor_MockSnapshotTestResultSwapper()
             swapper.swappedTestResult = SnapshotTestResult.recorded(testInformation: testInformation1, referenceImagePath: "referenceImagePath1", build: build)
             output = TestResultsInteractorOutputMock()
@@ -83,6 +85,7 @@ class TestResultsInteractorSpec: QuickSpec {
                 $0.externalViewers = ExternalViewers(xcodeViewer: xcodeViewer, kaleidoscopeViewer: kaleidoscopeViewer)
                 $0.processLauncher = processLauncher
                 $0.swapper = swapper
+                $0.pasteboard = pasteboard
             }
             interactor = TestResultsInteractor(builder: builder)
             interactor.output = output
@@ -227,6 +230,36 @@ class TestResultsInteractorSpec: QuickSpec {
                 
                 it("asserts") {
                     expect { interactor.openInXcode(testResult: testResults[0]) }.to(throwAssertion())
+                }
+            }
+        }
+        
+        describe(".copy") {
+            context("recorded snapshot test result") {
+                var testResult: SnapshotTestResult!
+                
+                beforeEach {
+                    testResult = testResults[1]
+                    interactor.copy(testResult: testResult)
+                }
+                
+                it("copies recorded image url") {
+                    expect(pasteboard.copyImage_at_Called).to(beTrue())
+                    expect(pasteboard.copyImage_at_ReceivedUrl).to(equal(URL(fileURLWithPath: "referenceImagePath2")))
+                }
+            }
+            
+            context("failed snapshot test result") {
+                var testResult: SnapshotTestResult!
+                
+                beforeEach {
+                    testResult = testResults[0]
+                    interactor.copy(testResult: testResult)
+                }
+                
+                it("copies failed image url") {
+                    expect(pasteboard.copyImage_at_Called).to(beTrue())
+                    expect(pasteboard.copyImage_at_ReceivedUrl).to(equal(URL(fileURLWithPath: "failedImagePath1")))
                 }
             }
         }

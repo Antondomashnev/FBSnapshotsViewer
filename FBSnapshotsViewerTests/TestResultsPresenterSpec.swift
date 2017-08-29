@@ -168,5 +168,25 @@ class TestResultsPresenterSpec: QuickSpec {
                 expect(userInterface.show_displayInfo_ReceivedDisplayInfo?.testResultsDiffMode).to(equal(TestResultsDiffMode.diff))
             }
         }
+        
+        describe("copy") {
+            var testResult: SnapshotTestResult!
+            var testResultDisplayInfo: TestResultDisplayInfo!
+            var build: Build!
+            var testInformation: SnapshotTestInformation!
+        
+            beforeEach {
+                build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs:  [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+                testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "MyTest", testFilePath: "testFilePath", testLineNumber: 1)
+                testResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo/bar.png", build: build)
+                testResultDisplayInfo = TestResultDisplayInfo(testResult: testResult)
+                presenter.copy(testResultDisplayInfo: testResultDisplayInfo)
+            }
+            
+            it("passes the message to interactor with correct test result") {
+                expect(interactor.copy_testResult_Called).to(beTrue())
+                expect(interactor.copy_testResult_ReceivedTestResult).to(equal(testResult))
+            }
+        }
     }
 }

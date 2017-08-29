@@ -259,6 +259,20 @@ class MenuUserInterfaceMock: MenuUserInterface {
         popUpOptionsMenu_Called = true
     }
 }
+class PasteboardMock: Pasteboard {
+
+
+    //MARK: - copyImage
+
+    var copyImage_at_Called = false
+    var copyImage_at_ReceivedUrl: URL?
+
+    func copyImage(at url: URL) {
+
+        copyImage_at_Called = true
+        copyImage_at_ReceivedUrl = url
+    }
+}
 class PreferencesInteractorInputMock: PreferencesInteractorInput {
 
 
@@ -493,6 +507,16 @@ class TestResultsInteractorInputMock: TestResultsInteractorInput {
         swap_testResult_Called = true
         swap_testResult_ReceivedTestResult = testResult
     }
+    //MARK: - copy
+
+    var copy_testResult_Called = false
+    var copy_testResult_ReceivedTestResult: SnapshotTestResult?
+
+    func copy(testResult: SnapshotTestResult) {
+
+        copy_testResult_Called = true
+        copy_testResult_ReceivedTestResult = testResult
+    }
 }
 class TestResultsInteractorOutputMock: TestResultsInteractorOutput {
 
@@ -558,6 +582,16 @@ class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
 
         swap___Called = true
         swap___ReceivedTestResults = testResults
+    }
+    //MARK: - copy
+
+    var copy_testResultDisplayInfo_Called = false
+    var copy_testResultDisplayInfo_ReceivedTestResultDisplayInfo: TestResultDisplayInfo?
+
+    func copy(testResultDisplayInfo: TestResultDisplayInfo) {
+
+        copy_testResultDisplayInfo_Called = true
+        copy_testResultDisplayInfo_ReceivedTestResultDisplayInfo = testResultDisplayInfo
     }
 }
 class TestResultsUserInterfaceMock: TestResultsUserInterface {
