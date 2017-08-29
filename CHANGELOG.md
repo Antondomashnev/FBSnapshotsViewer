@@ -3,6 +3,7 @@
 ### 0.7.1 (Next)
 
 * Your contribution here.
+* [#62](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/62): Add copy image button - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.7.0 (18.08.2017)
 
