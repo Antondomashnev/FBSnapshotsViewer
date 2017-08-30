@@ -13,6 +13,7 @@ protocol TestResultsInteractorInput: class, AutoMockable {
     func openInKaleidoscope(testResult: SnapshotTestResult)
     func openInXcode(testResult: SnapshotTestResult)
     func swap(testResult: SnapshotTestResult)
+    func copy(testResult: SnapshotTestResult)
 }
 
 protocol TestResultsInteractorOutput: class, AutoMockable {

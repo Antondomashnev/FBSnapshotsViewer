@@ -235,5 +235,49 @@ class TestResultsControllerSpec: QuickSpec {
                 }
             }
         }
+        
+        describe(".testResultCell:copySnapshotButtonClicked") {
+            var cell: TestResultCell!
+            var copySnapshotButton: NSButton!
+            
+            beforeEach {
+                copySnapshotButton = NSButton(frame: NSRect.zero)
+                cell = TestResultCell(nibName: nil, bundle: nil)
+            }
+            
+            context("when cell is not visible") {
+                beforeEach {
+                    collectionView.indexPathForItemReturnValue = nil
+                }
+                
+                it("asserts") {
+                    expect { controller.testResultCell(cell, copySnapshotButtonClicked: copySnapshotButton) }.to(throwAssertion())
+                }
+            }
+            
+            context("when test result is not presented in controller") {
+                beforeEach {
+                    collectionViewOutlets.testResultsDisplayInfo = displayInfo
+                    collectionView.indexPathForItemReturnValue = IndexPath(item: 1, section: 0)
+                }
+                
+                it("asserts") {
+                    expect { controller.testResultCell(cell, copySnapshotButtonClicked: copySnapshotButton) }.to(throwAssertion())
+                }
+            }
+            
+            context("when test result is presented and cell is visible") {
+                beforeEach {
+                    collectionViewOutlets.testResultsDisplayInfo = displayInfo
+                    collectionView.indexPathForItemReturnValue = IndexPath(item: 0, section: 0)
+                    controller.testResultCell(cell, copySnapshotButtonClicked: copySnapshotButton)
+                }
+                
+                it("opens test result in xcode") {
+                    expect(eventHandler.copy_testResultDisplayInfo_Called).to(beTrue())
+                    expect(eventHandler.copy_testResultDisplayInfo_ReceivedTestResultDisplayInfo).to(equal(testResults[0].itemInfos[0]))
+                }
+            }
+        }
     }
 }

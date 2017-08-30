@@ -78,6 +78,14 @@ extension TestResultsController: TestResultCellDelegate {
     func testResultCell(_ cell: TestResultCell, viewInXcodeButtonClicked: NSButton) {
         openIn(eventHandler.openInXcode, from: cell)
     }
+    
+    func testResultCell(_ cell: TestResultCell, copySnapshotButtonClicked: NSButton) {
+        guard let testResultInfo = findTestResultInfo(for: cell) else {
+            assertionFailure("Unexpected TestResultCellDelegate callback about copy snapshot button click")
+            return
+        }
+        eventHandler.copy(testResultDisplayInfo: testResultInfo.info)
+    }
 }
 
 extension TestResultsController: TestResultsHeaderDelegate {

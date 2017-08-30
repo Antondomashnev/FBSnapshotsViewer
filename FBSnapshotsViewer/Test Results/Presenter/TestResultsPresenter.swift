@@ -48,6 +48,10 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         }
         updateUserInterface()
     }
+    
+    func copy(testResultDisplayInfo: TestResultDisplayInfo) {
+        interactor?.copy(testResult: testResultDisplayInfo.testResult)
+    }
 }
 
 extension TestResultsPresenter: TestResultsInteractorOutput {
