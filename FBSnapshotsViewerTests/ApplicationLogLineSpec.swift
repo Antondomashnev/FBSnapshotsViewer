@@ -53,7 +53,15 @@ class ApplicationLogLineSpec: QuickSpec {
                     expect(ApplicationLogLine(line: line)).to(equal(ApplicationLogLine.snapshotTestErrorMessage(line: line)))
                 }
             }
-            
+
+            context("when line with failed snapshot test error") {
+                let line = "/Users/paultaykalo/Projects/product/ios-app/MyProJectSnapshotTests/ProductTypeCellTests.swift:32: error: -[MyProJectSnapshotTests.ProductTypeCellTests testGenerateMockupForUnknownProductType] : failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=4 \"Images different\" UserInfo={NSLocalizedFailureReason=image pixels differed by more than 0.00% from the reference image, FBDiffedImageKey=<UIImage: 0x61000008e8d0> size {400, 400} orientation 0 scale 2.000000, FBReferenceImageKey=<UIImage: 0x618000092f20> size {400, 400} orientation 0 scale 2.000000, FBCapturedImageKey=<UIImage: 0x6080004991e0> size {400, 400} orientation 0 scale 2.000000, NSLocalizedDescription=Images different})"
+
+                it("returns snapshotTestErrorMessage log line") {
+                    expect(ApplicationLogLine(line: line)).to(equal(ApplicationLogLine.snapshotTestErrorMessage(line: line)))
+                }
+            }
+
             context("when line with recorded snapshot test error") {
                 let line = "/Users/antondomashnev/Work/FBSnapshotsViewerExample/FBSnapshotsViewerExampleTests/FBSnapshotsViewerExampleTests.m:38: error: -[FBSnapshotsViewerExampleTests testRecord] : ((noErrors) is true) failed - Snapshot comparison failed: (null)"
                 
