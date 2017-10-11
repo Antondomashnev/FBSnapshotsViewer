@@ -15,7 +15,7 @@ import Foundation
 class ApplicationLogReaderrSpec: QuickSpec {
     override func spec() {
         var reader: ApplicationLogReader!
-        fdescribe(".readline(of:startingFrom:)") {
+        describe(".readline(of:startingFrom:)") {
             context("when appcode log") {
                 let path: String! = Bundle.init(for: type(of: self)).path(forResource: "AppCodeLog", ofType: "xml")
                 let log: String! = try? String(contentsOfFile: path)
