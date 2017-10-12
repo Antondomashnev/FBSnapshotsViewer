@@ -1,9 +1,9 @@
 ## Changelog
 
-### 0.8.0 (Next)
+### 0.8.0 (11.10.2017)
 
-* Your contribution here.
 * [#62](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/62): Add copy image button - [@antondomashnev](https://github.com/antondomashnev).
+* [#64](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/64): Fix test log parsing issue - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.7.0 (18.08.2017)
 
