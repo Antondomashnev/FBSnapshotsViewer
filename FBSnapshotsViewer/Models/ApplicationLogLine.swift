@@ -31,8 +31,10 @@ struct ApplicationLogLineIndicatorContainer {
         return "FB_REFERENCE_IMAGE_DIR"
     }
 
-    static func snapshotTestErrorMessageIndicator(for configuration: Configuration) -> String {
-        return " : ((noErrors) is true) failed - Snapshot comparison failed"
+    static func snapshotTestErrorMessageIndicators(for configuration: Configuration) -> [String] {
+        return [" : ((noErrors) is true) failed - Snapshot comparison failed",
+                " : failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=4",
+                " : failed - Test ran in record mode."]
     }
 }
 
@@ -59,7 +61,7 @@ enum ApplicationLogLine: AutoEquatable, AutoHashable {
         else if line.contains(ApplicationLogLineIndicatorContainer.fbReferenceImageDirMessageIndicator(for: configuration)) {
             self = ApplicationLogLine.fbReferenceImageDirMessage(line: line)
         }
-        else if line.contains(ApplicationLogLineIndicatorContainer.snapshotTestErrorMessageIndicator(for: configuration)) {
+        else if ApplicationLogLineIndicatorContainer.snapshotTestErrorMessageIndicators(for: configuration).reduce(false, { initial, next in initial ? true : line.contains(next) }) {
             self = ApplicationLogLine.snapshotTestErrorMessage(line: line)
         }
         else {

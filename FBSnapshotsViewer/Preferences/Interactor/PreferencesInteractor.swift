@@ -12,7 +12,7 @@ class PreferencesInteractor {
     fileprivate let configurationStorage: ConfigurationStorage
     fileprivate var configuration: Configuration
 
-    init(configurationStorage: ConfigurationStorage) {
+    @discardableResult init(configurationStorage: ConfigurationStorage) {
         guard let configuration = configurationStorage.loadConfiguration() else {
             preconditionFailure("At the moment of loading current configuration it must exist in the storage")
         }

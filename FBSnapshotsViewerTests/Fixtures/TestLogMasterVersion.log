@@ -1,0 +1,307 @@
+11:18:48.046 Xcode[55173:4886155] Beginning test session FBSnapshotsViewerTestTests-2CEC62B7-8789-4E42-9277-D0962AA396D0 at 2017-10-07 11:18:48.046 with Xcode 9A235 on target <DVTiPhoneSimulator: 0x7f9889c34a70> {
+		SimDevice: iPhone 8 (9C43B57E-D84A-4295-8C68-E30098B1A2E2, iOS 11.0, Booted)
+} (11.0 (15A372))
+11:18:48.046 Xcode[55173:4886155] Launching with Xcode.DebuggerFoundation.Launcher.LLDB
+11:18:48.047 Xcode[55173:4886155] Test standard output and standard error is at /var/folders/4q/7bj6nm8x0w5d0d7fx8r3b4n4kwxf4t/T/com.apple.dt.XCTest/IDETestRunSession-60BEBBC9-A40A-4DF7-92B2-6E2E946CB125/FBSnapshotsViewerTestTests-6920A004-EEDD-4073-A218-4C33057B8991/StandardOutputAndStandardError.txt
+11:18:49.799 Xcode[55173:4886155] Launch session started.
+11:18:49.873 Xcode[55173:4886155] Setting up test runner session
+11:18:49.873 Xcode[55173:5026937] Sim iPhone 8: Unregistering for sim device notification with token 35
+11:18:49.874 Xcode[55173:5026937] Calling -[SimDevice getenv:error:] for TESTMANAGERD_SIM_SOCK
+11:18:49.874 Xcode[55173:5026937] Sim iPhone 8 has testmanagerd socket at /private/tmp/com.apple.launchd.8X1R6Vr0WK/com.apple.testmanagerd.unix-domain.socket
+11:18:49.874 Xcode[55173:5026937] Validating test connection socket path (/private/tmp/com.apple.launchd.8X1R6Vr0WK/com.apple.testmanagerd.unix-domain.socket)
+11:18:49.874 Xcode[55173:5026937] Constructing transport for test connection socket
+11:18:49.874 Xcode[55173:5026937] Connected socket 86 to testmanagerd for Sim iPhone 8
+11:18:49.875 Xcode[55173:5026937] Received connection for test runner session
+11:18:49.875 Xcode[55173:5026937] Listening for proxy connection request from the test bundle
+11:18:49.875 Xcode[55173:5026937] Initiating session with identifier: 2CEC62B7-8789-4E42-9277-D0962AA396D0
+11:18:49.902 Xcode[55173:4886155] Test runner session acquired connection.
+11:18:49.902 Xcode[55173:4886155] Waiting for test process to launch.
+11:18:49.938 Xcode[55173:4886155] Received Ready from iOSSimulator
+11:18:49.938 Xcode[55173:4886155] Sending notification: NSConcreteNotification 0x7f9891975df0 {name = com.apple.iphonesimulator.startSession; userInfo = {
+    deviceUDID = "9C43B57E-D84A-4295-8C68-E30098B1A2E2";
+}}
+11:18:49.939 Xcode[55173:5029550] Launch session LaunchSessionClaim_0x7f9879a86e60 claimed simulator 9C43B57E-D84A-4295-8C68-E30098B1A2E2
+11:18:49.943 Xcode[55173:4886155] Adding console adaptor <IDEConsoleAdaptor: 0x7f9889b17040 'target' stdin: <IDEMasterPtyFileHandle: 0x7f98747a9e60 MasterFH: <NSConcreteFileHandle: 0x7f9877ca93f0> 74 SlaveFH: <NSConcreteFileHandle: 0x7f9879d3b730> 89> 74 stdout: <IDEMasterPtyFileHandle: 0x7f98747a9e60 MasterFH: <NSConcreteFileHandle: 0x7f9877ca93f0> 74 SlaveFH: <NSConcreteFileHandle: 0x7f9879d3b730> 89> 74 stderr: (null) 0> for test session 2CEC62B7-8789-4E42-9277-D0962AA396D0.
+11:18:49.976 Xcode[55173:4886155] Received Ready from iOSSimulator
+11:18:49.976 Xcode[55173:4886155] Sending notification: NSConcreteNotification 0x7f9879c3ebe0 {name = com.apple.iphonesimulator.startSession; userInfo = {
+    deviceUDID = "9C43B57E-D84A-4295-8C68-E30098B1A2E2";
+}}
+11:18:49.977 Xcode[55173:5029540] Launch session LaunchSessionClaim_0x7f9879a86e60 claimed simulator 9C43B57E-D84A-4295-8C68-E30098B1A2E2
+11:18:49.977 Xcode[55173:5029540] 9C43B57E-D84A-4295-8C68-E30098B1A2E2: Registered for sim device notification, got token 36
+11:18:49.977 Xcode[55173:5024903] 9C43B57E-D84A-4295-8C68-E30098B1A2E2: Unregistering for sim device notification with token 36
+11:18:49.978 Xcode[55173:5026938] 9C43B57E-D84A-4295-8C68-E30098B1A2E2: Installing app at path: /Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator/FBSnapshotsViewerTest.app and options: {
+    CFBundleIdentifier = "Anton-Domashnev.FBSnapshotsViewerTest";
+}
+11:18:50.437 Xcode[55173:5023581] Got reply to session initiation request with identifier 2CEC62B7-8789-4E42-9277-D0962AA396D0 (result:error): 25: (null)
+11:18:50.656 Xcode[55173:5026938] 9C43B57E-D84A-4295-8C68-E30098B1A2E2: Installed app at path: /Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator/FBSnapshotsViewerTest.app and options: {
+    CFBundleIdentifier = "Anton-Domashnev.FBSnapshotsViewerTest";
+}
+11:18:50.657 Xcode[55173:5026938] 9C43B57E-D84A-4295-8C68-E30098B1A2E2: Launching app with identifier: Anton-Domashnev.FBSnapshotsViewerTest and options: {
+    arguments =     (
+        "-NSTreatUnknownArgumentsAsOpen",
+        NO,
+        "-ApplePersistenceIgnoreState",
+        YES
+    );
+    environment =     {
+        "DYLD_FRAMEWORK_PATH" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator:/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/Developer/Library/PrivateFrameworks";
+        "DYLD_INSERT_LIBRARIES" = "/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/Developer/Library/PrivateFrameworks/DTDDISupport.framework/libViewDebuggerSupport.dylib:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libMainThreadChecker.dylib";
+        "DYLD_LIBRARY_PATH" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator:/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/Developer/Library/PrivateFrameworks";
+        "FB_REFERENCE_IMAGE_DIR" = "/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/ReferenceImages";
+        "MTC_CRASH_ON_REPORT" = 1;
+        NSUnbufferedIO = YES;
+        "OS_ACTIVITY_DT_MODE" = YES;
+        XCInjectBundleInto = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator/FBSnapshotsViewerTest.app/FBSnapshotsViewerTest";
+        "XCODE_DBG_XPC_EXCLUSIONS" = "com.apple.dt.xctestSymbolicator";
+        XCTestConfigurationFilePath = "/var/folders/4q/7bj6nm8x0w5d0d7fx8r3b4n4kwxf4t/T/com.apple.dt.XCTest/IDETestRunSession-60BEBBC9-A40A-4DF7-92B2-6E2E946CB125/FBSnapshotsViewerTestTests-6920A004-EEDD-4073-A218-4C33057B8991/LaunchSessions/2CEC62B7-8789-4E42-9277-D0962AA396D0/remote-container/tmp/FBSnapshotsViewerTestTests-2CEC62B7-8789-4E42-9277-D0962AA396D0.xctestconfiguration";
+        "__XCODE_BUILT_PRODUCTS_DIR_PATHS" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator";
+        "__XPC_DYLD_FRAMEWORK_PATH" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator";
+        "__XPC_DYLD_LIBRARY_PATH" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator";
+    };
+    stderr = "/dev/ttys003";
+    stdout = "/dev/ttys003";
+    "wait_for_debugger" = 1;
+}
+11:18:52.735 Xcode[55173:5029629] 9C43B57E-D84A-4295-8C68-E30098B1A2E2: Launched app with identifier: Anton-Domashnev.FBSnapshotsViewerTest (pid = 78470)
+11:18:52.735 Xcode[55173:5029629] Tracking pid 78470 for simulator <DVTiPhoneSimulator: 0x7f9889c34a70> {
+		SimDevice: iPhone 8 (9C43B57E-D84A-4295-8C68-E30098B1A2E2, iOS 11.0, Booted)
+}
+11:18:52.735 Xcode[55173:5029629] Checking to see if pid 78470 is valid: kill(pid, 0) = 0 (YES, it's still running)
+11:18:52.735 Xcode[55173:5029629] Setting up DVTTaskNotifyOnProcDeath for pid 78470
+11:18:52.735 Xcode[55173:4886155] Test process runnable PID is 78470.
+11:18:53.373 Xcode[55173:4886155] Waiting for test process to check in..., will wait up to 120s
+11:18:53.812 Xcode[55173:5029562] Handling proxy channel request from test runner
+11:18:53.813 Xcode[55173:5029562] Test runner is ready, running protocol 25, requires at least version 8. Control framework is running 25 and requires at least 8
+11:18:53.813 Xcode[55173:4886155] Test runner session successfully initiated.
+11:18:53.813 Xcode[55173:4886155] Creating the daemon control session.
+11:18:53.813 Xcode[55173:4886155] Whitelisting test process ID 78470
+11:18:53.813 Xcode[55173:5023754] Sim iPhone 8: Unregistering for sim device notification with token 37
+11:18:53.813 Xcode[55173:4886155] Got authorization request for pid 78470
+11:18:53.813 Xcode[55173:5023754] Calling -[SimDevice getenv:error:] for TESTMANAGERD_SIM_SOCK
+11:18:53.813 Xcode[55173:5023754] Sim iPhone 8 has testmanagerd socket at /private/tmp/com.apple.launchd.8X1R6Vr0WK/com.apple.testmanagerd.unix-domain.socket
+11:18:53.813 Xcode[55173:5023754] Validating test connection socket path (/private/tmp/com.apple.launchd.8X1R6Vr0WK/com.apple.testmanagerd.unix-domain.socket)
+11:18:53.813 Xcode[55173:5023754] Constructing transport for test connection socket
+11:18:53.813 Xcode[55173:5023754] Connected socket 93 to testmanagerd for Sim iPhone 8
+11:18:53.814 Xcode[55173:5023754] Requesting authorization for pid 78470
+11:18:53.816 Xcode[55173:5023754] Got reply to authorization request for pid 78470 (result:error): 25: (null)
+11:18:53.816 Xcode[55173:4886155] Got whitelisting response from test daemon. Success: 1
+11:18:53.816 Xcode[55173:4886155] Registering/updating daemon-based crash report observer for process names (
+    XCTRunner,
+    FBSnapshotsViewerTest,
+    xctest
+), report directories: (
+    "/Users/antondomashnev/Library/Logs/DiagnosticReports",
+    "/Library/Logs/DiagnosticReports"
+).
+11:18:53.816 testmanagerd[78302:5029803] Received request to collect crash reports in directories '/Users/antondomashnev/Library/Logs/DiagnosticReports', '/Library/Logs/DiagnosticReports' for processes with names 'XCTRunner', 'FBSnapshotsViewerTest', 'xctest'
+11:18:53.817 testmanagerd[78302:5029920] Got reply for process assertion request, success: YES
+11:18:53.817 testmanagerd[78302:5029803] Initializing crash report observer for /Users/antondomashnev/Library/Logs/DiagnosticReports
+11:18:53.817 testmanagerd[78302:5029803] Getting files in /Users/antondomashnev/Library/Logs/DiagnosticReports
+11:18:53.817 testmanagerd[78302:5029803] Found 44 files in /Users/antondomashnev/Library/Logs/DiagnosticReports
+11:18:53.818 testmanagerd[78302:5029803] Started monitoring /Users/antondomashnev/Library/Logs/DiagnosticReports
+11:18:53.818 testmanagerd[78302:5029803] Initializing crash report observer for /Library/Logs/DiagnosticReports
+11:18:53.818 testmanagerd[78302:5029803] Getting files in /Library/Logs/DiagnosticReports
+11:18:53.819 Xcode[55173:4886155] Telling test runner to start executing tests.
+11:18:53.818 testmanagerd[78302:5029803] Found 101 files in /Library/Logs/DiagnosticReports
+11:18:53.818 testmanagerd[78302:5029803] Started monitoring /Library/Logs/DiagnosticReports
+11:18:53.801 FBSnapshotsViewerTest[78470:5030312] Linked XCTest.framework from /Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework/XCTest, built with Xcode 0900(9A221a), modified on Saturday, September 2, 2017 at 4:51:28 PM Irish Standard Time
+XCTest.framework bundle version: 13201
+11:18:53.802 FBSnapshotsViewerTest[78470:5030312] System uptime: 34:54
+11:18:53.802 FBSnapshotsViewerTest[78470:5030312] Process arguments: (
+    "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/Containers/Bundle/Application/D1B9B568-8939-4655-B812-54322B193AFD/FBSnapshotsViewerTest.app/FBSnapshotsViewerTest",
+    "-NSTreatUnknownArgumentsAsOpen",
+    NO,
+    "-ApplePersistenceIgnoreState",
+    YES
+)
+11:18:53.802 FBSnapshotsViewerTest[78470:5030312] Process environment: {
+    "CFFIXED_USER_HOME" = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/Containers/Data/Application/0A43508A-692A-4C0E-860B-D032A45BDD62";
+    CLASSIC = 0;
+    "CUPS_SERVER" = "/private/tmp/com.apple.launchd.y42ALmiiLq/Listeners";
+    "DYLD_FALLBACK_FRAMEWORK_PATH" = "/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/System/Library/Frameworks";
+    "DYLD_FALLBACK_LIBRARY_PATH" = "/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/lib";
+    "DYLD_FRAMEWORK_PATH" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator:/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/Developer/Library/PrivateFrameworks";
+    "DYLD_LIBRARY_PATH" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator:/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/Developer/Library/PrivateFrameworks";
+    "DYLD_ROOT_PATH" = "/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot";
+    "FB_REFERENCE_IMAGE_DIR" = "/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/ReferenceImages";
+    HOME = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/Containers/Data/Application/0A43508A-692A-4C0E-860B-D032A45BDD62";
+    "IOS_SIMULATOR_SYSLOG_SOCKET" = "/private/tmp/com.apple.CoreSimulator.SimDevice.9C43B57E-D84A-4295-8C68-E30098B1A2E2/syslogsock";
+    "IPHONE_SHARED_RESOURCES_DIRECTORY" = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data";
+    "IPHONE_SIMULATOR_ROOT" = "/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot";
+    "IPHONE_TVOUT_EXTENDED_PROPERTIES" = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/Library/Application Support/Simulator/extended_display.plist";
+    "MTC_CRASH_ON_REPORT" = 1;
+    NSUnbufferedIO = YES;
+    "OS_ACTIVITY_DT_MODE" = YES;
+    PATH = "/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/bin:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/bin:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/sbin:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/sbin:/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/local/bin";
+    "SIMULATOR_AUDIO_DEVICES_PLIST_PATH" = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/var/run/com.apple.coresimulator.audio.plist";
+    "SIMULATOR_AUDIO_SETTINGS_PATH" = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/var/run/simulatoraudio/audiosettings.plist";
+    "SIMULATOR_BOOT_TIME" = 1507369439;
+    "SIMULATOR_CAPABILITIES" = "/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/DeviceTypes/iPhone2017-A.simdevicetype/Contents/Resources/capabilities.plist";
+    "SIMULATOR_DEVICE_NAME" = "iPhone 8";
+    "SIMULATOR_EXTENDED_DISPLAY_PROPERTIES" = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/Library/Application Support/Simulator/extended_display.plist";
+    "SIMULATOR_HID_SYSTEM_MANAGER" = "/Library/Developer/PrivateFrameworks/CoreSimulator.framework/Resources/Platforms/iphoneos/Library/Frameworks/SimulatorHID.framework";
+    "SIMULATOR_HOST_HOME" = "/Users/antondomashnev";
+    "SIMULATOR_LEGACY_ASSET_SUFFIX" = iphone;
+    "SIMULATOR_LOG_ROOT" = "/Users/antondomashnev/Library/Logs/CoreSimulator/9C43B57E-D84A-4295-8C68-E30098B1A2E2";
+    "SIMULATOR_MAINSCREEN_HEIGHT" = 1334;
+    "SIMULATOR_MAINSCREEN_PITCH" = "326.000000";
+    "SIMULATOR_MAINSCREEN_SCALE" = "2.000000";
+    "SIMULATOR_MAINSCREEN_WIDTH" = 750;
+    "SIMULATOR_MEMORY_WARNINGS" = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/var/run/memory_warning_simulation";
+    "SIMULATOR_MODEL_IDENTIFIER" = "iPhone10,4";
+    "SIMULATOR_PRODUCT_CLASS" = D20;
+    "SIMULATOR_ROOT" = "/Applications/Xcode_9.0.0_fb.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot";
+    "SIMULATOR_RUNTIME_BUILD_VERSION" = 15A372;
+    "SIMULATOR_RUNTIME_VERSION" = "11.0";
+    "SIMULATOR_SHARED_RESOURCES_DIRECTORY" = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data";
+    "SIMULATOR_UDID" = "9C43B57E-D84A-4295-8C68-E30098B1A2E2";
+    "SIMULATOR_VERSION_INFO" = "CoreSimulator 494.13.6 - Device: iPhone 8 - Runtime: iOS 11.0 (15A372) - DeviceType: iPhone2017-A";
+    "TESTMANAGERD_SIM_SOCK" = "/private/tmp/com.apple.launchd.8X1R6Vr0WK/com.apple.testmanagerd.unix-domain.socket";
+    TMPDIR = "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/Containers/Data/Application/0A43508A-692A-4C0E-860B-D032A45BDD62/tmp";
+    XCInjectBundleInto = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator/FBSnapshotsViewerTest.app/FBSnapshotsViewerTest";
+    "XCODE_DBG_XPC_EXCLUSIONS" = "com.apple.dt.xctestSymbolicator";
+    XCTestConfigurationFilePath = "/var/folders/4q/7bj6nm8x0w5d0d7fx8r3b4n4kwxf4t/T/com.apple.dt.XCTest/IDETestRunSession-60BEBBC9-A40A-4DF7-92B2-6E2E946CB125/FBSnapshotsViewerTestTests-6920A004-EEDD-4073-A218-4C33057B8991/LaunchSessions/2CEC62B7-8789-4E42-9277-D0962AA396D0/remote-container/tmp/FBSnapshotsViewerTestTests-2CEC62B7-8789-4E42-9277-D0962AA396D0.xctestconfiguration";
+    "XPC_FLAGS" = 0x0;
+    "XPC_SERVICE_NAME" = "UIKitApplication:Anton-Domashnev.FBSnapshotsViewerTest[0xb6e1][66376]";
+    "XPC_SIMULATOR_LAUNCHD_NAME" = "com.apple.CoreSimulator.SimDevice.9C43B57E-D84A-4295-8C68-E30098B1A2E2";
+    "__XCODE_BUILT_PRODUCTS_DIR_PATHS" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator";
+    "__XPC_DYLD_FRAMEWORK_PATH" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator";
+    "__XPC_DYLD_LIBRARY_PATH" = "/Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator";
+}
+11:18:53.802 FBSnapshotsViewerTest[78470:5030312] App Sandbox active: NO
+11:18:53.802 FBSnapshotsViewerTest[78470:5030312] Loading test bundle at: file:///Users/antondomashnev/Library/Developer/Xcode/DerivedData/FBSnapshotsViewerTest-cfwggbrdbrgmeqglezgseksycblm/Build/Products/Debug-iphonesimulator/FBSnapshotsViewerTest.app/PlugIns/FBSnapshotsViewerTestTests.xctest/
+11:18:53.802 FBSnapshotsViewerTest[78470:5030312] Finished loading test bundle
+11:18:53.802 FBSnapshotsViewerTest[78470:5030312] Readying IDE session
+11:18:53.804 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x60000000a190, state: XCTWaiterStateInProgress> entering wait loop for 5.00s with expectations: (
+    "Exchange protocol versions with daemon"
+)
+11:18:53.809 FBSnapshotsViewerTest[78470:5030376] Got daemon protocol version 18
+11:18:53.809 FBSnapshotsViewerTest[78470:5030372] <XCTWaiter: 0x60000000a190, state: XCTWaiterStateSucceeded>: cancelWaiting
+11:18:53.809 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x60000000a190, state: XCTWaiterStateSucceeded> done waiting
+11:18:53.809 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x60000000a190, state: XCTWaiterStateSucceeded> cleaning up Exchange protocol versions with daemon
+11:18:53.809 FBSnapshotsViewerTest[78470:5030312] Requesting IDE connection transport
+11:18:53.810 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x608000015110, state: XCTWaiterStateInProgress> entering wait loop for 60.00s with expectations: (
+    "Transport for IDE session acquired"
+)
+11:18:53.811 FBSnapshotsViewerTest[78470:5030376] Creating transport with received transport data
+11:18:53.811 FBSnapshotsViewerTest[78470:5030367] <XCTWaiter: 0x608000015110, state: XCTWaiterStateSucceeded>: cancelWaiting
+11:18:53.811 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x608000015110, state: XCTWaiterStateSucceeded> done waiting
+11:18:53.811 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x608000015110, state: XCTWaiterStateSucceeded> cleaning up Transport for IDE session acquired
+11:18:53.811 FBSnapshotsViewerTest[78470:5030312] Creating connection with transport <DTXFileDescriptorTransport: 0x6080000f3680>
+11:18:53.812 FBSnapshotsViewerTest[78470:5030312] Creating the proxy channel with connection <DTXConnection 0x60c0001fef00 : x1>
+11:18:53.812 FBSnapshotsViewerTest[78470:5030312] Messaging IDE proxy - _XCT_testBundleReadyWithProtocolVersion:25 minimumVersion:8
+11:18:53.813 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x60c00000a720, state: XCTWaiterStateInProgress> entering wait loop for 60.00s with expectations: (
+    "IDE session ready for test plan"
+)
+11:18:53.813 FBSnapshotsViewerTest[78470:5030371] _XCT_testBundleReadyWithProtocolVersion:minimumVersion: reply received
+11:18:53.819 FBSnapshotsViewerTest[78470:5030367] _IDE_startExecutingTestPlanWithProtocolVersion:25
+11:18:53.819 FBSnapshotsViewerTest[78470:5030376] <XCTWaiter: 0x60c00000a720, state: XCTWaiterStateSucceeded>: cancelWaiting
+11:18:53.819 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x60c00000a720, state: XCTWaiterStateSucceeded> done waiting
+11:18:53.819 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x60c00000a720, state: XCTWaiterStateSucceeded> cleaning up IDE session ready for test plan
+11:18:53.822 Xcode[55173:4886155] Starting test plan, clearing initialization timeout timer.
+11:18:53.822 FBSnapshotsViewerTest[78470:5030312] Loading test suite...
+11:18:53.857 FBSnapshotsViewerTest[78470:5030312] Finished loading test suite, took 0.035s
+11:18:53.857 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testBundleWillStart:]
+11:18:53.857 FBSnapshotsViewerTest[78470:5030312] Running suite...
+11:18:53.858 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 58 bytes written out to StandardOutputAndStandardError
+11:18:53.858 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testSuiteWillStart:]
+11:18:53.860 Xcode[55173:4886155] _XCT_testSuite:All tests didStartAt:2017-10-07 10:18:53 +0000
+11:18:53.860 Xcode[55173:5029539] (LOG ARBITER) Rotating message buffer with 3 messages.
+11:18:53.894 Xcode[55173:5023754] (LOG ARBITER) Dumping buffered message data; 3 messages.
+Test Suite 'All tests' started at 2017-10-07 11:18:53.858
+Test Suite 'FBSnapshotTestCase.framework' started at 2017-10-07 11:18:53.858
+11:18:53.860 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 230 bytes written out to StandardOutputAndStandardError
+11:18:53.860 Xcode[55173:4886155] _XCT_testSuite:FBSnapshotTestCase.framework didFinishAt:2017-10-07 10:18:53 +0000 runCount:0 withFailures:0 unexpected:0 testDuration:0 totalDuration:0.0003209710121154785
+11:18:53.859 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testSuiteWillStart:]
+11:18:53.860 Xcode[55173:4886155] _XCT_testSuite:FBSnapshotsViewerTestTests.xctest didStartAt:2017-10-07 10:18:53 +0000
+11:18:53.861 Xcode[55173:4886155] _XCT_testSuite:FBSnapshotsViewerTestTests didStartAt:2017-10-07 10:18:53 +0000
+11:18:53.859 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testSuiteWillStart:]
+11:18:53.860 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testCaseWillStart:] FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample
+11:18:53.861 Xcode[55173:4886155] _XCT_testCaseDidStartForTestClass:FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests method:testExample
+Test Suite 'FBSnapshotTestCase.framework' passed at 2017-10-07 11:18:53.859.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'FBSnapshotsViewerTestTests.xctest' started at 2017-10-07 11:18:53.859
+Test Suite 'FBSnapshotsViewerTestTests' started at 2017-10-07 11:18:53.859
+11:18:53.864 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 247 bytes written out to StandardOutputAndStandardError
+Test Case '-[FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample]' started.
+11:18:53.890 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 105 bytes written out to StandardOutputAndStandardError
+11:18:53.890 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testCaseDidFinish:]
+11:18:53.894 Xcode[55173:4886155] _XCT_testCaseDidFinishForTestClass:FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests method:testExample withStatus:passed duration:0.02999198436737061
+Test Case '-[FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample]' passed (0.030 seconds).
+11:18:53.900 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 91 bytes written out to StandardOutputAndStandardError
+Test Case '-[FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample2]' started.
+11:18:53.900 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 673 bytes written out to StandardOutputAndStandardError
+11:18:53.900 Xcode[55173:4886155] _XCT_testCaseDidStartForTestClass:FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests method:testExample2
+11:18:53.890 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testCaseWillStart:] FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample2
+11:18:53.919 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 633 bytes written out to StandardOutputAndStandardError
+2017-10-07 11:18:53.896861+0100 FBSnapshotsViewerTest[78470:5030312] If you have Kaleidoscope installed you can run this command to see an image diff:
+ksdiff "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/Containers/Data/Application/0A43508A-692A-4C0E-860B-D032A45BDD62/tmp/FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests/reference_testExample2@2x.png" "/Users/antondomashnev/Library/Developer/CoreSimulator/Devices/9C43B57E-D84A-4295-8C68-E30098B1A2E2/data/Containers/Data/Application/0A43508A-692A-4C0E-860B-D032A45BDD62/tmp/FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests/failed_testExample2@2x.png"
+/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/FBSnapshotsViewerTestTests.swift:33: error: -[FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample2] : failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=4 "Images different" UserInfo={NSLocalizedFailureReason=image pixels differed by more than 0.00% from the reference image, FBDiffedImageKey=<UIImage: 0x6080000bcda0>, {64, 64}, FBReferenceImageKey=<UIImage: 0x6000000bc500>, {64, 64}, FBCapturedImageKey=<UIImage: 0x6000000bc680>, {64, 64}, NSLocalizedDescription=Images different})
+2017-10-07 11:24:48.361941+0100 FBSnapshotsViewerTest[84009:5050923] Reference image save at: /Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/ReferenceImages_64/FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests/testExample@2x.png
+/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/FBSnapshotsViewerTestTests.swift:27: error: -[FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample] : failed - Test ran in record mode. Reference image is now saved. Disable record mode to perform an actual snapshot comparison!11:18:53.919 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 961 bytes written out to StandardOutputAndStandardError
+Test Suite 'FBSnapshotsViewerTestTests' failed at 2017-10-07 11:18:53.907.
+	 Executed 2 tests, with 2 failures (0 unexpected) in 0.046 (0.047) seconds
+11:18:53.922 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 158 bytes written out to StandardOutputAndStandardError
+11:18:53.903 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testCase:didFailWithDescription:inFile:atLine:]
+11:18:53.922 Xcode[55173:4886155] _XCT_testCaseDidFailForTestClass:FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests method:testExample2 withMessage:failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=4 "Images different" UserInfo={NSLocalizedFailureReason=image pixels differed by more than 0.00% from the reference image, FBDiffedImageKey=<UIImage: 0x6080000bcda0>, {64, 64}, FBReferenceImageKey=<UIImage: 0x6000000bc500>, {64, 64}, FBCapturedImageKey=<UIImage: 0x6000000bc680>, {64, 64}, NSLocalizedDescription=Images different}) file:/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/FBSnapshotsViewerTestTests.swift line:33
+11:18:53.903 FBSnapshotsViewerTest[78470:5030312] -[FBSnapshotsViewerTestTests testExample2] started activity <XCActivityRecord: 0x60000009b850> 2017-10-07 10:18:53 +0000: Assertion Failure: FBSnapshotsViewerTestTests.swift:33: failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=4 "Images different" UserInfo={NSLocalizedFailureReason=image pixels differed by more than 0.00% from the reference image, FBDiffedImageKey=<UIImage: 0x6080000bcda0>, {64, 64}, FBReferenceImageKey=<UIImage: 0x6000000bc500>, {64, 64}, FBCapturedImageKey=<UIImage: 0x6000000bc680>, {64, 64}, NSLocalizedDescription=Images different})
+11:18:53.922 Xcode[55173:4886155] -[FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample2] will start activity 454B10A4-ACC0-46A9-BB19-5EB13A01FC08:'Assertion Failure: FBSnapshotsViewerTestTests.swift:33: failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=4 "Images different" UserInfo={NSLocalizedFailureReason=image pixels differed by more than 0.00% from the reference image, FBDiffedImageKey=<UIImage: 0x6080000bcda0>, {64, 64}, FBReferenceImageKey=<UIImage: 0x6000000bc500>, {64, 64}, FBCapturedImageKey=<UIImage: 0x6000000bc680>, {64, 64}, NSLocalizedDescription=Images different})'
+11:18:53.904 FBSnapshotsViewerTest[78470:5030312] -[FBSnapshotsViewerTestTests testExample2] finished activity <XCActivityRecord: 0x60000009b850> 2017-10-07 10:18:53 +0000: Assertion Failure: FBSnapshotsViewerTestTests.swift:33: failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=4 "Images different" UserInfo={NSLocalizedFailureReason=image pixels differed by more than 0.00% from the reference image, FBDiffedImageKey=<UIImage: 0x6080000bcda0>, {64, 64}, FBReferenceImageKey=<UIImage: 0x6000000bc500>, {64, 64}, FBCapturedImageKey=<UIImage: 0x6000000bc680>, {64, 64}, NSLocalizedDescription=Images different}) (0.000516057s)
+11:18:53.922 Xcode[55173:4886155] -[FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample2] did finish activity 454B10A4-ACC0-46A9-BB19-5EB13A01FC08:'Assertion Failure: FBSnapshotsViewerTestTests.swift:33: failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=4 "Images different" UserInfo={NSLocalizedFailureReason=image pixels differed by more than 0.00% from the reference image, FBDiffedImageKey=<UIImage: 0x6080000bcda0>, {64, 64}, FBReferenceImageKey=<UIImage: 0x6000000bc500>, {64, 64}, FBCapturedImageKey=<UIImage: 0x6000000bc680>, {64, 64}, NSLocalizedDescription=Images different})'
+11:18:53.905 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testCase:didFailWithDescription:inFile:atLine:]
+11:18:53.923 Xcode[55173:4886155] _XCT_testCaseDidFailForTestClass:FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests method:testExample2 withMessage:failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=1 "Unable to load reference image." UserInfo={NSLocalizedFailureReason=Reference image not found. You need to run the test in record mode, NSLocalizedDescription=Unable to load reference image., FBReferenceImageFilePathKey=/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/ReferenceImages_32/FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests/testExample2@2x.png}) file:/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/FBSnapshotsViewerTestTests.swift line:33
+11:18:53.905 FBSnapshotsViewerTest[78470:5030312] -[FBSnapshotsViewerTestTests testExample2] started activity <XCActivityRecord: 0x60000009f4f0> 2017-10-07 10:18:53 +0000: Assertion Failure: FBSnapshotsViewerTestTests.swift:33: failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=1 "Unable to load reference image." UserInfo={NSLocalizedFailureReason=Reference image not found. You need to run the test in record mode, NSLocalizedDescription=Unable to load reference image., FBReferenceImageFilePathKey=/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/ReferenceImages_32/FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests/testExample2@2x.png})
+11:18:53.923 Xcode[55173:4886155] -[FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample2] will start activity E1BFC88E-B13A-4A26-B8A6-899E6070A0AB:'Assertion Failure: FBSnapshotsViewerTestTests.swift:33: failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=1 "Unable to load reference image." UserInfo={NSLocalizedFailureReason=Reference image not found. You need to run the test in record mode, NSLocalizedDescription=Unable to load reference image., FBReferenceImageFilePathKey=/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/ReferenceImages_32/FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests/testExample2@2x.png})'
+11:18:53.905 FBSnapshotsViewerTest[78470:5030312] -[FBSnapshotsViewerTestTests testExample2] finished activity <XCActivityRecord: 0x60000009f4f0> 2017-10-07 10:18:53 +0000: Assertion Failure: FBSnapshotsViewerTestTests.swift:33: failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=1 "Unable to load reference image." UserInfo={NSLocalizedFailureReason=Reference image not found. You need to run the test in record mode, NSLocalizedDescription=Unable to load reference image., FBReferenceImageFilePathKey=/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/ReferenceImages_32/FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests/testExample2@2x.png}) (0.000319958s)
+11:18:53.923 Xcode[55173:4886155] -[FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests testExample2] did finish activity E1BFC88E-B13A-4A26-B8A6-899E6070A0AB:'Assertion Failure: FBSnapshotsViewerTestTests.swift:33: failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=1 "Unable to load reference image." UserInfo={NSLocalizedFailureReason=Reference image not found. You need to run the test in record mode, NSLocalizedDescription=Unable to load reference image., FBReferenceImageFilePathKey=/Users/antondomashnev/privatesource/FBSnapshotsViewerTest/FBSnapshotsViewerTestTests/ReferenceImages_32/FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests/testExample2@2x.png})'
+11:18:53.906 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testCaseDidFinish:]
+11:18:53.923 Xcode[55173:4886155] _XCT_testCaseDidFinishForTestClass:FBSnapshotsViewerTestTests.FBSnapshotsViewerTestTests method:testExample2 withStatus:failed duration:0.01633799076080322
+11:18:53.907 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testSuiteDidFinish:]
+11:18:53.934 Xcode[55173:4886155] _XCT_testSuite:FBSnapshotsViewerTestTests didFinishAt:2017-10-07 10:18:53 +0000 runCount:2 withFailures:2 unexpected:0 testDuration:0.04632997512817383 totalDuration:0.04736202955245972
+11:18:53.919 FBSnapshotsViewerTest[78470:5030312] Activity statistics for FBSnapshotsViewerTestTests:
+11:18:53.919 FBSnapshotsViewerTest[78470:5030312] 0.00s : Other
+11:18:53.919 FBSnapshotsViewerTest[78470:5030312] Total time in activities: 0.00s
+11:18:53.920 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testSuiteDidFinish:]
+11:18:53.934 Xcode[55173:4886155] _XCT_testSuite:FBSnapshotsViewerTestTests.xctest didFinishAt:2017-10-07 10:18:53 +0000 runCount:2 withFailures:2 unexpected:0 testDuration:0.04632997512817383 totalDuration:0.06055200099945068
+11:18:53.920 FBSnapshotsViewerTest[78470:5030312] Activity statistics for FBSnapshotsViewerTestTests.xctest:
+11:18:53.920 FBSnapshotsViewerTest[78470:5030312] 0.00s : Other
+11:18:53.920 FBSnapshotsViewerTest[78470:5030312] Total time in activities: 0.00s
+11:18:53.920 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testSuiteDidFinish:]
+11:18:53.934 Xcode[55173:4886155] _XCT_testSuite:All tests didFinishAt:2017-10-07 10:18:53 +0000 runCount:2 withFailures:2 unexpected:0 testDuration:0.04632997512817383 totalDuration:0.06262499094009399
+11:18:53.921 FBSnapshotsViewerTest[78470:5030312] Activity statistics for All tests:
+11:18:53.921 FBSnapshotsViewerTest[78470:5030312] 0.00s : Other
+11:18:53.921 FBSnapshotsViewerTest[78470:5030312] Total time in activities: 0.00s
+11:18:53.921 FBSnapshotsViewerTest[78470:5030312] Finished running suite.
+11:18:53.934 Xcode[55173:4886155] -[XCTTestRunnerSession _XCT_didFinishExecutingTestPlan]_block_invoke
+11:18:53.921 FBSnapshotsViewerTest[78470:5030312] -[XCTRunnerIDESession testBundleDidFinish:], Flushing connection to IDE...
+11:18:53.921 FBSnapshotsViewerTest[78470:5030312] Calling completion.
+11:18:53.921 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x60c00000aba0, state: XCTWaiterStateInProgress> entering wait loop for 15.00s with expectations: (
+    "IDE confirmed the end of session"
+)
+Test Suite 'FBSnapshotsViewerTestTests.xctest' failed at 2017-10-07 11:18:53.920.
+	 Executed 2 tests, with 2 failures (0 unexpected) in 0.046 (0.061) seconds
+11:18:53.951 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 134 bytes written out to StandardOutputAndStandardError
+11:18:53.951 Xcode[55173:5024903] Closing socket 86 to testmanagerd for Sim iPhone 8
+11:18:53.934 FBSnapshotsViewerTest[78470:5030371] <XCTWaiter: 0x60c00000aba0, state: XCTWaiterStateSucceeded>: cancelWaiting
+11:18:53.935 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x60c00000aba0, state: XCTWaiterStateSucceeded> done waiting
+11:18:53.935 FBSnapshotsViewerTest[78470:5030312] <XCTWaiter: 0x60c00000aba0, state: XCTWaiterStateSucceeded> cleaning up IDE confirmed the end of session
+11:18:53.940 testmanagerd[78302:5030107] Test process connection invalidated or interrupted, closing test session <XCTestSession: 0x7ffb5e8087f0>.
+11:18:53.941 testmanagerd[78302:5029922] Closed <XCTestSession: 0x7ffb5e8087f0>, removing from (
+    "<XCTestSession: 0x7ffb5e8087f0>"
+)
+11:18:53.941 testmanagerd[78302:5029922] Tearing down test session <XCTestSession: 0x7ffb5e8087f0>.
+11:18:53.941 testmanagerd[78302:5029922] XCTestSession is responsible for cleaning up its socket from an XCIDESession
+11:18:53.943 testmanagerd[78302:5029922] Considering exiting:
+11:18:53.943 testmanagerd[78302:5029922] Session summary: 0 test sessions, 0 sessions with identifiers, 0 unidentified sessions, has control sessions, 0 pending connections
+11:18:53.943 testmanagerd[78302:5029922] Control sessions: (
+    "<XCIDESession: 0x7ffb5cc0b8a0> (socket 5) created Saturday, October 7, 2017 at 11:18:53 AM Irish Standard Time"
+)
+11:18:53.960 Xcode[55173:4886155] Got death notice for pid 78470, removing from SimulatorSessionMap
+11:18:53.973 Xcode[55173:4886155] Launch session LaunchSessionClaim_0x7f9879a86e60 relinquised claim on simulator 9C43B57E-D84A-4295-8C68-E30098B1A2E2
+11:18:53.973 Xcode[55173:4886155] Launch session LaunchSessionClaim_0x7f9879a86e60 relinquised claim on simulator 9C43B57E-D84A-4295-8C68-E30098B1A2E2
+Test Suite 'All tests' failed at 2017-10-07 11:18:53.920.
+	 Executed 2 tests, with 2 failures (0 unexpected) in 0.046 (0.063) seconds
+11:18:54.076 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: parseConsoleOutputFromOriginalOutput: called, 0 bytes written out to StandardOutputAndStandardError
+11:18:54.216 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0> finished receiving data from <IDEConsoleAdaptor: 0x7f9889b17040 'target' stdin: (null) 0 stdout: (null) 0 stderr: (null) 0>
+11:18:54.216 Xcode[55173:4886155] <IDETestOperationCoordinator: 0x7f9879f35ed0>: _considerFlushingDelegateBlockQueue - nothing to flush
+11:18:54.216 Xcode[55173:4886155] _finishWithError:(null)
