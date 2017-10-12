@@ -52,11 +52,21 @@
       <title>0.7.0</title>
       <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
       <description>
-        &lt;ul&gt; &lt;li&gt;&lt;a
+         &lt;ul&gt; &lt;li&gt;&lt;a
         href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/60&quot;&gt;#60&lt;/a&gt;: Add open in Xcode button - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/li&gt; &lt;/ul&gt; 
       </description>
       <pubDate>Fri, 18 Aug 2017 16:26:26 +0200</pubDate>
       <enclosure type='application/octet-stream' sparkle:version='9' sparkle:shortVersionString='0.7.0' length='5373037' url='https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/0.7.0/FBSnapshotsViewer-0.7.0.app.zip'/>
+    </item>
+    <item>
+      <title>0.8.0</title>
+      <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
+      <description>
+        &lt;ul&gt; &lt;li&gt; &lt;p&gt;&lt;a
+        href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/62&quot;&gt;#62&lt;/a&gt;: Add copy image button - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/Antondomashnev/FBSnapshotsViewer/pull/64&quot;&gt;#64&lt;/a&gt;: Fix test log parsing issue - &lt;a href=&quot;https://github.com/antondomashnev&quot;&gt;@antondomashnev&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
+      </description>
+      <pubDate>Wed, 11 Oct 2017 21:46:45 -0700</pubDate>
+      <enclosure type='application/octet-stream' sparkle:version='10' sparkle:shortVersionString='0.8.0' length='9275650' url='https://github.com/Antondomashnev/FBSnapshotsViewer/releases/download/0.8.0/FBSnapshotsViewer-0.8.0.app.zip'/>
     </item>
   </channel>
 </rss>

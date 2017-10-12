@@ -27,7 +27,7 @@ module Fastlane
 
         # Verify that the new version is strictly greater than the last one in the list
         last_version = channel.elements.select { |e| e.name == 'item' }.last.get_elements('enclosure').first.attributes['version']
-        raise "You must update the machine version to be above #{last_version}!" unless params[:machine_version] > last_version
+        raise "You must update the machine version #{params[:machine_version]} to be above #{last_version}!" unless params[:machine_version] > last_version
 
         # Add a new item to the Appcast feed
         item = channel.add_element('item')
