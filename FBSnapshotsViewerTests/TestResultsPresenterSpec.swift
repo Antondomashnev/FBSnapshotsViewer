@@ -76,7 +76,7 @@ class TestResultsPresenterSpec: QuickSpec {
             var testInformation: SnapshotTestInformation!
 
             beforeEach {
-                build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs:  [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+                build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                 testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "MyTest", testFilePath: "testFilePath", testLineNumber: 1)
                 testResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo/bar.png", build: build)
                 testResultDisplayInfo = TestResultDisplayInfo(testResult: testResult)
@@ -96,7 +96,7 @@ class TestResultsPresenterSpec: QuickSpec {
             var testInformation: SnapshotTestInformation!
             
             beforeEach {
-                build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs:  [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+                build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                 testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "MyTest", testFilePath: "testFilePath", testLineNumber: 1)
                 testResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo/bar.png", build: build)
                 testResultDisplayInfo = TestResultDisplayInfo(testResult: testResult)
@@ -125,7 +125,7 @@ class TestResultsPresenterSpec: QuickSpec {
                 var testResults: [SnapshotTestResult] = []
 
                 beforeEach {
-                    let build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs:  [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+                    let build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                     let testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "MyTest", testFilePath: "testFilePath", testLineNumber: 1)
                     let snapshotTestResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
                     let titleInfo = TestResultsSectionTitleDisplayInfo(build: build, testContext: "Context")
@@ -155,7 +155,7 @@ class TestResultsPresenterSpec: QuickSpec {
             var testResults: [SnapshotTestResult] = []
             
             beforeEach {
-                let build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs:  [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+                let build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                 let testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "testName", testFilePath: "testFilePath", testLineNumber: 1)
                 let snapshotTestResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath", diffImagePath: "diffImagePath", failedImagePath: "failedImagePath", build: build)
                 testResults = [snapshotTestResult]
@@ -176,7 +176,7 @@ class TestResultsPresenterSpec: QuickSpec {
             var testInformation: SnapshotTestInformation!
         
             beforeEach {
-                build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs:  [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
+                build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
                 testInformation = SnapshotTestInformation(testClassName: "testClassName", testName: "MyTest", testFilePath: "testFilePath", testLineNumber: 1)
                 testResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo/bar.png", build: build)
                 testResultDisplayInfo = TestResultDisplayInfo(testResult: testResult)

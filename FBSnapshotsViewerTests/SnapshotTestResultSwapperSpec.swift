@@ -155,7 +155,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
             
             context("given recorded snapshot test result") {
                 beforeEach {
-                    testResult = SnapshotTestResult.recorded(testInformation:testInformation, referenceImagePath: "Bar", build: build)
+                    testResult = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "Bar", build: build)
                 }
                 
                 it("returns false") {

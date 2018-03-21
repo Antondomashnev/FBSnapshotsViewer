@@ -45,7 +45,6 @@ extension PreferencesInteractor: PreferencesInteractorInput {
         switch configuration.derivedDataFolder.type {
         case .xcodeDefault:
             assertionFailure("Unexpected call to modify derived data folder path while the type of derived data is Xcode")
-            break
         case .xcodeCustom:
             configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: path))
         case .appcode:

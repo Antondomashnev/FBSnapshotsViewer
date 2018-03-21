@@ -6,7 +6,7 @@ PODS:
   - Sourcery (0.9.0)
   - Sparkle (1.18.1)
   - SwiftGen (4.2.1)
-  - SwiftLint (0.22.0)
+  - SwiftLint (0.25.0)
 
 DEPENDENCIES:
   - KZFileWatchers (~> 1.0)
@@ -26,7 +26,7 @@ SPEC CHECKSUMS:
   Sourcery: e3829460a1fa0bcd3b689e6087a89cc063cd2289
   Sparkle: 06ea33170007c5937ee54da481b4481af98fac79
   SwiftGen: 2ba2a88fc6130b96e38e2baa0029e4bd222ffd85
-  SwiftLint: 1134786caedd2caab0560d2f36b76414a5a56808
+  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
 
 PODFILE CHECKSUM: f2aa312bd89688aa16287520141fb963f25369df
 
