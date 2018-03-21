@@ -25,7 +25,7 @@ final class MenuController {
 }
 
 // MARK: - MenuUserInterface
-extension MenuController:  MenuUserInterface {
+extension MenuController: MenuUserInterface {
     func setNewTestResults(available: Bool) {
         statusItem.button?.image = NSImage(named: available ? "menu_icon_red" : "menu_icon")
     }
