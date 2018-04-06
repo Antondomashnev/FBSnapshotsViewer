@@ -13,4 +13,8 @@ extension FileManager {
         try self.removeItem(at: toURL)
         try self.copyItem(at: fromURL, to: toURL)
     }
+
+    func deleteItem(at url: URL) throws {
+        try self.removeItem(at: url)
+    }
 }
