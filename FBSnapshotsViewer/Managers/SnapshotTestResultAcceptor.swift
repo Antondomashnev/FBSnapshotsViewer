@@ -53,7 +53,7 @@ class SnapshotTestResultAcceptor {
     
     func accept(_ testResult: SnapshotTestResult) throws -> SnapshotTestResult {
         let removeAcceptedImages = true
-        guard case let SnapshotTestResult.failed(testInformation, referenceImagePath, diffImagePath, failedImagePath, build) = testResult, canAccept(testResult) else {
+        guard case let SnapshotTestResult.failed(testInformation, _, _, failedImagePath, build) = testResult, canAccept(testResult) else {
             throw SnapshotTestResultAcceptorError.canNotBeAccepted(testResult: testResult)
         }
         let failedImageURL = URL(fileURLWithPath: failedImagePath, isDirectory: false)
@@ -62,14 +62,29 @@ class SnapshotTestResultAcceptor {
             try fileManager.moveItem(at: failedImageURL, to: recordedImageURL)
 
             if removeAcceptedImages {
-                let referenceImageURL = URL(fileURLWithPath: referenceImagePath, isDirectory: false)
-                let diffImageURL = URL(fileURLWithPath: diffImagePath, isDirectory: false)
-                try fileManager.deleteItem(at: failedImageURL)
-                try fileManager.deleteItem(at: referenceImageURL)
-                try fileManager.deleteItem(at: diffImageURL)
+                try removeTestImages(testResult)
             }
             imageCache.invalidate()
             return SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: recordedImageURL.path, build: build)
+        }
+        catch let error {
+            throw SnapshotTestResultAcceptorError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
+        }
+    }
+    
+    func removeTestImages(_ testResult: SnapshotTestResult) throws {
+        guard case let SnapshotTestResult.failed(_, referenceImagePath, diffImagePath, failedImagePath, _) = testResult else {
+            throw SnapshotTestResultAcceptorError.canNotBeAccepted(testResult: testResult)
+        }
+
+        let referenceImageURL = URL(fileURLWithPath: referenceImagePath, isDirectory: false)
+        let diffImageURL = URL(fileURLWithPath: diffImagePath, isDirectory: false)
+        let failedImageURL = URL(fileURLWithPath: failedImagePath, isDirectory: false)
+        
+        do {
+            try fileManager.deleteItem(at: referenceImageURL)
+            try fileManager.deleteItem(at: diffImageURL)
+            try fileManager.deleteItem(at: failedImageURL)
         }
         catch let error {
             throw SnapshotTestResultAcceptorError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
