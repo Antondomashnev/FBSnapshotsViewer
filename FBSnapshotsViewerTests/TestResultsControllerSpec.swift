@@ -104,12 +104,12 @@ class TestResultsControllerSpec: QuickSpec {
             }
         }
         
-        describe(".testResultCell:swapSnapshotsButtonClicked") {
+        describe(".testResultCell:acceptSnapshotsButtonClicked") {
             var cell: TestResultCell!
-            var swapSnapshotsButton: NSButton!
+            var acceptSnapshotsButton: NSButton!
             
             beforeEach {
-                swapSnapshotsButton = NSButton(frame: NSRect.zero)
+                acceptSnapshotsButton = NSButton(frame: NSRect.zero)
                 cell = TestResultCell(nibName: nil, bundle: nil)
             }
             
@@ -119,7 +119,7 @@ class TestResultsControllerSpec: QuickSpec {
                 }
                 
                 it("asserts") {
-                    expect { controller.testResultCell(cell, swapSnapshotsButtonClicked: swapSnapshotsButton) }.to(throwAssertion())
+                    expect { controller.testResultCell(cell, acceptSnapshotsButtonClicked: acceptSnapshotsButton) }.to(throwAssertion())
                 }
             }
             
@@ -130,7 +130,7 @@ class TestResultsControllerSpec: QuickSpec {
                 }
                 
                 it("asserts") {
-                    expect { controller.testResultCell(cell, swapSnapshotsButtonClicked: swapSnapshotsButton) }.to(throwAssertion())
+                    expect { controller.testResultCell(cell, acceptSnapshotsButtonClicked: acceptSnapshotsButton) }.to(throwAssertion())
                 }
             }
             
@@ -138,12 +138,12 @@ class TestResultsControllerSpec: QuickSpec {
                 beforeEach {
                     collectionViewOutlets.testResultsDisplayInfo = displayInfo
                     collectionView.indexPathForItemReturnValue = IndexPath(item: 0, section: 0)
-                    controller.testResultCell(cell, swapSnapshotsButtonClicked: swapSnapshotsButton)
+                    controller.testResultCell(cell, acceptSnapshotsButtonClicked: acceptSnapshotsButton)
                 }
                 
-                it("swaps test result") {
-                    expect(eventHandler.swap___Called).to(beTrue())
-                    expect(eventHandler.swap___ReceivedTestResults).to(equal([testResultDisplayInfo]))
+                it("accepts test result") {
+                    expect(eventHandler.accept___Called).to(beTrue())
+                    expect(eventHandler.accept___ReceivedTestResults).to(equal([testResultDisplayInfo]))
                 }
             }
         }

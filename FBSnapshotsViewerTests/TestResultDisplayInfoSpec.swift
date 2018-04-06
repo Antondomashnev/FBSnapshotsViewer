@@ -64,10 +64,10 @@ class TestResultDisplayInfo_MockKaleidoscopeViewer: ExternalViewer {
     }
 }
 
-class TestResultDisplayInfo_MockSnapshotTestResultSwapper: SnapshotTestResultSwapper {
-    var canSwapReturnValue: Bool = false
-    override func canSwap(_ testResult: SnapshotTestResult) -> Bool {
-        return canSwapReturnValue
+class TestResultDisplayInfo_MockSnapshotTestResultAcceptor: SnapshotTestResultAcceptor {
+    var canAcceptReturnValue: Bool = false
+    override func canAccept(_ testResult: SnapshotTestResult) -> Bool {
+        return canAcceptReturnValue
     }
 }
 
@@ -77,7 +77,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
             var build: Build!
             var testInformation: SnapshotTestInformation!
             var testResult: SnapshotTestResult!
-            var swapper: TestResultDisplayInfo_MockSnapshotTestResultSwapper!
+            var acceptor: TestResultDisplayInfo_MockSnapshotTestResultAcceptor!
             var externalViewers: ExternalViewers!
             let kaleidoscopeViewer: TestResultDisplayInfo_MockKaleidoscopeViewer.Type = TestResultDisplayInfo_MockKaleidoscopeViewer.self
             let xcodeViewer: TestResultDisplayInfo_MockXcodeViewer.Type = TestResultDisplayInfo_MockXcodeViewer.self
@@ -88,7 +88,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
             
             beforeEach {
                 externalViewers = ExternalViewers(xcodeViewer: xcodeViewer, kaleidoscopeViewer: kaleidoscopeViewer)
-                swapper = TestResultDisplayInfo_MockSnapshotTestResultSwapper()
+                acceptor = TestResultDisplayInfo_MockSnapshotTestResultAcceptor()
                 build = Build(date: Date(), applicationName: "FBSnapshotsViewer", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "foo/bar", isDirectory: true)])
             }
             
@@ -128,7 +128,7 @@ class TestResultDisplayInfoSpec: QuickSpec {
                 }
             }
             
-            describe("canBeSwapped") {
+            describe("canBeAccepted") {
                 var displayInfo: TestResultDisplayInfo!
                 
                 beforeEach {
@@ -136,25 +136,25 @@ class TestResultDisplayInfoSpec: QuickSpec {
                     testResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "referenceImagePath.png", diffImagePath: "diffImagePath.png", failedImagePath: "failedImagePath.png", build: build)
                 }
                 
-                context("when swapper can swap given test result") {
+                context("when acceptor can accept given test result") {
                     beforeEach {
-                        swapper.canSwapReturnValue = true
-                        displayInfo = TestResultDisplayInfo(testResult: testResult, swapper: swapper)
+                        acceptor.canAcceptReturnValue = true
+                        displayInfo = TestResultDisplayInfo(testResult: testResult, acceptor: acceptor)
                     }
                     
-                    it("can be swapped") {
-                        expect(displayInfo.canBeSwapped).to(beTrue())
+                    it("can be accepted") {
+                        expect(displayInfo.canBeAccepted).to(beTrue())
                     }
                 }
                 
-                context("when swapper can not swap given test result") {
+                context("when acceptor can not accept given test result") {
                     beforeEach {
-                        swapper.canSwapReturnValue = false
-                        displayInfo = TestResultDisplayInfo(testResult: testResult, swapper: swapper)
+                        acceptor.canAcceptReturnValue = false
+                        displayInfo = TestResultDisplayInfo(testResult: testResult, acceptor: acceptor)
                     }
                     
-                    it("can not be swapped") {
-                        expect(displayInfo.canBeSwapped).to(beFalse())
+                    it("can not be accepted") {
+                        expect(displayInfo.canBeAccepted).to(beFalse())
                     }
                 }
             }

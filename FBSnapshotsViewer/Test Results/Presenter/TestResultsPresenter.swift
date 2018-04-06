@@ -42,9 +42,9 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         updateUserInterface()
     }
     
-    func swap(_ testResults: [TestResultDisplayInfo]) {
+    func accept(_ testResults: [TestResultDisplayInfo]) {
         for testResultInfo in testResults {
-            interactor?.swap(testResult: testResultInfo.testResult)
+            interactor?.accept(testResult: testResultInfo.testResult)
         }
         updateUserInterface()
     }
@@ -55,11 +55,11 @@ extension TestResultsPresenter: TestResultsModuleInterface {
 }
 
 extension TestResultsPresenter: TestResultsInteractorOutput {
-    func didFailToSwap(testResult: SnapshotTestResult, with error: Error) {
-        let failToSwapAlert = NSAlert()
-        failToSwapAlert.addButton(withTitle: "Ok")
-        failToSwapAlert.alertStyle = .critical
-        failToSwapAlert.messageText = "Ops, swap can not be done. \(error.localizedDescription). Please report an issue https://github.com/Antondomashnev/FBSnapshotsViewer/issues/new"
-        failToSwapAlert.runModal()
+    func didFailToAccept(testResult: SnapshotTestResult, with error: Error) {
+        let failToAcceptAlert = NSAlert()
+        failToAcceptAlert.addButton(withTitle: "Ok")
+        failToAcceptAlert.alertStyle = .critical
+        failToAcceptAlert.messageText = "Ops, accept can not be done. \(error.localizedDescription). Please report an issue https://github.com/Antondomashnev/FBSnapshotsViewer/issues/new"
+        failToAcceptAlert.runModal()
     }
 }
