@@ -92,9 +92,9 @@ class SnapshotTestResultAcceptor {
         let failedImageURL = URL(fileURLWithPath: failedImagePath, isDirectory: false)
         
         do {
-            try fileManager.removeItem(at: referenceImageURL)
-            try fileManager.removeItem(at: diffImageURL)
-            try fileManager.removeItem(at: failedImageURL)
+            try fileManager.deleteItem(at: referenceImageURL)
+            try fileManager.deleteItem(at: diffImageURL)
+            try fileManager.deleteItem(at: failedImageURL)
         }
         catch let error {
             throw SnapshotTestResultSwapperError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
