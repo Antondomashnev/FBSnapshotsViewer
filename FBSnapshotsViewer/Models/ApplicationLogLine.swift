@@ -34,6 +34,7 @@ struct ApplicationLogLineIndicatorContainer {
     static func snapshotTestErrorMessageIndicators(for configuration: Configuration) -> [String] {
         return [" : ((noErrors) is true) failed - Snapshot comparison failed",
                 " : failed - Snapshot comparison failed: Optional(Error Domain=FBSnapshotTestControllerErrorDomain Code=4",
+                " : failed - No previous reference image. New image has been stored for approval.",
                 " : failed - Test ran in record mode."]
     }
 }
