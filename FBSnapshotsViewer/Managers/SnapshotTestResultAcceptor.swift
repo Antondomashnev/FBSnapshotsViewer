@@ -66,4 +66,23 @@ class SnapshotTestResultAcceptor {
             throw SnapshotTestResultAcceptorError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
         }
     }
+
+    func removeTestImages(_ testResult: SnapshotTestResult) throws {
+        guard case let SnapshotTestResult.failed(_, referenceImagePath, diffImagePath, failedImagePath, _) = testResult else {
+            throw SnapshotTestResultSwapperError.canNotBeSwapped(testResult: testResult)
+        }
+        
+        let referenceImageURL = URL(fileURLWithPath: referenceImagePath, isDirectory: false)
+        let diffImageURL = URL(fileURLWithPath: diffImagePath, isDirectory: false)
+        let failedImageURL = URL(fileURLWithPath: failedImagePath, isDirectory: false)
+        
+        do {
+            try fileManager.removeItem(at: referenceImageURL)
+            try fileManager.removeItem(at: diffImageURL)
+            try fileManager.removeItem(at: failedImageURL)
+        }
+        catch let error {
+            throw SnapshotTestResultSwapperError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
+        }
+    }
 }
