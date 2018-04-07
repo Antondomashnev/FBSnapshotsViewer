@@ -13,10 +13,10 @@ extension FileManager {
         try deleteIfExists(at: toURL)
         try self.copyItem(at: fromURL, to: toURL)
     }
-}
 
-func deleteIfExists(at url: URL) throws {
-    if fileExists(atPath: url.path) {
-        try self.removeItem(at: url)
+    func deleteIfExists(at url: URL) throws {
+        if fileExists(atPath: url.path) {
+            try self.removeItem(at: url)
+        }
     }
 }
