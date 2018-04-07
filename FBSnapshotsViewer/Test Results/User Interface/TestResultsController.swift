@@ -75,6 +75,15 @@ extension TestResultsController: TestResultCellDelegate {
         collectionView.reloadSections(IndexSet(integer: testResultInfo.indexPath.section))
     }
     
+    func testResultCell(_ cell: TestResultCell, rejectSnapshotButtonClicked: NSButton) {
+        guard let testResultInfo = findTestResultInfo(for: cell) else {
+            assertionFailure("Unexpected TestResultCellDelegate callback about reject snapshot button click")
+            return
+        }
+        eventHandler.reject([testResultInfo.info])
+        collectionView.reloadSections(IndexSet(integer: testResultInfo.indexPath.section))
+    }
+    
     func testResultCell(_ cell: TestResultCell, viewInXcodeButtonClicked: NSButton) {
         openIn(eventHandler.openInXcode, from: cell)
     }

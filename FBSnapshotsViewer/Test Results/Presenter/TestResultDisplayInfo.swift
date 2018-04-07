@@ -80,6 +80,10 @@ struct TestResultDisplayInfo: AutoEquatable {
             self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)
             self.diffImageURL = nil
             self.failedImageURL = nil
+        case let .rejected(_, referenceImagePath, _):
+            self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)
+            self.diffImageURL = nil
+            self.failedImageURL = nil
         case let .failed(_, referenceImagePath, diffImagePath, failedImagePath, _):
             self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)
             self.diffImageURL = URL(fileURLWithPath: diffImagePath)

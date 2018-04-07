@@ -11,6 +11,7 @@ import Nuke
 
 enum SnapshotTestResultAcceptorError: Error {
     case canNotBeAccepted(testResult: SnapshotTestResult)
+    case canNotBeRejected(testResult: SnapshotTestResult)
     case nonRetinaImages(testResult: SnapshotTestResult)
     case notExistedRecordedImage(testResult: SnapshotTestResult)
     case canNotPerformFileManagerOperation(testResult: SnapshotTestResult, underlyingError: Error)
@@ -64,6 +65,20 @@ class SnapshotTestResultAcceptor {
         }
         catch let error {
             throw SnapshotTestResultAcceptorError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
+        }
+    }
+
+    func reject(_ testResult: SnapshotTestResult) throws -> SnapshotTestResult {
+        guard case let SnapshotTestResult.failed(testInformation, referenceImagePath, _, _, build) = testResult, canSwap(testResult) else {
+            throw SnapshotTestResultSwapperError.canNotBeRejected(testResult: testResult)
+        }
+        do {
+            try removeTestImages(testResult)
+            imageCache.invalidate()
+            return SnapshotTestResult.rejected(testInformation: testInformation, referenceImagePath: referenceImagePath, build: build)
+        }
+        catch let error {
+            throw SnapshotTestResultSwapperError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
         }
     }
 

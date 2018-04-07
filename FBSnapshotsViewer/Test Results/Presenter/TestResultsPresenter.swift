@@ -49,6 +49,13 @@ extension TestResultsPresenter: TestResultsModuleInterface {
         updateUserInterface()
     }
     
+    func reject(_ testResults: [TestResultDisplayInfo]) {
+        for testResultInfo in testResults {
+            interactor?.reject(testResult: testResultInfo.testResult)
+        }
+        updateUserInterface()
+    }
+    
     func copy(testResultDisplayInfo: TestResultDisplayInfo) {
         interactor?.copy(testResult: testResultDisplayInfo.testResult)
     }
@@ -61,5 +68,13 @@ extension TestResultsPresenter: TestResultsInteractorOutput {
         failToAcceptAlert.alertStyle = .critical
         failToAcceptAlert.messageText = "Ops, accept can not be done. \(error.localizedDescription). Please report an issue https://github.com/Antondomashnev/FBSnapshotsViewer/issues/new"
         failToAcceptAlert.runModal()
+    }
+
+    func didFailToReject(testResult: SnapshotTestResult, with error: Error) {
+        let failToRejectAlert = NSAlert()
+        failToRejectAlert.addButton(withTitle: "Ok")
+        failToRejectAlert.alertStyle = .critical
+        failToRejectAlert.messageText = "Oops, rejection cannot be completed. \(error.localizedDescription). Please report an issue https://github.com/Antondomashnev/FBSnapshotsViewer/issues/new"
+        failToRejectAlert.runModal()
     }
 }

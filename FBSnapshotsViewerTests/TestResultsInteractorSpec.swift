@@ -55,6 +55,19 @@ class TestResultsInteractor_MockSnapshotTestResultAcceptor: SnapshotTestResultAc
     override func canAccept(_ testResult: SnapshotTestResult) -> Bool {
         return canAcceptReturnValue
     }
+
+    var rejectThrows: Bool = false
+    var rejectCalled: Bool = false
+    var rejectTestResult: SnapshotTestResult?
+    var rejectedTestResult: SnapshotTestResult!
+    override func reject(_ testResult: SnapshotTestResult) throws -> SnapshotTestResult {
+        rejectCalled = true
+        rejectTestResult = testResult
+        if rejectThrows {
+            throw SnapshotTestResultSwapperError.canNotBeRejected(testResult: testResult)
+        }
+        return rejectedTestResult
+    }
 }
 
 class TestResultsInteractorSpec: QuickSpec {
@@ -160,6 +173,71 @@ class TestResultsInteractorSpec: QuickSpec {
                         
                         it("outputs error") {
                             expect(output.didFailToAccept_testResult_with_Called).to(beTrue())
+                        }
+                    }
+                }
+            }
+        }
+
+        describe(".reject") {
+            var testResult: SnapshotTestResult!
+            
+            beforeEach {
+                testResult = testResults[0]
+            }
+            
+            context("when test result can not be rejected") {
+                beforeEach {
+                    swapper.canSwapReturnValue = false
+                    interactor.reject(testResult: testResult)
+                }
+                
+                it("does nothing") {
+                    expect(swapper.rejectCalled).to(beFalse())
+                }
+            }
+            
+            context("when test result can be rejected") {
+                beforeEach {
+                    swapper.canSwapReturnValue = true
+                }
+                
+                context("when reject throws") {
+                    beforeEach {
+                        swapper.rejectThrows = true
+                        interactor.reject(testResult: testResult)
+                    }
+                    
+                    it("outputs error") {
+                        expect(output.didFailToReject_testResult_with_Called).to(beTrue())
+                    }
+                }
+                
+                context("when reject doesn't throw") {
+                    beforeEach {
+                        swapper.rejectThrows = false
+                    }
+                    
+                    context("given presented test result") {
+                        beforeEach {
+                            interactor.reject(testResult: testResult)
+                        }
+                        
+                        it("rejects") {
+                            expect(swapper.rejectCalled).to(beTrue())
+                            expect(output.didFailToReject_testResult_with_Called).toNot(beTrue())
+                        }
+                    }
+                    
+                    context("given not presented test result") {
+                        beforeEach {
+                            let testInformation = SnapshotTestInformation(testClassName: "Foo", testName: "Bar", testFilePath: "/Baz/Foo.m", testLineNumber: 1)
+                            let notPresentedTestResult = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "foo/bar@2x.png", diffImagePath: "foo/bar@2x.png", failedImagePath: "foo/bar@2x.png", build: build)
+                            interactor.reject(testResult: notPresentedTestResult)
+                        }
+                        
+                        it("outputs error") {
+                            expect(output.didFailToReject_testResult_with_Called).to(beTrue())
                         }
                     }
                 }

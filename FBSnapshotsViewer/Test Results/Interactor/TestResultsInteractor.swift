@@ -88,12 +88,26 @@ extension TestResultsInteractor: TestResultsInteractorInput {
         }
     }
     
+    func reject(testResult: SnapshotTestResult) {
+        if !swapper.canSwap(testResult) {
+            return
+        }
+        do {
+            _ = try swapper.reject(testResult)
+        }
+        catch let error {
+            output?.didFailToReject(testResult: testResult, with: error)
+        }
+    }
+    
     func copy(testResult: SnapshotTestResult) {
         var url: URL
         switch testResult {
         case let .failed(_, _, _, failedImagePath, _):
             url = URL(fileURLWithPath: failedImagePath)
         case let .recorded(_, referenceImagePath, _):
+            url = URL(fileURLWithPath: referenceImagePath)
+        case let .rejected(_, referenceImagePath, _):
             url = URL(fileURLWithPath: referenceImagePath)
         }
         pasteboard.copyImage(at: url)
