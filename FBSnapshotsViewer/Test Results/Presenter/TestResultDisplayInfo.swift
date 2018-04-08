@@ -23,16 +23,16 @@ struct TestResultInformationDisplayInfo: AutoEquatable {
 
 struct TestResultDisplayInfoOptions: OptionSet {
     let rawValue: Int
-    static let canBeSwapped = TestResultDisplayInfoOptions(rawValue: 1 << 0)
+    static let canBeAccepted = TestResultDisplayInfoOptions(rawValue: 1 << 0)
     static let canBeViewedInKaleidoscope = TestResultDisplayInfoOptions(rawValue: 1 << 1)
     static let canBeViewedInXcode = TestResultDisplayInfoOptions(rawValue: 1 << 2)
     static let canBeCopied = TestResultDisplayInfoOptions(rawValue: 1 << 3)
 }
 
 extension TestResultDisplayInfoOptions {
-    static func availableOptions(for testResult: SnapshotTestResult, externalViewers: ExternalViewers = ExternalViewers(), swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()) -> TestResultDisplayInfoOptions {
+    static func availableOptions(for testResult: SnapshotTestResult, externalViewers: ExternalViewers = ExternalViewers(), acceptor: SnapshotTestResultAcceptor = SnapshotTestResultAcceptor()) -> TestResultDisplayInfoOptions {
         var availableOptions: TestResultDisplayInfoOptions = [TestResultDisplayInfoOptions.canBeCopied]
-        if swapper.canSwap(testResult) { availableOptions = availableOptions.union(.canBeSwapped) }
+        if acceptor.canAccept(testResult) { availableOptions = availableOptions.union(.canBeAccepted) }
         if externalViewers.xcode.isAvailable() && externalViewers.xcode.canView(snapshotTestResult: testResult) { availableOptions = availableOptions.union(.canBeViewedInXcode) }
         if externalViewers.kaleidoscope.isAvailable() && externalViewers.kaleidoscope.canView(snapshotTestResult: testResult) { availableOptions = availableOptions.union(.canBeViewedInKaleidoscope) }
         return availableOptions
@@ -55,8 +55,8 @@ struct TestResultDisplayInfo: AutoEquatable {
         return testInformation.testContext
     }
     
-    var canBeSwapped: Bool {
-        return options.contains(.canBeSwapped)
+    var canBeAccepted: Bool {
+        return options.contains(.canBeAccepted)
     }
     
     var canBeViewedInKaleidoscope: Bool {
@@ -71,10 +71,10 @@ struct TestResultDisplayInfo: AutoEquatable {
         return options.contains(.canBeCopied)
     }
 
-    init(testResult: SnapshotTestResult, swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper(), externalViewers: ExternalViewers = ExternalViewers()) {
+    init(testResult: SnapshotTestResult, acceptor: SnapshotTestResultAcceptor = SnapshotTestResultAcceptor(), externalViewers: ExternalViewers = ExternalViewers()) {
         self.testResult = testResult
         self.testInformation = TestResultInformationDisplayInfo(testResultInformation: testResult.testInformation)
-        self.options = TestResultDisplayInfoOptions.availableOptions(for: testResult, externalViewers: externalViewers, swapper: swapper)
+        self.options = TestResultDisplayInfoOptions.availableOptions(for: testResult, externalViewers: externalViewers, acceptor: acceptor)
         switch testResult {
         case let .recorded(_, referenceImagePath, _):
             self.referenceImageURL = URL(fileURLWithPath: referenceImagePath)

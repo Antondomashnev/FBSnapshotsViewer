@@ -34,7 +34,7 @@ class TestResultsSectionDisplayInfoSpec: QuickSpec {
             }
         }
         
-        describe(".hasItemsToSwap") {
+        describe(".hasItemsToAccept") {
             var build: Build!
             var items: [TestResultDisplayInfo] = []
             var title: TestResultsSectionTitleDisplayInfo!
@@ -46,7 +46,7 @@ class TestResultsSectionDisplayInfoSpec: QuickSpec {
                 title = TestResultsSectionTitleDisplayInfo(build: build, testContext: "TestContext")
             }
             
-            context("when there is display info that can be swapped") {
+            context("when there is display info that can be accepted") {
                 beforeEach {
                     let testResult1 = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo1/foo1.png", build: build)
                     let testResult2 = SnapshotTestResult.failed(testInformation: testInformation, referenceImagePath: "foo/bar.png", diffImagePath: "foo/foo.png", failedImagePath: "bar/bar.png", build: build)
@@ -58,11 +58,11 @@ class TestResultsSectionDisplayInfoSpec: QuickSpec {
                 }
                 
                 it("returns true") {
-                    expect(displayInfo.hasItemsToSwap).to(beTrue())
+                    expect(displayInfo.hasItemsToAccept).to(beTrue())
                 }
             }
             
-            context("when there is no display info that can be swapped") {
+            context("when there is no display info that can be accepted") {
                 beforeEach {
                     let testResult1 = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo1/foo1.png", build: build)
                     let testResult2 = SnapshotTestResult.recorded(testInformation: testInformation, referenceImagePath: "foo1/foo2.png", build: build)
@@ -74,7 +74,7 @@ class TestResultsSectionDisplayInfoSpec: QuickSpec {
                 }
                 
                 it("returns false") {
-                    expect(displayInfo.hasItemsToSwap).to(beFalse())
+                    expect(displayInfo.hasItemsToAccept).to(beFalse())
                 }
             }
         }

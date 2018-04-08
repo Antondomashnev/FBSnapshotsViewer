@@ -1,5 +1,5 @@
 //
-//  SnapshotTestResultSwapperSpec.swift
+//  SnapshotTestResultAcceptorSpec.swift
 //  FBSnapshotsViewerTests
 //
 //  Created by Anton Domashnev on 27.06.17.
@@ -11,8 +11,8 @@ import Nimble
 
 @testable import FBSnapshotsViewer
 
-class SnapshotTestResultSwapper_MockFileManager: FileManager {
-    enum SnapshotTestResultSwapper_MockFileManagerError: Error {
+class SnapshotTestResultAcceptor_MockFileManager: FileManager {
+    enum SnapshotTestResultAcceptor_MockFileManagerError: Error {
         case sample
     }
     
@@ -22,7 +22,7 @@ class SnapshotTestResultSwapper_MockFileManager: FileManager {
     var copyItemThrows: Bool = false
     override func copyItem(at srcURL: URL, to dstURL: URL) throws {
         if copyItemThrows {
-            throw SnapshotTestResultSwapper_MockFileManagerError.sample
+            throw SnapshotTestResultAcceptor_MockFileManagerError.sample
         }
         copyItemCalled = true
         copyItemFromSourceURL = srcURL
@@ -34,7 +34,7 @@ class SnapshotTestResultSwapper_MockFileManager: FileManager {
     var removeItemThrows: Bool = false
     override func removeItem(at URL: URL) throws {
         if removeItemThrows {
-            throw SnapshotTestResultSwapper_MockFileManagerError.sample
+            throw SnapshotTestResultAcceptor_MockFileManagerError.sample
         }
         removeItemCalled = true
         removeItemAtURL = URL
@@ -48,23 +48,23 @@ class SnapshotTestResultSwapper_MockFileManager: FileManager {
     }
 }
 
-class SnapshotTestResultSwapperSpec: QuickSpec {
+class SnapshotTestResultAcceptorSpec: QuickSpec {
     override func spec() {
         var build: Build!
         var testInformation: SnapshotTestInformation!
         var imageCache: ImageCacheMock!
-        var swapper: SnapshotTestResultSwapper!
-        var fileManager: SnapshotTestResultSwapper_MockFileManager!
+        var acceptor: SnapshotTestResultAcceptor!
+        var fileManager: SnapshotTestResultAcceptor_MockFileManager!
         
         beforeEach {
             build = Build(date: Date(), applicationName: "MyApp", fbReferenceImageDirectoryURLs: [URL(fileURLWithPath: "/foo/bar", isDirectory: true)])
             testInformation = SnapshotTestInformation(testClassName: "Bar", testName: "Foo", testFilePath: "Bar/Foo.m", testLineNumber: 1)
-            fileManager = SnapshotTestResultSwapper_MockFileManager()
+            fileManager = SnapshotTestResultAcceptor_MockFileManager()
             imageCache = ImageCacheMock()
-            swapper = SnapshotTestResultSwapper(fileManager: fileManager, imageCache: imageCache)
+            acceptor = SnapshotTestResultAcceptor(fileManager: fileManager, imageCache: imageCache)
         }
         
-        describe(".swap") {
+        describe(".accept") {
             var testResult: SnapshotTestResult!
             
             context("given recorded snapshot test result") {
@@ -73,7 +73,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                 }
                 
                 it("throws error") {
-                    expect { try swapper.swap(testResult) }.to(throwError())
+                    expect { try acceptor.accept(testResult) }.to(throwError())
                 }
             }
             
@@ -85,7 +85,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                 }
                 
                 it("throws error") {
-                    expect { try swapper.swap(testResult) }.to(throwError())
+                    expect { try acceptor.accept(testResult) }.to(throwError())
                 }
             }
             
@@ -97,7 +97,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                     }
                     
                     it("throws error") {
-                        expect { try swapper.swap(testResult) }.to(throwError())
+                        expect { try acceptor.accept(testResult) }.to(throwError())
                     }
                 }
                 
@@ -115,14 +115,14 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                         }
                         
                         it("throws error") {
-                            expect { try swapper.swap(testResult) }.to(throwError())
+                            expect { try acceptor.accept(testResult) }.to(throwError())
                         }
                     }
                     
                     context("that exists") {
                         beforeEach {
                             fileManager.fileExistsReturnValue = true
-                            returnedTestResult = try? swapper.swap(testResult)
+                            returnedTestResult = try? acceptor.accept(testResult)
                         }
                         
                         it("removes current reference images from directory") {
@@ -140,7 +140,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                             expect(imageCache.invalidate_Called).to(beTrue())
                         }
                         
-                        it("returns swapped test result") {
+                        it("returns accepted test result") {
                             let expectedTestInformation = SnapshotTestInformation(testClassName: "DetailsViewController", testName: "testNormalState", testFilePath: "foo/DetailsViewController.m", testLineNumber: 1)
                             let expectedTestResult = SnapshotTestResult.recorded(testInformation: expectedTestInformation, referenceImagePath: "/foo/bar/DetailsViewController/testNormalState@2x.png", build: build)
                             expect(returnedTestResult).to(equal(expectedTestResult))
@@ -150,7 +150,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
             }
         }
         
-        describe(".canSwap") {
+        describe(".canAccept") {
             var testResult: SnapshotTestResult!
             
             context("given recorded snapshot test result") {
@@ -159,7 +159,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                 }
                 
                 it("returns false") {
-                    expect(swapper.canSwap(testResult)).to(beFalse())
+                    expect(acceptor.canAccept(testResult)).to(beFalse())
                 }
             }
             
@@ -169,7 +169,7 @@ class SnapshotTestResultSwapperSpec: QuickSpec {
                 }
                 
                 it("returns true") {
-                    expect(swapper.canSwap(testResult)).to(beTrue())
+                    expect(acceptor.canAccept(testResult)).to(beTrue())
                 }
             }
         }
