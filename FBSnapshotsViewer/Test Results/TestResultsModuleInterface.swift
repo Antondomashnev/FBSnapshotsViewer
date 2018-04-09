@@ -14,5 +14,6 @@ protocol TestResultsModuleInterface: class, AutoMockable {
     func openInXcode(testResultDisplayInfo: TestResultDisplayInfo)
     func selectDiffMode(_ diffMode: TestResultsDiffMode)
     func accept(_ testResults: [TestResultDisplayInfo])
+    func reject(_ testResults: [TestResultDisplayInfo])
     func copy(testResultDisplayInfo: TestResultDisplayInfo)
 }

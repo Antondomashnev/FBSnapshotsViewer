@@ -450,6 +450,16 @@ class TestResultCellDelegateMock: TestResultCellDelegate {
     }
     //MARK: - testResultCell
 
+    var testResultCell___rejectSnapshotButtonClicked_Called = false
+    var testResultCell___rejectSnapshotButtonClicked_ReceivedArguments: (cell: TestResultCell, rejectSnapshotButtonClicked: NSButton)?
+
+    func testResultCell(_ cell: TestResultCell, rejectSnapshotButtonClicked: NSButton) {
+
+        testResultCell___rejectSnapshotButtonClicked_Called = true
+        testResultCell___rejectSnapshotButtonClicked_ReceivedArguments = (cell: cell, rejectSnapshotButtonClicked: rejectSnapshotButtonClicked)
+    }
+    //MARK: - testResultCell
+
     var testResultCell___copySnapshotButtonClicked_Called = false
     var testResultCell___copySnapshotButtonClicked_ReceivedArguments: (cell: TestResultCell, copySnapshotButtonClicked: NSButton)?
 
@@ -507,6 +517,16 @@ class TestResultsInteractorInputMock: TestResultsInteractorInput {
         accept_testResult_Called = true
         accept_testResult_ReceivedTestResult = testResult
     }
+    //MARK: - reject
+
+    var reject_testResult_Called = false
+    var reject_testResult_ReceivedTestResult: SnapshotTestResult?
+
+    func reject(testResult: SnapshotTestResult) {
+
+        reject_testResult_Called = true
+        reject_testResult_ReceivedTestResult = testResult
+    }
     //MARK: - copy
 
     var copy_testResult_Called = false
@@ -530,6 +550,16 @@ class TestResultsInteractorOutputMock: TestResultsInteractorOutput {
 
         didFailToAccept_testResult_with_Called = true
         didFailToAccept_testResult_with_ReceivedArguments = (testResult: testResult, error: error)
+    }
+    //MARK: - didFailToReject
+
+    var didFailToReject_testResult_with_Called = false
+    var didFailToReject_testResult_with_ReceivedArguments: (testResult: SnapshotTestResult, error: Error)?
+
+    func didFailToReject(testResult: SnapshotTestResult, with error: Error) {
+
+        didFailToReject_testResult_with_Called = true
+        didFailToReject_testResult_with_ReceivedArguments = (testResult: testResult, error: error)
     }
 }
 class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
@@ -582,6 +612,16 @@ class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
 
         accept___Called = true
         accept___ReceivedTestResults = testResults
+    }
+    //MARK: - reject
+
+    var reject___Called = false
+    var reject___ReceivedTestResults: [TestResultDisplayInfo]?
+
+    func reject(_ testResults: [TestResultDisplayInfo]) {
+
+        reject___Called = true
+        reject___ReceivedTestResults = testResults
     }
     //MARK: - copy
 

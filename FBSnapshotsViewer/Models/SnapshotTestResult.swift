@@ -36,6 +36,8 @@ enum SnapshotTestResult: AutoEquatable {
         switch self {
         case let .recorded(testInformation, _, _):
             return testInformation
+        case let .rejected(testInformation, _, _):
+            return testInformation
         case let .failed(testInformation, _, _, _, _):
             return testInformation
         }
@@ -45,6 +47,8 @@ enum SnapshotTestResult: AutoEquatable {
         switch self {
         case let .recorded(_, _, build):
             return build
+        case let .rejected(_, _, build):
+                return build
         case let .failed(_, _, _, _, build):
             return build
         }
@@ -54,6 +58,10 @@ enum SnapshotTestResult: AutoEquatable {
                   referenceImagePath: String,
                   build: Build)
 
+    case rejected(testInformation: SnapshotTestInformation,
+        referenceImagePath: String,
+        build: Build)
+    
     case failed(testInformation: SnapshotTestInformation,
                 referenceImagePath: String,
                 diffImagePath: String,

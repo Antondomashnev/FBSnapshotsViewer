@@ -165,6 +165,11 @@ internal func == (lhs: SnapshotTestResult, rhs: SnapshotTestResult) -> Bool {
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }
         if lhs.build != rhs.build { return false }
         return true
+    case (.rejected(let lhs), .rejected(let rhs)): 
+        if lhs.testInformation != rhs.testInformation { return false }
+        if lhs.referenceImagePath != rhs.referenceImagePath { return false }
+        if lhs.build != rhs.build { return false }
+        return true
     case (.failed(let lhs), .failed(let rhs)): 
         if lhs.testInformation != rhs.testInformation { return false }
         if lhs.referenceImagePath != rhs.referenceImagePath { return false }

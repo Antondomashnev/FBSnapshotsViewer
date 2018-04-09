@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -190,16 +190,6 @@
                                 <action selector="viewInXcodeButtonClicked:" target="i7H-GG-lM3" id="Cng-5d-SBQ"/>
                             </connections>
                         </button>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dTc-pr-6Mk">
-                            <rect key="frame" x="200" y="0.0" width="52" height="17"/>
-                            <buttonCell key="cell" type="inline" title="Accept" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="erZ-Db-LCI">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="smallSystemBold"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="acceptSnapshotsButtonClicked:" target="i7H-GG-lM3" id="9Sg-cx-JnE"/>
-                            </connections>
-                        </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T5h-WQ-msk">
                             <rect key="frame" x="104" y="-1" width="88" height="17"/>
                             <buttonCell key="cell" type="inline" title="Kaleidoscope" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="vfP-WI-LhL">
@@ -210,16 +200,38 @@
                                 <action selector="viewInKaleidoscopeButtonClicked:" target="i7H-GG-lM3" id="39C-6q-BzH"/>
                             </connections>
                         </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Uk-XP-BAf" userLabel="Reject Snapshot Button">
+                            <rect key="frame" x="200" y="0.0" width="48" height="17"/>
+                            <buttonCell key="cell" type="inline" title="Reject" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="NLl-oz-N9O">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="smallSystemBold"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="rejectSnapshotButtonClicked:" target="i7H-GG-lM3" id="EO3-UA-DWT"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dTc-pr-6Mk" userLabel="Accept Snapshots Button">
+                            <rect key="frame" x="256" y="0.0" width="52" height="17"/>
+                            <buttonCell key="cell" type="inline" title="Accept" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="erZ-Db-LCI">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="smallSystemBold"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="acceptSnapshotsButtonClicked:" target="i7H-GG-lM3" id="Yab-UN-Gdr"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="dTc-pr-6Mk" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="1J2-q4-hjM"/>
-                        <constraint firstItem="dTc-pr-6Mk" firstAttribute="leading" secondItem="T5h-WQ-msk" secondAttribute="trailing" constant="8" id="2UL-3w-aAn"/>
                         <constraint firstItem="T5h-WQ-msk" firstAttribute="leading" secondItem="82c-wB-1dx" secondAttribute="trailing" constant="8" id="ENj-Hb-uwX"/>
                         <constraint firstItem="ywy-Aa-jQX" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="Nuh-b9-YOz"/>
+                        <constraint firstItem="1Uk-XP-BAf" firstAttribute="trailing" secondItem="dTc-pr-6Mk" secondAttribute="leading" constant="-8" id="Pte-bc-IGC"/>
                         <constraint firstAttribute="height" constant="17" id="S1P-8B-JMQ"/>
                         <constraint firstItem="T5h-WQ-msk" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="a3W-2X-DLg"/>
                         <constraint firstItem="82c-wB-1dx" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="akK-SP-WOg"/>
                         <constraint firstItem="ywy-Aa-jQX" firstAttribute="leading" secondItem="AHf-ta-nvJ" secondAttribute="leading" id="ckn-RE-UP1"/>
+                        <constraint firstItem="1Uk-XP-BAf" firstAttribute="leading" secondItem="T5h-WQ-msk" secondAttribute="trailing" constant="8" id="iiq-Wf-19r"/>
+                        <constraint firstItem="1Uk-XP-BAf" firstAttribute="centerY" secondItem="AHf-ta-nvJ" secondAttribute="centerY" id="shi-Gf-IYK"/>
                         <constraint firstItem="82c-wB-1dx" firstAttribute="leading" secondItem="ywy-Aa-jQX" secondAttribute="trailing" constant="8" id="vHK-dX-xDw"/>
                     </constraints>
                 </customView>
@@ -248,7 +260,7 @@
         </customView>
         <collectionViewItem nibName="TestResultCell" id="i7H-GG-lM3" customClass="TestResultCell" customModule="FBSnapshotsViewer" customModuleProvider="target">
             <connections>
-                <outlet property="acceptSnapshotsButton" destination="dTc-pr-6Mk" id="XcZ-34-QUG"/>
+                <outlet property="acceptSnapshotsButton" destination="dTc-pr-6Mk" id="0aI-xK-dlm"/>
                 <outlet property="actionsContainerView" destination="AHf-ta-nvJ" id="ggA-yn-13p"/>
                 <outlet property="copySnapshotButton" destination="ywy-Aa-jQX" id="Uwx-dp-kHu"/>
                 <outlet property="diffContainerView" destination="HvH-e1-A4r" id="Ydb-cW-xPt"/>
@@ -258,6 +270,7 @@
                 <outlet property="imagesContainerView" destination="LJB-1E-GeF" id="15u-q3-AcU"/>
                 <outlet property="referenceImageTitleLabel" destination="H6x-U9-K6u" id="wXt-ua-Ggv"/>
                 <outlet property="referenceImageView" destination="K85-1M-wcy" id="UtW-Gp-pOZ"/>
+                <outlet property="rejectSnapshotsButton" destination="1Uk-XP-BAf" id="Hwh-mu-Ulm"/>
                 <outlet property="separatorView" destination="Xdr-DA-S5B" id="axP-xd-ghd"/>
                 <outlet property="splitContainerView" destination="oaS-Kh-fqd" id="ID4-fk-Axc"/>
                 <outlet property="testInfoContainerView" destination="YEn-VX-jtO" id="RRJ-ht-Nth"/>
