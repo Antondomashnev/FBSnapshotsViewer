@@ -89,11 +89,11 @@ extension TestResultsInteractor: TestResultsInteractorInput {
     }
     
     func reject(testResult: SnapshotTestResult) {
-        if !swapper.canSwap(testResult) {
+        if !acceptor.canAccept(testResult) {
             return
         }
         do {
-            _ = try swapper.reject(testResult)
+            _ = try acceptor.reject(testResult)
         }
         catch let error {
             output?.didFailToReject(testResult: testResult, with: error)

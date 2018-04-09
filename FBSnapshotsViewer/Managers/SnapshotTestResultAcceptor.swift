@@ -69,8 +69,8 @@ class SnapshotTestResultAcceptor {
     }
 
     func reject(_ testResult: SnapshotTestResult) throws -> SnapshotTestResult {
-        guard case let SnapshotTestResult.failed(testInformation, referenceImagePath, _, _, build) = testResult, canSwap(testResult) else {
-            throw SnapshotTestResultSwapperError.canNotBeRejected(testResult: testResult)
+        guard case let SnapshotTestResult.failed(testInformation, referenceImagePath, _, _, build) = testResult, canAccept(testResult) else {
+            throw SnapshotTestResultAcceptorError.canNotBeRejected(testResult: testResult)
         }
         do {
             try removeTestImages(testResult)
@@ -78,13 +78,13 @@ class SnapshotTestResultAcceptor {
             return SnapshotTestResult.rejected(testInformation: testInformation, referenceImagePath: referenceImagePath, build: build)
         }
         catch let error {
-            throw SnapshotTestResultSwapperError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
+            throw SnapshotTestResultAcceptorError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
         }
     }
 
     func removeTestImages(_ testResult: SnapshotTestResult) throws {
         guard case let SnapshotTestResult.failed(_, referenceImagePath, diffImagePath, failedImagePath, _) = testResult else {
-            throw SnapshotTestResultSwapperError.canNotBeSwapped(testResult: testResult)
+            throw SnapshotTestResultAcceptorError.canNotBeAccepted(testResult: testResult)
         }
         
         let referenceImageURL = URL(fileURLWithPath: referenceImagePath, isDirectory: false)
@@ -92,12 +92,12 @@ class SnapshotTestResultAcceptor {
         let failedImageURL = URL(fileURLWithPath: failedImagePath, isDirectory: false)
         
         do {
-            try fileManager.deleteItem(at: referenceImageURL)
-            try fileManager.deleteItem(at: diffImageURL)
-            try fileManager.deleteItem(at: failedImageURL)
+            try fileManager.deleteIfExists(at: referenceImageURL)
+            try fileManager.deleteIfExists(at: diffImageURL)
+            try fileManager.deleteIfExists(at: failedImageURL)
         }
         catch let error {
-            throw SnapshotTestResultSwapperError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
+            throw SnapshotTestResultAcceptorError.canNotPerformFileManagerOperation(testResult: testResult, underlyingError: error)
         }
     }
 }
