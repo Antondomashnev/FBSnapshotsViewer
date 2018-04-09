@@ -4,6 +4,7 @@
 
 * Your contribution here.
 * [#69](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/69): Replace Swap with Accept and Accept All. - [@babbage](https://github.com/babbage).
+* [#70](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/70): Remove accepted images from failed image path. - [@babbage](https://github.com/babbage).
 
 ### 0.8.0 (11.10.2017)
 
