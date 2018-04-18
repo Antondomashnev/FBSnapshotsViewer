@@ -147,8 +147,8 @@
 		6DBD6C541EAD4B2B006F14DC /* ApplicationTestLogFilesListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD6C531EAD4B2B006F14DC /* ApplicationTestLogFilesListener.swift */; };
 		6DBD99D91E7AB31B00E1714E /* NonRecursiveFolderEventsListenerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD99D81E7AB31B00E1714E /* NonRecursiveFolderEventsListenerSpec.swift */; };
 		6DBD99DB1E7AB3D400E1714E /* FileWatcherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD99DA1E7AB3D400E1714E /* FileWatcherFactory.swift */; };
-		6DCCEF0C1F02F60700523B47 /* SnapshotTestResultSwapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCEF0B1F02F60700523B47 /* SnapshotTestResultSwapper.swift */; };
-		6DCCEF0E1F02F64800523B47 /* SnapshotTestResultSwapperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCEF0D1F02F64800523B47 /* SnapshotTestResultSwapperSpec.swift */; };
+		6DCCEF0C1F02F60700523B47 /* SnapshotTestResultAcceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCEF0B1F02F60700523B47 /* SnapshotTestResultAcceptor.swift */; };
+		6DCCEF0E1F02F64800523B47 /* SnapshotTestResultAcceptorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCCEF0D1F02F64800523B47 /* SnapshotTestResultAcceptorSpec.swift */; };
 		6DD1AEA51F08093E002FCA82 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD1AEA41F08093E002FCA82 /* ImageCache.swift */; };
 		6DD1AEA71F080968002FCA82 /* Nuke+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD1AEA61F080968002FCA82 /* Nuke+ImageCache.swift */; };
 		6DDFBD8D1E63268300DFC0A4 /* FolderEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDFBD8C1E63268300DFC0A4 /* FolderEvent.swift */; };
@@ -328,8 +328,8 @@
 		6DBD6C531EAD4B2B006F14DC /* ApplicationTestLogFilesListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationTestLogFilesListener.swift; sourceTree = "<group>"; };
 		6DBD99D81E7AB31B00E1714E /* NonRecursiveFolderEventsListenerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonRecursiveFolderEventsListenerSpec.swift; sourceTree = "<group>"; };
 		6DBD99DA1E7AB3D400E1714E /* FileWatcherFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileWatcherFactory.swift; sourceTree = "<group>"; };
-		6DCCEF0B1F02F60700523B47 /* SnapshotTestResultSwapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestResultSwapper.swift; sourceTree = "<group>"; };
-		6DCCEF0D1F02F64800523B47 /* SnapshotTestResultSwapperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestResultSwapperSpec.swift; sourceTree = "<group>"; };
+		6DCCEF0B1F02F60700523B47 /* SnapshotTestResultAcceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestResultAcceptor.swift; sourceTree = "<group>"; };
+		6DCCEF0D1F02F64800523B47 /* SnapshotTestResultAcceptorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestResultAcceptorSpec.swift; sourceTree = "<group>"; };
 		6DD1AEA41F08093E002FCA82 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6DD1AEA61F080968002FCA82 /* Nuke+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nuke+ImageCache.swift"; sourceTree = "<group>"; };
 		6DDFBD8C1E63268300DFC0A4 /* FolderEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderEvent.swift; sourceTree = "<group>"; };
@@ -577,7 +577,7 @@
 				6D14776C1EFED78D0070EFEC /* BuildCreatorSpec.swift */,
 				6D1477721EFEE7D00070EFEC /* FBReferenceImageDirectoryURLExtractorSpec.swift */,
 				6D1477741EFEEDB30070EFEC /* ApplicationSnapshotTestResultFileWatcherUpdateHandlerSpec.swift */,
-				6DCCEF0D1F02F64800523B47 /* SnapshotTestResultSwapperSpec.swift */,
+				6DCCEF0D1F02F64800523B47 /* SnapshotTestResultAcceptorSpec.swift */,
 				6D57D3E31F31A9CD007FDBAE /* StringStripSpec.swift */,
 				6D942D521F40E544009984C4 /* TestClassPathExtractorpecSpec.swift */,
 				6D942D561F40FE1D009984C4 /* TestLineNumberExtractorSpec.swift */,
@@ -644,7 +644,7 @@
 				6D942D541F40FC2E009984C4 /* TestLineNumberExtractor.swift */,
 				6D14776A1EFED5500070EFEC /* BuildCreator.swift */,
 				6D14776E1EFEDF5A0070EFEC /* ApplicationSnapshotTestResultFileWatcherUpdateHandler.swift */,
-				6DCCEF0B1F02F60700523B47 /* SnapshotTestResultSwapper.swift */,
+				6DCCEF0B1F02F60700523B47 /* SnapshotTestResultAcceptor.swift */,
 				6D5EB5421F43999A0055C356 /* TestNameExtractor.swift */,
 				6D5EB5441F4399A70055C356 /* TestClassNameExtractor.swift */,
 			);
@@ -1158,7 +1158,7 @@
 				6D3000431EBFBE14005B6103 /* PreferencesController.swift in Sources */,
 				6D5F913C1E4F6D4700C6E5BF /* FolderEventsListenerFactory.swift in Sources */,
 				6D89B9541EF088B600865C5F /* TestResultsDiffMode.swift in Sources */,
-				6DCCEF0C1F02F60700523B47 /* SnapshotTestResultSwapper.swift in Sources */,
+				6DCCEF0C1F02F60700523B47 /* SnapshotTestResultAcceptor.swift in Sources */,
 				6DA1BF991E7755110017D47B /* Storyboards.swift in Sources */,
 				6DE3477E1E47D9DF004147DF /* MenuInteractorIO.swift in Sources */,
 				6DBD6C501EACF1B0006F14DC /* DerivedDataFolder.swift in Sources */,
@@ -1216,7 +1216,7 @@
 				6D1477731EFEE7D00070EFEC /* FBReferenceImageDirectoryURLExtractorSpec.swift in Sources */,
 				6D130B6D1EC8E82B00E9642A /* ConfigurationSpec.swift in Sources */,
 				6D3BA5651E6E07AA00CAD4EE /* MenuPresenterSpec.swift in Sources */,
-				6DCCEF0E1F02F64800523B47 /* SnapshotTestResultSwapperSpec.swift in Sources */,
+				6DCCEF0E1F02F64800523B47 /* SnapshotTestResultAcceptorSpec.swift in Sources */,
 				6D42C93E1EB275B6003744BF /* MenuWireframeSpec.swift in Sources */,
 				6D342CE21EBBDFDF006EEBEC /* AppleInterfaceModeSpec.swift in Sources */,
 				6D12F4721E81758500AA4727 /* TestResultsControllerSpec.swift in Sources */,

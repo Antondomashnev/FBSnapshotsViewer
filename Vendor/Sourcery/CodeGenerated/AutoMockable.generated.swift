@@ -440,13 +440,13 @@ class TestResultCellDelegateMock: TestResultCellDelegate {
     }
     //MARK: - testResultCell
 
-    var testResultCell___swapSnapshotsButtonClicked_Called = false
-    var testResultCell___swapSnapshotsButtonClicked_ReceivedArguments: (cell: TestResultCell, swapSnapshotsButtonClicked: NSButton)?
+    var testResultCell___acceptSnapshotsButtonClicked_Called = false
+    var testResultCell___acceptSnapshotsButtonClicked_ReceivedArguments: (cell: TestResultCell, acceptSnapshotsButtonClicked: NSButton)?
 
-    func testResultCell(_ cell: TestResultCell, swapSnapshotsButtonClicked: NSButton) {
+    func testResultCell(_ cell: TestResultCell, acceptSnapshotsButtonClicked: NSButton) {
 
-        testResultCell___swapSnapshotsButtonClicked_Called = true
-        testResultCell___swapSnapshotsButtonClicked_ReceivedArguments = (cell: cell, swapSnapshotsButtonClicked: swapSnapshotsButtonClicked)
+        testResultCell___acceptSnapshotsButtonClicked_Called = true
+        testResultCell___acceptSnapshotsButtonClicked_ReceivedArguments = (cell: cell, acceptSnapshotsButtonClicked: acceptSnapshotsButtonClicked)
     }
     //MARK: - testResultCell
 
@@ -464,13 +464,13 @@ class TestResultsHeaderDelegateMock: TestResultsHeaderDelegate {
 
     //MARK: - testResultsHeader
 
-    var testResultsHeader___swapSnapshotsButtonClicked_Called = false
-    var testResultsHeader___swapSnapshotsButtonClicked_ReceivedArguments: (header: TestResultsHeader, swapSnapshotsButtonClicked: NSButton)?
+    var testResultsHeader___acceptSnapshotsButtonClicked_Called = false
+    var testResultsHeader___acceptSnapshotsButtonClicked_ReceivedArguments: (header: TestResultsHeader, acceptSnapshotsButtonClicked: NSButton)?
 
-    func testResultsHeader(_ header: TestResultsHeader, swapSnapshotsButtonClicked: NSButton) {
+    func testResultsHeader(_ header: TestResultsHeader, acceptSnapshotsButtonClicked: NSButton) {
 
-        testResultsHeader___swapSnapshotsButtonClicked_Called = true
-        testResultsHeader___swapSnapshotsButtonClicked_ReceivedArguments = (header: header, swapSnapshotsButtonClicked: swapSnapshotsButtonClicked)
+        testResultsHeader___acceptSnapshotsButtonClicked_Called = true
+        testResultsHeader___acceptSnapshotsButtonClicked_ReceivedArguments = (header: header, acceptSnapshotsButtonClicked: acceptSnapshotsButtonClicked)
     }
 }
 class TestResultsInteractorInputMock: TestResultsInteractorInput {
@@ -497,15 +497,15 @@ class TestResultsInteractorInputMock: TestResultsInteractorInput {
         openInXcode_testResult_Called = true
         openInXcode_testResult_ReceivedTestResult = testResult
     }
-    //MARK: - swap
+    //MARK: - accept
 
-    var swap_testResult_Called = false
-    var swap_testResult_ReceivedTestResult: SnapshotTestResult?
+    var accept_testResult_Called = false
+    var accept_testResult_ReceivedTestResult: SnapshotTestResult?
 
-    func swap(testResult: SnapshotTestResult) {
+    func accept(testResult: SnapshotTestResult) {
 
-        swap_testResult_Called = true
-        swap_testResult_ReceivedTestResult = testResult
+        accept_testResult_Called = true
+        accept_testResult_ReceivedTestResult = testResult
     }
     //MARK: - copy
 
@@ -521,15 +521,15 @@ class TestResultsInteractorInputMock: TestResultsInteractorInput {
 class TestResultsInteractorOutputMock: TestResultsInteractorOutput {
 
 
-    //MARK: - didFailToSwap
+    //MARK: - didFailToAccept
 
-    var didFailToSwap_testResult_with_Called = false
-    var didFailToSwap_testResult_with_ReceivedArguments: (testResult: SnapshotTestResult, error: Error)?
+    var didFailToAccept_testResult_with_Called = false
+    var didFailToAccept_testResult_with_ReceivedArguments: (testResult: SnapshotTestResult, error: Error)?
 
-    func didFailToSwap(testResult: SnapshotTestResult, with error: Error) {
+    func didFailToAccept(testResult: SnapshotTestResult, with error: Error) {
 
-        didFailToSwap_testResult_with_Called = true
-        didFailToSwap_testResult_with_ReceivedArguments = (testResult: testResult, error: error)
+        didFailToAccept_testResult_with_Called = true
+        didFailToAccept_testResult_with_ReceivedArguments = (testResult: testResult, error: error)
     }
 }
 class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
@@ -573,15 +573,15 @@ class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
         selectDiffMode___Called = true
         selectDiffMode___ReceivedDiffMode = diffMode
     }
-    //MARK: - swap
+    //MARK: - accept
 
-    var swap___Called = false
-    var swap___ReceivedTestResults: [TestResultDisplayInfo]?
+    var accept___Called = false
+    var accept___ReceivedTestResults: [TestResultDisplayInfo]?
 
-    func swap(_ testResults: [TestResultDisplayInfo]) {
+    func accept(_ testResults: [TestResultDisplayInfo]) {
 
-        swap___Called = true
-        swap___ReceivedTestResults = testResults
+        accept___Called = true
+        accept___ReceivedTestResults = testResults
     }
     //MARK: - copy
 

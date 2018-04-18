@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13178.6"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -191,13 +191,13 @@
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dTc-pr-6Mk">
-                            <rect key="frame" x="200" y="0.0" width="43" height="17"/>
-                            <buttonCell key="cell" type="inline" title="Swap" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="erZ-Db-LCI">
+                            <rect key="frame" x="200" y="0.0" width="52" height="17"/>
+                            <buttonCell key="cell" type="inline" title="Accept" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="erZ-Db-LCI">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystemBold"/>
                             </buttonCell>
                             <connections>
-                                <action selector="swapSnapshotsButtonClicked:" target="i7H-GG-lM3" id="sNe-PT-tvr"/>
+                                <action selector="acceptSnapshotsButtonClicked:" target="i7H-GG-lM3" id="9Sg-cx-JnE"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T5h-WQ-msk">
@@ -248,6 +248,7 @@
         </customView>
         <collectionViewItem nibName="TestResultCell" id="i7H-GG-lM3" customClass="TestResultCell" customModule="FBSnapshotsViewer" customModuleProvider="target">
             <connections>
+                <outlet property="acceptSnapshotsButton" destination="dTc-pr-6Mk" id="XcZ-34-QUG"/>
                 <outlet property="actionsContainerView" destination="AHf-ta-nvJ" id="ggA-yn-13p"/>
                 <outlet property="copySnapshotButton" destination="ywy-Aa-jQX" id="Uwx-dp-kHu"/>
                 <outlet property="diffContainerView" destination="HvH-e1-A4r" id="Ydb-cW-xPt"/>
@@ -259,7 +260,6 @@
                 <outlet property="referenceImageView" destination="K85-1M-wcy" id="UtW-Gp-pOZ"/>
                 <outlet property="separatorView" destination="Xdr-DA-S5B" id="axP-xd-ghd"/>
                 <outlet property="splitContainerView" destination="oaS-Kh-fqd" id="ID4-fk-Axc"/>
-                <outlet property="swapSnapshotsButton" destination="dTc-pr-6Mk" id="rYx-Iv-mfX"/>
                 <outlet property="testInfoContainerView" destination="YEn-VX-jtO" id="RRJ-ht-Nth"/>
                 <outlet property="testNameLabel" destination="MCk-nZ-jTQ" id="4DF-7O-GL0"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="t7t-hF-Vsm"/>

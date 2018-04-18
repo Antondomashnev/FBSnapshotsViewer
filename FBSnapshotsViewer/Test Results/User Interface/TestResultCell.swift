@@ -12,7 +12,7 @@ import Nuke
 protocol TestResultCellDelegate: class, AutoMockable {
     func testResultCell(_ cell: TestResultCell, viewInXcodeButtonClicked: NSButton)
     func testResultCell(_ cell: TestResultCell, viewInKaleidoscopeButtonClicked: NSButton)
-    func testResultCell(_ cell: TestResultCell, swapSnapshotsButtonClicked: NSButton)
+    func testResultCell(_ cell: TestResultCell, acceptSnapshotsButtonClicked: NSButton)
     func testResultCell(_ cell: TestResultCell, copySnapshotButtonClicked: NSButton)
 }
 
@@ -24,7 +24,7 @@ class TestResultCell: NSCollectionViewItem {
     @IBOutlet private weak var actionsContainerView: NSView!
     @IBOutlet private weak var viewInKaleidoscopeButton: NSButton!
     @IBOutlet private weak var viewInXcodeButton: NSButton!
-    @IBOutlet private weak var swapSnapshotsButton: NSButton!
+    @IBOutlet private weak var acceptSnapshotsButton: NSButton!
     @IBOutlet private weak var copySnapshotButton: NSButton!
     
     @IBOutlet private weak var imagesContainerView: NSView!
@@ -99,7 +99,7 @@ class TestResultCell: NSCollectionViewItem {
         else {
             failedImageView.image = nil
         }
-        swapSnapshotsButton.isHidden = !testResult.canBeSwapped
+        acceptSnapshotsButton.isHidden = !testResult.canBeAccepted
         viewInKaleidoscopeButton.isHidden = !testResult.canBeViewedInKaleidoscope
         viewInXcodeButton.isHidden = !testResult.canBeViewedInXcode
         copySnapshotButton.isHidden = !testResult.canBeCopied
@@ -137,7 +137,7 @@ class TestResultCell: NSCollectionViewItem {
         delegate?.testResultCell(self, viewInKaleidoscopeButtonClicked: sender)
     }
     
-    @objc @IBAction func swapSnapshotsButtonClicked(_ sender: NSButton) {
-        delegate?.testResultCell(self, swapSnapshotsButtonClicked: sender)
+    @objc @IBAction func acceptSnapshotsButtonClicked(_ sender: NSButton) {
+        delegate?.testResultCell(self, acceptSnapshotsButtonClicked: sender)
     }
 }

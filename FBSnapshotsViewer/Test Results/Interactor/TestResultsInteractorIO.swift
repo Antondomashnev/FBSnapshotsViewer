@@ -12,10 +12,10 @@ protocol TestResultsInteractorInput: class, AutoMockable {
     var testResults: [SnapshotTestResult] { get }
     func openInKaleidoscope(testResult: SnapshotTestResult)
     func openInXcode(testResult: SnapshotTestResult)
-    func swap(testResult: SnapshotTestResult)
+    func accept(testResult: SnapshotTestResult)
     func copy(testResult: SnapshotTestResult)
 }
 
 protocol TestResultsInteractorOutput: class, AutoMockable {
-    func didFailToSwap(testResult: SnapshotTestResult, with error: Error)
+    func didFailToAccept(testResult: SnapshotTestResult, with error: Error)
 }

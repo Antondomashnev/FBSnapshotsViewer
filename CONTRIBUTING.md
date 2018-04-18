@@ -18,12 +18,18 @@ git remote add upstream https://github.com/Antondomashnev/FBSnapshotsViewer.git
 
 ### Bundle Install and Test
 
+Install [Bundler](http://bundler.io) if you have not previously done so on your development machine.
+
+```
+gem install bundler
+```
+
 Ensure that you can build the project and run tests.
 
 ```
 bundle install
 bundle exec pod install
-bundle exec fastlane osx test
+bundle exec fastlane mac test
 ```
 
 ## Contribute Code

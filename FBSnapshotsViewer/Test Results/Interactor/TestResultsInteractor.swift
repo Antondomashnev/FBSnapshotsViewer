@@ -10,13 +10,13 @@ import Foundation
 import Cocoa
 
 enum TestResultsInteractorError: Error {
-    case canNotSwapNotExistedTestResult
+    case canNotAcceptNotExistedTestResult
 }
 
 class TestResultsInteractorBuilder {
     var externalViewers: ExternalViewers = ExternalViewers()
     var processLauncher: ProcessLauncher = ProcessLauncher()
-    var swapper: SnapshotTestResultSwapper = SnapshotTestResultSwapper()
+    var acceptor: SnapshotTestResultAcceptor = SnapshotTestResultAcceptor()
     var pasteboard: Pasteboard = NSPasteboard.general()
     var testResults: [SnapshotTestResult] = []
     
@@ -31,7 +31,7 @@ class TestResultsInteractor {
     fileprivate let xcodeViewer: ExternalViewer.Type
     fileprivate let kaleidoscopeViewer: ExternalViewer.Type
     fileprivate let processLauncher: ProcessLauncher
-    fileprivate let swapper: SnapshotTestResultSwapper
+    fileprivate let acceptor: SnapshotTestResultAcceptor
     fileprivate let pasteboard: Pasteboard
     var testResults: [SnapshotTestResult]
     
@@ -42,7 +42,7 @@ class TestResultsInteractor {
         self.kaleidoscopeViewer = builder.externalViewers.kaleidoscope
         self.xcodeViewer = builder.externalViewers.xcode
         self.processLauncher = builder.processLauncher
-        self.swapper = builder.swapper
+        self.acceptor = builder.acceptor
         self.pasteboard = builder.pasteboard
     }
 }
@@ -52,7 +52,7 @@ extension TestResultsInteractor: TestResultsInteractorInput {
     
     private func replace(testResult: SnapshotTestResult, with newTestResult: SnapshotTestResult) throws {
         guard let indexOfTestResult = testResults.index(of: testResult) else {
-            throw TestResultsInteractorError.canNotSwapNotExistedTestResult
+            throw TestResultsInteractorError.canNotAcceptNotExistedTestResult
         }
         testResults[indexOfTestResult] = newTestResult
     }
@@ -75,16 +75,16 @@ extension TestResultsInteractor: TestResultsInteractorInput {
         xcodeViewer.view(snapshotTestResult: testResult, using: processLauncher)
     }
     
-    func swap(testResult: SnapshotTestResult) {
-        if !swapper.canSwap(testResult) {
+    func accept(testResult: SnapshotTestResult) {
+        if !acceptor.canAccept(testResult) {
             return
         }
         do {
-            let swappedTestResult = try swapper.swap(testResult)
-            try replace(testResult: testResult, with: swappedTestResult)
+            let acceptedTestResult = try acceptor.accept(testResult)
+            try replace(testResult: testResult, with: acceptedTestResult)
         }
         catch let error {
-            output?.didFailToSwap(testResult: testResult, with: error)
+            output?.didFailToAccept(testResult: testResult, with: error)
         }
     }
     

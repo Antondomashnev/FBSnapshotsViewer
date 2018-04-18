@@ -13,6 +13,6 @@ protocol TestResultsModuleInterface: class, AutoMockable {
     func openInKaleidoscope(testResultDisplayInfo: TestResultDisplayInfo)
     func openInXcode(testResultDisplayInfo: TestResultDisplayInfo)
     func selectDiffMode(_ diffMode: TestResultsDiffMode)
-    func swap(_ testResults: [TestResultDisplayInfo])
+    func accept(_ testResults: [TestResultDisplayInfo])
     func copy(testResultDisplayInfo: TestResultDisplayInfo)
 }

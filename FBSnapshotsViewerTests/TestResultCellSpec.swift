@@ -56,14 +56,14 @@ class TestResultCellSpec: QuickSpec {
             }
         }
         
-        describe(".swapSnapshotsButtonClicked") {
+        describe(".acceptSnapshotsButtonClicked") {
             beforeEach {
-                cell.swapSnapshotsButtonClicked(NSButton(frame: NSRect.zero))
+                cell.acceptSnapshotsButtonClicked(NSButton(frame: NSRect.zero))
             }
             
             it("calls delegate") {
-                expect(delegate.testResultCell___swapSnapshotsButtonClicked_Called).to(beTrue())
-                expect(delegate.testResultCell___swapSnapshotsButtonClicked_ReceivedArguments?.cell).to(equal(cell))
+                expect(delegate.testResultCell___acceptSnapshotsButtonClicked_Called).to(beTrue())
+                expect(delegate.testResultCell___acceptSnapshotsButtonClicked_ReceivedArguments?.cell).to(equal(cell))
             }
         }
     }
