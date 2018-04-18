@@ -21,10 +21,10 @@ class TestResultsPresenter_MockTestResultsDisplayInfosCollector: TestResultsDisp
 }
 
 class TestResultsPresenter_MockTestResultsInteractorInputMock: TestResultsInteractorInputMock {
-    var swapCalledCounter: Int = 0
-    override func swap(testResult: SnapshotTestResult) {
-        super.swap(testResult: testResult)
-        swapCalledCounter += 1
+    var acceptCalledCounter: Int = 0
+    override func accept(testResult: SnapshotTestResult) {
+        super.accept(testResult: testResult)
+        acceptCalledCounter += 1
     }
 }
 
@@ -44,7 +44,7 @@ class TestResultsPresenterSpec: QuickSpec {
             presenter.userInterface = userInterface
         }
         
-        describe(".swap") {
+        describe(".accept") {
             var testResults: [TestResultDisplayInfo] = []
             
             beforeEach {
@@ -57,11 +57,11 @@ class TestResultsPresenterSpec: QuickSpec {
                 let testResultDisplayInfo2 = TestResultDisplayInfo(testResult: testResult2)
                 testResults = [testResultDisplayInfo1, testResultDisplayInfo2]
                 interactor.testResults = [testResult1, testResult2]
-                presenter.swap(testResults)
+                presenter.accept(testResults)
             }
             
-            it("swaps all given test results") {
-                expect(interactor.swapCalledCounter).to(equal(2))
+            it("accepts all given test results") {
+                expect(interactor.acceptCalledCounter).to(equal(2))
             }
             
             it("updates user interface") {

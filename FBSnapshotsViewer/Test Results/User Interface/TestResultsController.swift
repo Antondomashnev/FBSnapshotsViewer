@@ -66,12 +66,12 @@ extension TestResultsController: TestResultCellDelegate {
         openIn(eventHandler.openInKaleidoscope, from: cell)
     }
     
-    func testResultCell(_ cell: TestResultCell, swapSnapshotsButtonClicked: NSButton) {
+    func testResultCell(_ cell: TestResultCell, acceptSnapshotsButtonClicked: NSButton) {
         guard let testResultInfo = findTestResultInfo(for: cell) else {
-            assertionFailure("Unexpected TestResultCellDelegate callback about swap snapshots button click")
+            assertionFailure("Unexpected TestResultCellDelegate callback about accept snapshots button click")
             return
         }
-        eventHandler.swap([testResultInfo.info])
+        eventHandler.accept([testResultInfo.info])
         collectionView.reloadSections(IndexSet(integer: testResultInfo.indexPath.section))
     }
     
@@ -99,12 +99,12 @@ extension TestResultsController: TestResultsHeaderDelegate {
         return (sectionInfos[headerIndexPath.section], headerIndexPath)
     }
     
-    func testResultsHeader(_ header: TestResultsHeader, swapSnapshotsButtonClicked: NSButton) {
+    func testResultsHeader(_ header: TestResultsHeader, acceptSnapshotsButtonClicked: NSButton) {
         guard let testResultsSectionInfo = findTestResultsSectionDisplayInfo(for: header) else {
-            assertionFailure("Unexpected TestResultsHeaderDelegate callback about swap snapshots button click")
+            assertionFailure("Unexpected TestResultsHeaderDelegate callback about accept snapshots button click")
             return
         }
-        eventHandler.swap(testResultsSectionInfo.info.itemInfos)
+        eventHandler.accept(testResultsSectionInfo.info.itemInfos)
         collectionView.reloadSections(IndexSet(integer: testResultsSectionInfo.indexPath.section))
     }
 }
