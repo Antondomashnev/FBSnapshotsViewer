@@ -12,6 +12,8 @@ import Nimble
 @testable import FBSnapshotsViewer
 
 class TestResultsWireframeSpec: QuickSpec {
+    var window: NSWindow?
+    
     override func spec() {
         var wireframe: TestResultsWireframe!
 
@@ -28,8 +30,8 @@ class TestResultsWireframeSpec: QuickSpec {
                 rect = NSRect(x: 0, y: 0, width: 300, height: 300)
                 view = NSView(frame: NSRect(x: 0, y: 0, width: 200, height: 200))
                 view.wantsLayer = true
-                let window = NSWindow(contentRect: rect, styleMask: NSWindowStyleMask.borderless, backing: .retained, defer: false)
-                window.contentView?.addSubview(view)
+                self.window = NSWindow(contentRect: rect, styleMask: NSWindowStyleMask.borderless, backing: .retained, defer: false)
+                self.window?.contentView?.addSubview(view)
             }
 
             it("initializes the module") {
