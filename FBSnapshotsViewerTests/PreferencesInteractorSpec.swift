@@ -28,7 +28,7 @@ class PreferencesInteractorSpec: QuickSpec {
 
                 beforeEach {
                     newPath = "myNewPath"
-                    configurationStorage.loadConfiguration_ReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "customPath"))
+                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "customPath"))
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                     interactor.setNewDerivedDataFolderPath(newPath)
                 }
@@ -44,7 +44,7 @@ class PreferencesInteractorSpec: QuickSpec {
 
                 beforeEach {
                     newPath = "myNewPath"
-                    configurationStorage.loadConfiguration_ReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: "customPath"))
+                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: "customPath"))
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                     interactor.setNewDerivedDataFolderPath(newPath)
                 }
@@ -57,7 +57,7 @@ class PreferencesInteractorSpec: QuickSpec {
 
             context("when current configuration derived data folder type is xcodeDefault") {
                 beforeEach {
-                    configurationStorage.loadConfiguration_ReturnValue = configuration
+                    configurationStorage.loadConfigurationReturnValue = configuration
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                 }
 
@@ -70,7 +70,7 @@ class PreferencesInteractorSpec: QuickSpec {
         describe(".setNewDerivedDataFolderType") {
             context("when type is not derived data folder type") {
                 beforeEach {
-                    configurationStorage.loadConfiguration_ReturnValue = configuration
+                    configurationStorage.loadConfigurationReturnValue = configuration
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                 }
 
@@ -81,7 +81,7 @@ class PreferencesInteractorSpec: QuickSpec {
 
             context("when type is equal to current one") {
                 beforeEach {
-                    configurationStorage.loadConfiguration_ReturnValue = configuration
+                    configurationStorage.loadConfigurationReturnValue = configuration
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                 }
 
@@ -92,7 +92,7 @@ class PreferencesInteractorSpec: QuickSpec {
 
             context("when current type is xcodeDefault") {
                 beforeEach {
-                    configurationStorage.loadConfiguration_ReturnValue = configuration
+                    configurationStorage.loadConfigurationReturnValue = configuration
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                 }
 
@@ -119,7 +119,7 @@ class PreferencesInteractorSpec: QuickSpec {
 
             context("when current type is xcodeCustom") {
                 beforeEach {
-                    configurationStorage.loadConfiguration_ReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
+                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                 }
 
@@ -146,7 +146,7 @@ class PreferencesInteractorSpec: QuickSpec {
 
             context("when current type is appcode") {
                 beforeEach {
-                    configurationStorage.loadConfiguration_ReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: "myPath"))
+                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: "myPath"))
                     interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                 }
 
@@ -174,7 +174,7 @@ class PreferencesInteractorSpec: QuickSpec {
 
         describe(".currentConfiguration") {
             beforeEach {
-                configurationStorage.loadConfiguration_ReturnValue = configuration
+                configurationStorage.loadConfigurationReturnValue = configuration
                 interactor = PreferencesInteractor(configurationStorage: configurationStorage)
             }
 
@@ -185,7 +185,7 @@ class PreferencesInteractorSpec: QuickSpec {
 
         describe(".save") {
             beforeEach {
-                configurationStorage.loadConfiguration_ReturnValue = configuration
+                configurationStorage.loadConfigurationReturnValue = configuration
                 interactor = PreferencesInteractor(configurationStorage: configurationStorage)
                 interactor.save()
             }
@@ -199,7 +199,7 @@ class PreferencesInteractorSpec: QuickSpec {
         describe(".init") {
             context("when configuration storage can load configuration") {
                 beforeEach {
-                    configurationStorage.loadConfiguration_ReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
+                    configurationStorage.loadConfigurationReturnValue = Configuration(derivedDataFolder: DerivedDataFolder.xcodeDefault)
                 }
 
                 it("initializes new instance") {

@@ -844,7 +844,6 @@
 				6D4724B61E3E9F2300F38161 /* Frameworks */,
 				6D4724B71E3E9F2300F38161 /* Resources */,
 				409B5AAF2BC6861F9EB75343 /* [CP] Embed Pods Frameworks */,
-				85A248FF384E76EC0BA66DC2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -864,7 +863,6 @@
 				6D4724C71E3E9F2400F38161 /* Frameworks */,
 				6D4724C81E3E9F2400F38161 /* Resources */,
 				CFE0A697EFC847B478C1A8E7 /* [CP] Embed Pods Frameworks */,
-				86A730847AB3BDCA9DFC0E7D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -883,12 +881,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Anton Domashnev";
 				TargetAttributes = {
 					6D4724B81E3E9F2300F38161 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = XZ2J8VAMV6;
+						DevelopmentTeam = Y4283X45U8;
 						ProvisioningStyle = Manual;
 					};
 					6D4724C91E3E9F2400F38161 = {
@@ -952,22 +950,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotsViewer/Pods-FBSnapshotsViewer-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-FBSnapshotsViewer/Pods-FBSnapshotsViewer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/KZFileWatchers/KZFileWatchers.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${PODS_ROOT}/Sparkle/Sparkle.framework",
-				"${PODS_ROOT}/Sparkle/Sparkle.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KZFileWatchers.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/Sparkle.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotsViewer/Pods-FBSnapshotsViewer-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FBSnapshotsViewer/Pods-FBSnapshotsViewer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6D21F7461E6C204700BFCE4C /* Swiftlint */ = {
@@ -996,37 +992,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Sourcery/bin/sourcery\" --sources \"${SRCROOT}/FBSnapshotsViewer\" --templates \"${SRCROOT}/Vendor/Sourcery/Templates\" --output \"${SRCROOT}/Vendor/Sourcery/CodeGenerated\"";
-		};
-		85A248FF384E76EC0BA66DC2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotsViewer/Pods-FBSnapshotsViewer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		86A730847AB3BDCA9DFC0E7D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotsViewerTests/Pods-FBSnapshotsViewerTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/Sourcery/bin/sourcery\" --sources \"${SRCROOT}/FBSnapshotsViewer\" --templates \"${SRCROOT}/Vendor/Sourcery/Templates\" --output \"${SRCROOT}/Vendor/Sourcery/CodeGenerated\"\n";
 		};
 		9F4AE397767705C1E9D22C1D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1048,7 +1014,7 @@
 		};
 		BBCA672821526DC17B8B6AFA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -1059,7 +1025,7 @@
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-FBSnapshotsViewer-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
@@ -1070,7 +1036,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotsViewerTests/Pods-FBSnapshotsViewerTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-FBSnapshotsViewerTests/Pods-FBSnapshotsViewerTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
@@ -1081,7 +1047,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotsViewerTests/Pods-FBSnapshotsViewerTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FBSnapshotsViewerTests/Pods-FBSnapshotsViewerTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1285,6 +1251,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1292,6 +1259,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1341,6 +1309,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1348,6 +1317,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1385,7 +1355,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = XZ2J8VAMV6;
+				DEVELOPMENT_TEAM = Y4283X45U8;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = FBSnapshotsViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1407,7 +1377,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = XZ2J8VAMV6;
+				DEVELOPMENT_TEAM = Y4283X45U8;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = FBSnapshotsViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1415,7 +1385,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.antondomashnev.FBSnapshotsViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a4a82d49-55f8-4d42-b85b-8aa3a7c0a500";
-				PROVISIONING_PROFILE_SPECIFIER = mac_production_com.antondomashnev.FBSnapshotsView;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

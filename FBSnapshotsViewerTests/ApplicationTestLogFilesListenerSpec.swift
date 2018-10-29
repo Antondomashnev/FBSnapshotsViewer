@@ -91,7 +91,7 @@ class ApplicationTestLogFilesListenerSpec: QuickSpec {
                 }
 
                 it("stops current listening") {
-                    expect(applicationTestLogsEventsListener.stopListening_Called).to(beTrue())
+                    expect(applicationTestLogsEventsListener.stopListeningCalled).to(beTrue())
                 }
             }
 
@@ -100,7 +100,7 @@ class ApplicationTestLogFilesListenerSpec: QuickSpec {
             }
 
             it("starts listening") {
-                expect(applicationTestLogsEventsListener.startListening_Called).to(beTrue())
+                expect(applicationTestLogsEventsListener.startListeningCalled).to(beTrue())
             }
         }
     }

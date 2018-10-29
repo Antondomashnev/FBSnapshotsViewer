@@ -127,7 +127,7 @@ class SnapshotTestResultAcceptorSpec: QuickSpec {
                         
                         it("removes current reference images from directory") {
                             expect(fileManager.removeItemCalled).to(beTrue())
-                            expect(fileManager.removeItemAtURL).to(equal(URL(fileURLWithPath: "/foo/bar/DetailsViewController/testNormalState@2x.png")))
+                            expect(fileManager.removeItemAtURL).to(equal(URL(fileURLWithPath: "/Users/antondomashnev/Library/Xcode/tmp/DetailsViewController/failed_testNormalState@2x.png")))
                         }
                         
                         it("copies failed snapshot image to the fb reference images directory") {
@@ -137,7 +137,7 @@ class SnapshotTestResultAcceptorSpec: QuickSpec {
                         }
                         
                         it("invalidates cache") {
-                            expect(imageCache.invalidate_Called).to(beTrue())
+                            expect(imageCache.invalidateCalled).to(beTrue())
                         }
                         
                         it("returns accepted test result") {
