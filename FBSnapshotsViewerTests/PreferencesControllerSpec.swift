@@ -29,7 +29,7 @@ class PreferencesControllerSpec: QuickSpec {
             }
 
             it("updates user interface") {
-                expect(eventHandler.updateUserInterface_Called).to(beTrue())
+                expect(eventHandler.updateUserInterfaceCalled).to(beTrue())
             }
         }
 
@@ -39,7 +39,7 @@ class PreferencesControllerSpec: QuickSpec {
             }
 
             it("closes") {
-                expect(eventHandler.close_Called).to(beTrue())
+                expect(eventHandler.closeCalled).to(beTrue())
             }
         }
 

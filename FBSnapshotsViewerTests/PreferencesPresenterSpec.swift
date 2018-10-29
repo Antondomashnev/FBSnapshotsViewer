@@ -38,7 +38,7 @@ class PreferencesPresenterSpec: QuickSpec {
         describe(".selectDerivedDataFolderType") {
             beforeEach {
                 let configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
-                interactor.currentConfiguration_ReturnValue = configuration
+                interactor.currentConfigurationReturnValue = configuration
                 presenter.select(derivedDataFolderType: "Type")
             }
 
@@ -55,7 +55,7 @@ class PreferencesPresenterSpec: QuickSpec {
         describe(".updateDerivedDataFolderPath") {
             beforeEach {
                 let configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
-                interactor.currentConfiguration_ReturnValue = configuration
+                interactor.currentConfigurationReturnValue = configuration
                 presenter.update(derivedDataFolderPath: "newPath")
             }
 
@@ -71,7 +71,7 @@ class PreferencesPresenterSpec: QuickSpec {
             }
 
             it("saves") {
-                expect(interactor.save_Called).to(beTrue())
+                expect(interactor.saveCalled).to(beTrue())
             }
 
             it("notifies the module delegate that module will close") {
@@ -82,7 +82,7 @@ class PreferencesPresenterSpec: QuickSpec {
         describe(".updateUserInterface") {
             beforeEach {
                 let configuration = Configuration(derivedDataFolder: DerivedDataFolder.xcodeCustom(path: "myPath"))
-                interactor.currentConfiguration_ReturnValue = configuration
+                interactor.currentConfigurationReturnValue = configuration
                 presenter.updateUserInterface()
             }
 

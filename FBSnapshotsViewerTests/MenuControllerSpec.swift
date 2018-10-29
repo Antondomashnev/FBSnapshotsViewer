@@ -83,7 +83,7 @@ class MenuControllerSpec: QuickSpec {
             }
 
             it("quits") {
-                expect(eventHandler.quit_Called).to(beTrue())
+                expect(eventHandler.quitCalled).to(beTrue())
             }
         }
 
@@ -93,7 +93,7 @@ class MenuControllerSpec: QuickSpec {
             }
 
             it("quits") {
-                expect(eventHandler.showPreferences_Called).to(beTrue())
+                expect(eventHandler.showPreferencesCalled).to(beTrue())
             }
         }
 
@@ -103,7 +103,7 @@ class MenuControllerSpec: QuickSpec {
             }
 
             it("quits") {
-                expect(eventHandler.checkForUpdates_Called).to(beTrue())
+                expect(eventHandler.checkForUpdatesCalled).to(beTrue())
             }
         }
 
@@ -116,7 +116,7 @@ class MenuControllerSpec: QuickSpec {
                 }
 
                 it("shows application menu") {
-                    expect(eventHandler.showApplicationMenu_Called).to(beTrue())
+                    expect(eventHandler.showApplicationMenuCalled).to(beTrue())
                 }
             }
 
@@ -128,7 +128,7 @@ class MenuControllerSpec: QuickSpec {
                 }
 
                 it("shows test results") {
-                    expect(eventHandler.showTestResults_Called).to(beTrue())
+                    expect(eventHandler.showTestResultsCalled).to(beTrue())
                 }
             }
         }

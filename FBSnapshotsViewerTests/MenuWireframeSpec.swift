@@ -51,7 +51,7 @@ class MenuWireframeSpec: QuickSpec {
             beforeEach {
                 let configuration = Configuration.default()
                 configurationStorage = ConfigurationStorageMock()
-                configurationStorage.loadConfiguration_ReturnValue = configuration
+                configurationStorage.loadConfigurationReturnValue = configuration
             }
 
             it("doesnt crash") {

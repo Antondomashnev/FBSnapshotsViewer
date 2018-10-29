@@ -10,7 +10,7 @@ import AppKit
 
 {% macro methodReceivedParameters method %}
     {%if method.parameters.count == 1 %}
-        {{ method.selectorName | replace:"(","_" | replace:")","" | replace:":","_" }}Received{% for param in method.parameters %}{{ param.name|upperFirst }} = {{ param.name }}{% endfor %}
+        {{ method.selectorName | replace:"(","_" | replace:")","" | replace:":","_" }}Received{% for param in method.parameters %}{{ param.name|upperFirstLetter }} = {{ param.name }}{% endfor %}
     {% else %}
     {% if not method.parameters.count == 0 %}
         {{ method.selectorName | replace:"(","_" | replace:")","" | replace:":","_" }}ReceivedArguments = ({% for param in method.parameters %}{{ param.name }}: {{ param.name }}{% if not forloop.last%}, {% endif %}{% endfor %})
@@ -31,7 +31,7 @@ class {{ type.name }}Mock: {{ type.name }} {
 
     {% if not method.isInitializer %}var {{ method.selectorName | replace:"(","_" | replace:")","" | replace:":","_" }}Called = false{% endif %}
     {% if method.parameters.count == 1 %}
-    var {{ method.selectorName | replace:"(","_" | replace:")","" | replace:":","_" }}Received{% for param in method.parameters %}{{ param.name|upperFirst }}: {{ param.typeName.unwrappedTypeName }}?{% endfor %}
+    var {{ method.selectorName | replace:"(","_" | replace:")","" | replace:":","_" }}Received{% for param in method.parameters %}{{ param.name|upperFirstLetter }}: {{ param.typeName.unwrappedTypeName }}?{% endfor %}
     {% else %}{% if not method.parameters.count == 0 %}
     var {{ method.selectorName | replace:"(","_" | replace:")","" | replace:":","_" }}ReceivedArguments: ({% for param in method.parameters %}{{ param.name }}: {% if param.typeAttributes.escaping %}{{ param.unwrappedTypeName }}{% else %}{{ param.typeName }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %})?
     {% endif %}{% endif %}

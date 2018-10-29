@@ -60,7 +60,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("checks for updaters") {
-                expect(updater.checkForUpdates_Called).to(beTrue())
+                expect(updater.checkForUpdatesCalled).to(beTrue())
             }
         }
 
@@ -100,7 +100,7 @@ class MenuPresenterSpec: QuickSpec {
             }
 
             it("pop ups the menu in user interface") {
-                expect(userInterface.popUpOptionsMenu_Called).to(beTrue())
+                expect(userInterface.popUpOptionsMenuCalled).to(beTrue())
             }
         }
 

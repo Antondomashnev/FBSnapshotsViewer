@@ -90,7 +90,7 @@ class TestResultsControllerSpec: QuickSpec {
             }
 
             it("updates user interface") {
-                expect(eventHandler.updateUserInterface_Called).to(beTrue())
+                expect(eventHandler.updateUserInterfaceCalled).to(beTrue())
             }
         }
         

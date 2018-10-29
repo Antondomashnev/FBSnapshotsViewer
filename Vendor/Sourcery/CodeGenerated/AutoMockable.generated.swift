@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.9.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.15.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 // swiftlint:disable line_length
@@ -47,13 +47,13 @@ class ConfigurationStorageMock: ConfigurationStorage {
 
     //MARK: - loadConfiguration
 
-    var loadConfiguration_Called = false
-    var loadConfiguration_ReturnValue: Configuration?
+    var loadConfigurationCalled = false
+    var loadConfigurationReturnValue: Configuration?
 
     func loadConfiguration() -> Configuration? {
 
-        loadConfiguration_Called = true
-        return loadConfiguration_ReturnValue
+        loadConfigurationCalled = true
+        return loadConfigurationReturnValue
     }
     //MARK: - save
 
@@ -95,19 +95,19 @@ class FolderEventsListenerMock: FolderEventsListener {
     }
     //MARK: - startListening
 
-    var startListening_Called = false
+    var startListeningCalled = false
 
     func startListening() {
 
-        startListening_Called = true
+        startListeningCalled = true
     }
     //MARK: - stopListening
 
-    var stopListening_Called = false
+    var stopListeningCalled = false
 
     func stopListening() {
 
-        stopListening_Called = true
+        stopListeningCalled = true
     }
 }
 class FolderEventsListenerOutputMock: FolderEventsListenerOutput {
@@ -129,11 +129,11 @@ class ImageCacheMock: ImageCache {
 
     //MARK: - invalidate
 
-    var invalidate_Called = false
+    var invalidateCalled = false
 
     func invalidate() {
 
-        invalidate_Called = true
+        invalidateCalled = true
     }
 }
 class MenuInteractorInputMock: MenuInteractorInput {
@@ -190,51 +190,51 @@ class MenuModuleInterfaceMock: MenuModuleInterface {
 
     //MARK: - start
 
-    var start_Called = false
+    var startCalled = false
 
     func start() {
 
-        start_Called = true
+        startCalled = true
     }
     //MARK: - showTestResults
 
-    var showTestResults_Called = false
+    var showTestResultsCalled = false
 
     func showTestResults() {
 
-        showTestResults_Called = true
+        showTestResultsCalled = true
     }
     //MARK: - showPreferences
 
-    var showPreferences_Called = false
+    var showPreferencesCalled = false
 
     func showPreferences() {
 
-        showPreferences_Called = true
+        showPreferencesCalled = true
     }
     //MARK: - showApplicationMenu
 
-    var showApplicationMenu_Called = false
+    var showApplicationMenuCalled = false
 
     func showApplicationMenu() {
 
-        showApplicationMenu_Called = true
+        showApplicationMenuCalled = true
     }
     //MARK: - checkForUpdates
 
-    var checkForUpdates_Called = false
+    var checkForUpdatesCalled = false
 
     func checkForUpdates() {
 
-        checkForUpdates_Called = true
+        checkForUpdatesCalled = true
     }
     //MARK: - quit
 
-    var quit_Called = false
+    var quitCalled = false
 
     func quit() {
 
-        quit_Called = true
+        quitCalled = true
     }
 }
 class MenuUserInterfaceMock: MenuUserInterface {
@@ -252,11 +252,11 @@ class MenuUserInterfaceMock: MenuUserInterface {
     }
     //MARK: - popUpOptionsMenu
 
-    var popUpOptionsMenu_Called = false
+    var popUpOptionsMenuCalled = false
 
     func popUpOptionsMenu() {
 
-        popUpOptionsMenu_Called = true
+        popUpOptionsMenuCalled = true
     }
 }
 class PasteboardMock: Pasteboard {
@@ -278,21 +278,21 @@ class PreferencesInteractorInputMock: PreferencesInteractorInput {
 
     //MARK: - save
 
-    var save_Called = false
+    var saveCalled = false
 
     func save() {
 
-        save_Called = true
+        saveCalled = true
     }
     //MARK: - currentConfiguration
 
-    var currentConfiguration_Called = false
-    var currentConfiguration_ReturnValue: Configuration!
+    var currentConfigurationCalled = false
+    var currentConfigurationReturnValue: Configuration!
 
     func currentConfiguration() -> Configuration {
 
-        currentConfiguration_Called = true
-        return currentConfiguration_ReturnValue
+        currentConfigurationCalled = true
+        return currentConfigurationReturnValue
     }
     //MARK: - setNewDerivedDataFolderType
 
@@ -334,19 +334,19 @@ class PreferencesModuleInterfaceMock: PreferencesModuleInterface {
 
     //MARK: - close
 
-    var close_Called = false
+    var closeCalled = false
 
     func close() {
 
-        close_Called = true
+        closeCalled = true
     }
     //MARK: - updateUserInterface
 
-    var updateUserInterface_Called = false
+    var updateUserInterfaceCalled = false
 
     func updateUserInterface() {
 
-        updateUserInterface_Called = true
+        updateUserInterfaceCalled = true
     }
     //MARK: - select
 
@@ -537,11 +537,11 @@ class TestResultsModuleInterfaceMock: TestResultsModuleInterface {
 
     //MARK: - updateUserInterface
 
-    var updateUserInterface_Called = false
+    var updateUserInterfaceCalled = false
 
     func updateUserInterface() {
 
-        updateUserInterface_Called = true
+        updateUserInterfaceCalled = true
     }
     //MARK: - openInKaleidoscope
 
@@ -613,10 +613,10 @@ class UpdaterMock: Updater {
 
     //MARK: - checkForUpdates
 
-    var checkForUpdates_Called = false
+    var checkForUpdatesCalled = false
 
     func checkForUpdates() {
 
-        checkForUpdates_Called = true
+        checkForUpdatesCalled = true
     }
 }
