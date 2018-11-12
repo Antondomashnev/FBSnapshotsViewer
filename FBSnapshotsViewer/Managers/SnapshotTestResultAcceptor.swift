@@ -34,7 +34,7 @@ class SnapshotTestResultAcceptor {
         let failedImageSizeSuffix = imagePath.substring(with: failedImageSizeSuffixRange)
         let recordedImageURLs = testResult.build.fbReferenceImageDirectoryURLs.flatMap { fbReferenceImageDirectoryURL -> URL? in
             let url = fbReferenceImageDirectoryURL.appendingPathComponent(testResult.testClassName).appendingPathComponent("\(testResult.testName)\(failedImageSizeSuffix)").appendingPathExtension("png")
-            return fileManager.fileExists(atPath: url.path) ? url : nil
+            return url
         }
         guard let url = recordedImageURLs.first else {
             throw SnapshotTestResultAcceptorError.notExistedRecordedImage(testResult: testResult)
