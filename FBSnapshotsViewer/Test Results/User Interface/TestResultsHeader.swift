@@ -39,7 +39,7 @@ class TestResultsHeader: NSView, NSCollectionViewSectionHeaderView {
     
     // MARK: - Actions
     
-    @objc @IBAction func acceptSnapshotsButtonClicked(_ sender: NSButton) {
+    @IBAction func acceptSnapshotsButtonClicked(_ sender: NSButton) {
         delegate?.testResultsHeader(self, acceptSnapshotsButtonClicked: sender)
     }
 }

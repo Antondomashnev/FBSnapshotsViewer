@@ -15,7 +15,7 @@ protocol FolderEventsListenerOutput: class, AutoMockable {
 protocol FolderEventsListener: AutoMockable {
 
     /// Handler for `FolderEventsListener` output
-    weak var output: FolderEventsListenerOutput? { get set }
+    var output: FolderEventsListenerOutput? { get set }
 
     /// Designated initializer to create new instance of FolderEventsListener
     ///
