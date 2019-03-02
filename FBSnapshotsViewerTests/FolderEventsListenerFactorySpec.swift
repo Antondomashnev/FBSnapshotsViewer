@@ -30,7 +30,7 @@ class FolderEventsListenerFactorySpec: QuickSpec {
                 }
 
                 it("returns correct listener") {
-                    let expectedFilter = FolderEventFilter.known & FolderEventFilter.type(.file) & FolderEventFilter.pathRegex("/Logs/Test(/Diagnostics/.+-[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}|/[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12})/.+log$")
+                    let expectedFilter = FolderEventFilter.known & FolderEventFilter.type(.file) & FolderEventFilter.pathRegex("/Logs/Test/Test-.+-[0-9]{4}.[0-9]{2}.[0-9]{2}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[+-][0-9]{3,4}.xcresult/[0-1]+_Test/Diagnostics/.+-[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}/.+-[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}/Session-.+-[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{5,6}-.+.log$")
                     expect(listener.folderPath).to(equal(derivedDataFolder.path))
                     expect(listener.filter).to(equal(expectedFilter))
                 }
@@ -43,7 +43,7 @@ class FolderEventsListenerFactorySpec: QuickSpec {
                 }
 
                 it("returns correct listener") {
-                    let expectedFilter = FolderEventFilter.known & FolderEventFilter.type(.file) & FolderEventFilter.pathRegex("/Logs/Test(/Diagnostics/.+-[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}|/[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12})/.+log$")
+                    let expectedFilter = FolderEventFilter.known & FolderEventFilter.type(.file) & FolderEventFilter.pathRegex("/Logs/Test/Test-.+-[0-9]{4}.[0-9]{2}.[0-9]{2}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[+-][0-9]{3,4}.xcresult/[0-1]+_Test/Diagnostics/.+-[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}/.+-[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}/Session-.+-[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{5,6}-.+.log$")
                     expect(listener.folderPath).to(equal(derivedDataFolder.path))
                     expect(listener.filter).to(equal(expectedFilter))
                 }
