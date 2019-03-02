@@ -33,7 +33,7 @@ class TestResultSplitView: NSView {
     // MARK: - Helpers
     
     private func createTrackingArea() {
-        trackingArea = NSTrackingArea(rect: bounds, options: NSTrackingAreaOptions.mouseEnteredAndExited.union(NSTrackingAreaOptions.mouseMoved).union(NSTrackingAreaOptions.activeAlways), owner: self, userInfo: nil)
+        trackingArea = NSTrackingArea(rect: bounds, options: NSTrackingArea.Options.mouseEnteredAndExited.union(NSTrackingArea.Options.mouseMoved).union(NSTrackingArea.Options.activeAlways), owner: self, userInfo: nil)
         self.addTrackingArea(trackingArea)
     }
     

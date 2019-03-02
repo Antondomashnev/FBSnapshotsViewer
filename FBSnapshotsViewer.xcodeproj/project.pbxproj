@@ -887,10 +887,12 @@
 					6D4724B81E3E9F2300F38161 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Y4283X45U8;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Manual;
 					};
 					6D4724C91E3E9F2400F38161 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6D4724B81E3E9F2300F38161;
 					};
@@ -1366,7 +1368,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1388,7 +1391,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a4a82d49-55f8-4d42-b85b-8aa3a7c0a500";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1406,7 +1410,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.antondomashnev.FBSnapshotsViewerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FBSnapshotsViewer.app/Contents/MacOS/FBSnapshotsViewer";
 			};
 			name = Debug;
@@ -1425,7 +1430,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.antondomashnev.FBSnapshotsViewerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FBSnapshotsViewer.app/Contents/MacOS/FBSnapshotsViewer";
 			};
 			name = Release;

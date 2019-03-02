@@ -29,17 +29,21 @@ class SnapshotTestResultAcceptor {
     
     private func buildRecordedImageURL(from imagePath: String, of testResult: SnapshotTestResult) throws -> URL {
         guard let failedImageSizeSuffixRange = imagePath.range(of: "@\\d{1}x", options: .regularExpression) else {
-                throw SnapshotTestResultAcceptorError.nonRetinaImages(testResult: testResult)
+            throw SnapshotTestResultAcceptorError.nonRetinaImages(testResult: testResult)
         }
-        let failedImageSizeSuffix = imagePath.substring(with: failedImageSizeSuffixRange)
-        let recordedImageURLs = testResult.build.fbReferenceImageDirectoryURLs.flatMap { fbReferenceImageDirectoryURL -> URL? in
-            let url = fbReferenceImageDirectoryURL.appendingPathComponent(testResult.testClassName).appendingPathComponent("\(testResult.testName)\(failedImageSizeSuffix)").appendingPathExtension("png")
-            return fileManager.fileExists(atPath: url.path) ? url : nil
+        let failedImageSizeSuffix = String(imagePath[failedImageSizeSuffixRange])
+        let recordedImageURLs = testResult.build.fbReferenceImageDirectoryURLs.compactMap { fbReferenceImageDirectoryURL -> URL? in
+            return urlForFailedReferenceImage(of: testResult, from: fbReferenceImageDirectoryURL, sizeSuffix: failedImageSizeSuffix)
         }
         guard let url = recordedImageURLs.first else {
             throw SnapshotTestResultAcceptorError.notExistedRecordedImage(testResult: testResult)
         }
         return url
+    }
+    
+    private func urlForFailedReferenceImage(of testResult: SnapshotTestResult, from referenceImageDirectoryURL: URL, sizeSuffix: String) -> URL? {
+        let url = referenceImageDirectoryURL.appendingPathComponent(testResult.testClassName).appendingPathComponent("\(testResult.testName)\(sizeSuffix)").appendingPathExtension("png")
+        return fileManager.fileExists(atPath: url.path) ? url : nil
     }
     
     // MARK: - Interface

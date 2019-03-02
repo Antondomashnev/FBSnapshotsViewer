@@ -18,8 +18,8 @@ class TestResultsCollectionViewOutlets: NSObject {
               let testResultHeaderNib = NSNib(nibNamed: TestResultsHeader.itemIdentifier, bundle: Bundle.main) else {
             fatalError("TestResultCell || TestResultsHeader is missing in bundle")
         }
-        collectionView.register(testResultCellNib, forItemWithIdentifier: TestResultCell.itemIdentifier)
-        collectionView.register(testResultHeaderNib, forSupplementaryViewOfKind: NSCollectionElementKindSectionHeader, withIdentifier: TestResultsHeader.itemIdentifier)
+        collectionView.register(testResultCellNib, forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: TestResultCell.itemIdentifier))
+        collectionView.register(testResultHeaderNib, forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TestResultsHeader.itemIdentifier))
         self.testResultCellDelegate = testResultCellDelegate
         self.testResultsHeaderDelegate = testResultsHeaderDelegate
         super.init()
@@ -31,8 +31,8 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDelegateFlowLayout {
         return NSSize(width: 732, height: 408)
     }
 
-    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, insetForSectionAt section: Int) -> EdgeInsets {
-        return EdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, insetForSectionAt section: Int) -> NSEdgeInsets {
+        return NSEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -58,7 +58,7 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> NSView {
-        guard let view = collectionView.makeSupplementaryView(ofKind: NSCollectionElementKindSectionHeader, withIdentifier: TestResultsHeader.itemIdentifier, for: indexPath) as? TestResultsHeader else {
+        guard let view = collectionView.makeSupplementaryView(ofKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TestResultsHeader.itemIdentifier), for: indexPath) as? TestResultsHeader else {
             fatalError("TestResultsHeader is not registered in collection view")
         }
         let sectionInfo = testResultsDisplayInfo.sectionInfos[indexPath.section]
@@ -68,7 +68,7 @@ extension TestResultsCollectionViewOutlets: NSCollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        guard let item = collectionView.makeItem(withIdentifier: TestResultCell.itemIdentifier, for: indexPath) as? TestResultCell else {
+        guard let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TestResultCell.itemIdentifier), for: indexPath) as? TestResultCell else {
             fatalError("TestResultCell is not registered in collection view")
         }
         let testResultInfo = testResultsDisplayInfo.sectionInfos[indexPath.section].itemInfos[indexPath.item]

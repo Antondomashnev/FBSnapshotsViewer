@@ -24,7 +24,7 @@ extension FontConvertible where Self: RawRepresentable, Self.RawValue == String 
         let extensions = ["otf", "ttf"]
         let bundle = Bundle(for: BundleToken.self)
         
-        guard let url = extensions.flatMap({ bundle.url(forResource: rawValue, withExtension: $0) }).first else { return }
+        guard let url = extensions.compactMap({ bundle.url(forResource: rawValue, withExtension: $0) }).first else { return }
         
         var errorRef: Unmanaged<CFError>?
         CTFontManagerRegisterFontsForURL(url as CFURL, .none, &errorRef)
@@ -40,7 +40,7 @@ extension Font {
                     font.register()
                 }
             #elseif os(OSX)
-                if NSFontManager.shared().availableMembers(ofFontFamily: font.rawValue) == nil {
+                if NSFontManager.shared.availableMembers(ofFontFamily: font.rawValue) == nil {
                     font.register()
                 }
             #endif

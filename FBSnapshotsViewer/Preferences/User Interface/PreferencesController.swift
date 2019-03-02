@@ -18,7 +18,7 @@ class PreferencesController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(derivedDataPathTextFieldDidChange(notification:)), name: Notification.Name.NSControlTextDidChange, object: derivedDataPathTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(derivedDataPathTextFieldDidChange(notification:)), name: NSControl.textDidChangeNotification, object: derivedDataPathTextField)
     }
 
     deinit {

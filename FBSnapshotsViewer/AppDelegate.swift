@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         let cofiguration = setUpConfiguration()
         let wireframe = MenuWireframe()
-        menuUserInterface = wireframe.instantinateMenu(in: NSStatusBar.system(), configuration: cofiguration)
+        menuUserInterface = wireframe.instantinateMenu(in: NSStatusBar.system, configuration: cofiguration)
     }
     
     // MARK: - Helpers

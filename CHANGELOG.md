@@ -9,6 +9,7 @@
 * [#70](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/70): Remove accepted images from failed image path. - [@babbage](https://github.com/babbage).
 * [#76](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/76): Update for Xcode 10 .xcresult file format. - [@babbage](https://github.com/babbage).
 * [#78](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/78): Resolve Xcode warnings. Update dependencies. - [@babbage](https://github.com/babbage).
+* [#79](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/79): Migrate to Swift 4.2. - [@babbage](https://github.com/babbage).
 
 ### 0.8.0 (11.10.2017)
 

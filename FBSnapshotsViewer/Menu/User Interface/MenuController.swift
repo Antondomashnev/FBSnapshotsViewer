@@ -13,13 +13,13 @@ final class MenuController {
     var eventHandler: MenuModuleInterface?
 
     init(statusBar: NSStatusBar) {
-        statusItem = statusBar.statusItem(withLength: NSSquareStatusItemLength)
+        statusItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem.button {
             button.image = NSImage(named: "menu_icon")
             button.alternateImage = NSImage(named: "menu_icon_highlighted")
             button.action = #selector(showSnapshots(sender:))
             button.target = self
-            button.sendAction(on: NSEventMask.leftMouseUp.union(NSEventMask.rightMouseUp))
+            button.sendAction(on: NSEvent.EventTypeMask.leftMouseUp.union(NSEvent.EventTypeMask.rightMouseUp))
         }
     }
 }
@@ -40,10 +40,10 @@ extension MenuController: MenuUserInterface {
 extension MenuController: MenuActions {
     func handleIconMouseEvent(_ event: NSEvent) {
         let associatedEventsMask = event.associatedEventsMask
-        if associatedEventsMask.contains(NSEventMask.rightMouseUp) {
+        if associatedEventsMask.contains(NSEvent.EventTypeMask.rightMouseUp) {
             eventHandler?.showApplicationMenu()
         }
-        else if associatedEventsMask.contains(NSEventMask.leftMouseUp) {
+        else if associatedEventsMask.contains(NSEvent.EventTypeMask.leftMouseUp) {
             eventHandler?.showTestResults()
         }
     }
