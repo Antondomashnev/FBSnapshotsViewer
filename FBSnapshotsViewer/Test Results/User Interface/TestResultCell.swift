@@ -125,19 +125,19 @@ class TestResultCell: NSCollectionViewItem {
 
     // MARK: - Actions
 
-    @objc @IBAction func copySnapshotButtonClicked(_ sender: NSButton) {
+    @IBAction func copySnapshotButtonClicked(_ sender: NSButton) {
         delegate?.testResultCell(self, copySnapshotButtonClicked: sender)
     }
     
-    @objc @IBAction func viewInXcodeButtonClicked(_ sender: NSButton) {
+    @IBAction func viewInXcodeButtonClicked(_ sender: NSButton) {
         delegate?.testResultCell(self, viewInXcodeButtonClicked: sender)
     }
     
-    @objc @IBAction func viewInKaleidoscopeButtonClicked(_ sender: NSButton) {
+    @IBAction func viewInKaleidoscopeButtonClicked(_ sender: NSButton) {
         delegate?.testResultCell(self, viewInKaleidoscopeButtonClicked: sender)
     }
     
-    @objc @IBAction func acceptSnapshotsButtonClicked(_ sender: NSButton) {
+    @IBAction func acceptSnapshotsButtonClicked(_ sender: NSButton) {
         delegate?.testResultCell(self, acceptSnapshotsButtonClicked: sender)
     }
 }
