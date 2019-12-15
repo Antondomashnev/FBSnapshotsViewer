@@ -28,10 +28,11 @@ class SnapshotTestResultAcceptor {
     // MARK: - Helpers
     
     private func buildRecordedImageURL(from imagePath: String, of testResult: SnapshotTestResult) throws -> URL {
-        guard let failedImageSizeSuffixRange = imagePath.range(of: "@\\d{1}x", options: .regularExpression) else {
-                throw SnapshotTestResultAcceptorError.nonRetinaImages(testResult: testResult)
-        }
-        let failedImageSizeSuffix = imagePath.substring(with: failedImageSizeSuffixRange)
+//        guard let failedImageSizeSuffixRange = imagePath.range(of: "@\\d{1}x", options: .regularExpression) else {
+//                throw SnapshotTestResultAcceptorError.nonRetinaImages(testResult: testResult)
+//        }
+//        let failedImageSizeSuffix = imagePath.substring(with: failedImageSizeSuffixRange)
+        let failedImageSizeSuffix = "@2x"
         let recordedImageURLs = testResult.build.fbReferenceImageDirectoryURLs.flatMap { fbReferenceImageDirectoryURL -> URL? in
             let url = fbReferenceImageDirectoryURL.appendingPathComponent(testResult.testClassName).appendingPathComponent("\(testResult.testName)\(failedImageSizeSuffix)").appendingPathExtension("png")
             return fileManager.fileExists(atPath: url.path) ? url : nil

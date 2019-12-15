@@ -314,6 +314,16 @@ class PreferencesInteractorInputMock: PreferencesInteractorInput {
         setNewDerivedDataFolderPath___Called = true
         setNewDerivedDataFolderPath___ReceivedPath = path
     }
+    //MARK: - setNewReferenceImagesFolderPath
+
+    var setNewReferenceImagesFolderPath___Called = false
+    var setNewReferenceImagesFolderPath___ReceivedPath: String?
+
+    func setNewReferenceImagesFolderPath(_ path: String) {
+
+        setNewReferenceImagesFolderPath___Called = true
+        setNewReferenceImagesFolderPath___ReceivedPath = path
+    }
 }
 class PreferencesModuleDelegateMock: PreferencesModuleDelegate {
 
@@ -367,6 +377,26 @@ class PreferencesModuleInterfaceMock: PreferencesModuleInterface {
 
         update_derivedDataFolderPath_Called = true
         update_derivedDataFolderPath_ReceivedDerivedDataFolderPath = derivedDataFolderPath
+    }
+    //MARK: - select
+
+    var select_referenceImagesFolderPath_Called = false
+    var select_referenceImagesFolderPath_ReceivedReferenceImagesFolderPath: String?
+
+    func select(referenceImagesFolderPath: String) {
+
+        select_referenceImagesFolderPath_Called = true
+        select_referenceImagesFolderPath_ReceivedReferenceImagesFolderPath = referenceImagesFolderPath
+    }
+    //MARK: - update
+
+    var update_referenceImagesFolderPath_Called = false
+    var update_referenceImagesFolderPath_ReceivedReferenceImagesFolderPath: String?
+
+    func update(referenceImagesFolderPath: String) {
+
+        update_referenceImagesFolderPath_Called = true
+        update_referenceImagesFolderPath_ReceivedReferenceImagesFolderPath = referenceImagesFolderPath
     }
 }
 class PreferencesUserInterfaceMock: PreferencesUserInterface {

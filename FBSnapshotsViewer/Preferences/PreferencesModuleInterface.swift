@@ -13,4 +13,6 @@ protocol PreferencesModuleInterface: AutoMockable {
     func updateUserInterface()
     func select(derivedDataFolderType: String)
     func update(derivedDataFolderPath: String)
+    func select(referenceImagesFolderPath: String)
+    func update(referenceImagesFolderPath: String)
 }

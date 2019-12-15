@@ -15,10 +15,12 @@ class PreferencesController: NSViewController {
     @IBOutlet weak var derivedDataTypePopUpButton: NSPopUpButton!
     @IBOutlet weak var derivedDataPathLabel: NSTextField!
     @IBOutlet weak var derivedDataPathTextField: NSTextField!
+    @IBOutlet weak var referenceImagesTextField: NSTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
       NotificationCenter.default.addObserver(self, selector: #selector(derivedDataPathTextFieldDidChange(notification:)), name: NSControl.textDidChangeNotification, object: derivedDataPathTextField)
+      NotificationCenter.default.addObserver(self, selector: #selector(referenceImagesTextFieldDidChange(notification:)), name: NSControl.textDidChangeNotification, object: referenceImagesTextField)
     }
 
     deinit {
@@ -43,6 +45,7 @@ extension PreferencesController: PreferencesUserInterface {
         setUpDerivedDataTypePopUpButton(with: preferencesDisplayInfo)
         setUpDerivedDataPathTextField(with: preferencesDisplayInfo)
         setUpDerivedDataPathLabel(with: preferencesDisplayInfo)
+        setUpReferencesImagePathTextField(with: preferencesDisplayInfo)
     }
 
     // MARK: - Helpers
@@ -61,6 +64,10 @@ extension PreferencesController: PreferencesUserInterface {
         derivedDataTypePopUpButton.addItems(withTitles: displayInfo.derivedDataFolderTypeNames)
         derivedDataTypePopUpButton.selectItem(withTitle: displayInfo.derivedDataFolderTypeName)
     }
+  
+    private func setUpReferencesImagePathTextField(with displayInfo: PreferencesDisplayInfo) {
+      referenceImagesTextField.stringValue = displayInfo.referenceImagesFolderPath
+    }
 }
 
 extension PreferencesController {
@@ -68,6 +75,10 @@ extension PreferencesController {
 
     @objc func derivedDataPathTextFieldDidChange(notification: Notification) {
         eventHandler.update(derivedDataFolderPath: derivedDataPathTextField.stringValue)
+    }
+  
+    @objc func referenceImagesTextFieldDidChange(notification: Notification) {
+        eventHandler.update(referenceImagesFolderPath: referenceImagesTextField.stringValue)
     }
 }
 
