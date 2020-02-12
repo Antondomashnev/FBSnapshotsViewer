@@ -24,7 +24,7 @@ class MenuWireframeSpec: QuickSpec {
             var menuModule: MenuController!
 
             beforeEach {
-                menuModule = wireframe.instantinateMenu(in: NSStatusBar.system(), configuration: Configuration.default()) as? MenuController
+                menuModule = wireframe.instantinateMenu(in: NSStatusBar.system, configuration: Configuration.default()) as? MenuController
             }
 
             it("returns initialized module") {
