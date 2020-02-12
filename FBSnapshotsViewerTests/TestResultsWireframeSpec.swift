@@ -30,7 +30,7 @@ class TestResultsWireframeSpec: QuickSpec {
                 rect = NSRect(x: 0, y: 0, width: 300, height: 300)
                 view = NSView(frame: NSRect(x: 0, y: 0, width: 200, height: 200))
                 view.wantsLayer = true
-                self.window = NSWindow(contentRect: rect, styleMask: NSWindowStyleMask.borderless, backing: .retained, defer: false)
+                self.window = NSWindow(contentRect: rect, styleMask: NSWindow.StyleMask.borderless, backing: .retained, defer: false)
                 self.window?.contentView?.addSubview(view)
             }
 

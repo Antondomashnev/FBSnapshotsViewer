@@ -17,7 +17,7 @@ class TestResultsInteractorBuilder {
     var externalViewers: ExternalViewers = ExternalViewers()
     var processLauncher: ProcessLauncher = ProcessLauncher()
     var acceptor: SnapshotTestResultAcceptor = SnapshotTestResultAcceptor()
-    var pasteboard: Pasteboard = NSPasteboard.general()
+  var pasteboard: Pasteboard = NSPasteboard.general
     var testResults: [SnapshotTestResult] = []
     
     typealias BuiderClojure = (TestResultsInteractorBuilder) -> Void
