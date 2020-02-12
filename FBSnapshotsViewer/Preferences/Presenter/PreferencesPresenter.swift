@@ -31,6 +31,14 @@ extension PreferencesPresenter: PreferencesModuleInterface {
     func update(derivedDataFolderPath: String) {
         interactor.setNewDerivedDataFolderPath(derivedDataFolderPath)
     }
+  
+    func select(referenceImagesFolderPath: String) {
+        updateUserInterface()
+    }
+  
+    func update(referenceImagesFolderPath: String) {
+      interactor.setNewReferenceImagesFolderPath(referenceImagesFolderPath)
+    }
 
     func close() {
         interactor.save()

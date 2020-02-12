@@ -51,6 +51,11 @@ extension PreferencesInteractor: PreferencesInteractorInput {
             configuration = Configuration(derivedDataFolder: DerivedDataFolder.appcode(path: path))
         }
     }
+  
+    func setNewReferenceImagesFolderPath(_ path: String) {
+      configuration = Configuration(derivedDataFolder: configuration.derivedDataFolder,
+                                    referenceImagesFolder: path)
+    }
 
     func currentConfiguration() -> Configuration {
         return configuration

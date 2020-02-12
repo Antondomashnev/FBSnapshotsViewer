@@ -13,4 +13,5 @@ protocol PreferencesInteractorInput: class, AutoMockable {
     func currentConfiguration() -> Configuration
     func setNewDerivedDataFolderType(_ type: String)
     func setNewDerivedDataFolderPath(_ path: String)
+    func setNewReferenceImagesFolderPath(_ path: String)
 }

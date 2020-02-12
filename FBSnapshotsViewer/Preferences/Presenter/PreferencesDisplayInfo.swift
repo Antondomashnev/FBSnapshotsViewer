@@ -13,19 +13,22 @@ struct PreferencesDisplayInfo {
     let derivedDataFolderPathEditable: Bool
     let derivedDataFolderPath: String
     let derivedDataFolderTypeName: String
+    let referenceImagesFolderPath: String
     let derivedDataFolderTypeNames: [String] = DerivedDataFolderType.allCases.map { $0.rawValue }
 
-    init(derivedDataFolderPathEditable: Bool, derivedDataFolderPath: String, derivedDataFolderTypeName: String, pathExplanation: String) {
+  init(derivedDataFolderPathEditable: Bool, derivedDataFolderPath: String, derivedDataFolderTypeName: String, pathExplanation: String, referenceImagesFolderPath: String) {
         self.derivedDataFolderPathEditable = derivedDataFolderPathEditable
         self.derivedDataFolderPath = derivedDataFolderPath
         self.derivedDataFolderTypeName = derivedDataFolderTypeName
         self.pathExplanation = pathExplanation
+        self.referenceImagesFolderPath = referenceImagesFolderPath
     }
 
     init(configuration: Configuration) {
         let derivedDataFolder = configuration.derivedDataFolder
         derivedDataFolderPath = derivedDataFolder.path
         derivedDataFolderTypeName = derivedDataFolder.type.rawValue
+        referenceImagesFolderPath = configuration.referenceImagesFolder
         switch derivedDataFolder.type {
         case .xcodeCustom:
             derivedDataFolderPathEditable = true
