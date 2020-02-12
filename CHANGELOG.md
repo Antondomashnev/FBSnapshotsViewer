@@ -9,6 +9,7 @@
 * [#70](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/70): Remove accepted images from failed image path. - [@babbage](https://github.com/babbage).
 * [#76](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/76): Update for Xcode 10 .xcresult file format. - [@babbage](https://github.com/babbage).
 * [#78](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/78): Resolve Xcode warnings. Update dependencies. - [@babbage](https://github.com/babbage).
+* [#82](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/82): Update to Swift 5. - [@foulkesjohn](https://github.com/foulkesjohn).
 
 ### 0.8.0 (11.10.2017)
 
@@ -34,7 +35,7 @@
 * [#41](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/41): Add additional information for tests - [@antondomashnev](https://github.com/antondomashnev).
 * [#44](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/44): Compact view redesign - [@antondomashnev](https://github.com/antondomashnev).
 * [#45](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/45): Use Nuke for image loading - [@antondomashnev](https://github.com/antondomashnev).
-* [47](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/47): Swap snapshots - [@antondomashnev](https://github.com/antondomashnev).
+* [#47](https://github.com/Antondomashnev/FBSnapshotsViewer/pull/47): Swap snapshots - [@antondomashnev](https://github.com/antondomashnev).
 
 ### 0.5.0 (26.05.2017)
 

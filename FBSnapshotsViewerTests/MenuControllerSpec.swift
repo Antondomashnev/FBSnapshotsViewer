@@ -12,9 +12,9 @@ import Nimble
 @testable import FBSnapshotsViewer
 
 class MenuController_MockNSEvent: NSEvent {
-    var mockedAssociatedEventsMask: NSEventMask!
+    var mockedAssociatedEventsMask: NSEvent.EventTypeMask!
 
-    override var associatedEventsMask: NSEventMask {
+    override var associatedEventsMask: NSEvent.EventTypeMask {
         return mockedAssociatedEventsMask
     }
 }
@@ -53,7 +53,7 @@ class MenuController_MockStatusBar: NSStatusBar {
         return mockedStatusItem
     }
 
-    open override class func system() -> MenuController_MockStatusBar {
+    open class func system() -> MenuController_MockStatusBar {
         return MenuController_MockStatusBar()
     }
 }
@@ -111,7 +111,7 @@ class MenuControllerSpec: QuickSpec {
             context("when rightMouseUp") {
                 beforeEach {
                     let event = MenuController_MockNSEvent()
-                    event.mockedAssociatedEventsMask = NSEventMask.rightMouseUp
+                    event.mockedAssociatedEventsMask = NSEvent.EventTypeMask.rightMouseUp
                     menuController.handleIconMouseEvent(event)
                 }
 
@@ -123,7 +123,7 @@ class MenuControllerSpec: QuickSpec {
             context("when leftMouseUp") {
                 beforeEach {
                     let event = MenuController_MockNSEvent()
-                    event.mockedAssociatedEventsMask = NSEventMask.leftMouseUp
+                    event.mockedAssociatedEventsMask = NSEvent.EventTypeMask.leftMouseUp
                     menuController.handleIconMouseEvent(event)
                 }
 
